@@ -6,7 +6,7 @@ export const Route = createFileRoute("/")({
   component: Index,
   head: () => ({
     meta: [
-      { title: "LA 27 PRODUCTIONS — High-End Sonic Engineering" },
+      { title: "LA 27 PRODUCTIONS — Sound of Luxury" },
       {
         name: "description",
         content:
@@ -26,24 +26,20 @@ function LanguageSelector({
   setLang: (l: Lang) => void;
 }) {
   return (
-    <div className="flex items-center gap-2 text-[10px] tracking-luxe uppercase rounded-full bg-soft border border-hairline px-3 py-1.5">
-      {LANGS.map((l, i) => (
-        <span key={l.code} className="flex items-center gap-2">
-          <button
-            onClick={() => setLang(l.code)}
-            className={`transition-opacity duration-300 ${
-              lang === l.code
-                ? "text-bone opacity-100"
-                : "text-bone opacity-40 hover:opacity-80"
-            }`}
-            aria-label={`Switch language to ${l.label}`}
-          >
-            {l.label}
-          </button>
-          {i < LANGS.length - 1 && (
-            <span className="text-bone opacity-20">·</span>
-          )}
-        </span>
+    <div className="flex items-center gap-3 text-[10px] tracking-luxe uppercase">
+      {LANGS.map((l) => (
+        <button
+          key={l.code}
+          onClick={() => setLang(l.code)}
+          className={`transition-colors duration-200 ${
+            lang === l.code
+              ? "text-red"
+              : "text-white/40 hover:text-white"
+          }`}
+          aria-label={`Switch to ${l.label}`}
+        >
+          {l.label}
+        </button>
       ))}
     </div>
   );
@@ -51,18 +47,24 @@ function LanguageSelector({
 
 function VideoCard({
   caption,
-  label,
   index,
   vimeoId,
 }: {
   caption: string;
-  label: string;
   index: string;
   vimeoId: string;
 }) {
   return (
     <figure className="group">
-      <div className="relative aspect-[16/10] md:aspect-[16/9] w-full overflow-hidden rounded-3xl md:rounded-[2.5rem] bg-soft border border-hairline">
+      <div className="flex items-end justify-between mb-3 px-1">
+        <span className="text-[10px] tracking-luxe uppercase text-red">
+          {index}
+        </span>
+        <span className="text-[10px] tracking-luxe uppercase text-white/40">
+          {caption}
+        </span>
+      </div>
+      <div className="relative aspect-video w-full overflow-hidden bg-black border border-hairline">
         <iframe
           src={`https://player.vimeo.com/video/${vimeoId}?title=0&byline=0&portrait=0&dnt=1`}
           title={caption}
@@ -71,21 +73,7 @@ function VideoCard({
           allow="autoplay; fullscreen; picture-in-picture"
           allowFullScreen
         />
-        <div className="pointer-events-none absolute top-5 left-6 text-[10px] tracking-luxe uppercase text-bone/60 mix-blend-difference">
-          REEL · {index}
-        </div>
-        <div className="pointer-events-none absolute top-5 right-6 text-[10px] tracking-luxe uppercase text-bone/60 mix-blend-difference">
-          {label}
-        </div>
       </div>
-      <figcaption className="mt-5 px-2 flex items-center justify-between gap-4">
-        <span className="text-[11px] md:text-xs tracking-luxe uppercase text-bone">
-          {caption}
-        </span>
-        <span className="text-[10px] tracking-luxe uppercase text-bone/40 shrink-0">
-          ⏵ Concept
-        </span>
-      </figcaption>
     </figure>
   );
 }
@@ -95,130 +83,91 @@ function Index() {
   const t = translations[lang];
 
   return (
-    <div className="min-h-screen bg-base text-bone">
+    <div className="min-h-screen bg-black text-white overflow-hidden">
       {/* Top Nav */}
-      <header className="fixed top-0 left-0 right-0 z-50 px-4 md:px-8 pt-4">
-        <div className="mx-auto max-w-[1600px] flex items-center justify-between rounded-full bg-soft/80 backdrop-blur-xl border border-hairline pl-5 pr-2 py-2">
-          <a
-            href="#top"
-            className="text-[11px] tracking-luxe uppercase text-bone"
-          >
-            LA 27 <span className="opacity-50">— Productions</span>
-          </a>
-          <LanguageSelector lang={lang} setLang={setLang} />
-        </div>
+      <header className="fixed top-0 left-0 right-0 z-50 px-5 md:px-10 py-5 md:py-6 flex items-center justify-between bg-black/60 backdrop-blur-sm">
+        <a
+          href="#top"
+          className="text-[11px] tracking-luxe uppercase text-white"
+        >
+          LA 27<span className="text-red">.</span>
+        </a>
+        <LanguageSelector lang={lang} setLang={setLang} />
       </header>
 
-      {/* Hero — tighter */}
+      {/* Hero */}
       <section
         id="top"
-        className="relative px-4 md:px-8 pt-28 md:pt-32 pb-12 md:pb-16"
+        className="relative min-h-screen flex flex-col justify-between px-5 md:px-10 pt-28 md:pt-36 pb-8"
       >
-        <div className="mx-auto max-w-[1600px] rounded-3xl md:rounded-[2.5rem] bg-soft border border-hairline px-6 md:px-12 py-14 md:py-20 relative overflow-hidden">
-          {/* Soft glow */}
-          <div
-            className="absolute inset-0 pointer-events-none"
-            style={{
-              background:
-                "radial-gradient(ellipse at 50% 0%, rgba(255,255,255,0.06) 0%, rgba(21,22,26,0) 60%)",
-            }}
-          />
+        <div className="flex items-center justify-between text-[10px] tracking-luxe uppercase text-white/40">
+          <span>EST · Barcelona</span>
+          <span className="text-red">● Live</span>
+        </div>
 
-          <div className="relative flex items-center justify-between text-[10px] tracking-luxe uppercase text-bone/40 mb-10 md:mb-12">
-            <span>EST. Barcelona</span>
-            <span>Studio / 001</span>
-          </div>
-
-          <h1 className="relative text-center font-light tracking-tightest leading-[0.88] text-bone text-[19vw] md:text-[11vw] lg:text-[9rem]">
-            LA 27
+        <div>
+          <h1 className="font-black tracking-tightest leading-[0.82] text-white text-[26vw] md:text-[19vw]">
+            <span className="block">{t.heroLine1}</span>
+            <span className="block pl-[0.2em] text-white/30">{t.heroLine2}</span>
+            <span className="block text-red">{t.heroAccent}</span>
           </h1>
-          <div className="relative mt-1 text-center text-[11px] md:text-sm tracking-luxe uppercase text-bone/70">
-            Productions
-          </div>
+        </div>
 
-          <div className="relative mt-10 md:mt-12 max-w-2xl mx-auto text-center">
-            <p className="text-xl md:text-3xl font-light tracking-tight text-bone">
-              {t.heroSubtitle}
-            </p>
-            <p className="mt-6 text-sm md:text-[15px] leading-relaxed text-bone/60 font-light">
-              {t.heroDesc}
-            </p>
-          </div>
+        <div className="flex items-end justify-between gap-6">
+          <span className="text-[11px] md:text-xs tracking-luxe uppercase text-white/60 max-w-xs">
+            {t.heroTag}
+          </span>
+          <span className="text-[10px] tracking-luxe uppercase text-white/30">
+            ↓ Scroll
+          </span>
         </div>
       </section>
 
-      {/* Portfolio — close to top */}
-      <section className="px-4 md:px-8 pb-16 md:pb-24">
-        <div className="mx-auto max-w-[1600px]">
-          <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-10 md:mb-14 px-2">
-            <div>
-              <div className="text-[10px] tracking-luxe uppercase text-bone/40 mb-4">
-                — Portfolio
-              </div>
-              <h2 className="text-3xl md:text-5xl lg:text-6xl font-light tracking-tightest leading-[0.95] text-bone max-w-3xl">
-                {t.portfolioTitle}
-              </h2>
-            </div>
-            <p className="md:max-w-sm text-sm leading-relaxed text-bone/55 font-light">
-              {t.portfolioIntro}
-            </p>
-          </div>
+      {/* Work */}
+      <section className="px-5 md:px-10 py-20 md:py-32 border-t border-hairline">
+        <div className="flex items-end justify-between mb-12 md:mb-20">
+          <h2 className="text-5xl md:text-8xl font-black tracking-tightest leading-[0.9] text-white">
+            {t.workTitle}<span className="text-red">.</span>
+          </h2>
+          <span className="hidden md:block text-[10px] tracking-luxe uppercase text-white/40">
+            {t.workKicker}
+          </span>
+        </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-8">
-            <VideoCard caption={t.video1} label="Ferrari · Mockup" index="01" vimeoId="1192292542" />
-            <VideoCard caption={t.video2} label="Dior · Mockup" index="02" vimeoId="1192292538" />
-          </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-6">
+          <VideoCard caption={t.video1} index="01 / Ferrari" vimeoId="1192292542" />
+          <VideoCard caption={t.video2} index="02 / Dior" vimeoId="1192292538" />
         </div>
       </section>
 
       {/* Contact */}
-      <section className="px-4 md:px-8 pb-12 md:pb-16">
-        <div className="mx-auto max-w-[1600px] rounded-3xl md:rounded-[2.5rem] bg-soft border border-hairline px-6 md:px-16 py-20 md:py-32 text-center relative overflow-hidden">
-          <div
-            className="absolute inset-0 pointer-events-none"
-            style={{
-              background:
-                "radial-gradient(ellipse at 50% 100%, rgba(255,255,255,0.05) 0%, rgba(21,22,26,0) 60%)",
-            }}
-          />
-          <div className="relative">
-            <div className="text-[10px] tracking-luxe uppercase text-bone/40 mb-8">
-              — Contact
-            </div>
-            <h2 className="text-4xl md:text-6xl lg:text-7xl font-light tracking-tightest leading-[0.95] text-bone">
-              {t.contactTitle}
-            </h2>
-            <p className="mt-8 max-w-xl mx-auto text-sm md:text-base leading-relaxed text-bone/60 font-light">
-              {t.contactBody}
-            </p>
+      <section className="px-5 md:px-10 py-24 md:py-40 border-t border-hairline">
+        <h2 className="text-6xl md:text-[10rem] font-black tracking-tightest leading-[0.85] text-white mb-12 md:mb-16">
+          {t.contactTitle}
+          <br />
+          <span className="text-red">{t.contactAccent}</span>
+        </h2>
 
-            <div className="mt-12 md:mt-14">
-              <a
-                href={`mailto:${EMAIL}?subject=LA%2027%20Productions%20%E2%80%94%20Inquiry`}
-                className="group inline-flex items-center justify-between w-full max-w-2xl rounded-full border border-bone/25 bg-softer hover:bg-bone hover:text-[#15161a] hover:border-bone transition-all duration-500 pl-8 pr-3 py-3"
-              >
-                <span className="text-[11px] md:text-xs tracking-luxe uppercase">
-                  {t.contactCta}
-                </span>
-                <span className="flex items-center justify-center w-12 h-12 md:w-14 md:h-14 rounded-full bg-bone text-[#15161a] group-hover:bg-[#15161a] group-hover:text-bone transition-all">
-                  ↗
-                </span>
-              </a>
-              <div className="mt-6 text-[10px] tracking-luxe uppercase text-bone/40">
-                {EMAIL}
-              </div>
-            </div>
-          </div>
+        <a
+          href={`mailto:${EMAIL}?subject=LA%2027%20Productions%20%E2%80%94%20Inquiry`}
+          className="group inline-flex items-center gap-4 border-b-2 border-white hover:border-red pb-2 transition-colors duration-300"
+        >
+          <span className="text-2xl md:text-4xl font-medium tracking-tight text-white group-hover:text-red transition-colors">
+            {t.contactCta}
+          </span>
+          <span className="text-2xl md:text-4xl text-red">→</span>
+        </a>
+
+        <div className="mt-8 text-[11px] tracking-luxe uppercase text-white/50">
+          {EMAIL}
         </div>
       </section>
 
       {/* Footer */}
-      <footer className="px-4 md:px-8 pb-6">
-        <div className="mx-auto max-w-[1600px] rounded-full bg-soft border border-hairline px-6 py-4 flex flex-col md:flex-row items-center justify-between gap-2 text-[10px] tracking-luxe uppercase text-bone/45">
-          <span>© LA 27 Productions</span>
-          <span>{t.footer}</span>
-          <span>All Rights Reserved</span>
-        </div>
+      <footer className="px-5 md:px-10 py-6 border-t border-hairline flex flex-col md:flex-row items-start md:items-center justify-between gap-2 text-[10px] tracking-luxe uppercase text-white/40">
+        <span>© LA 27 Productions</span>
+        <span>{t.footer}</span>
+        <span>All Rights Reserved</span>
       </footer>
     </div>
   );
