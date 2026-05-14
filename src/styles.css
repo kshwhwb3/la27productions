@@ -31,24 +31,26 @@
 }
 
 :root {
-  --radius: 0rem;
-  --background: oklch(0 0 0);
+  --radius: 1.75rem;
+  --background: oklch(0.16 0.004 270);
   --foreground: oklch(0.96 0 0);
-  --card: oklch(0.04 0 0);
+  --card: oklch(0.20 0.004 270);
   --card-foreground: oklch(0.96 0 0);
-  --popover: oklch(0.04 0 0);
+  --popover: oklch(0.20 0.004 270);
   --popover-foreground: oklch(0.96 0 0);
   --primary: oklch(0.96 0 0);
-  --primary-foreground: oklch(0 0 0);
-  --secondary: oklch(0.12 0 0);
+  --primary-foreground: oklch(0.16 0.004 270);
+  --secondary: oklch(0.22 0.004 270);
   --secondary-foreground: oklch(0.96 0 0);
-  --muted: oklch(0.12 0 0);
-  --muted-foreground: oklch(0.55 0 0);
-  --accent: oklch(0.18 0 0);
+  --muted: oklch(0.22 0.004 270);
+  --muted-foreground: oklch(0.62 0 0);
+  --accent: oklch(0.26 0.004 270);
   --accent-foreground: oklch(0.96 0 0);
-  --border: oklch(0.18 0 0);
-  --input: oklch(0.18 0 0);
-  --ring: oklch(0.55 0 0);
+  --border: oklch(0.28 0.004 270);
+  --input: oklch(0.28 0.004 270);
+  --ring: oklch(0.62 0 0);
+  --bg-base: #15161a;
+  --bg-soft: #1c1d22;
 }
 
 @layer base {
@@ -56,7 +58,7 @@
     border-color: var(--color-border);
   }
   html, body {
-    background-color: #000000;
+    background-color: #15161a;
     color: var(--color-foreground);
     font-family: var(--font-sans);
     -webkit-font-smoothing: antialiased;
@@ -79,6 +81,9 @@
     color: #f2efe9;
   }
   .border-hairline {
-    border-color: rgba(242, 239, 233, 0.12);
+    border-color: rgba(242, 239, 233, 0.10);
   }
+  .bg-base { background-color: #15161a; }
+  .bg-soft { background-color: #1c1d22; }
+  .bg-softer { background-color: #202127; }
 }
