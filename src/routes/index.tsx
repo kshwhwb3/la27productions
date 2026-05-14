@@ -53,55 +53,29 @@ function VideoCard({
   caption,
   label,
   index,
+  vimeoId,
 }: {
   caption: string;
   label: string;
   index: string;
+  vimeoId: string;
 }) {
   return (
     <figure className="group">
       <div className="relative aspect-[16/10] md:aspect-[16/9] w-full overflow-hidden rounded-3xl md:rounded-[2.5rem] bg-soft border border-hairline">
-        {/* Soft radial highlight */}
-        <div
-          className="absolute inset-0"
-          style={{
-            background:
-              "radial-gradient(ellipse at center, rgba(255,255,255,0.06) 0%, rgba(21,22,26,0) 70%)",
-          }}
+        <iframe
+          src={`https://player.vimeo.com/video/${vimeoId}?title=0&byline=0&portrait=0&dnt=1`}
+          title={caption}
+          className="absolute inset-0 w-full h-full"
+          frameBorder={0}
+          allow="autoplay; fullscreen; picture-in-picture"
+          allowFullScreen
         />
-        {/* Grain */}
-        <div
-          className="absolute inset-0 opacity-[0.05] mix-blend-overlay pointer-events-none"
-          style={{
-            backgroundImage:
-              "url(\"data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>\")",
-          }}
-        />
-        {/* Center play */}
-        <div className="absolute inset-0 flex items-center justify-center">
-          <div className="flex flex-col items-center gap-5 transition-transform duration-700 group-hover:scale-[1.03]">
-            <div className="flex items-center justify-center w-20 h-20 md:w-24 md:h-24 rounded-full bg-bone/5 backdrop-blur-sm border border-bone/20 group-hover:border-bone/60 group-hover:bg-bone/10 transition-all">
-              <svg
-                width="18"
-                height="20"
-                viewBox="0 0 14 16"
-                fill="none"
-                className="text-bone ml-[3px]"
-              >
-                <path d="M0 0L14 8L0 16V0Z" fill="currentColor" />
-              </svg>
-            </div>
-            <span className="text-[10px] tracking-luxe uppercase text-bone/60">
-              {label}
-            </span>
-          </div>
-        </div>
-        {/* Corners */}
-        <div className="absolute top-5 left-6 text-[10px] tracking-luxe uppercase text-bone/45">
+        <div className="pointer-events-none absolute top-5 left-6 text-[10px] tracking-luxe uppercase text-bone/60 mix-blend-difference">
           REEL · {index}
         </div>
-        <div className="absolute top-5 right-6 text-[10px] tracking-luxe uppercase text-bone/45">
-          LA 27
+        <div className="pointer-events-none absolute top-5 right-6 text-[10px] tracking-luxe uppercase text-bone/60 mix-blend-difference">
+          {label}
         </div>
       </div>
       <figcaption className="mt-5 px-2 flex items-center justify-between gap-4">
@@ -191,8 +165,8 @@ function Index() {
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-8">
-            <VideoCard caption={t.video1} label="Ferrari · Mockup" index="01" />
-            <VideoCard caption={t.video2} label="Dior · Mockup" index="02" />
+            <VideoCard caption={t.video1} label="Ferrari · Mockup" index="01" vimeoId="1192292542" />
+            <VideoCard caption={t.video2} label="Dior · Mockup" index="02" vimeoId="1192292538" />
           </div>
         </div>
       </section>
