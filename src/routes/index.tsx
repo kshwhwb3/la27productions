@@ -89,9 +89,10 @@ function ContactForm({ t }: { t: ReturnType<typeof getT> }) {
     const name = String(fd.get("name") ?? "").slice(0, 100);
     const email = String(fd.get("email") ?? "").slice(0, 200);
     const company = String(fd.get("company") ?? "").slice(0, 150);
+    const projectType = String(fd.get("projectType") ?? "").slice(0, 100);
     const message = String(fd.get("message") ?? "").slice(0, 2000);
-    const subject = `LA 27 — ${name}${company ? ` (${company})` : ""}`;
-    const body = `${message}\n\n— ${name}\n${email}${company ? `\n${company}` : ""}`;
+    const subject = `LA 27 — ${name}${projectType ? ` · ${projectType}` : ""}`;
+    const body = `${projectType ? `[${projectType}]\n\n` : ""}${message}\n\n— ${name}\n${email}${company ? `\n${company}` : ""}`;
     window.location.href = `mailto:${EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
     setSent(true);
   };
