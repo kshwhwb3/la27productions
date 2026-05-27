@@ -37,6 +37,12 @@ type Dict = {
   formMessage: string;
   formSend: string;
   formOr: string;
+  formProjectType: string;
+  projectSpot: string;
+  projectIdentity: string;
+  projectDigital: string;
+  projectOther: string;
+  replyTime: string;
   footer: string;
 };
 
