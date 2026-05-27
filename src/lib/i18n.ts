@@ -191,6 +191,12 @@ export const translations: Record<Lang, Dict> = {
     formMessage: "Nachricht",
     formSend: "Senden",
     formOr: "oder schreiben Sie uns direkt",
+    formProjectType: "Projektart",
+    projectSpot: "Werbespot",
+    projectIdentity: "Klangidentität",
+    projectDigital: "Digitale Inhalte",
+    projectOther: "Sonstiges",
+    replyTime: "Antwort in unter 24h",
     footer: "Barcelona — Weltweit",
   },
 };
