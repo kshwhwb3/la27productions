@@ -182,7 +182,7 @@ function Index() {
             </span>
             <span className="text-[10px] tracking-luxe uppercase text-white/30">↓ Scroll</span>
           </div>
-          <div className="text-[10px] tracking-luxe uppercase text-white/40 border-t border-hairline pt-3">
+          <div className="text-[11px] md:text-xs tracking-luxe uppercase text-white/70 border-t border-hairline pt-4">
             {t.heroProof}
           </div>
         </div>
