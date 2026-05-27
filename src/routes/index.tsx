@@ -223,8 +223,13 @@ function Index() {
         </div>
       </section>
 
+      {/* Divider */}
+      <div className="px-5 md:px-10">
+        <div className="h-px bg-white/20" />
+      </div>
+
       {/* Founder */}
-      <section className="px-5 md:px-10 py-20 md:py-32 border-t border-hairline">
+      <section className="px-5 md:px-10 py-20 md:py-32">
         <div className="flex items-center justify-between mb-10 md:mb-16">
           <span className="text-[10px] tracking-luxe uppercase text-red">{t.studioKicker}</span>
           <span className="text-[10px] tracking-luxe uppercase text-white/40">003</span>
