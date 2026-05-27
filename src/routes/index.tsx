@@ -292,6 +292,7 @@ function Index() {
           >
             {EMAIL}
           </a>
+          <span className="text-[10px] tracking-luxe uppercase text-red md:ml-auto">● {t.replyTime}</span>
         </div>
       </section>
 
