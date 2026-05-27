@@ -68,8 +68,7 @@ function VideoCard({
       </div>
       <div className="relative aspect-video w-full overflow-hidden bg-black border border-hairline">
         <iframe
-          src={`https://player.vimeo.com/video/${vimeoId}?title=0&byline=0&portrait=0&dnt=1`}
-          title={caption}
+          src={`https://player.vimeo.com/video/${vimeoId}?title=0&byline=0&portrait=0&dnt=1&autopause=0`}
           className="absolute inset-0 w-full h-full"
           frameBorder={0}
           allow="autoplay; fullscreen; picture-in-picture"
