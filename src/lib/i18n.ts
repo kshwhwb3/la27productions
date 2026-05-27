@@ -37,6 +37,12 @@ type Dict = {
   formMessage: string;
   formSend: string;
   formOr: string;
+  formProjectType: string;
+  projectSpot: string;
+  projectIdentity: string;
+  projectDigital: string;
+  projectOther: string;
+  replyTime: string;
   footer: string;
 };
 
@@ -71,6 +77,12 @@ export const translations: Record<Lang, Dict> = {
     formMessage: "Mensaje",
     formSend: "Enviar",
     formOr: "o escríbenos directamente",
+    formProjectType: "Tipo de proyecto",
+    projectSpot: "Spot publicitario",
+    projectIdentity: "Identidad sonora",
+    projectDigital: "Contenido digital",
+    projectOther: "Otro",
+    replyTime: "Respuesta en menos de 24h",
     footer: "Barcelona — Mundial",
   },
   en: {
@@ -103,6 +115,12 @@ export const translations: Record<Lang, Dict> = {
     formMessage: "Message",
     formSend: "Send",
     formOr: "or email us directly",
+    formProjectType: "Project type",
+    projectSpot: "Commercial spot",
+    projectIdentity: "Sonic identity",
+    projectDigital: "Digital content",
+    projectOther: "Other",
+    replyTime: "Reply within 24h",
     footer: "Barcelona — Worldwide",
   },
   fr: {
@@ -135,6 +153,12 @@ export const translations: Record<Lang, Dict> = {
     formMessage: "Message",
     formSend: "Envoyer",
     formOr: "ou écrivez-nous directement",
+    formProjectType: "Type de projet",
+    projectSpot: "Spot publicitaire",
+    projectIdentity: "Identité sonore",
+    projectDigital: "Contenu digital",
+    projectOther: "Autre",
+    replyTime: "Réponse en moins de 24h",
     footer: "Barcelone — International",
   },
   de: {
@@ -167,6 +191,12 @@ export const translations: Record<Lang, Dict> = {
     formMessage: "Nachricht",
     formSend: "Senden",
     formOr: "oder schreiben Sie uns direkt",
+    formProjectType: "Projektart",
+    projectSpot: "Werbespot",
+    projectIdentity: "Klangidentität",
+    projectDigital: "Digitale Inhalte",
+    projectOther: "Sonstiges",
+    replyTime: "Antwort in unter 24h",
     footer: "Barcelona — Weltweit",
   },
 };

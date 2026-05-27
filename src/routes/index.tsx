@@ -89,9 +89,10 @@ function ContactForm({ t }: { t: ReturnType<typeof getT> }) {
     const name = String(fd.get("name") ?? "").slice(0, 100);
     const email = String(fd.get("email") ?? "").slice(0, 200);
     const company = String(fd.get("company") ?? "").slice(0, 150);
+    const projectType = String(fd.get("projectType") ?? "").slice(0, 100);
     const message = String(fd.get("message") ?? "").slice(0, 2000);
-    const subject = `LA 27 — ${name}${company ? ` (${company})` : ""}`;
-    const body = `${message}\n\n— ${name}\n${email}${company ? `\n${company}` : ""}`;
+    const subject = `LA 27 — ${name}${projectType ? ` · ${projectType}` : ""}`;
+    const body = `${projectType ? `[${projectType}]\n\n` : ""}${message}\n\n— ${name}\n${email}${company ? `\n${company}` : ""}`;
     window.location.href = `mailto:${EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
     setSent(true);
   };
@@ -104,6 +105,18 @@ function ContactForm({ t }: { t: ReturnType<typeof getT> }) {
       <input required name="name" placeholder={t.formName} className={inputCls} maxLength={100} />
       <input required type="email" name="email" placeholder={t.formEmail} className={inputCls} maxLength={200} />
       <input name="company" placeholder={t.formCompany} className={`${inputCls} md:col-span-2`} maxLength={150} />
+      <select
+        required
+        name="projectType"
+        defaultValue=""
+        className={`${inputCls} md:col-span-2 appearance-none cursor-pointer`}
+      >
+        <option value="" disabled className="bg-black text-white/40">{t.formProjectType}</option>
+        <option value={t.projectSpot} className="bg-black text-white">{t.projectSpot}</option>
+        <option value={t.projectIdentity} className="bg-black text-white">{t.projectIdentity}</option>
+        <option value={t.projectDigital} className="bg-black text-white">{t.projectDigital}</option>
+        <option value={t.projectOther} className="bg-black text-white">{t.projectOther}</option>
+      </select>
       <textarea
         required
         name="message"
@@ -115,12 +128,12 @@ function ContactForm({ t }: { t: ReturnType<typeof getT> }) {
       <div className="md:col-span-2 pt-8">
         <button
           type="submit"
-          className="group inline-flex items-center gap-4 border-b-2 border-white hover:border-red pb-2 transition-colors duration-300"
+          className="group inline-flex items-center gap-4 bg-red hover:bg-white text-white hover:text-black px-8 py-4 transition-colors duration-300"
         >
-          <span className="text-xl md:text-2xl font-medium tracking-tight text-white group-hover:text-red transition-colors">
+          <span className="text-xl md:text-2xl font-medium tracking-tight">
             {sent ? "✓" : t.formSend}
           </span>
-          <span className="text-xl md:text-2xl text-red">→</span>
+          <span className="text-xl md:text-2xl">→</span>
         </button>
       </div>
     </form>
@@ -169,7 +182,7 @@ function Index() {
             </span>
             <span className="text-[10px] tracking-luxe uppercase text-white/30">↓ Scroll</span>
           </div>
-          <div className="text-[10px] tracking-luxe uppercase text-white/40 border-t border-hairline pt-3">
+          <div className="text-[11px] md:text-xs tracking-luxe uppercase text-white/70 border-t border-hairline pt-4">
             {t.heroProof}
           </div>
         </div>
@@ -210,8 +223,13 @@ function Index() {
         </div>
       </section>
 
+      {/* Divider */}
+      <div className="px-5 md:px-10">
+        <div className="h-px bg-white/20" />
+      </div>
+
       {/* Founder */}
-      <section className="px-5 md:px-10 py-20 md:py-32 border-t border-hairline">
+      <section className="px-5 md:px-10 py-20 md:py-32">
         <div className="flex items-center justify-between mb-10 md:mb-16">
           <span className="text-[10px] tracking-luxe uppercase text-red">{t.studioKicker}</span>
           <span className="text-[10px] tracking-luxe uppercase text-white/40">003</span>
@@ -274,6 +292,7 @@ function Index() {
           >
             {EMAIL}
           </a>
+          <span className="text-[10px] tracking-luxe uppercase text-red md:ml-auto">● {t.replyTime}</span>
         </div>
       </section>
 
