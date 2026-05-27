@@ -104,6 +104,18 @@ function ContactForm({ t }: { t: ReturnType<typeof getT> }) {
       <input required name="name" placeholder={t.formName} className={inputCls} maxLength={100} />
       <input required type="email" name="email" placeholder={t.formEmail} className={inputCls} maxLength={200} />
       <input name="company" placeholder={t.formCompany} className={`${inputCls} md:col-span-2`} maxLength={150} />
+      <select
+        required
+        name="projectType"
+        defaultValue=""
+        className={`${inputCls} md:col-span-2 appearance-none cursor-pointer`}
+      >
+        <option value="" disabled className="bg-black text-white/40">{t.formProjectType}</option>
+        <option value={t.projectSpot} className="bg-black text-white">{t.projectSpot}</option>
+        <option value={t.projectIdentity} className="bg-black text-white">{t.projectIdentity}</option>
+        <option value={t.projectDigital} className="bg-black text-white">{t.projectDigital}</option>
+        <option value={t.projectOther} className="bg-black text-white">{t.projectOther}</option>
+      </select>
       <textarea
         required
         name="message"
@@ -115,12 +127,12 @@ function ContactForm({ t }: { t: ReturnType<typeof getT> }) {
       <div className="md:col-span-2 pt-8">
         <button
           type="submit"
-          className="group inline-flex items-center gap-4 border-b-2 border-white hover:border-red pb-2 transition-colors duration-300"
+          className="group inline-flex items-center gap-4 bg-red hover:bg-white text-white hover:text-black px-8 py-4 transition-colors duration-300"
         >
-          <span className="text-xl md:text-2xl font-medium tracking-tight text-white group-hover:text-red transition-colors">
+          <span className="text-xl md:text-2xl font-medium tracking-tight">
             {sent ? "✓" : t.formSend}
           </span>
-          <span className="text-xl md:text-2xl text-red">→</span>
+          <span className="text-xl md:text-2xl">→</span>
         </button>
       </div>
     </form>
