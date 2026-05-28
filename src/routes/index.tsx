@@ -1,14 +1,29 @@
-<>
-  <meta charSet="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>LA 27 Productions — Sonido de Lujo · Barcelona</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
-  <link
-    href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Space+Grotesk:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap"
-    rel="stylesheet"
-  />
-  <link rel="stylesheet" href="styles.css" />
+import { createFileRoute } from "@tanstack/react-router";
+import { useEffect } from "react";
+
+export const Route = createFileRoute("/")({
+  component: HomePage,
+});
+
+function HomePage() {
+  useEffect(() => {
+    const s1 = document.createElement("script");
+    s1.src = "/i18n.js";
+    s1.async = false;
+    document.body.appendChild(s1);
+    const s2 = document.createElement("script");
+    s2.src = "/script.js";
+    s2.async = false;
+    s1.onload = () => document.body.appendChild(s2);
+    return () => {
+      s1.remove();
+      s2.remove();
+    };
+  }, []);
+
+  return (
+    <>
+
   {/* =========== LANGUAGE OVERLAY (first visit) =========== */}
   <div
     className="lang-overlay"
