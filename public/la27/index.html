@@ -1,0 +1,370 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <script>window.location.href = 'https://kshwhwb3.github.io/la27productions/';</script>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>LA 27 Productions — Sonido de Lujo · Barcelona</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Space+Grotesk:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body class="is-locked">
+
+  <!-- =========== LANGUAGE OVERLAY (first visit) =========== -->
+  <div class="lang-overlay" id="lang-overlay" role="dialog" aria-modal="true" aria-labelledby="lang-overlay-title">
+    <div class="lang-overlay-inner">
+      <div class="lang-overlay-brand">
+        <span class="dot"></span>
+        <span>LA 27 PRODUCTIONS</span>
+      </div>
+
+      <div class="lang-overlay-titles">
+        <div class="lang-overlay-line" id="lang-overlay-title">Selecciona idioma.</div>
+        <div class="lang-overlay-line">Select language.</div>
+        <div class="lang-overlay-line">Sprache wählen.</div>
+        <div class="lang-overlay-line">Choisir la langue.</div>
+        <div class="lang-overlay-line">Selecione o idioma.</div>
+      </div>
+
+      <ul class="lang-overlay-list">
+        <li><a href="#" data-lang="es" data-cursor="hover"><span class="code">ES</span><span class="name">Español</span><span class="arrow">→</span></a></li>
+        <li><a href="#" data-lang="en" data-cursor="hover"><span class="code">EN</span><span class="name">English</span><span class="arrow">→</span></a></li>
+        <li><a href="#" data-lang="de" data-cursor="hover"><span class="code">DE</span><span class="name">Deutsch</span><span class="arrow">→</span></a></li>
+        <li><a href="#" data-lang="fr" data-cursor="hover"><span class="code">FR</span><span class="name">Français</span><span class="arrow">→</span></a></li>
+        <li><a href="#" data-lang="pt" data-cursor="hover"><span class="code">PT</span><span class="name">Português</span><span class="arrow">→</span></a></li>
+      </ul>
+
+      <div class="lang-overlay-foot">
+        <span>Barcelona — ES</span>
+        <span>© LA 27</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="cursor" aria-hidden="true">
+    <span class="cursor-label">Play</span>
+  </div>
+
+  <div class="scroll-progress" aria-hidden="true"></div>
+
+  <header class="nav">
+    <a href="#top" class="nav-brand" data-cursor="hover">
+      <strong>LA 27</strong> &nbsp;Productions
+    </a>
+    <nav>
+      <ul class="nav-links">
+        <li><a href="#work" data-cursor="hover" data-i18n="nav.work">Trabajo</a></li>
+        <li><a href="#why" data-cursor="hover" data-i18n="nav.studio">Estudio</a></li>
+        <li><a href="#founder" data-cursor="hover" data-i18n="nav.founder">Founder</a></li>
+        <li><a href="#contact" data-cursor="hover" data-i18n="nav.contact">Contacto</a></li>
+      </ul>
+    </nav>
+    <div class="nav-right">
+      <div class="lang-switch" data-cursor="hover">
+        <button class="lang-switch-btn" type="button" aria-haspopup="true" aria-expanded="false">
+          <span class="lang-switch-current">ES</span>
+          <svg width="8" height="8" viewBox="0 0 8 8" fill="none"><path d="M1.5 3l2.5 2.5L6.5 3" stroke="currentColor" stroke-width="1" stroke-linecap="round"/></svg>
+        </button>
+        <ul class="lang-switch-menu" role="menu">
+          <li><a href="#" data-lang="es" data-cursor="hover"><span class="code">ES</span> Español</a></li>
+          <li><a href="#" data-lang="en" data-cursor="hover"><span class="code">EN</span> English</a></li>
+          <li><a href="#" data-lang="de" data-cursor="hover"><span class="code">DE</span> Deutsch</a></li>
+          <li><a href="#" data-lang="fr" data-cursor="hover"><span class="code">FR</span> Français</a></li>
+          <li><a href="#" data-lang="pt" data-cursor="hover"><span class="code">PT</span> Português</a></li>
+        </ul>
+      </div>
+      <div class="nav-meta">
+        <span class="dot"></span>
+        <span data-bcn-time>—:— BCN</span>
+      </div>
+    </div>
+  </header>
+
+  <aside class="section-index" aria-hidden="true">
+    <a href="#hero" data-cursor="hover"><span class="num">001</span><span class="label" data-i18n="index.intro">Intro</span></a>
+    <a href="#work" data-cursor="hover"><span class="num">002</span><span class="label" data-i18n="index.reels">Reels</span></a>
+    <a href="#why" data-cursor="hover"><span class="num">003</span><span class="label" data-i18n="index.studio">Estudio</span></a>
+    <a href="#founder" data-cursor="hover"><span class="num">004</span><span class="label" data-i18n="index.founder">Founder</span></a>
+    <a href="#contact" data-cursor="hover"><span class="num">005</span><span class="label" data-i18n="index.contact">Contacto</span></a>
+  </aside>
+
+  <main id="top">
+
+    <!-- =========== HERO =========== -->
+    <section id="hero" class="hero" data-section data-screen-label="Hero">
+      <div class="hero-meta">
+        <span data-i18n="hero.meta">001 / Intro</span>
+        <span data-i18n="hero.location">Barcelona — ES</span>
+      </div>
+
+      <h1 class="hero-title" data-i18n-html="hero.title">
+        <span class="word"><span>Sonido</span></span>
+        <span class="word"><span>de</span></span>
+        <span class="word"><span class="it">Lujo.</span></span>
+        <br />
+        <span class="word"><span>Audio</span></span>
+        <span class="word"><span>a</span></span>
+        <span class="word"><span class="it">medida.</span></span>
+      </h1>
+
+      <div class="waveform" aria-hidden="true"></div>
+
+      <div class="hero-sub">
+        <p class="hero-sub-left" data-i18n="hero.sub">
+          Música instrumental exclusiva para marcas, agencias y film. Compuesta desde cero — sin librerías, sin royalties.
+        </p>
+        <a class="scroll-cue" href="#work" data-cursor="hover">
+          <span data-i18n="hero.scroll">Scroll</span>
+          <span class="arrow">
+            <svg width="10" height="10" viewBox="0 0 10 10" fill="none">
+              <path d="M5 1v8M2 6l3 3 3-3" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </span>
+        </a>
+      </div>
+    </section>
+
+    <!-- =========== TRUST STRIP =========== -->
+    <section class="trust" aria-label="Trust">
+      <div class="trust-inner">
+        <span>
+          <em style="font-style:italic" data-i18n="trust.text">Confiado por agencias y marcas en 15+ países</em>
+          <i class="sep"></i> Ferrari
+          <i class="sep"></i> Dior
+          <i class="sep"></i> Loewe
+          <i class="sep"></i> Estrella Damm
+          <i class="sep"></i> Mango
+          <i class="sep"></i> Volkswagen
+          <i class="sep"></i> Banco Sabadell
+          <i class="sep"></i>
+        </span>
+        <span aria-hidden="true">
+          <em style="font-style:italic" data-i18n="trust.text">Confiado por agencias y marcas en 15+ países</em>
+          <i class="sep"></i> Ferrari
+          <i class="sep"></i> Dior
+          <i class="sep"></i> Loewe
+          <i class="sep"></i> Estrella Damm
+          <i class="sep"></i> Mango
+          <i class="sep"></i> Volkswagen
+          <i class="sep"></i> Banco Sabadell
+          <i class="sep"></i>
+        </span>
+      </div>
+    </section>
+
+    <!-- =========== WORK =========== -->
+    <section id="work" class="work" data-section data-screen-label="Trabajo Seleccionado">
+      <div class="section-header reveal">
+        <div class="section-eyebrow">
+          <span class="num">002</span>
+          <span data-i18n="work.eyebrow">Reels</span>
+        </div>
+        <h2 class="section-title" data-i18n-html="work.title">Trabajo<br /><span class="it">Seleccionado.</span></h2>
+      </div>
+
+      <div class="work-grid">
+
+        <article class="work-item reveal">
+          <div class="work-media">
+            <div class="video-frame">
+              <iframe
+                src="https://player.vimeo.com/video/1192292542?title=0&byline=0&portrait=0&badge=0&color=ffffff&dnt=1"
+                allow="autoplay; fullscreen; picture-in-picture"
+                allowfullscreen
+                loading="lazy"
+                title="Ferrari — Roma Spider"></iframe>
+            </div>
+          </div>
+          <div class="work-info">
+            <div class="work-index">01 / Ferrari</div>
+            <h3 class="work-title" data-i18n-html="work.ferrari.title">Roma <span class="it">Spider</span></h3>
+            <div class="work-meta">
+              <span data-i18n="work.ferrari.meta1">Automotriz</span>
+              <span class="sep"></span>
+              <span data-i18n="work.ferrari.meta2">Rock Score</span>
+              <span class="sep"></span>
+              <span>2025</span>
+            </div>
+            <p class="work-desc" data-i18n="work.ferrari.desc">
+              Rock Texas-style, crudo y potente. Guitarras eléctricas, batería en vivo y un bajo que empuja el corte como un motor en sexta. Compuesto y grabado íntegramente en el estudio.
+            </p>
+          </div>
+        </article>
+
+        <article class="work-item reveal">
+          <div class="work-media">
+            <div class="video-frame">
+              <iframe
+                src="https://player.vimeo.com/video/1192292538?title=0&byline=0&portrait=0&badge=0&color=ffffff&dnt=1"
+                allow="autoplay; fullscreen; picture-in-picture"
+                allowfullscreen
+                loading="lazy"
+                title="Dior — Maison Perfume"></iframe>
+            </div>
+          </div>
+          <div class="work-info">
+            <div class="work-index">02 / Dior</div>
+            <h3 class="work-title" data-i18n-html="work.dior.title">Maison <span class="it">Perfume</span></h3>
+            <div class="work-meta">
+              <span data-i18n="work.dior.meta1">Perfumería</span>
+              <span class="sep"></span>
+              <span data-i18n="work.dior.meta2">Voz &amp; Guitarra</span>
+              <span class="sep"></span>
+              <span>2026</span>
+            </div>
+            <p class="work-desc" data-i18n="work.dior.desc">
+              Una voz femenina suspendida sobre una guitarra de paraíso. Aire, sensualidad y un decorado sonoro tan delicado como el frasco — escrito sólo para esta campaña.
+            </p>
+          </div>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- =========== WHY / STUDIO (no photo) =========== -->
+    <section id="why" class="why" data-section data-screen-label="El Estudio">
+      <div class="section-header reveal">
+        <div class="section-eyebrow">
+          <span class="num">003</span>
+          <span data-i18n="why.eyebrow">El Estudio</span>
+        </div>
+        <h2 class="section-title" data-i18n-html="why.title">Todo bajo<br /><span class="it">un mismo techo.</span></h2>
+      </div>
+
+      <div class="why-lede reveal" data-i18n-html="why.lede">
+        <p>
+          Estudio propio en Barcelona — <em>ciudad del arte y la música</em> — con la tecnología y la calidad más avanzadas. Producimos cada pieza enteramente in-house, desde el primer sonido hasta el master final, con master de televisión incluido o el formato que prefiera el cliente. <span class="hl">Servicio 100%.</span>
+        </p>
+      </div>
+
+      <div class="pillars-grid">
+        <div class="pillar-card reveal">
+          <div class="pillar-num">01</div>
+          <h3 class="pillar-title" data-i18n-html="pillar.01.title">Estudio en <span class="it">Barcelona.</span></h3>
+          <p class="pillar-body" data-i18n="pillar.01.body">Instalaciones tratadas acústicamente, monitoreo de referencia y una colección de instrumentos físicos lista para grabar.</p>
+        </div>
+        <div class="pillar-card reveal">
+          <div class="pillar-num">02</div>
+          <h3 class="pillar-title" data-i18n-html="pillar.02.title">100% <span class="it">Exclusivo.</span></h3>
+          <p class="pillar-body" data-i18n="pillar.02.body">Cada pieza compuesta desde cero para tu proyecto. Sin librerías, sin stock, nunca reutilizada.</p>
+        </div>
+        <div class="pillar-card reveal">
+          <div class="pillar-num">03</div>
+          <h3 class="pillar-title" data-i18n-html="pillar.03.title">Sin <span class="it">Royalties.</span></h3>
+          <p class="pillar-body" data-i18n="pillar.03.body">La música es tuya. Para siempre. Sin licencias, sin renovaciones, sin gestores intermediarios.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========== FOUNDER =========== -->
+    <section id="founder" class="studio" data-section data-screen-label="Founder · Tim Helmes">
+      <div class="section-header reveal">
+        <div class="section-eyebrow">
+          <span class="num">004</span>
+          <span data-i18n="founder.eyebrow">Quiénes somos</span>
+        </div>
+        <h2 class="section-title" data-i18n-html="founder.title">El <span class="it">Founder.</span></h2>
+      </div>
+
+      <div class="studio-grid">
+        <div class="studio-portrait reveal">
+          <img src="assets/tim-helmes.png" alt="Tim Helmes — Founder & Music Director, LA 27 Productions" />
+        </div>
+
+        <div class="studio-text reveal">
+          <p class="studio-quote" data-i18n-html="founder.quote">
+            "Cada marca <span class="it">merece</span> su propio sonido. No una librería compartida con cien anuncios más."
+          </p>
+          <p class="studio-bio" data-i18n="founder.bio">
+            Tim Helmes es compositor y director musical con sede en Barcelona. LA 27 PRODUCTIONS nació de una convicción simple: música instrumental 100% exclusiva, compuesta desde cero, sin librerías, sin royalties.
+          </p>
+
+          <div class="studio-signature">
+            <div>
+              <div class="name">Tim Helmes</div>
+              <div class="role" data-i18n="founder.role">Founder &amp; Music Director — LA 27</div>
+            </div>
+            <a href="https://www.linkedin.com/in/tim-helmes-boschi-9b9244246/" target="_blank" rel="noopener" class="linkedin" data-cursor="hover">
+              LinkedIn
+              <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M2 8L8 2M8 2H3M8 2v5" stroke="currentColor" stroke-width="1"/></svg>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========== CONTACT =========== -->
+    <section id="contact" class="contact" data-section data-screen-label="Contacto">
+      <div class="contact-grid">
+        <div class="reveal">
+          <h2 class="contact-title" data-i18n-html="contact.title">Asegura tu<br /><span class="it">sonido.</span></h2>
+          <p class="contact-aside" data-i18n="contact.aside">
+            Cuéntanos en qué estás trabajando. Te respondemos con un primer enfoque sonoro y propuesta de tiempos.
+          </p>
+          <div class="contact-direct">
+            <div class="lab" data-i18n="contact.direct">O escríbenos directamente</div>
+            <a class="mail" href="mailto:la27productions@gmail.com" data-cursor="hover">la27productions@gmail.com</a>
+            <div class="contact-status">
+              <span class="dot"></span>
+              <span data-i18n="contact.status">Respuesta en menos de 24h</span>
+            </div>
+          </div>
+        </div>
+
+        <form class="form reveal" autocomplete="off">
+          <div class="field">
+            <label for="f-name" data-i18n="form.name">Nombre</label>
+            <input id="f-name" type="text" />
+          </div>
+          <div class="field">
+            <label for="f-email" data-i18n="form.email">Email</label>
+            <input id="f-email" type="email" />
+          </div>
+          <div class="field">
+            <label for="f-company" data-i18n="form.company">Empresa</label>
+            <input id="f-company" type="text" />
+          </div>
+          <div class="field is-filled">
+            <label for="f-type" data-i18n="form.type">Tipo de proyecto</label>
+            <select id="f-type">
+              <option value="" data-i18n="form.type.placeholder">— Elegir —</option>
+              <option data-i18n="form.type.opt1">Spot / Campaña</option>
+              <option data-i18n="form.type.opt2">Film / Cortometraje</option>
+              <option data-i18n="form.type.opt3">Desfile / Evento</option>
+              <option data-i18n="form.type.opt4">Sound Branding</option>
+              <option data-i18n="form.type.opt5">Otro</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="f-message" data-i18n="form.message">Mensaje</label>
+            <textarea id="f-message" rows="2"></textarea>
+          </div>
+
+          <div class="form-submit">
+            <button type="submit" class="btn" data-cursor="hover">
+              <span data-i18n="form.submit">Enviar</span>
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+          </div>
+
+          <p class="form-success" data-i18n="form.success">Recibido. Tim responde en menos de 24h.</p>
+        </form>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <div data-i18n="footer.copy">© LA 27 Productions · Barcelona</div>
+    <div class="right">
+      <span data-i18n="footer.mastered">Mastered in Barcelona</span>
+      <span>v2026</span>
+    </div>
+  </footer>
+
+  <script src="i18n.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
