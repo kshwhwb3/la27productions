@@ -1,12 +1,9 @@
-/* LA 27 — interactions */
+/* LA 27 — interactions v2 */
 
 (() => {
   const i18n = window.LA27_I18N;
 
-  // ----- Language overlay + switcher -----
-  const overlay = document.getElementById("lang-overlay");
-  const body = document.body;
-
+  // ----- Language: apply stored or default ES, no overlay -----
   const setHeroDelays = () => {
     const heroWords = document.querySelectorAll(".hero-title .word > span");
     heroWords.forEach((sp, i) => {
@@ -14,51 +11,25 @@
     });
   };
 
-  const applyLang = (lang, { fromOverlay = false } = {}) => {
+  const applyLang = (lang) => {
     if (!i18n) return;
     i18n.apply(lang);
     i18n.setLang(lang);
-    setHeroDelays();
-    if (fromOverlay) hideOverlay();
-  };
-
-  const hideOverlay = () => {
-    if (!overlay) return;
-    overlay.classList.add("is-hidden");
-    body.classList.remove("is-locked");
-    setTimeout(() => {
-      if (overlay && overlay.parentNode) {
-        overlay.setAttribute("aria-hidden", "true");
-      }
-    }, 700);
-  };
-
-  // Determine starting language
-  const stored = i18n && i18n.getLang();
-  const initial = (stored && i18n.T[stored]) ? stored : "es";
-
-  // If user already picked, skip overlay
-  if (stored && i18n.T[stored]) {
-    body.classList.remove("is-locked");
-    if (overlay) overlay.classList.add("is-hidden");
-    applyLang(stored);
-  } else {
-    // Apply default (Spanish) text but keep overlay visible
-    applyLang(initial);
-    body.classList.add("is-locked");
-  }
-
-  // Overlay clicks
-  document.querySelectorAll(".lang-overlay-list a").forEach((a) => {
-    a.addEventListener("click", (e) => {
-      e.preventDefault();
-      const lang = a.dataset.lang;
-      if (!lang) return;
-      applyLang(lang, { fromOverlay: true });
+    // Update nav current lang display
+    const cur = document.querySelector(".lang-switch-current");
+    if (cur) cur.textContent = lang.toUpperCase();
+    // Mark active in menu
+    document.querySelectorAll(".lang-switch-menu a").forEach((a) => {
+      a.classList.toggle("is-active", a.dataset.lang === lang);
     });
-  });
+    setHeroDelays();
+  };
 
-  // Nav switcher
+  const stored = i18n && i18n.getLang();
+  const initial = (stored && i18n.T && i18n.T[stored]) ? stored : "es";
+  applyLang(initial);
+
+  // Nav language switcher
   const switcher = document.querySelector(".lang-switch");
   const switcherBtn = document.querySelector(".lang-switch-btn");
 
@@ -84,50 +55,49 @@
     });
   });
 
-  // ----- Custom cursor -----
+  // ----- Custom cursor (desktop only) -----
   const cursor = document.querySelector(".cursor");
   let cx = window.innerWidth / 2, cy = window.innerHeight / 2;
   let tx = cx, ty = cy;
 
-  window.addEventListener("mousemove", (e) => {
-    tx = e.clientX;
-    ty = e.clientY;
-  });
+  if (cursor && window.matchMedia("(hover: hover)").matches) {
+    window.addEventListener("mousemove", (e) => {
+      tx = e.clientX;
+      ty = e.clientY;
+    });
 
-  const renderCursor = () => {
-    cx += (tx - cx) * 0.22;
-    cy += (ty - cy) * 0.22;
-    if (cursor) cursor.style.transform = `translate(${cx}px, ${cy}px) translate(-50%, -50%)`;
-    requestAnimationFrame(renderCursor);
-  };
-  renderCursor();
+    const renderCursor = () => {
+      cx += (tx - cx) * 0.22;
+      cy += (ty - cy) * 0.22;
+      cursor.style.transform = `translate(${cx}px, ${cy}px) translate(-50%, -50%)`;
+      requestAnimationFrame(renderCursor);
+    };
+    renderCursor();
 
-  // Delegated hover handlers (works on dynamically-rendered elements too)
-  document.addEventListener("mouseover", (e) => {
-    if (!cursor) return;
-    const hover = e.target.closest("[data-cursor='hover']");
-    const play = e.target.closest("[data-cursor='play']");
-    if (play) {
-      cursor.classList.add("is-play");
-      cursor.classList.remove("is-hover");
-      const label = cursor.querySelector(".cursor-label");
-      if (label) label.textContent = play.dataset.cursorLabel || "Play";
-    } else if (hover) {
-      cursor.classList.add("is-hover");
-      cursor.classList.remove("is-play");
-    }
-  });
-  document.addEventListener("mouseout", (e) => {
-    if (!cursor) return;
-    const hover = e.target.closest("[data-cursor='hover']");
-    const play = e.target.closest("[data-cursor='play']");
-    if (play && !e.relatedTarget?.closest("[data-cursor='play']")) {
-      cursor.classList.remove("is-play");
-    }
-    if (hover && !e.relatedTarget?.closest("[data-cursor='hover']")) {
-      cursor.classList.remove("is-hover");
-    }
-  });
+    document.addEventListener("mouseover", (e) => {
+      const hover = e.target.closest("[data-cursor='hover']");
+      const play = e.target.closest("[data-cursor='play']");
+      if (play) {
+        cursor.classList.add("is-play");
+        cursor.classList.remove("is-hover");
+        const label = cursor.querySelector(".cursor-label");
+        if (label) label.textContent = play.dataset.cursorLabel || "Play";
+      } else if (hover) {
+        cursor.classList.add("is-hover");
+        cursor.classList.remove("is-play");
+      }
+    });
+    document.addEventListener("mouseout", (e) => {
+      const hover = e.target.closest("[data-cursor='hover']");
+      const play = e.target.closest("[data-cursor='play']");
+      if (play && !e.relatedTarget?.closest("[data-cursor='play']")) {
+        cursor.classList.remove("is-play");
+      }
+      if (hover && !e.relatedTarget?.closest("[data-cursor='hover']")) {
+        cursor.classList.remove("is-hover");
+      }
+    });
+  }
 
   // ----- Scroll progress -----
   const progress = document.querySelector(".scroll-progress");
@@ -147,7 +117,7 @@
         io.unobserve(e.target);
       }
     });
-  }, { threshold: 0.12, rootMargin: "0px 0px -8% 0px" });
+  }, { threshold: 0.1, rootMargin: "0px 0px -6% 0px" });
 
   document.querySelectorAll(".reveal").forEach((el) => io.observe(el));
 
@@ -168,7 +138,7 @@
   window.addEventListener("scroll", updateIndex, { passive: true });
   updateIndex();
 
-  // ----- Hero waveform: build bars + animate -----
+  // ----- Hero waveform -----
   const wave = document.querySelector(".waveform");
   if (wave) {
     const COUNT = 84;
@@ -198,17 +168,32 @@
     document.head.appendChild(style);
   }
 
-  // ----- Hero parallax / fade on scroll -----
+  // ----- Hero parallax / fade on scroll (desktop only, gentle on tablet) -----
   const hero = document.querySelector(".hero");
   const heroTitle = document.querySelector(".hero-title");
   const heroSub = document.querySelector(".hero-sub");
   const heroWave = document.querySelector(".waveform");
+  const isMobile = () => window.innerWidth <= 680;
 
   const onHeroScroll = () => {
     if (!hero) return;
     const y = window.scrollY;
     const h = window.innerHeight;
     const p = Math.min(1, y / h);
+
+    if (isMobile()) {
+      // On mobile: no parallax, just a very subtle title fade
+      if (heroTitle) {
+        heroTitle.style.transform = "";
+        heroTitle.style.opacity = String(Math.max(0, 1 - p * 1.2));
+      }
+      if (heroSub) {
+        heroSub.style.opacity = String(Math.max(0, 1 - p * 2));
+        heroSub.style.transform = "";
+      }
+      return;
+    }
+
     if (heroTitle) {
       heroTitle.style.transform = `translateY(${y * 0.18}px)`;
       heroTitle.style.opacity = String(1 - p * 0.85);
@@ -269,7 +254,6 @@
 
   const openVideo = (id, title) => {
     if (!vlb || !vlbWrap || !id) return;
-    // Build iframe fresh each time so the video reloads / autoplays
     vlbWrap.innerHTML = "";
     const iframe = document.createElement("iframe");
     iframe.src = `https://player.vimeo.com/video/${id}?autoplay=1&title=0&byline=0&portrait=0&badge=0&color=ffffff&dnt=1`;
@@ -291,11 +275,9 @@
     vlb.classList.remove("is-open");
     vlb.setAttribute("aria-hidden", "true");
     document.body.style.overflow = "";
-    // Delay iframe removal until fade-out finishes so we don't see a snap to black
     setTimeout(() => { vlbWrap.innerHTML = ""; }, 500);
   };
 
-  // Play cards intercept the click
   document.querySelectorAll(".play-card[data-vimeo-id]").forEach((card) => {
     card.addEventListener("click", (e) => {
       e.preventDefault();
@@ -305,7 +287,6 @@
     });
   });
 
-  // Close handlers
   document.querySelectorAll("[data-vlightbox-close]").forEach((el) => {
     el.addEventListener("click", (e) => {
       e.preventDefault();
