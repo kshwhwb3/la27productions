@@ -598,4 +598,7 @@ function HomePage() {
       <span>v2026</span>
     </div>
   </footer>
-</>
+    </>
+  );
+}
+
