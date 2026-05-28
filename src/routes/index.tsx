@@ -301,7 +301,7 @@
               <iframe
                 src="https://player.vimeo.com/video/1192292542?title=0&byline=0&portrait=0&badge=0&color=ffffff&dnt=1"
                 allow="autoplay; fullscreen; picture-in-picture"
-                allowFullScreen=""
+                allowFullScreen={true}
                 loading="lazy"
                 title="Ferrari — Roma Spider"
               />
@@ -332,7 +332,7 @@
               <iframe
                 src="https://player.vimeo.com/video/1192292538?title=0&byline=0&portrait=0&badge=0&color=ffffff&dnt=1"
                 allow="autoplay; fullscreen; picture-in-picture"
-                allowFullScreen=""
+                allowFullScreen={true}
                 loading="lazy"
                 title="Dior — Maison Perfume"
               />
