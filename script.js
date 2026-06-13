@@ -365,7 +365,7 @@
     if (!vlb || !vlbWrap || !id) return;
     vlbWrap.innerHTML = "";
     const iframe = document.createElement("iframe");
-    iframe.src = `https://player.vimeo.com/video/${id}?autoplay=1&title=0&byline=0&portrait=0&badge=0&color=ffffff&dnt=1`;
+    iframe.src = `https://player.vimeo.com/video/${id}?autoplay=1&title=0&byline=0&portrait=0&badge=0&color=ffffff&dnt=1&quality=1080p`;
     iframe.setAttribute("allow", "autoplay; fullscreen; picture-in-picture");
     iframe.setAttribute("allowfullscreen", "");
     iframe.setAttribute("frameborder", "0");
