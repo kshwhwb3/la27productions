@@ -698,7 +698,7 @@ body.is-locked {
   align-items: center;
   gap: 80px;
   white-space: nowrap;
-  animation: marquee 36s linear infinite;
+  animation: marquee 24s linear infinite;
   font-family: var(--font-display);
   font-style: italic;
   font-size: 32px;
