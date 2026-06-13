@@ -6,11 +6,15 @@
   // ----- Premium Micro-Sound Engine (Web Audio API) -----
   const SoundEngine = (() => {
     let ctx = null;
+    let analyser = null;
     let enabled = localStorage.getItem("la27.sound") !== "false";
 
     const init = () => {
       if (!ctx) {
         ctx = new (window.AudioContext || window.webkitAudioContext)();
+        analyser = ctx.createAnalyser();
+        analyser.fftSize = 256;
+        analyser.connect(ctx.destination);
       }
       if (ctx.state === "suspended") {
         ctx.resume();
@@ -26,7 +30,7 @@
         const gainNode = ctx.createGain();
 
         osc.connect(gainNode);
-        gainNode.connect(ctx.destination);
+        gainNode.connect(analyser || ctx.destination);
 
         if (type === "hover") {
           // Warm Pop Analógico Hover: very quick frequency decay in low mids
@@ -67,7 +71,7 @@
           const gain = ctx.createGain();
           
           osc.connect(gain);
-          gain.connect(ctx.destination);
+          gain.connect(analyser || ctx.destination);
           
           osc.type = "sine";
           osc.frequency.setValueAtTime(freq, now + index * 0.12);
@@ -95,7 +99,7 @@
         
         const now = ctx.currentTime;
         const masterGain = ctx.createGain();
-        masterGain.connect(ctx.destination);
+        masterGain.connect(analyser || ctx.destination);
         
         masterGain.gain.setValueAtTime(0, now);
         masterGain.gain.linearRampToValueAtTime(0.03, now + 0.3);
@@ -264,7 +268,14 @@
       localStorage.setItem("la27.sound", val ? "true" : "false");
     };
 
-    return { play, playLogoChime, startCardAudition, stopCardAudition, isEnabled, setEnabled, init };
+    const getFrequencyData = () => {
+      if (!analyser) return null;
+      const dataArray = new Uint8Array(analyser.frequencyBinCount);
+      analyser.getByteFrequencyData(dataArray);
+      return dataArray;
+    };
+
+    return { play, playLogoChime, startCardAudition, stopCardAudition, isEnabled, setEnabled, init, getFrequencyData };
   })();
 
   const soundBtn = document.querySelector(".sound-toggle-btn");
@@ -914,6 +925,105 @@
     });
   };
 
+  // ----- Sensory Upgrades: Real-Time Audio Visualizer -----
+  const initVisualizer = () => {
+    const vbars = document.querySelectorAll(".sound-visualizer-bars .vbar");
+    const hbars = document.querySelectorAll(".waveform .bar");
+    
+    const update = () => {
+      requestAnimationFrame(update);
+      
+      const freq = SoundEngine.getFrequencyData();
+      const soundEnabled = SoundEngine.isEnabled();
+      
+      // 1. Update navigation mini visualizer
+      if (freq && soundEnabled && vbars.length) {
+        vbars.forEach((bar, i) => {
+          const val = freq[i * 3] || 0;
+          const h = 2 + (val / 255) * 8;
+          bar.style.height = `${h}px`;
+          if (val > 15) {
+            bar.style.backgroundColor = "var(--accent)";
+          } else {
+            bar.style.backgroundColor = "";
+          }
+        });
+      } else if (vbars.length) {
+        vbars.forEach((bar) => {
+          bar.style.height = "2px";
+          bar.style.backgroundColor = "";
+        });
+      }
+      
+      // 2. Update Hero Waveform visualizer
+      if (freq && soundEnabled && hbars.length) {
+        let hasEnergy = false;
+        for (let i = 0; i < 20; i++) {
+          if (freq[i] > 10) {
+            hasEnergy = true;
+            break;
+          }
+        }
+        
+        if (hasEnergy) {
+          hbars.forEach((bar, index) => {
+            const freqIndex = Math.floor((index / hbars.length) * freq.length * 0.55);
+            const val = freq[freqIndex] || 0;
+            const scale = 1 + (val / 255) * 2.6;
+            bar.style.transform = `scaleY(${scale})`;
+            bar.style.backgroundColor = "var(--accent)";
+          });
+          return;
+        }
+      }
+      
+      if (hbars.length) {
+        hbars.forEach((bar) => {
+          bar.style.transform = "";
+          bar.style.backgroundColor = "";
+        });
+      }
+    };
+    
+    requestAnimationFrame(update);
+  };
+
+  // ----- Sensory Upgrades: Ambient Glow Orbs -----
+  const initAmbientOrbs = () => {
+    const orb1 = document.querySelector(".orb-1");
+    const orb2 = document.querySelector(".orb-2");
+    if (!orb1 || !orb2) return;
+    
+    window.addEventListener("mousemove", (e) => {
+      const mxPct = e.clientX / window.innerWidth;
+      const myPct = e.clientY / window.innerHeight;
+      
+      orb1.style.transform = `translate(${mxPct * 90}px, ${myPct * 90}px)`;
+      orb2.style.transform = `translate(${(1 - mxPct) * -90}px, ${(1 - myPct) * -90}px)`;
+    });
+  };
+
+  // ----- Sensory Upgrades: Sonic Click Ripples -----
+  const initClickRipples = () => {
+    const createRipple = (x, y) => {
+      const ripple = document.createElement("span");
+      ripple.className = "sonic-ripple";
+      ripple.style.left = `${x}px`;
+      ripple.style.top = `${y}px`;
+      document.body.appendChild(ripple);
+      setTimeout(() => ripple.remove(), 800);
+    };
+    
+    window.addEventListener("click", (e) => {
+      if (e.target.closest("iframe") || e.target.closest(".vlightbox-frame")) return;
+      
+      createRipple(e.pageX, e.pageY);
+      setTimeout(() => {
+        createRipple(e.pageX, e.pageY);
+      }, 140);
+    });
+  };
+
   // Load dynamic assets
   loadThumbnails();
   setHeroDelays();
@@ -922,4 +1032,7 @@
   bindMicroSounds();
   bindLogoChime();
   bindCardAuditions();
+  initVisualizer();
+  initAmbientOrbs();
+  initClickRipples();
 })();

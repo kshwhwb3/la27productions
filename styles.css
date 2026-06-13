@@ -1853,3 +1853,85 @@ footer .right {
   .hero-title .word > span { transform: translateY(0); }
   .reveal { opacity: 1; transform: none; }
 }
+
+/* ===== Sensory Luxury Upgrades (Audio Visualizer, Background Orbs, Ripples) ===== */
+
+/* 1. Fluid Ambient Orbs */
+.bg-orbs {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: -2;
+  overflow: hidden;
+  opacity: 0.8;
+}
+
+.orb {
+  position: absolute;
+  width: 55vw;
+  height: 55vw;
+  border-radius: 50%;
+  filter: blur(140px);
+  mix-blend-mode: screen;
+  opacity: 0.045;
+  pointer-events: none;
+  transition: transform 2.2s cubic-bezier(0.1, 0.8, 0.2, 1);
+}
+
+.orb-1 {
+  background: var(--accent);
+  top: -15%;
+  left: -15%;
+}
+
+.orb-2 {
+  background: oklch(0.76 0.11 86);
+  bottom: -15%;
+  right: -15%;
+}
+
+/* 2. Nav Bar Sound Visualizer Bars */
+.sound-visualizer-bars {
+  display: inline-flex;
+  align-items: flex-end;
+  gap: 2px;
+  height: 8px;
+  width: 14px;
+  margin-left: 8px;
+  vertical-align: middle;
+}
+
+.sound-visualizer-bars .vbar {
+  flex: 1;
+  height: 2px;
+  background-color: var(--ink-dim);
+  border-radius: 0.5px;
+  transition: height 0.05s ease, background-color 0.2s ease;
+}
+
+.sound-toggle-btn:hover .sound-visualizer-bars .vbar {
+  background-color: var(--accent);
+}
+
+.sound-toggle-btn.is-muted .sound-visualizer-bars {
+  opacity: 0.2;
+}
+
+/* 3. Sonic Click Ripples */
+.sonic-ripple {
+  position: absolute;
+  border: 1px solid var(--accent);
+  border-radius: 50%;
+  pointer-events: none;
+  transform: translate(-50%, -50%) scale(0);
+  opacity: 0.8;
+  animation: rippleEffect 0.8s cubic-bezier(0.1, 0.8, 0.3, 1) forwards;
+  z-index: 9998;
+}
+
+@keyframes rippleEffect {
+  to {
+    transform: translate(-50%, -50%) scale(6);
+    opacity: 0;
+  }
+}
