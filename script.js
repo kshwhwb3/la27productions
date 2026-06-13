@@ -743,42 +743,30 @@
   let isVideoPlaying = false;
 
   const buildVisualizerBars = () => {
-    const chL = document.getElementById("vis-ch-l");
-    const chR = document.getElementById("vis-ch-r");
-    if (!chL || !chR) return;
+    const container = document.getElementById("vis-bars-container");
+    if (!container) return;
     
-    chL.innerHTML = "";
-    chR.innerHTML = "";
+    container.innerHTML = "";
     
-    const BARS_COUNT = 16;
+    const BARS_COUNT = 32;
     for (let i = 0; i < BARS_COUNT; i++) {
-      const wrapL = document.createElement("div");
-      wrapL.className = "vis-bar-wrapper";
-      wrapL.innerHTML = `<div class="vis-bar"></div><div class="vis-peak" style="bottom: 0px;"></div>`;
-      chL.appendChild(wrapL);
-      
-      const wrapR = document.createElement("div");
-      wrapR.className = "vis-bar-wrapper";
-      wrapR.innerHTML = `<div class="vis-bar"></div><div class="vis-peak" style="bottom: 0px;"></div>`;
-      chR.appendChild(wrapR);
+      const wrap = document.createElement("div");
+      wrap.className = "vis-bar-wrapper";
+      wrap.innerHTML = `<div class="vis-bar"></div><div class="vis-peak" style="bottom: 0%;"></div>`;
+      container.appendChild(wrap);
     }
   };
 
   const startLightboxVisualizer = () => {
     buildVisualizerBars();
     
-    const BARS_COUNT = 16;
-    const chL = document.getElementById("vis-ch-l");
-    const chR = document.getElementById("vis-ch-r");
-    if (!chL || !chR) return;
+    const BARS_COUNT = 32;
+    const container = document.getElementById("vis-bars-container");
+    if (!container) return;
     
-    const wrappersL = chL.querySelectorAll(".vis-bar-wrapper");
-    const wrappersR = chR.querySelectorAll(".vis-bar-wrapper");
-    
-    const peaksL = new Array(BARS_COUNT).fill(0);
-    const peaksR = new Array(BARS_COUNT).fill(0);
-    const currentHeightsL = new Array(BARS_COUNT).fill(0);
-    const currentHeightsR = new Array(BARS_COUNT).fill(0);
+    const wrappers = container.querySelectorAll(".vis-bar-wrapper");
+    const peaks = new Array(BARS_COUNT).fill(0);
+    const currentHeights = new Array(BARS_COUNT).fill(0);
     
     isVideoPlaying = true; // autoplays by default
     let time = 0;
@@ -788,68 +776,47 @@
       if (!vlb || !vlb.classList.contains("is-open")) return;
       
       visAnimFrame = requestAnimationFrame(animate);
-      time += 0.08;
+      time += 0.1;
       
       for (let i = 0; i < BARS_COUNT; i++) {
-        let targetL = 0;
-        let targetR = 0;
+        let target = 0;
         
         if (isVideoPlaying) {
-          if (i < 4) { // Bass
-            const beat = Math.pow(Math.sin(time * 1.6), 4) * 0.75 + Math.sin(time * 3.8) * 0.15;
-            targetL = Math.max(8, (beat * 85) + Math.random() * 12);
-            targetR = Math.max(8, (beat * 80) + Math.random() * 14);
-          } else if (i < 12) { // Mids
-            const wave1 = Math.sin(time * 2.4 + i * 0.45) * 22;
-            const wave2 = Math.cos(time * 3.5 - i * 0.25) * 16;
-            targetL = Math.max(10, 48 + wave1 + wave2 + Math.random() * 8);
-            targetR = Math.max(10, 44 - wave1 + wave2 + Math.random() * 8);
-          } else { // Highs
-            const flicker = Math.sin(time * 10 + i) * 16 + Math.cos(time * 18) * 8;
-            targetL = Math.max(4, 28 + flicker + Math.random() * 10);
-            targetR = Math.max(4, 24 + flicker + Math.random() * 12);
+          if (i < 8) { // Bass
+            const beat = Math.pow(Math.sin(time * 1.5 - i * 0.1), 4) * 0.75 + Math.sin(time * 3.6) * 0.15;
+            target = Math.max(10, (beat * 85) + Math.random() * 15);
+          } else if (i < 24) { // Mids
+            const wave1 = Math.sin(time * 2.2 + i * 0.3) * 25;
+            const wave2 = Math.cos(time * 3.2 - i * 0.15) * 18;
+            target = Math.max(15, 50 + wave1 + wave2 + Math.random() * 10);
+          } else { // Treble
+            const flicker = Math.sin(time * 8 + i * 0.8) * 18 + Math.cos(time * 15) * 10;
+            target = Math.max(5, 30 + flicker + Math.random() * 12);
           }
           
-          if (Math.random() < 0.04) {
-            targetL = Math.min(100, targetL + 25);
-            targetR = Math.min(100, targetR + 25);
+          if (Math.random() < 0.05) {
+            target = Math.min(100, target + 30);
           }
         }
         
-        currentHeightsL[i] += (targetL - currentHeightsL[i]) * 0.22;
-        currentHeightsR[i] += (targetR - currentHeightsR[i]) * 0.22;
+        currentHeights[i] += (target - currentHeights[i]) * 0.22;
         
-        const barL = wrappersL[i].querySelector(".vis-bar");
-        const barR = wrappersR[i].querySelector(".vis-bar");
-        const peakL = wrappersL[i].querySelector(".vis-peak");
-        const peakR = wrappersR[i].querySelector(".vis-peak");
+        const bar = wrappers[i].querySelector(".vis-bar");
+        const peak = wrappers[i].querySelector(".vis-peak");
         
-        const hL = currentHeightsL[i];
-        const hR = currentHeightsR[i];
+        const h = currentHeights[i];
+        bar.style.height = `${h}%`;
         
-        barL.style.height = `${hL}%`;
-        barR.style.height = `${hR}%`;
+        if (h > 8) bar.classList.add("active");
+        else bar.classList.remove("active");
         
-        if (hL > 5) barL.classList.add("active");
-        else barL.classList.remove("active");
-        
-        if (hR > 5) barR.classList.add("active");
-        else barR.classList.remove("active");
-        
-        if (hL >= peaksL[i]) {
-          peaksL[i] = hL;
+        if (h >= peaks[i]) {
+          peaks[i] = h;
         } else {
-          peaksL[i] = Math.max(0, peaksL[i] - 1.4);
+          peaks[i] = Math.max(0, peaks[i] - 1.6);
         }
         
-        if (hR >= peaksR[i]) {
-          peaksR[i] = hR;
-        } else {
-          peaksR[i] = Math.max(0, peaksR[i] - 1.4);
-        }
-        
-        peakL.style.bottom = `${peaksL[i]}%`;
-        peakR.style.bottom = `${peaksR[i]}%`;
+        peak.style.bottom = `${peaks[i]}%`;
       }
     };
     
