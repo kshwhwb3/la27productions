@@ -696,7 +696,7 @@ body.is-locked {
 .trust-inner {
   display: flex;
   align-items: center;
-  gap: 80px;
+  gap: 0;
   white-space: nowrap;
   animation: marquee 24s linear infinite;
   font-family: var(--font-display);
@@ -709,6 +709,7 @@ body.is-locked {
   display: inline-flex;
   align-items: center;
   gap: 80px;
+  padding-right: 80px;
 }
 
 .trust-inner .sep {
