@@ -1344,6 +1344,19 @@ section {
   margin-top: 4px;
 }
 
+.studio-signature .linkedin-links {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 6px;
+}
+
+@media (max-width: 680px) {
+  .studio-signature .linkedin-links {
+    align-items: flex-start;
+  }
+}
+
 .studio-signature .linkedin {
   font-family: var(--font-mono);
   font-size: 11px;
