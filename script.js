@@ -1,4 +1,4 @@
-/* LA 27 — interactions v2 */
+/* LA 27 — interactions v3 (optimized & premium) */
 
 (() => {
   const i18n = window.LA27_I18N;
@@ -13,16 +13,35 @@
 
   const applyLang = (lang) => {
     if (!i18n) return;
-    i18n.apply(lang);
-    i18n.setLang(lang);
-    // Update nav current lang display
-    const cur = document.querySelector(".lang-switch-current");
-    if (cur) cur.textContent = lang.toUpperCase();
-    // Mark active in menu
-    document.querySelectorAll(".lang-switch-menu a").forEach((a) => {
-      a.classList.toggle("is-active", a.dataset.lang === lang);
+    
+    // Smooth transition: fade out translatable elements
+    const targets = document.querySelectorAll("[data-i18n], [data-i18n-html]");
+    targets.forEach((t) => {
+      t.classList.add("i18n-fade", "i18n-fade-out");
     });
-    setHeroDelays();
+
+    setTimeout(() => {
+      i18n.apply(lang);
+      i18n.setLang(lang);
+      
+      // Update nav current lang display
+      const cur = document.querySelector(".lang-switch-current");
+      if (cur) cur.textContent = lang.toUpperCase();
+      
+      // Mark active in menu
+      document.querySelectorAll(".lang-switch-menu a").forEach((a) => {
+        a.classList.toggle("is-active", a.dataset.lang === lang);
+      });
+      
+      setHeroDelays();
+
+      // Fade back in
+      setTimeout(() => {
+        targets.forEach((t) => {
+          t.classList.remove("i18n-fade-out");
+        });
+      }, 50);
+    }, 180);
   };
 
   const stored = i18n && i18n.getLang();
@@ -55,15 +74,18 @@
     });
   });
 
-  // ----- Custom cursor (desktop only) -----
+  // ----- Custom cursor & Magnetic effect (desktop only) -----
   const cursor = document.querySelector(".cursor");
   let cx = window.innerWidth / 2, cy = window.innerHeight / 2;
   let tx = cx, ty = cy;
 
   if (cursor && window.matchMedia("(hover: hover)").matches) {
     window.addEventListener("mousemove", (e) => {
-      tx = e.clientX;
-      ty = e.clientY;
+      // If we are not hovering over a magnetic element, trace the exact cursor coordinates
+      if (!document.querySelector(".cursor-magnetic-hover")) {
+        tx = e.clientX;
+        ty = e.clientY;
+      }
     });
 
     const renderCursor = () => {
@@ -87,6 +109,7 @@
         cursor.classList.remove("is-play");
       }
     });
+
     document.addEventListener("mouseout", (e) => {
       const hover = e.target.closest("[data-cursor='hover']");
       const play = e.target.closest("[data-cursor='play']");
@@ -96,6 +119,28 @@
       if (hover && !e.relatedTarget?.closest("[data-cursor='hover']")) {
         cursor.classList.remove("is-hover");
       }
+    });
+
+    // Premium Magnetic Pull Effect for Buttons and Nav Links
+    document.querySelectorAll(".btn, .lang-switch-btn, .scroll-cue, .nav-links a, .nav-brand").forEach((el) => {
+      el.addEventListener("mousemove", (e) => {
+        el.classList.add("cursor-magnetic-hover");
+        const rect = el.getBoundingClientRect();
+        const x = e.clientX - (rect.left + rect.width / 2);
+        const y = e.clientY - (rect.top + rect.height / 2);
+        
+        // Gently pull the element towards cursor
+        el.style.transform = `translate(${x * 0.25}px, ${y * 0.25}px)`;
+        
+        // Lock cursor destination near center
+        tx = rect.left + rect.width / 2 + x * 0.12;
+        ty = rect.top + rect.height / 2 + y * 0.12;
+      });
+      
+      el.addEventListener("mouseleave", () => {
+        el.classList.remove("cursor-magnetic-hover");
+        el.style.transform = "";
+      });
     });
   }
 
@@ -166,6 +211,35 @@
       }
     `;
     document.head.appendChild(style);
+
+    // Interactive Waveform Hover: scale up and color ripple
+    wave.addEventListener("mousemove", (e) => {
+      const rect = wave.getBoundingClientRect();
+      const mouseX = e.clientX - rect.left;
+      const bars = wave.querySelectorAll(".bar");
+      
+      bars.forEach((bar, index) => {
+        const barRect = bar.getBoundingClientRect();
+        const barX = barRect.left + barRect.width / 2 - rect.left;
+        const dist = Math.abs(mouseX - barX);
+        
+        if (dist < 100) {
+          const factor = 1 + (1 - dist / 100) * 0.8;
+          bar.style.transform = `scaleY(${factor})`;
+          bar.style.backgroundColor = "var(--accent)";
+        } else {
+          bar.style.transform = "";
+          bar.style.backgroundColor = "";
+        }
+      });
+    });
+
+    wave.addEventListener("mouseleave", () => {
+      wave.querySelectorAll(".bar").forEach((bar) => {
+        bar.style.transform = "";
+        bar.style.backgroundColor = "";
+      });
+    });
   }
 
   // ----- Hero parallax / fade on scroll (desktop only, gentle on tablet) -----
@@ -313,12 +387,44 @@
     setTimeout(() => { vlbWrap.innerHTML = ""; }, 500);
   };
 
+  // ----- Dynamic Vimeo thumbnail loader -----
+  const loadThumbnails = () => {
+    document.querySelectorAll(".play-card[data-vimeo-id]").forEach((card) => {
+      const id = card.dataset.vimeoId;
+      const placeholder = card.querySelector(".thumbnail-placeholder");
+      if (!id || !placeholder) return;
+      
+      // Fetch oEmbed JSON to get thumbnail_url
+      fetch(`https://vimeo.com/api/oembed.json?url=https://vimeo.com/${id}`)
+        .then((res) => res.json())
+        .then((data) => {
+          if (data && data.thumbnail_url) {
+            // Replace default low-res thumbnail suffix with higher resolution width
+            const highResUrl = data.thumbnail_url.replace(/_[0-9]+x[0-9]+/, "_1280");
+            placeholder.style.backgroundImage = `url('${highResUrl}')`;
+          }
+        })
+        .catch((err) => console.error("Error loading Vimeo thumbnail:", err));
+    });
+  };
+
+  // Bind portfolio play-card trigger with accessibility roles
   document.querySelectorAll(".play-card[data-vimeo-id]").forEach((card) => {
-    card.addEventListener("click", (e) => {
+    card.setAttribute("tabindex", "0");
+    card.setAttribute("role", "button");
+
+    const playVideo = (e) => {
       e.preventDefault();
       const id = card.dataset.vimeoId;
       const title = card.dataset.vimeoTitle || "LA 27 PRODUCTIONS";
       openVideo(id, title);
+    };
+
+    card.addEventListener("click", playVideo);
+    card.addEventListener("keydown", (e) => {
+      if (e.key === "Enter" || e.key === " ") {
+        playVideo(e);
+      }
     });
   });
 
@@ -328,10 +434,12 @@
       closeVideo();
     });
   });
+
   document.addEventListener("keydown", (e) => {
     if (e.key === "Escape" && vlb && vlb.classList.contains("is-open")) closeVideo();
   });
 
-  // ----- Initial hero delays -----
+  // Load dynamic assets
+  loadThumbnails();
   setHeroDelays();
 })();

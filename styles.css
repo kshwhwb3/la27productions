@@ -406,12 +406,16 @@ body.is-locked {
   left: 0;
   right: 0;
   z-index: 100;
-  padding: 24px 48px;
+  padding: 20px 48px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  mix-blend-mode: difference;
+  background: rgba(10, 10, 10, 0.65);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.03);
   color: #fff;
+  transition: padding 0.3s ease, background 0.3s ease;
 }
 
 .nav-brand {
@@ -677,6 +681,7 @@ body.is-locked {
   border-radius: 1px;
   transform-origin: center;
   animation: wave 1.4s ease-in-out infinite;
+  transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
 /* ===== Trust strip ===== */
@@ -838,6 +843,65 @@ section {
   color: var(--ink);
   cursor: none;
   isolation: isolate;
+}
+
+.thumbnail-placeholder {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  filter: grayscale(1) brightness(0.6);
+  transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1), filter 0.6s ease;
+  z-index: 0;
+}
+
+.play-card:hover .thumbnail-placeholder {
+  transform: scale(1.06);
+  filter: grayscale(0) brightness(0.8);
+}
+
+.play-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+  opacity: 0.6;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.play-card:hover .play-overlay {
+  opacity: 1;
+  transform: scale(1.08);
+}
+
+.play-overlay svg {
+  width: 64px;
+  height: 64px;
+  color: var(--ink);
+  background: rgba(10, 10, 10, 0.65);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  padding: 16px;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  transition: background 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+}
+
+.play-card:hover .play-overlay svg {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--bg);
+}
+
+/* Language switcher fade animation */
+.i18n-fade {
+  transition: opacity 0.22s cubic-bezier(0.16, 1, 0.3, 1), transform 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.i18n-fade-out {
+  opacity: 0;
+  transform: translateY(2px);
 }
 
 .play-card-bg {
