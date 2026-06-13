@@ -1,8 +1,7 @@
 <!doctype html>
 <html lang="es">
 <head>
-  <meta charset="utf-8" />
-  <!-- Google tag (gtag.js) -->
+    <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-XHJNPVSHVM"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
@@ -11,6 +10,7 @@
 
     gtag('config', 'G-XHJNPVSHVM');
   </script>
+  <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>LA 27 Productions — Sonido de Lujo · Barcelona</title>
   <meta name="description" content="Música instrumental 100% exclusiva para marcas, agencias y film. Compuesta desde cero, sin librerías, sin royalties. Estudio propio en Barcelona." />
@@ -204,10 +204,79 @@
             </p>
           </div>
         </article>
+         <article class="work-item reveal">
+          <div class="work-media">
+            <div class="video-frame">
+              <iframe src="https://player.vimeo.com/video/1200779757?title=0&byline=0&portrait=0&badge=0&color=ffffff&dnt=1"
+                allow="autoplay; fullscreen; picture-in-picture"
+                allowfullscreen
+                frameborder="0"
+                title="BMW — Dune Taxi"></iframe>
+            </div>
+          </div>
+          <div class="work-info">
+            <div class="work-index">03 / BMW</div>
+            <h3 class="work-title" data-i18n-html="work.bmw.title">Dune <span class="it">Taxi</span></h3>
+            <div class="work-meta">
+              <span data-i18n="work.bmw.meta1">Automotriz</span>
+              <span class="sep"></span>
+              <span data-i18n="work.bmw.meta2">Desert Score</span>
+              <span class="sep"></span>
+              <span>2026</span>
+            </div>
+            <p class="work-desc" data-i18n="work.bmw.desc">
+              Ritmos electrónicos áridos y percusiones contundentes para el desierto. Tensión y potencia acústica diseñada específicamente para empujar la tracción xDrive al límite absoluto.
+            </p>
+          </div>
+        </article>
+                      <!-- === VÍDEO OCULTO (FASHION FILM) === -->
+        <div id="extra-videos" style="display: none; contents: display;">
+           
+           <article class="work-item reveal" style="margin-top: 4rem; direction: rtl;">
+             
+             <!-- El vídeo (Forzado a ltr para que no se voltee por dentro) -->
+             <div class="work-media" style="direction: ltr;">
+               <div class="video-frame">
+                 <iframe src="https://player.vimeo.com/video/1200905700?title=0&byline=0&portrait=0&badge=0&color=ffffff&dnt=1"
+                   allow="autoplay; fullscreen; picture-in-picture"
+                   allowfullscreen
+                   frameborder="0"
+                   title="Fashion Film — Dark & Cinematic"></iframe>
+               </div>
+             </div>
+             
+             <!-- El texto (Forzado a ltr) -->
+             <div class="work-info" style="direction: ltr;">
+               <div class="work-index">04 / Fashion Film</div>
+               <h3 class="work-title" data-i18n-html="work.fashion.title">Dark <span class="it">Cinematic</span></h3>
+               <div class="work-meta">
+                 <span data-i18n="work.fashion.meta1">Moda & Lujo</span>
+                 <span class="sep"></span>
+                 <span data-i18n="work.fashion.meta2">Diseño Sonoro & Sintetizadores</span>
+                 <span class="sep"></span>
+                 <span>2026</span>
+               </div>
+               <p class="work-desc" data-i18n="work.fashion.desc">
+                 Un viaje visual oscuro y elegante envuelto en una atmósfera electrónica profunda. Bajos potentes, sintetizadores tensos y un diseño de sonido (Foley) hiperrealista, reconstruido íntegramente desde cero para darle peso y misterio a cada movimiento de cámara.
+               </p>
+             </div>
+             
+           </article>
+           
+        </div>
 
+      </div> <!-- Cierra el work-grid principal -->
+
+      <!-- === BOTÓN VER MÁS === -->
+      <div style="text-align: center; margin-top: 5rem; margin-bottom: 2rem;">
+        <button id="load-more-btn" class="btn" style="cursor: pointer; padding: 1rem 2rem; font-family: var(--font-mono); font-size: 14px; text-transform: uppercase; letter-spacing: 1px;" 
+                onclick="document.getElementById('extra-videos').style.display = 'contents'; this.style.display = 'none';">
+          <span data-i18n="work.loadmore">Click para ver más contenido producido por LA 27</span>
+        </button>
       </div>
-    </section>
 
+    </section>
+      
     <!-- =========== WHY / STUDIO =========== -->
     <section id="why" class="why" data-section data-screen-label="El Estudio">
       <div class="section-header reveal">
@@ -314,15 +383,15 @@
             <label for="f-company" data-i18n="form.company">Empresa</label>
             <input id="f-company" name="empresa" type="text" />
           </div>
-          <div class="field is-filled">
-            <label for="f-type" data-i18n="form.type">Tipo de proyecto</label>
-            <select id="f-type" name="tipo_proyecto">
-              <option value="" data-i18n="form.type.placeholder">— Elegir —</option>
-              <option data-i18n="form.type.opt1">Spot / Campaña</option>
-              <option data-i18n="form.type.opt2">Film / Cortometraje</option>
-              <option data-i18n="form.type.opt3">Desfile / Evento</option>
-              <option data-i18n="form.type.opt4">Sound Branding</option>
-              <option data-i18n="form.type.opt5">Otro</option>
+            <div class="field is-filled">
+            <label for="f-type" data-i18n="form.type">Tipo de servicio</label>
+            <select id="f-type" name="tipo_servicio" required>
+              <option value="" disabled selected data-i18n="form.type.placeholder">— Selecciona un servicio —</option>
+              <option value="Musica Original" data-i18n="form.type.opt1">Música Original (Custom Score)</option>
+              <option value="Diseno de Sonido" data-i18n="form.type.opt2">Diseño de Sonido (Sound Design & Foley)</option>
+              <option value="Audio Completo" data-i18n="form.type.opt3">Audio Completo (Música + Diseño de Sonido)</option>
+              <option value="Sonic Branding" data-i18n="form.type.opt4">Sonic Branding (Audio Logo)</option>
+              <option value="Otro" data-i18n="form.type.opt5">Otro / Consulta general</option>
             </select>
           </div>
           <div class="field">

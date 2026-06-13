@@ -224,9 +224,44 @@
   if (form && success) {
     form.addEventListener("submit", (e) => {
       e.preventDefault();
-      success.classList.add("is-shown");
-      form.querySelectorAll("input, textarea, select").forEach((el) => { el.value = ""; });
-      document.querySelectorAll(".field").forEach((f) => f.classList.remove("is-filled"));
+      
+      const btn = form.querySelector("button[type='submit']");
+      const btnText = btn ? btn.querySelector("span") : null;
+      const originalText = btnText ? btnText.textContent : "Enviar";
+      if (btnText) btnText.textContent = "...";
+      if (btn) btn.disabled = true;
+
+      const formData = new FormData(form);
+      const object = Object.fromEntries(formData);
+      const json = JSON.stringify(object);
+
+      fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Accept": "application/json"
+        },
+        body: json
+      })
+      .then(async (response) => {
+        let jsonRes = await response.json();
+        if (response.status == 200) {
+          success.classList.add("is-shown");
+          form.querySelectorAll("input, textarea, select").forEach((el) => { el.value = ""; });
+          document.querySelectorAll(".field").forEach((f) => f.classList.remove("is-filled"));
+        } else {
+          console.error("Web3Forms error:", jsonRes);
+          alert(jsonRes.message || "Error al enviar el formulario.");
+        }
+      })
+      .catch((error) => {
+        console.error("Connection error:", error);
+        alert("Error de conexión. Por favor, inténtalo de nuevo.");
+      })
+      .then(() => {
+        if (btnText) btnText.textContent = originalText;
+        if (btn) btn.disabled = false;
+      });
     });
   }
 
