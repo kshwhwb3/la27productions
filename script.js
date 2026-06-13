@@ -29,28 +29,199 @@
         gainNode.connect(ctx.destination);
 
         if (type === "hover") {
+          // Warm Pop Analógico Hover: very quick frequency decay in low mids
           osc.type = "sine";
-          osc.frequency.setValueAtTime(1400, now);
-          osc.frequency.exponentialRampToValueAtTime(900, now + 0.05);
+          osc.frequency.setValueAtTime(180, now);
+          osc.frequency.exponentialRampToValueAtTime(70, now + 0.02);
           
           gainNode.gain.setValueAtTime(0.08, now);
-          gainNode.gain.linearRampToValueAtTime(0, now + 0.05);
+          gainNode.gain.linearRampToValueAtTime(0, now + 0.02);
           
           osc.start(now);
-          osc.stop(now + 0.055);
+          osc.stop(now + 0.025);
         } else if (type === "click") {
+          // Warm Pop Analógico Click
           osc.type = "triangle";
-          osc.frequency.setValueAtTime(500, now);
-          osc.frequency.setValueAtTime(180, now + 0.015);
+          osc.frequency.setValueAtTime(120, now);
+          osc.frequency.exponentialRampToValueAtTime(50, now + 0.045);
           
-          gainNode.gain.setValueAtTime(0.22, now);
-          gainNode.gain.linearRampToValueAtTime(0, now + 0.08);
+          gainNode.gain.setValueAtTime(0.18, now);
+          gainNode.gain.linearRampToValueAtTime(0, now + 0.045);
           
           osc.start(now);
-          osc.stop(now + 0.085);
+          osc.stop(now + 0.05);
         }
       } catch (err) {
         console.warn("Web Audio playback failed:", err);
+      }
+    };
+
+    const playBrandLuxury = (now) => {
+      // Warm Fmaj9 chord
+      const freqs = [174.61, 220.00, 261.63, 329.63, 392.00];
+      freqs.forEach((freq, index) => {
+        const o = ctx.createOscillator();
+        const g = ctx.createGain();
+        o.type = "sine";
+        o.frequency.value = freq;
+        o.connect(g);
+        g.connect(ctx.destination);
+        
+        g.gain.setValueAtTime(0, now);
+        g.gain.linearRampToValueAtTime(0.04, now + 0.4 + index * 0.08);
+        g.gain.setValueAtTime(0.04, now + 1.2);
+        g.gain.exponentialRampToValueAtTime(0.0001, now + 2.5);
+        
+        o.start(now);
+        o.stop(now + 2.6);
+      });
+
+      // Crystal chime
+      const bellFreqs = [1200, 1500, 1800];
+      bellFreqs.forEach((freq, index) => {
+        const o = ctx.createOscillator();
+        const g = ctx.createGain();
+        o.type = "sine";
+        o.frequency.value = freq;
+        o.connect(g);
+        g.connect(ctx.destination);
+        
+        const chimeTime = now + 0.8 + index * 0.05;
+        g.gain.setValueAtTime(0, now);
+        g.gain.setValueAtTime(0.015, chimeTime);
+        g.gain.exponentialRampToValueAtTime(0.0001, chimeTime + 1.2);
+        
+        o.start(now);
+        o.stop(chimeTime + 1.3);
+      });
+    };
+
+    const playBrandPower = (now) => {
+      // Detuned engine growl
+      const osc1 = ctx.createOscillator();
+      const osc2 = ctx.createOscillator();
+      const gainSub = ctx.createGain();
+      const filter = ctx.createBiquadFilter();
+
+      osc1.type = "sawtooth";
+      osc1.frequency.value = 65.41; // C2
+      osc2.type = "sawtooth";
+      osc2.frequency.value = 65.80; // detuned
+
+      const lfo = ctx.createOscillator();
+      const lfoGain = ctx.createGain();
+      lfo.type = "sine";
+      lfo.frequency.value = 9; // 9Hz modulation
+      lfoGain.gain.value = 0.4;
+
+      osc1.connect(filter);
+      osc2.connect(filter);
+      filter.connect(gainSub);
+      gainSub.connect(ctx.destination);
+
+      filter.type = "lowpass";
+      filter.frequency.setValueAtTime(100, now);
+      filter.frequency.exponentialRampToValueAtTime(450, now + 0.4);
+      filter.frequency.exponentialRampToValueAtTime(80, now + 1.8);
+
+      lfo.connect(lfoGain);
+      lfoGain.connect(gainSub.gain);
+
+      gainSub.gain.setValueAtTime(0.12, now);
+      gainSub.gain.setValueAtTime(0.12, now + 1.2);
+      gainSub.gain.exponentialRampToValueAtTime(0.0001, now + 2.0);
+
+      lfo.start(now);
+      osc1.start(now);
+      osc2.start(now);
+
+      lfo.stop(now + 2.1);
+      osc1.stop(now + 2.1);
+      osc2.stop(now + 2.1);
+
+      // Fast pulses
+      const accentTimes = [now + 0.1, now + 0.3, now + 0.5];
+      accentTimes.forEach((time) => {
+        const o = ctx.createOscillator();
+        const g = ctx.createGain();
+        o.type = "triangle";
+        o.frequency.setValueAtTime(220, time);
+        o.frequency.exponentialRampToValueAtTime(50, time + 0.1);
+        o.connect(g);
+        g.connect(ctx.destination);
+
+        g.gain.setValueAtTime(0, now);
+        g.gain.setValueAtTime(0.06, time);
+        g.gain.exponentialRampToValueAtTime(0.0001, time + 0.1);
+
+        o.start(now);
+        o.stop(time + 0.12);
+      });
+    };
+
+    const playBrandCinematic = (now) => {
+      // Sub drone drop
+      const osc = ctx.createOscillator();
+      const gainSub = ctx.createGain();
+      osc.type = "sine";
+      osc.frequency.setValueAtTime(90, now);
+      osc.frequency.linearRampToValueAtTime(55, now + 1.8);
+      
+      osc.connect(gainSub);
+      gainSub.connect(ctx.destination);
+      
+      gainSub.gain.setValueAtTime(0.18, now);
+      gainSub.gain.linearRampToValueAtTime(0.18, now + 1.5);
+      gainSub.gain.exponentialRampToValueAtTime(0.0001, now + 2.5);
+      
+      osc.start(now);
+      osc.stop(now + 2.6);
+
+      // Atmospheric Noise
+      const bufferSize = ctx.sampleRate * 3;
+      const buffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
+      const data = buffer.getChannelData(0);
+      for (let i = 0; i < bufferSize; i++) {
+        data[i] = Math.random() * 2 - 1;
+      }
+
+      const noise = ctx.createBufferSource();
+      noise.buffer = buffer;
+
+      const noiseFilter = ctx.createBiquadFilter();
+      noiseFilter.type = "bandpass";
+      noiseFilter.Q.value = 2.0;
+      noiseFilter.frequency.setValueAtTime(150, now);
+      noiseFilter.frequency.exponentialRampToValueAtTime(800, now + 1.0);
+      noiseFilter.frequency.exponentialRampToValueAtTime(250, now + 2.2);
+
+      const noiseGain = ctx.createGain();
+      noiseGain.gain.setValueAtTime(0, now);
+      noiseGain.gain.linearRampToValueAtTime(0.07, now + 0.5);
+      noiseGain.gain.exponentialRampToValueAtTime(0.0001, now + 2.5);
+
+      noise.connect(noiseFilter);
+      noiseFilter.connect(noiseGain);
+      noiseGain.connect(ctx.destination);
+
+      noise.start(now);
+      noise.stop(now + 2.6);
+    };
+
+    const playBrand = (mood) => {
+      if (!enabled) return;
+      try {
+        init();
+        const now = ctx.currentTime;
+        if (mood === "luxury") {
+          playBrandLuxury(now);
+        } else if (mood === "power") {
+          playBrandPower(now);
+        } else if (mood === "cinematic") {
+          playBrandCinematic(now);
+        }
+      } catch (err) {
+        console.warn("Brand sound playback failed:", err);
       }
     };
 
@@ -60,7 +231,7 @@
       localStorage.setItem("la27.sound", val ? "true" : "false");
     };
 
-    return { play, isEnabled, setEnabled, init };
+    return { play, playBrand, isEnabled, setEnabled, init };
   })();
 
   const soundBtn = document.querySelector(".sound-toggle-btn");
@@ -304,6 +475,18 @@
       @keyframes wave {
         0%, 100% { transform: scaleY(0.4); }
         50% { transform: scaleY(1); }
+      }
+      @keyframes wave-gentle {
+        0%, 100% { transform: scaleY(0.3); }
+        50% { transform: scaleY(0.7); }
+      }
+      @keyframes wave-energetic {
+        0%, 100% { transform: scaleY(0.5); }
+        50% { transform: scaleY(1.4); }
+      }
+      @keyframes wave-deep {
+        0%, 100% { transform: scaleY(0.2); }
+        50% { transform: scaleY(0.5); }
       }
     `;
     document.head.appendChild(style);
@@ -669,10 +852,88 @@
     document.addEventListener("keydown", () => SoundEngine.init(), { once: true });
   };
 
+  // ----- Sonic Brand Selector & Accent Morpher -----
+  const initSonicIdentityShowcase = () => {
+    const moods = {
+      luxury: {
+        accent: "oklch(0.76 0.11 86)",       // Luxury Gold
+        accentBright: "oklch(0.82 0.12 86)",
+        accentDeep: "oklch(0.60 0.08 86)"
+      },
+      power: {
+        accent: "oklch(0.58 0.22 25)",       // Brand Red
+        accentBright: "oklch(0.64 0.25 25)",
+        accentDeep: "oklch(0.42 0.18 25)"
+      },
+      cinematic: {
+        accent: "oklch(0.55 0.15 250)",      // Cinematic Blue
+        accentBright: "oklch(0.62 0.18 250)",
+        accentDeep: "oklch(0.38 0.12 250)"
+      }
+    };
+
+    const buttons = document.querySelectorAll(".mood-btn");
+    const bars = document.querySelectorAll(".waveform .bar");
+
+    const modulateWaveform = (mood) => {
+      if (!bars.length) return;
+      bars.forEach((bar, i) => {
+        bar.style.animation = "none";
+        void bar.offsetWidth; // force reflow
+        
+        let duration = "1.6s";
+        let keyframes = "wave";
+        
+        if (mood === "luxury") {
+          duration = (2.5 + (i % 5) * 0.3) + "s";
+          keyframes = "wave-gentle";
+        } else if (mood === "power") {
+          duration = (0.7 + (i % 4) * 0.1) + "s";
+          keyframes = "wave-energetic";
+        } else if (mood === "cinematic") {
+          duration = (3.5 + (i % 6) * 0.4) + "s";
+          keyframes = "wave-deep";
+        }
+        
+        bar.style.animationName = keyframes;
+        bar.style.animationDuration = duration;
+        bar.style.animationDelay = (i * 0.04) + "s";
+        bar.style.animationIterationCount = "infinite";
+        bar.style.animationTimingFunction = "ease-in-out";
+      });
+    };
+
+    buttons.forEach((btn) => {
+      btn.addEventListener("click", (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        
+        const mood = btn.dataset.mood;
+        if (!mood || !moods[mood]) return;
+        
+        // Active states
+        buttons.forEach((b) => b.classList.toggle("is-active", b === btn));
+        
+        // Morph accents
+        const colors = moods[mood];
+        document.documentElement.style.setProperty("--accent", colors.accent);
+        document.documentElement.style.setProperty("--accent-bright", colors.accentBright);
+        document.documentElement.style.setProperty("--accent-deep", colors.accentDeep);
+        
+        // Play synthesized soundscape
+        SoundEngine.playBrand(mood);
+        
+        // Modulate Waveform
+        modulateWaveform(mood);
+      });
+    });
+  };
+
   // Load dynamic assets
   loadThumbnails();
   setHeroDelays();
   initSmoothScroll();
   init3DTilt();
   bindMicroSounds();
+  initSonicIdentityShowcase();
 })();

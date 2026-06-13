@@ -90,6 +90,10 @@ window.LA27_I18N = (() => {
       "form.type.opt5": "Otro / Consulta general",
       "nav.sound.on": "SONIDO ON",
       "nav.sound.off": "SONIDO OFF",
+      "hero.sonic_builder": "EXPERIMENTA TU IDENTIDAD SONORA",
+      "mood.luxury": "Lujo & Sofisticación",
+      "mood.power": "Poder & Dinamismo",
+      "mood.cinematic": "Misterio & Cine",
     },
 
     en: {
@@ -177,6 +181,10 @@ window.LA27_I18N = (() => {
       "form.type.opt5": "Other / General inquiry",
       "nav.sound.on": "SOUND ON",
       "nav.sound.off": "SOUND OFF",
+      "hero.sonic_builder": "EXPERIENCE YOUR SONIC IDENTITY",
+      "mood.luxury": "Luxury & Sophistication",
+      "mood.power": "Power & Dynamism",
+      "mood.cinematic": "Mystery & Cinematic",
     },
 
     de: {
@@ -264,6 +272,10 @@ window.LA27_I18N = (() => {
       "form.type.opt5": "Sonstiges / Allgemeine Anfrage",
       "nav.sound.on": "SOUND AN",
       "nav.sound.off": "SOUND AUS",
+      "hero.sonic_builder": "ERLEBEN SIE IHRE SOUND-IDENTITÄT",
+      "mood.luxury": "Luxus & Raffinesse",
+      "mood.power": "Kraft & Dynamik",
+      "mood.cinematic": "Mystery & Kino",
     },
 
     fr: {
@@ -351,6 +363,10 @@ window.LA27_I18N = (() => {
       "form.type.opt5": "Autre / Demande générale",
       "nav.sound.on": "SON ON",
       "nav.sound.off": "SON OFF",
+      "hero.sonic_builder": "EXPÉRIMENTEZ VOTRE IDENTITÉ SONORE",
+      "mood.luxury": "Luxe & Sophistication",
+      "mood.power": "Puissance & Dynamisme",
+      "mood.cinematic": "Mystère & Cinéma",
     },
 
     pt: {
@@ -438,6 +454,10 @@ window.LA27_I18N = (() => {
       "form.type.opt5": "Outro / Consulta geral",
       "nav.sound.on": "SOM LIGADO",
       "nav.sound.off": "SOM DESLIGADO",
+      "hero.sonic_builder": "EXPERIMENTE A SUA IDENTIDADE SONORA",
+      "mood.luxury": "Luxo & Sofisticação",
+      "mood.power": "Poder & Dinamismo",
+      "mood.cinematic": "Mistério & Cinema",
     },
 
   };
