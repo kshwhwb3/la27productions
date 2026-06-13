@@ -30,24 +30,24 @@
 
         if (type === "hover") {
           osc.type = "sine";
-          osc.frequency.setValueAtTime(1200, now);
-          osc.frequency.exponentialRampToValueAtTime(800, now + 0.04);
-          
-          gainNode.gain.setValueAtTime(0.015, now);
-          gainNode.gain.exponentialRampToValueAtTime(0.0001, now + 0.04);
-          
-          osc.start(now);
-          osc.stop(now + 0.045);
-        } else if (type === "click") {
-          osc.type = "triangle";
-          osc.frequency.setValueAtTime(600, now);
-          osc.frequency.setValueAtTime(200, now + 0.015);
+          osc.frequency.setValueAtTime(1400, now);
+          osc.frequency.exponentialRampToValueAtTime(900, now + 0.05);
           
           gainNode.gain.setValueAtTime(0.08, now);
-          gainNode.gain.exponentialRampToValueAtTime(0.0001, now + 0.06);
+          gainNode.gain.linearRampToValueAtTime(0, now + 0.05);
           
           osc.start(now);
-          osc.stop(now + 0.065);
+          osc.stop(now + 0.055);
+        } else if (type === "click") {
+          osc.type = "triangle";
+          osc.frequency.setValueAtTime(500, now);
+          osc.frequency.setValueAtTime(180, now + 0.015);
+          
+          gainNode.gain.setValueAtTime(0.22, now);
+          gainNode.gain.linearRampToValueAtTime(0, now + 0.08);
+          
+          osc.start(now);
+          osc.stop(now + 0.085);
         }
       } catch (err) {
         console.warn("Web Audio playback failed:", err);
