@@ -56,13 +56,215 @@
       }
     };
 
+    const playLogoChime = () => {
+      if (!enabled) return;
+      try {
+        init();
+        const now = ctx.currentTime;
+        const notes = [261.63, 392.00, 523.25]; // C4, G4, C5
+        notes.forEach((freq, index) => {
+          const osc = ctx.createOscillator();
+          const gain = ctx.createGain();
+          
+          osc.connect(gain);
+          gain.connect(ctx.destination);
+          
+          osc.type = "sine";
+          osc.frequency.setValueAtTime(freq, now + index * 0.12);
+          
+          const time = now + index * 0.12;
+          gain.gain.setValueAtTime(0, now);
+          gain.gain.setValueAtTime(0.04, time);
+          gain.gain.exponentialRampToValueAtTime(0.0001, time + 0.8);
+          
+          osc.start(time);
+          osc.stop(time + 0.85);
+        });
+      } catch (err) {
+        console.warn("Logo chime playback failed:", err);
+      }
+    };
+
+    let activeAudition = null;
+
+    const startCardAudition = (mood) => {
+      if (!enabled) return;
+      try {
+        init();
+        stopCardAudition();
+        
+        const now = ctx.currentTime;
+        const masterGain = ctx.createGain();
+        masterGain.connect(ctx.destination);
+        
+        masterGain.gain.setValueAtTime(0, now);
+        masterGain.gain.linearRampToValueAtTime(0.03, now + 0.3);
+        
+        const oscs = [];
+        
+        if (mood === "ferrari") {
+          const osc1 = ctx.createOscillator();
+          const osc2 = ctx.createOscillator();
+          
+          osc1.type = "sawtooth";
+          osc1.frequency.setValueAtTime(70, now);
+          
+          osc2.type = "sawtooth";
+          osc2.frequency.setValueAtTime(70.4, now);
+          
+          const filter = ctx.createBiquadFilter();
+          filter.type = "lowpass";
+          filter.frequency.setValueAtTime(120, now);
+          
+          const lfo = ctx.createOscillator();
+          const lfoGain = ctx.createGain();
+          lfo.type = "sine";
+          lfo.frequency.setValueAtTime(7, now);
+          lfoGain.gain.value = 0.35;
+          
+          osc1.connect(filter);
+          osc2.connect(filter);
+          filter.connect(masterGain);
+          
+          lfo.connect(lfoGain);
+          lfoGain.connect(masterGain.gain);
+          
+          lfo.start(now);
+          osc1.start(now);
+          osc2.start(now);
+          
+          oscs.push(osc1, osc2, lfo);
+        } 
+        else if (mood === "dior") {
+          const osc1 = ctx.createOscillator();
+          const osc2 = ctx.createOscillator();
+          
+          osc1.type = "sine";
+          osc1.frequency.setValueAtTime(659.25, now);
+          
+          osc2.type = "sine";
+          osc2.frequency.setValueAtTime(830.61, now);
+          
+          const g1 = ctx.createGain();
+          const g2 = ctx.createGain();
+          
+          osc1.connect(g1);
+          osc2.connect(g2);
+          g1.connect(masterGain);
+          g2.connect(masterGain);
+          
+          const lfo1 = ctx.createOscillator();
+          const lfoGain1 = ctx.createGain();
+          lfo1.type = "sine";
+          lfo1.frequency.setValueAtTime(0.4, now);
+          lfoGain1.gain.value = 0.5;
+          
+          lfo1.connect(lfoGain1);
+          lfoGain1.connect(g1.gain);
+          
+          const lfo2 = ctx.createOscillator();
+          const lfoGain2 = ctx.createGain();
+          lfo2.type = "sine";
+          lfo2.frequency.setValueAtTime(0.3, now);
+          lfoGain2.gain.value = 0.5;
+          
+          lfo2.connect(lfoGain2);
+          const inverter = ctx.createGain();
+          inverter.gain.value = -1;
+          lfoGain2.connect(inverter);
+          inverter.connect(g2.gain);
+          
+          g1.gain.setValueAtTime(0.4, now);
+          g2.gain.setValueAtTime(0.4, now);
+          
+          osc1.start(now);
+          osc2.start(now);
+          lfo1.start(now);
+          lfo2.start(now);
+          
+          oscs.push(osc1, osc2, lfo1, lfo2);
+        }
+        else if (mood === "bmw") {
+          const osc = ctx.createOscillator();
+          osc.type = "triangle";
+          osc.frequency.setValueAtTime(110, now);
+          
+          const filter = ctx.createBiquadFilter();
+          filter.type = "lowpass";
+          filter.frequency.setValueAtTime(150, now);
+          
+          const filterLfo = ctx.createOscillator();
+          const filterLfoGain = ctx.createGain();
+          filterLfo.type = "sawtooth";
+          filterLfo.frequency.setValueAtTime(4, now);
+          filterLfoGain.gain.value = 200;
+          
+          osc.connect(filter);
+          filter.connect(masterGain);
+          
+          filterLfo.connect(filterLfoGain);
+          filterLfoGain.connect(filter.frequency);
+          
+          osc.start(now);
+          filterLfo.start(now);
+          
+          oscs.push(osc, filterLfo);
+        }
+        else if (mood === "fashion") {
+          const osc = ctx.createOscillator();
+          osc.type = "sine";
+          osc.frequency.setValueAtTime(80, now);
+          
+          const lfo = ctx.createOscillator();
+          const lfoGain = ctx.createGain();
+          lfo.type = "sine";
+          lfo.frequency.setValueAtTime(0.2, now);
+          lfoGain.gain.value = 3;
+          
+          osc.connect(masterGain);
+          lfo.connect(lfoGain);
+          lfoGain.connect(osc.frequency);
+          
+          osc.start(now);
+          lfo.start(now);
+          
+          oscs.push(osc, lfo);
+        }
+        
+        activeAudition = {
+          oscs,
+          masterGain,
+          fadeAndStop: () => {
+            const stopTime = ctx.currentTime;
+            masterGain.gain.setValueAtTime(masterGain.gain.value, stopTime);
+            masterGain.gain.linearRampToValueAtTime(0, stopTime + 0.4);
+            
+            setTimeout(() => {
+              oscs.forEach((o) => {
+                try { o.stop(); } catch(e) {}
+              });
+            }, 500);
+          }
+        };
+      } catch (err) {
+        console.warn("Card audition failed to start:", err);
+      }
+    };
+
+    const stopCardAudition = () => {
+      if (activeAudition) {
+        activeAudition.fadeAndStop();
+        activeAudition = null;
+      }
+    };
+
     const isEnabled = () => enabled;
     const setEnabled = (val) => {
       enabled = val;
       localStorage.setItem("la27.sound", val ? "true" : "false");
     };
 
-    return { play, isEnabled, setEnabled, init };
+    return { play, playLogoChime, startCardAudition, stopCardAudition, isEnabled, setEnabled, init };
   })();
 
   const soundBtn = document.querySelector(".sound-toggle-btn");
@@ -683,10 +885,41 @@
     document.addEventListener("keydown", () => SoundEngine.init(), { once: true });
   };
 
+  // ----- Bind Logo Chime -----
+  const bindLogoChime = () => {
+    const brand = document.querySelector(".nav-brand");
+    if (brand) {
+      brand.addEventListener("mouseenter", () => {
+        SoundEngine.playLogoChime();
+      });
+    }
+  };
+
+  // ----- Bind Card Auditions -----
+  const bindCardAuditions = () => {
+    document.querySelectorAll(".play-card").forEach((card) => {
+      card.addEventListener("mouseenter", () => {
+        const title = card.dataset.vimeoTitle?.toLowerCase();
+        let mood = "fashion";
+        if (title.includes("ferrari")) mood = "ferrari";
+        else if (title.includes("dior")) mood = "dior";
+        else if (title.includes("bmw")) mood = "bmw";
+        
+        SoundEngine.startCardAudition(mood);
+      });
+      
+      card.addEventListener("mouseleave", () => {
+        SoundEngine.stopCardAudition();
+      });
+    });
+  };
+
   // Load dynamic assets
   loadThumbnails();
   setHeroDelays();
   initSmoothScroll();
   init3DTilt();
   bindMicroSounds();
+  bindLogoChime();
+  bindCardAuditions();
 })();
