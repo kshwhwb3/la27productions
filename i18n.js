@@ -88,6 +88,8 @@ window.LA27_I18N = (() => {
       "form.type.opt3": "Audio Completo (Música + Diseño de Sonido)",
       "form.type.opt4": "Sonic Branding (Audio Logo)",
       "form.type.opt5": "Otro / Consulta general",
+      "nav.sound.on": "SONIDO ON",
+      "nav.sound.off": "SONIDO OFF",
     },
 
     en: {
@@ -173,6 +175,8 @@ window.LA27_I18N = (() => {
       "form.type.opt3": "Full Audio (Music + Sound Design)",
       "form.type.opt4": "Sonic Branding (Audio Logo)",
       "form.type.opt5": "Other / General inquiry",
+      "nav.sound.on": "SOUND ON",
+      "nav.sound.off": "SOUND OFF",
     },
 
     de: {
@@ -258,6 +262,8 @@ window.LA27_I18N = (() => {
       "form.type.opt3": "Vollständiges Audio (Musik + Sounddesign)",
       "form.type.opt4": "Sonic Branding (Audio-Logo)",
       "form.type.opt5": "Sonstiges / Allgemeine Anfrage",
+      "nav.sound.on": "SOUND AN",
+      "nav.sound.off": "SOUND AUS",
     },
 
     fr: {
@@ -343,6 +349,8 @@ window.LA27_I18N = (() => {
       "form.type.opt3": "Audio Complet (Musique + Sound Design)",
       "form.type.opt4": "Sonic Branding (Logo Audio)",
       "form.type.opt5": "Autre / Demande générale",
+      "nav.sound.on": "SON ON",
+      "nav.sound.off": "SON OFF",
     },
 
     pt: {
@@ -428,6 +436,8 @@ window.LA27_I18N = (() => {
       "form.type.opt3": "Áudio Completo (Música + Desenho de Som)",
       "form.type.opt4": "Sonic Branding (Audio Logo)",
       "form.type.opt5": "Outro / Consulta geral",
+      "nav.sound.on": "SOM LIGADO",
+      "nav.sound.off": "SOM DESLIGADO",
     },
 
   };

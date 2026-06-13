@@ -18,8 +18,11 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Space+Grotesk:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="styles.css" />
+  <link rel="preconnect" href="https://player.vimeo.com" />
+  <link rel="preconnect" href="https://vimeo.com" />
 </head>
 <body>
+  <div class="film-grain" aria-hidden="true"></div>
 
   <div class="cursor" aria-hidden="true">
     <span class="cursor-label">Play</span>
@@ -40,6 +43,15 @@
       </ul>
     </nav>
     <div class="nav-right">
+      <div class="sound-toggle" data-cursor="hover">
+        <button class="sound-toggle-btn" type="button" aria-label="Toggle Sound">
+          <svg class="sound-icon" width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true">
+            <path d="M1.5 3.5h2L6 1v8L3.5 6.5h-2z" stroke-linecap="round" stroke-linejoin="round"/>
+            <path class="sound-waves" d="M8.2 3c.5.6.5 1.4 0 2" stroke-linecap="round"/>
+          </svg>
+          <span class="sound-text" data-i18n="nav.sound.on">SONIDO ON</span>
+        </button>
+      </div>
       <div class="lang-switch" data-cursor="hover">
         <button class="lang-switch-btn" type="button" aria-haspopup="true" aria-expanded="false">
           <span class="lang-switch-current">ES</span>
@@ -312,7 +324,7 @@
 
       <div class="studio-grid">
         <div class="studio-portrait reveal">
-          <img src="assets/tim-helmes.png" alt="Tim Helmes — Founder & Music Director, LA 27 Productions" />
+          <img src="assets/tim-helmes.png" alt="Tim Helmes — Founder & Music Director, LA 27 Productions" loading="lazy" />
         </div>
 
         <div class="studio-text reveal">

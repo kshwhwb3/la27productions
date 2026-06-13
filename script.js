@@ -3,6 +3,95 @@
 (() => {
   const i18n = window.LA27_I18N;
 
+  // ----- Premium Micro-Sound Engine (Web Audio API) -----
+  const SoundEngine = (() => {
+    let ctx = null;
+    let enabled = localStorage.getItem("la27.sound") !== "false";
+
+    const init = () => {
+      if (!ctx) {
+        ctx = new (window.AudioContext || window.webkitAudioContext)();
+      }
+      if (ctx.state === "suspended") {
+        ctx.resume();
+      }
+    };
+
+    const play = (type) => {
+      if (!enabled) return;
+      try {
+        init();
+        const now = ctx.currentTime;
+        const osc = ctx.createOscillator();
+        const gainNode = ctx.createGain();
+
+        osc.connect(gainNode);
+        gainNode.connect(ctx.destination);
+
+        if (type === "hover") {
+          osc.type = "sine";
+          osc.frequency.setValueAtTime(1200, now);
+          osc.frequency.exponentialRampToValueAtTime(800, now + 0.04);
+          
+          gainNode.gain.setValueAtTime(0.015, now);
+          gainNode.gain.exponentialRampToValueAtTime(0.0001, now + 0.04);
+          
+          osc.start(now);
+          osc.stop(now + 0.045);
+        } else if (type === "click") {
+          osc.type = "triangle";
+          osc.frequency.setValueAtTime(600, now);
+          osc.frequency.setValueAtTime(200, now + 0.015);
+          
+          gainNode.gain.setValueAtTime(0.08, now);
+          gainNode.gain.exponentialRampToValueAtTime(0.0001, now + 0.06);
+          
+          osc.start(now);
+          osc.stop(now + 0.065);
+        }
+      } catch (err) {
+        console.warn("Web Audio playback failed:", err);
+      }
+    };
+
+    const isEnabled = () => enabled;
+    const setEnabled = (val) => {
+      enabled = val;
+      localStorage.setItem("la27.sound", val ? "true" : "false");
+    };
+
+    return { play, isEnabled, setEnabled, init };
+  })();
+
+  const soundBtn = document.querySelector(".sound-toggle-btn");
+  const updateSoundBtn = () => {
+    if (!soundBtn) return;
+    const isMuted = !SoundEngine.isEnabled();
+    soundBtn.classList.toggle("is-muted", isMuted);
+    const textEl = soundBtn.querySelector(".sound-text");
+    if (textEl) {
+      const lang = (i18n && i18n.getLang()) || "es";
+      const key = SoundEngine.isEnabled() ? "nav.sound.on" : "nav.sound.off";
+      textEl.setAttribute("data-i18n", key);
+      if (i18n && i18n.T && i18n.T[lang] && i18n.T[lang][key]) {
+        textEl.textContent = i18n.T[lang][key];
+      } else {
+        textEl.textContent = SoundEngine.isEnabled() ? "SONIDO ON" : "SONIDO OFF";
+      }
+    }
+  };
+
+  if (soundBtn) {
+    updateSoundBtn();
+    soundBtn.addEventListener("click", (e) => {
+      e.stopPropagation();
+      SoundEngine.setEnabled(!SoundEngine.isEnabled());
+      updateSoundBtn();
+      SoundEngine.init();
+      SoundEngine.play("click");
+    });
+  }
+
   // ----- Language: apply stored or default ES, no overlay -----
   const setHeroDelays = () => {
     const heroWords = document.querySelectorAll(".hero-title .word > span");
@@ -21,6 +110,12 @@
     });
 
     setTimeout(() => {
+      const soundText = document.querySelector(".sound-toggle-btn .sound-text");
+      if (soundText) {
+        const key = SoundEngine.isEnabled() ? "nav.sound.on" : "nav.sound.off";
+        soundText.setAttribute("data-i18n", key);
+      }
+
       i18n.apply(lang);
       i18n.setLang(lang);
       
@@ -34,6 +129,7 @@
       });
       
       setHeroDelays();
+      updateSoundBtn();
 
       // Fade back in
       setTimeout(() => {
@@ -439,7 +535,144 @@
     if (e.key === "Escape" && vlb && vlb.classList.contains("is-open")) closeVideo();
   });
 
+  // ----- Inertial Smooth Scroller -----
+  const initSmoothScroll = () => {
+    if (!window.matchMedia("(hover: hover)").matches) return;
+    
+    let currentY = window.scrollY;
+    let targetY = currentY;
+    const ease = 0.075;
+    let isScrolling = false;
+
+    window.addEventListener("wheel", (e) => {
+      e.preventDefault();
+      targetY += e.deltaY;
+      
+      const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+      targetY = Math.min(maxScroll, Math.max(0, targetY));
+      
+      if (!isScrolling) {
+        isScrolling = true;
+        requestAnimationFrame(updateScroll);
+      }
+    }, { passive: false });
+
+    const updateScroll = () => {
+      const diff = targetY - currentY;
+      if (Math.abs(diff) > 0.3) {
+        currentY += diff * ease;
+        window.scrollTo(0, currentY);
+        requestAnimationFrame(updateScroll);
+      } else {
+        currentY = targetY;
+        window.scrollTo(0, currentY);
+        isScrolling = false;
+      }
+    };
+
+    window.addEventListener("scroll", () => {
+      if (!isScrolling) {
+        currentY = window.scrollY;
+        targetY = currentY;
+      }
+    }, { passive: true });
+
+    document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+      anchor.addEventListener("click", (e) => {
+        const targetId = anchor.getAttribute("href");
+        if (targetId === "#") return;
+        
+        const targetEl = document.querySelector(targetId);
+        if (targetEl) {
+          e.preventDefault();
+          SoundEngine.play("click");
+          
+          const rect = targetEl.getBoundingClientRect();
+          const headerOffset = 60;
+          targetY = window.scrollY + rect.top - headerOffset;
+          
+          const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+          targetY = Math.min(maxScroll, Math.max(0, targetY));
+          
+          if (!isScrolling) {
+            isScrolling = true;
+            requestAnimationFrame(updateScroll);
+          }
+        }
+      });
+    });
+  };
+
+  // ----- 3D Tilt Effect -----
+  const init3DTilt = () => {
+    if (!window.matchMedia("(hover: hover)").matches) return;
+    
+    document.querySelectorAll(".play-card").forEach((card) => {
+      let rafId = null;
+      const maxTilt = 8;
+      
+      card.addEventListener("mousemove", (e) => {
+        if (rafId) cancelAnimationFrame(rafId);
+        
+        rafId = requestAnimationFrame(() => {
+          const rect = card.getBoundingClientRect();
+          const x = e.clientX - rect.left;
+          const y = e.clientY - rect.top;
+          
+          const xPct = (x / rect.width) - 0.5;
+          const yPct = (y / rect.height) - 0.5;
+          
+          const rotX = -(yPct * maxTilt).toFixed(2);
+          const rotY = (xPct * maxTilt).toFixed(2);
+          
+          card.style.transform = `perspective(1000px) rotateX(${rotX}deg) rotateY(${rotY}deg) scale3d(1.02, 1.02, 1.02)`;
+          
+          const playBtn = card.querySelector(".play-overlay svg, .play-card-btn");
+          if (playBtn) {
+            const transX = (xPct * 15).toFixed(1);
+            const transY = (yPct * 15).toFixed(1);
+            playBtn.style.transform = `translate(${transX}px, ${transY}px) translateZ(30px)`;
+          }
+        });
+      });
+      
+      card.addEventListener("mouseleave", () => {
+        if (rafId) cancelAnimationFrame(rafId);
+        card.style.transform = "perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)";
+        
+        const playBtn = card.querySelector(".play-overlay svg, .play-card-btn");
+        if (playBtn) {
+          playBtn.style.transform = "";
+        }
+      });
+    });
+  };
+
+  // ----- Bind Micro-Sounds -----
+  const bindMicroSounds = () => {
+    const hoverElements = ".btn, .lang-switch-btn, .sound-toggle-btn, .scroll-cue, .nav-links a, .nav-brand, .play-card, .section-index a, .vlightbox-close, .lang-switch-menu a";
+    const clickElements = ".btn, .lang-switch-btn, .sound-toggle-btn, .scroll-cue, .nav-links a, .nav-brand, .play-card, .section-index a, .vlightbox-close, .lang-switch-menu a, button[type='submit']";
+
+    document.querySelectorAll(hoverElements).forEach((el) => {
+      el.addEventListener("mouseenter", () => {
+        SoundEngine.play("hover");
+      });
+    });
+
+    document.querySelectorAll(clickElements).forEach((el) => {
+      el.addEventListener("click", () => {
+        SoundEngine.play("click");
+      });
+    });
+
+    document.addEventListener("click", () => SoundEngine.init(), { once: true });
+    document.addEventListener("keydown", () => SoundEngine.init(), { once: true });
+  };
+
   // Load dynamic assets
   loadThumbnails();
   setHeroDelays();
+  initSmoothScroll();
+  init3DTilt();
+  bindMicroSounds();
 })();
