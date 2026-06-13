@@ -1,12 +1,12 @@
 /* LA 27 PRODUCTIONS — styles */
 
 :root {
-  --bg: #0a0a0a;
-  --bg-2: #111111;
+  --bg: #020202;
+  --bg-2: #080808;
   --ink: #f5f1ef;
   --ink-dim: #8a8480;
   --ink-mute: #4a4644;
-  --line: #1f1c1c;
+  --line: #181515;
   --accent: oklch(0.58 0.22 25);       /* brand red */
   --accent-bright: oklch(0.64 0.25 25);
   --accent-deep: oklch(0.42 0.18 25);
@@ -38,7 +38,7 @@ html {
   z-index: 1400; /* below vlightbox (1500) but above page content */
   pointer-events: none;
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
-  opacity: 0.038;
+  opacity: 0.01;
   animation: grainPlay 8s steps(10) infinite;
 }
 
@@ -1854,70 +1854,112 @@ footer .right {
   .reveal { opacity: 1; transform: none; }
 }
 
-/* ===== Sensory Luxury Upgrades (Audio Visualizer, Background Orbs, Ripples) ===== */
+/* ===== Sensory Luxury Upgrades (Audio Visualizer, Ripples) ===== */
 
-/* 1. Fluid Ambient Orbs */
-.bg-orbs {
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  z-index: -2;
-  overflow: hidden;
-  opacity: 0.8;
+/* 1. Lightbox Technical Visualizer */
+.vlightbox-visualizer {
+  background: rgba(4, 4, 4, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  border-radius: 4px;
+  padding: 14px 20px;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  color: var(--ink-dim);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
 }
 
-.orb {
-  position: absolute;
-  width: 55vw;
-  height: 55vw;
-  border-radius: 50%;
-  filter: blur(140px);
-  mix-blend-mode: screen;
-  opacity: 0.045;
-  pointer-events: none;
-  transition: transform 2.2s cubic-bezier(0.1, 0.8, 0.2, 1);
+.vis-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px dashed rgba(255, 255, 255, 0.06);
+  padding-bottom: 8px;
+  font-size: 8px;
+  letter-spacing: 0.1em;
 }
 
-.orb-1 {
-  background: var(--accent);
-  top: -15%;
-  left: -15%;
+.vis-title {
+  color: var(--ink-dim);
 }
 
-.orb-2 {
-  background: oklch(0.76 0.11 86);
-  bottom: -15%;
-  right: -15%;
+.vis-mode {
+  color: var(--accent);
+  font-weight: 500;
 }
 
-/* 2. Nav Bar Sound Visualizer Bars */
-.sound-visualizer-bars {
-  display: inline-flex;
+.vis-channels {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.vis-channel {
+  display: flex;
   align-items: flex-end;
-  gap: 2px;
-  height: 8px;
-  width: 14px;
-  margin-left: 8px;
-  vertical-align: middle;
+  height: 24px;
+  gap: 3px;
+  padding-left: 20px;
+  position: relative;
 }
 
-.sound-visualizer-bars .vbar {
+.vis-channel::before {
+  content: 'L';
+  position: absolute;
+  left: 0;
+  bottom: 2px;
+  font-weight: 500;
+  font-size: 8px;
+  color: var(--accent);
+}
+
+#vis-ch-r::before {
+  content: 'R';
+}
+
+.vis-bar-wrapper {
   flex: 1;
-  height: 2px;
-  background-color: var(--ink-dim);
-  border-radius: 0.5px;
-  transition: height 0.05s ease, background-color 0.2s ease;
+  height: 100%;
+  position: relative;
+  display: flex;
+  align-items: flex-end;
 }
 
-.sound-toggle-btn:hover .sound-visualizer-bars .vbar {
+.vis-bar {
+  width: 100%;
+  height: 1px;
+  background-color: rgba(255, 255, 255, 0.08);
+  border-radius: 0.5px;
+  transition: height 0.04s ease;
+}
+
+.vis-bar.active {
   background-color: var(--accent);
 }
 
-.sound-toggle-btn.is-muted .sound-visualizer-bars {
-  opacity: 0.2;
+.vis-peak {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background-color: var(--ink-dim);
+  border-radius: 0.5px;
 }
 
-/* 3. Sonic Click Ripples */
+.vis-axis {
+  display: flex;
+  justify-content: space-between;
+  padding-left: 20px;
+  font-size: 8px;
+  color: var(--ink-mute);
+  border-top: 1px dashed rgba(255, 255, 255, 0.06);
+  padding-top: 8px;
+}
+
+/* 2. Sonic Click Ripples */
 .sonic-ripple {
   position: absolute;
   border: 1px solid var(--accent);

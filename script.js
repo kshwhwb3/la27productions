@@ -89,179 +89,6 @@
       }
     };
 
-    let activeAudition = null;
-
-    const startCardAudition = (mood) => {
-      if (!enabled) return;
-      try {
-        init();
-        stopCardAudition();
-        
-        const now = ctx.currentTime;
-        const masterGain = ctx.createGain();
-        masterGain.connect(analyser || ctx.destination);
-        
-        masterGain.gain.setValueAtTime(0, now);
-        masterGain.gain.linearRampToValueAtTime(0.03, now + 0.3);
-        
-        const oscs = [];
-        
-        if (mood === "ferrari") {
-          const osc1 = ctx.createOscillator();
-          const osc2 = ctx.createOscillator();
-          
-          osc1.type = "sawtooth";
-          osc1.frequency.setValueAtTime(70, now);
-          
-          osc2.type = "sawtooth";
-          osc2.frequency.setValueAtTime(70.4, now);
-          
-          const filter = ctx.createBiquadFilter();
-          filter.type = "lowpass";
-          filter.frequency.setValueAtTime(120, now);
-          
-          const lfo = ctx.createOscillator();
-          const lfoGain = ctx.createGain();
-          lfo.type = "sine";
-          lfo.frequency.setValueAtTime(7, now);
-          lfoGain.gain.value = 0.35;
-          
-          osc1.connect(filter);
-          osc2.connect(filter);
-          filter.connect(masterGain);
-          
-          lfo.connect(lfoGain);
-          lfoGain.connect(masterGain.gain);
-          
-          lfo.start(now);
-          osc1.start(now);
-          osc2.start(now);
-          
-          oscs.push(osc1, osc2, lfo);
-        } 
-        else if (mood === "dior") {
-          const osc1 = ctx.createOscillator();
-          const osc2 = ctx.createOscillator();
-          
-          osc1.type = "sine";
-          osc1.frequency.setValueAtTime(659.25, now);
-          
-          osc2.type = "sine";
-          osc2.frequency.setValueAtTime(830.61, now);
-          
-          const g1 = ctx.createGain();
-          const g2 = ctx.createGain();
-          
-          osc1.connect(g1);
-          osc2.connect(g2);
-          g1.connect(masterGain);
-          g2.connect(masterGain);
-          
-          const lfo1 = ctx.createOscillator();
-          const lfoGain1 = ctx.createGain();
-          lfo1.type = "sine";
-          lfo1.frequency.setValueAtTime(0.4, now);
-          lfoGain1.gain.value = 0.5;
-          
-          lfo1.connect(lfoGain1);
-          lfoGain1.connect(g1.gain);
-          
-          const lfo2 = ctx.createOscillator();
-          const lfoGain2 = ctx.createGain();
-          lfo2.type = "sine";
-          lfo2.frequency.setValueAtTime(0.3, now);
-          lfoGain2.gain.value = 0.5;
-          
-          lfo2.connect(lfoGain2);
-          const inverter = ctx.createGain();
-          inverter.gain.value = -1;
-          lfoGain2.connect(inverter);
-          inverter.connect(g2.gain);
-          
-          g1.gain.setValueAtTime(0.4, now);
-          g2.gain.setValueAtTime(0.4, now);
-          
-          osc1.start(now);
-          osc2.start(now);
-          lfo1.start(now);
-          lfo2.start(now);
-          
-          oscs.push(osc1, osc2, lfo1, lfo2);
-        }
-        else if (mood === "bmw") {
-          const osc = ctx.createOscillator();
-          osc.type = "triangle";
-          osc.frequency.setValueAtTime(110, now);
-          
-          const filter = ctx.createBiquadFilter();
-          filter.type = "lowpass";
-          filter.frequency.setValueAtTime(150, now);
-          
-          const filterLfo = ctx.createOscillator();
-          const filterLfoGain = ctx.createGain();
-          filterLfo.type = "sawtooth";
-          filterLfo.frequency.setValueAtTime(4, now);
-          filterLfoGain.gain.value = 200;
-          
-          osc.connect(filter);
-          filter.connect(masterGain);
-          
-          filterLfo.connect(filterLfoGain);
-          filterLfoGain.connect(filter.frequency);
-          
-          osc.start(now);
-          filterLfo.start(now);
-          
-          oscs.push(osc, filterLfo);
-        }
-        else if (mood === "fashion") {
-          const osc = ctx.createOscillator();
-          osc.type = "sine";
-          osc.frequency.setValueAtTime(80, now);
-          
-          const lfo = ctx.createOscillator();
-          const lfoGain = ctx.createGain();
-          lfo.type = "sine";
-          lfo.frequency.setValueAtTime(0.2, now);
-          lfoGain.gain.value = 3;
-          
-          osc.connect(masterGain);
-          lfo.connect(lfoGain);
-          lfoGain.connect(osc.frequency);
-          
-          osc.start(now);
-          lfo.start(now);
-          
-          oscs.push(osc, lfo);
-        }
-        
-        activeAudition = {
-          oscs,
-          masterGain,
-          fadeAndStop: () => {
-            const stopTime = ctx.currentTime;
-            masterGain.gain.setValueAtTime(masterGain.gain.value, stopTime);
-            masterGain.gain.linearRampToValueAtTime(0, stopTime + 0.4);
-            
-            setTimeout(() => {
-              oscs.forEach((o) => {
-                try { o.stop(); } catch(e) {}
-              });
-            }, 500);
-          }
-        };
-      } catch (err) {
-        console.warn("Card audition failed to start:", err);
-      }
-    };
-
-    const stopCardAudition = () => {
-      if (activeAudition) {
-        activeAudition.fadeAndStop();
-        activeAudition = null;
-      }
-    };
-
     const isEnabled = () => enabled;
     const setEnabled = (val) => {
       enabled = val;
@@ -275,7 +102,7 @@
       return dataArray;
     };
 
-    return { play, playLogoChime, startCardAudition, stopCardAudition, isEnabled, setEnabled, init, getFrequencyData };
+    return { play, playLogoChime, isEnabled, setEnabled, init, getFrequencyData };
   })();
 
   const soundBtn = document.querySelector(".sound-toggle-btn");
@@ -700,6 +527,8 @@
     vlb.classList.add("is-open");
     vlb.setAttribute("aria-hidden", "false");
     document.body.style.overflow = "hidden";
+
+    startLightboxVisualizer();
   };
 
   const closeVideo = () => {
@@ -707,6 +536,9 @@
     vlb.classList.remove("is-open");
     vlb.setAttribute("aria-hidden", "true");
     document.body.style.overflow = "";
+    
+    stopLightboxVisualizer();
+    
     setTimeout(() => { vlbWrap.innerHTML = ""; }, 500);
   };
 
@@ -906,102 +738,142 @@
     }
   };
 
-  // ----- Bind Card Auditions -----
-  const bindCardAuditions = () => {
-    document.querySelectorAll(".play-card").forEach((card) => {
-      card.addEventListener("mouseenter", () => {
-        const title = card.dataset.vimeoTitle?.toLowerCase();
-        let mood = "fashion";
-        if (title.includes("ferrari")) mood = "ferrari";
-        else if (title.includes("dior")) mood = "dior";
-        else if (title.includes("bmw")) mood = "bmw";
-        
-        SoundEngine.startCardAudition(mood);
-      });
+  // ----- Sensory Upgrades: Lightbox Technical Visualizer -----
+  let visAnimFrame = null;
+  let isVideoPlaying = false;
+
+  const buildVisualizerBars = () => {
+    const chL = document.getElementById("vis-ch-l");
+    const chR = document.getElementById("vis-ch-r");
+    if (!chL || !chR) return;
+    
+    chL.innerHTML = "";
+    chR.innerHTML = "";
+    
+    const BARS_COUNT = 16;
+    for (let i = 0; i < BARS_COUNT; i++) {
+      const wrapL = document.createElement("div");
+      wrapL.className = "vis-bar-wrapper";
+      wrapL.innerHTML = `<div class="vis-bar"></div><div class="vis-peak" style="bottom: 0px;"></div>`;
+      chL.appendChild(wrapL);
       
-      card.addEventListener("mouseleave", () => {
-        SoundEngine.stopCardAudition();
-      });
-    });
+      const wrapR = document.createElement("div");
+      wrapR.className = "vis-bar-wrapper";
+      wrapR.innerHTML = `<div class="vis-bar"></div><div class="vis-peak" style="bottom: 0px;"></div>`;
+      chR.appendChild(wrapR);
+    }
   };
 
-  // ----- Sensory Upgrades: Real-Time Audio Visualizer -----
-  const initVisualizer = () => {
-    const vbars = document.querySelectorAll(".sound-visualizer-bars .vbar");
-    const hbars = document.querySelectorAll(".waveform .bar");
+  const startLightboxVisualizer = () => {
+    buildVisualizerBars();
     
-    const update = () => {
-      requestAnimationFrame(update);
+    const BARS_COUNT = 16;
+    const chL = document.getElementById("vis-ch-l");
+    const chR = document.getElementById("vis-ch-r");
+    if (!chL || !chR) return;
+    
+    const wrappersL = chL.querySelectorAll(".vis-bar-wrapper");
+    const wrappersR = chR.querySelectorAll(".vis-bar-wrapper");
+    
+    const peaksL = new Array(BARS_COUNT).fill(0);
+    const peaksR = new Array(BARS_COUNT).fill(0);
+    const currentHeightsL = new Array(BARS_COUNT).fill(0);
+    const currentHeightsR = new Array(BARS_COUNT).fill(0);
+    
+    isVideoPlaying = true; // autoplays by default
+    let time = 0;
+    
+    const animate = () => {
+      const vlb = document.getElementById("vlightbox");
+      if (!vlb || !vlb.classList.contains("is-open")) return;
       
-      const freq = SoundEngine.getFrequencyData();
-      const soundEnabled = SoundEngine.isEnabled();
+      visAnimFrame = requestAnimationFrame(animate);
+      time += 0.08;
       
-      // 1. Update navigation mini visualizer
-      if (freq && soundEnabled && vbars.length) {
-        vbars.forEach((bar, i) => {
-          const val = freq[i * 3] || 0;
-          const h = 2 + (val / 255) * 8;
-          bar.style.height = `${h}px`;
-          if (val > 15) {
-            bar.style.backgroundColor = "var(--accent)";
-          } else {
-            bar.style.backgroundColor = "";
+      for (let i = 0; i < BARS_COUNT; i++) {
+        let targetL = 0;
+        let targetR = 0;
+        
+        if (isVideoPlaying) {
+          if (i < 4) { // Bass
+            const beat = Math.pow(Math.sin(time * 1.6), 4) * 0.75 + Math.sin(time * 3.8) * 0.15;
+            targetL = Math.max(8, (beat * 85) + Math.random() * 12);
+            targetR = Math.max(8, (beat * 80) + Math.random() * 14);
+          } else if (i < 12) { // Mids
+            const wave1 = Math.sin(time * 2.4 + i * 0.45) * 22;
+            const wave2 = Math.cos(time * 3.5 - i * 0.25) * 16;
+            targetL = Math.max(10, 48 + wave1 + wave2 + Math.random() * 8);
+            targetR = Math.max(10, 44 - wave1 + wave2 + Math.random() * 8);
+          } else { // Highs
+            const flicker = Math.sin(time * 10 + i) * 16 + Math.cos(time * 18) * 8;
+            targetL = Math.max(4, 28 + flicker + Math.random() * 10);
+            targetR = Math.max(4, 24 + flicker + Math.random() * 12);
           }
-        });
-      } else if (vbars.length) {
-        vbars.forEach((bar) => {
-          bar.style.height = "2px";
-          bar.style.backgroundColor = "";
-        });
-      }
-      
-      // 2. Update Hero Waveform visualizer
-      if (freq && soundEnabled && hbars.length) {
-        let hasEnergy = false;
-        for (let i = 0; i < 20; i++) {
-          if (freq[i] > 10) {
-            hasEnergy = true;
-            break;
+          
+          if (Math.random() < 0.04) {
+            targetL = Math.min(100, targetL + 25);
+            targetR = Math.min(100, targetR + 25);
           }
         }
         
-        if (hasEnergy) {
-          hbars.forEach((bar, index) => {
-            const freqIndex = Math.floor((index / hbars.length) * freq.length * 0.55);
-            const val = freq[freqIndex] || 0;
-            const scale = 1 + (val / 255) * 2.6;
-            bar.style.transform = `scaleY(${scale})`;
-            bar.style.backgroundColor = "var(--accent)";
-          });
-          return;
+        currentHeightsL[i] += (targetL - currentHeightsL[i]) * 0.22;
+        currentHeightsR[i] += (targetR - currentHeightsR[i]) * 0.22;
+        
+        const barL = wrappersL[i].querySelector(".vis-bar");
+        const barR = wrappersR[i].querySelector(".vis-bar");
+        const peakL = wrappersL[i].querySelector(".vis-peak");
+        const peakR = wrappersR[i].querySelector(".vis-peak");
+        
+        const hL = currentHeightsL[i];
+        const hR = currentHeightsR[i];
+        
+        barL.style.height = `${hL}%`;
+        barR.style.height = `${hR}%`;
+        
+        if (hL > 5) barL.classList.add("active");
+        else barL.classList.remove("active");
+        
+        if (hR > 5) barR.classList.add("active");
+        else barR.classList.remove("active");
+        
+        if (hL >= peaksL[i]) {
+          peaksL[i] = hL;
+        } else {
+          peaksL[i] = Math.max(0, peaksL[i] - 1.4);
         }
-      }
-      
-      if (hbars.length) {
-        hbars.forEach((bar) => {
-          bar.style.transform = "";
-          bar.style.backgroundColor = "";
-        });
+        
+        if (hR >= peaksR[i]) {
+          peaksR[i] = hR;
+        } else {
+          peaksR[i] = Math.max(0, peaksR[i] - 1.4);
+        }
+        
+        peakL.style.bottom = `${peaksL[i]}%`;
+        peakR.style.bottom = `${peaksR[i]}%`;
       }
     };
     
-    requestAnimationFrame(update);
+    animate();
   };
 
-  // ----- Sensory Upgrades: Ambient Glow Orbs -----
-  const initAmbientOrbs = () => {
-    const orb1 = document.querySelector(".orb-1");
-    const orb2 = document.querySelector(".orb-2");
-    if (!orb1 || !orb2) return;
-    
-    window.addEventListener("mousemove", (e) => {
-      const mxPct = e.clientX / window.innerWidth;
-      const myPct = e.clientY / window.innerHeight;
-      
-      orb1.style.transform = `translate(${mxPct * 90}px, ${myPct * 90}px)`;
-      orb2.style.transform = `translate(${(1 - mxPct) * -90}px, ${(1 - myPct) * -90}px)`;
-    });
+  const stopLightboxVisualizer = () => {
+    if (visAnimFrame) {
+      cancelAnimationFrame(visAnimFrame);
+      visAnimFrame = null;
+    }
   };
+
+  // Listen to Vimeo player state messages
+  window.addEventListener("message", (e) => {
+    try {
+      const data = typeof e.data === "string" ? JSON.parse(e.data) : e.data;
+      if (data.event === "play") {
+        isVideoPlaying = true;
+      } else if (data.event === "pause") {
+        isVideoPlaying = false;
+      }
+    } catch (err) {}
+  });
 
   // ----- Sensory Upgrades: Sonic Click Ripples -----
   const initClickRipples = () => {
@@ -1031,8 +903,5 @@
   init3DTilt();
   bindMicroSounds();
   bindLogoChime();
-  bindCardAuditions();
-  initVisualizer();
-  initAmbientOrbs();
   initClickRipples();
 })();
