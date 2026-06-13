@@ -515,7 +515,7 @@
     if (!vlb || !vlbWrap || !id) return;
     vlbWrap.innerHTML = "";
     const iframe = document.createElement("iframe");
-    iframe.src = `https://player.vimeo.com/video/${id}?autoplay=1&title=0&byline=0&portrait=0&badge=0&color=ffffff&dnt=1&quality=1080p`;
+    iframe.src = `https://player.vimeo.com/video/${id}?autoplay=1&api=1&title=0&byline=0&portrait=0&badge=0&color=ffffff&dnt=1&quality=1080p`;
     iframe.setAttribute("allow", "autoplay; fullscreen; picture-in-picture");
     iframe.setAttribute("allowfullscreen", "");
     iframe.setAttribute("frameborder", "0");
@@ -528,6 +528,19 @@
     vlb.setAttribute("aria-hidden", "false");
     document.body.style.overflow = "hidden";
 
+    activeVideoId = String(id);
+
+    // Subscribe to Vimeo player play/pause events
+    iframe.addEventListener("load", () => {
+      try {
+        const win = iframe.contentWindow;
+        win.postMessage(JSON.stringify({ method: 'addEventListener', value: 'play' }), '*');
+        win.postMessage(JSON.stringify({ method: 'addEventListener', value: 'pause' }), '*');
+      } catch (err) {
+        console.warn("Failed to send addEventListener to Vimeo iframe:", err);
+      }
+    });
+
     startLightboxVisualizer();
   };
 
@@ -538,6 +551,7 @@
     document.body.style.overflow = "";
     
     stopLightboxVisualizer();
+    activeVideoId = null;
     
     setTimeout(() => { vlbWrap.innerHTML = ""; }, 500);
   };
@@ -741,6 +755,7 @@
   // ----- Sensory Upgrades: Lightbox Technical Visualizer -----
   let visAnimFrame = null;
   let isVideoPlaying = false;
+  let activeVideoId = null;
 
   const buildVisualizerBars = () => {
     const container = document.getElementById("vis-bars-container");
@@ -776,7 +791,45 @@
       if (!vlb || !vlb.classList.contains("is-open")) return;
       
       visAnimFrame = requestAnimationFrame(animate);
-      time += 0.1;
+      
+      // Determine customized rhythmic profiles based on the playing video
+      let speedFactor = 1.0;
+      let bassIntensity = 1.0;
+      let midIntensity = 1.0;
+      let highIntensity = 1.0;
+      let noiseLevel = 5;
+      
+      // Ferrari Roma Spider (ID: 1192292542) - Fast Rock score
+      if (activeVideoId === "1192292542") {
+        speedFactor = 1.6;
+        bassIntensity = 1.4; // strong kick drum
+        midIntensity = 1.1;  // electric guitars
+        highIntensity = 0.8;
+      }
+      // Dior Maison Perfume (ID: 1192292538) - Slow acoustic bells
+      else if (activeVideoId === "1192292538") {
+        speedFactor = 0.7;
+        bassIntensity = 0.4; // quiet low end
+        midIntensity = 0.7;
+        highIntensity = 1.6; // bright chime sparks
+        noiseLevel = 2;
+      }
+      // BMW Dune Taxi (ID: 1200779757) - Aggressive electronic
+      else if (activeVideoId === "1200779757") {
+        speedFactor = 1.8;
+        bassIntensity = 1.2;
+        midIntensity = 1.4; // synthesizer waves
+        highIntensity = 1.1;
+      }
+      // Fashion Film (ID: 1200905700) - Cinematic sub-bass drone
+      else if (activeVideoId === "1200905700") {
+        speedFactor = 0.5;
+        bassIntensity = 1.8; // deep rumble
+        midIntensity = 0.4;
+        highIntensity = 0.2;
+      }
+      
+      time += 0.08 * speedFactor;
       
       for (let i = 0; i < BARS_COUNT; i++) {
         let target = 0;
@@ -784,18 +837,18 @@
         if (isVideoPlaying) {
           if (i < 8) { // Bass
             const beat = Math.pow(Math.sin(time * 1.5 - i * 0.1), 4) * 0.75 + Math.sin(time * 3.6) * 0.15;
-            target = Math.max(10, (beat * 85) + Math.random() * 15);
+            target = Math.max(noiseLevel, (beat * 85 * bassIntensity) + Math.random() * 10);
           } else if (i < 24) { // Mids
             const wave1 = Math.sin(time * 2.2 + i * 0.3) * 25;
             const wave2 = Math.cos(time * 3.2 - i * 0.15) * 18;
-            target = Math.max(15, 50 + wave1 + wave2 + Math.random() * 10);
+            target = Math.max(noiseLevel * 1.5, (45 + wave1 + wave2) * midIntensity + Math.random() * 8);
           } else { // Treble
             const flicker = Math.sin(time * 8 + i * 0.8) * 18 + Math.cos(time * 15) * 10;
-            target = Math.max(5, 30 + flicker + Math.random() * 12);
+            target = Math.max(noiseLevel, (25 + flicker) * highIntensity + Math.random() * 8);
           }
           
           if (Math.random() < 0.05) {
-            target = Math.min(100, target + 30);
+            target = Math.min(100, target + 25);
           }
         }
         
@@ -834,6 +887,16 @@
   window.addEventListener("message", (e) => {
     try {
       const data = typeof e.data === "string" ? JSON.parse(e.data) : e.data;
+      
+      // If Vimeo player sends ready message, register event listeners
+      if (data.event === "ready") {
+        const iframe = vlbWrap.querySelector("iframe");
+        if (iframe && iframe.contentWindow) {
+          iframe.contentWindow.postMessage(JSON.stringify({ method: 'addEventListener', value: 'play' }), '*');
+          iframe.contentWindow.postMessage(JSON.stringify({ method: 'addEventListener', value: 'pause' }), '*');
+        }
+      }
+      
       if (data.event === "play") {
         isVideoPlaying = true;
       } else if (data.event === "pause") {
