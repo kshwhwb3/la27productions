@@ -585,7 +585,7 @@ def fetch_supplement_leads(known_emails: set, target: int = 30) -> list:
                         continue
                     if domain in SUPPLEMENT_SKIP_DOMAINS or domain.split(".")[0] in SUPPLEMENT_SKIP_DOMAINS:
                         continue
-                    forbidden_words = ['apotheke', 'klinik', 'gemeinde', 'stadt', 'landkreis']
+                    forbidden_words = ['apotheke', 'klinik', 'gemeinde', 'stadt', 'landkreis', 'farmacia', 'hospital']
                     if any(word in domain.lower() for word in forbidden_words):
                         continue
                     visited.add(domain)
