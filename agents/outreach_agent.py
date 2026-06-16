@@ -748,7 +748,8 @@ def run_outreach(dry_run: bool = False) -> dict:
                 "rentals", "referral", "research", "representation", "subscriptions",
                 "sustainability", "tips", "trade", "upgrade", "visitors", "zendesk",
                 "windowscentral", "tecnologia", "tellmemore", "thinkglobal",
-                "datenschutz", "impressum", "news", "presse", "service"
+                "datenschutz", "impressum", "news", "presse", "service",
+                "jobs", "careers", "interns", "recruitment", "hiring", "talent", "apply"
             ]
             
             # Check if prefix matches or starts with blocked prefix (allowing exact or starts_with check)

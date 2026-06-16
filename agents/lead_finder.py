@@ -40,7 +40,8 @@ SKIP_EMAIL_PATTERNS = [
     "vendor@","sales@","customerservice@","client-care@",
     "user@","you@","your@","usuario@","vous@","name@",
     "domain.com","company.com","example.com","somewhere.com","email.fr",
-    "exemple.com","doe.com","domaine.com"
+    "exemple.com","doe.com","domaine.com",
+    "jobs@","careers@","interns@","recruitment@","hr@","hiring@","talent@","apply@"
 ]
 
 SKIP_DOMAINS = [
@@ -194,11 +195,11 @@ DDG_QUERIES = [
 
 
 DDG_SUPPLEMENT_QUERIES = [
-    '"Nahrungsergänzung" "GmbH" "Impressum" site:.de -amazon -otto -dm -rossmann',
-    'supplement brand "Inhaber" site:.de -amazon -otto',
-    '"abnehmen" supplement "GmbH" kaufen site:.de -amazon',
-    'keto supplement "Gründer" site:.de',
-    '"blood sugar" supplement kaufen site:.de -amazon -otto',
+    'nahrungsergänzung shop kaufen site:.de',
+    'protein pulver online shop site:.de',
+    'keto tropfen kaufen official site:.de',
+    'abnehmen kapseln shop bestellen site:.de',
+    'vitamin supplement online kaufen site:.de',
 ]
 
 
@@ -222,7 +223,10 @@ SUPPLEMENT_SKIP_DOMAINS = {
 }
 
 
-SUPPLEMENT_GENERIC_EMAIL_PREFIXES = ['datenschutz', 'impressum', 'news', 'presse', 'service']
+SUPPLEMENT_GENERIC_EMAIL_PREFIXES = [
+    'datenschutz', 'impressum', 'news', 'presse', 'service',
+    'jobs', 'careers', 'interns', 'recruitment', 'hr', 'hiring', 'talent', 'apply'
+]
 
 
 def estimate_employee_count(domain: str) -> int:
