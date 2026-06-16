@@ -775,7 +775,8 @@ def run_outreach(dry_run: bool = False) -> dict:
             # 3. Forbidden words/domains inside the email address
             block_words = [
                 "@gap.com", "@gov.", "@gc.ca", ".edu", "@brevo.com", 
-                "@zohocorp.com", "@pipedrive.com", "@adweek.com", "@fashionunited.com"
+                "@zohocorp.com", "@pipedrive.com", "@adweek.com", "@fashionunited.com",
+                "jobs", "careers", "hiring", "recruitment", "licensing", "press", "redaccion", "autonews", "support", "assistenza", "hotro"
             ]
             if any(word in email for word in block_words):
                 print(f"  [Filter-Skip] Blocked forbidden word/domain: {email}")

@@ -33,7 +33,7 @@ SKIP_EMAIL_PATTERNS = [
     "noreply","no-reply","donotreply","bounce","mailer","postmaster",
     "webmaster","abuse@","spam@","example.com","test.com","sentry",
     "wix.com","wordpress","squarespace","shopify","gmail.com",
-    "yahoo.com","hotmail","outlook.com","support@","help@","newsletter@",
+    "yahoo.com","hotmail","outlook.com","newsletter@",
     "unsubscribe","privacy@","legal@","billing@","mail.com",
     "info@","contact@","hello@","hola@","admin@","yourname@",
     ".png","@2x","@1x",".jpg",".gif",".svg","thebeatles","ringo",
@@ -41,7 +41,8 @@ SKIP_EMAIL_PATTERNS = [
     "user@","you@","your@","usuario@","vous@","name@",
     "domain.com","company.com","example.com","somewhere.com","email.fr",
     "exemple.com","doe.com","domaine.com",
-    "jobs@","careers@","interns@","recruitment@","hr@","hiring@","talent@","apply@"
+    "jobs", "careers", "interns", "recruitment", "hr@", "hiring", "talent", "apply@",
+    "licensing", "press", "redaccion", "autonews", "support", "assistenza", "hotro"
 ]
 
 SKIP_DOMAINS = [
