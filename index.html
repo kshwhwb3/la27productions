@@ -1,18 +1,43 @@
-h<!doctype html>
+<!doctype html>
 <html lang="es">
 <head>
+    <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XHJNPVSHVM"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-XHJNPVSHVM');
+  </script>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>LA 27 Productions — Sonido de Lujo · Barcelona</title>
   <meta name="description" content="Música instrumental 100% exclusiva para marcas, agencias y film. Compuesta desde cero, sin librerías, sin royalties. Estudio propio en Barcelona." />
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
+  
+  <!-- Open Graph / Facebook / LinkedIn -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="LA 27 Productions — Sonido de Lujo · Barcelona" />
+  <meta property="og:description" content="Música instrumental 100% exclusiva para marcas, agencias y film. Compuesta desde cero, sin librerías, sin royalties. Estudio en Barcelona." />
+  <meta property="og:image" content="https://la27productions.com/assets/LA27_logo.png" />
+  
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="LA 27 Productions — Sonido de Lujo · Barcelona" />
+  <meta name="twitter:description" content="Música instrumental 100% exclusiva para marcas, agencias y film. Compuesta desde cero, sin librerías, sin royalties." />
+  <meta name="twitter:image" content="https://la27productions.com/assets/LA27_logo.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Space+Grotesk:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="styles.css?v=20260613_8" />
+  <link rel="preconnect" href="https://player.vimeo.com" />
+  <link rel="preconnect" href="https://vimeo.com" />
 </head>
 <body>
+  <div class="film-grain" aria-hidden="true"></div>
 
-  <div class="cursor" aria-hidden="true">h
+  <div class="cursor" aria-hidden="true">
     <span class="cursor-label">Play</span>
   </div>
 
@@ -31,6 +56,15 @@ h<!doctype html>
       </ul>
     </nav>
     <div class="nav-right">
+      <div class="sound-toggle" data-cursor="hover">
+        <button class="sound-toggle-btn" type="button" aria-label="Toggle Sound">
+          <svg class="sound-icon" width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true">
+            <path d="M1.5 3.5h2L6 1v8L3.5 6.5h-2z" stroke-linecap="round" stroke-linejoin="round"/>
+            <path class="sound-waves" d="M8.2 3c.5.6.5 1.4 0 2" stroke-linecap="round"/>
+          </svg>
+          <span class="sound-text" data-i18n="nav.sound.on">SONIDO ON</span>
+        </button>
+      </div>
       <div class="lang-switch" data-cursor="hover">
         <button class="lang-switch-btn" type="button" aria-haspopup="true" aria-expanded="false">
           <span class="lang-switch-current">ES</span>
@@ -80,6 +114,8 @@ h<!doctype html>
 
       <div class="waveform" aria-hidden="true"></div>
 
+
+
       <div class="hero-sub">
         <p class="hero-sub-left" data-i18n="hero.sub">
           Música instrumental exclusiva para marcas, agencias y film. Compuesta desde cero — sin librerías, sin royalties.
@@ -105,29 +141,13 @@ h<!doctype html>
     </section>
 
     <!-- =========== TRUST STRIP =========== -->
-    <section class="trust" aria-label="Trust">
+    <section class="trust" aria-label="Valores">
       <div class="trust-inner">
-        <span>
-          <em style="font-style:italic" data-i18n="trust.text">Confiado por agencias y marcas en 15+ países</em>
-          <i class="sep"></i> Ferrari
-          <i class="sep"></i> Dior
-          <i class="sep"></i> Loewe
-          <i class="sep"></i> Estrella Damm
-          <i class="sep"></i> Mango
-          <i class="sep"></i> Volkswagen
-          <i class="sep"></i> Banco Sabadell
-          <i class="sep"></i>
+        <span data-i18n-html="trust.text">
+          Música Original <i class="sep"></i> Diseño de Sonido <i class="sep"></i> Sonic Branding <i class="sep"></i> 100% Exclusivo <i class="sep"></i> Sin Royalties <i class="sep"></i> Estudio en Barcelona <i class="sep"></i>
         </span>
-        <span aria-hidden="true">
-          <em style="font-style:italic" data-i18n="trust.text">Confiado por agencias y marcas en 15+ países</em>
-          <i class="sep"></i> Ferrari
-          <i class="sep"></i> Dior
-          <i class="sep"></i> Loewe
-          <i class="sep"></i> Estrella Damm
-          <i class="sep"></i> Mango
-          <i class="sep"></i> Volkswagen
-          <i class="sep"></i> Banco Sabadell
-          <i class="sep"></i>
+        <span aria-hidden="true" data-i18n-html="trust.text">
+          Música Original <i class="sep"></i> Diseño de Sonido <i class="sep"></i> Sonic Branding <i class="sep"></i> 100% Exclusivo <i class="sep"></i> Sin Royalties <i class="sep"></i> Estudio en Barcelona <i class="sep"></i>
         </span>
       </div>
     </section>
@@ -145,15 +165,16 @@ h<!doctype html>
       <div class="work-grid">
 
         <article class="work-item reveal">
-          <div class="work-media">
-  <div class="video-frame">
-    <iframe src="https://player.vimeo.com/video/1192292542?title=0&byline=0&portrait=0&badge=0&color=ffffff&dnt=1"
-      allow="autoplay; fullscreen; picture-in-picture"
-      allowfullscreen
-      frameborder="0"
-      title="Ferrari — Roma Spider"></iframe>
-  </div>
-</div>
+          <figure class="work-media play-card" data-cursor="play" data-vimeo-id="1192292542" data-vimeo-title="Ferrari — Roma Spider">
+            <div class="video-frame">
+              <div class="thumbnail-placeholder"></div>
+              <div class="play-overlay">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                  <path d="M8 5v14l11-7z" fill="currentColor"/>
+                </svg>
+              </div>
+            </div>
+          </figure>
           <div class="work-info">
             <div class="work-index">01 / Ferrari</div>
             <h3 class="work-title" data-i18n-html="work.ferrari.title">Roma <span class="it">Spider</span></h3>
@@ -171,15 +192,16 @@ h<!doctype html>
         </article>
 
         <article class="work-item reveal">
-          <div class="work-media">
-  <div class="video-frame">
-    <iframe src="https://player.vimeo.com/video/1192292538?title=0&byline=0&portrait=0&badge=0&color=ffffff&dnt=1"
-      allow="autoplay; fullscreen; picture-in-picture"
-      allowfullscreen
-      frameborder="0"
-      title="Dior — Maison Perfume"></iframe>
-  </div>
-</div>
+          <figure class="work-media play-card" data-cursor="play" data-vimeo-id="1192292538" data-vimeo-title="Dior — Maison Perfume">
+            <div class="video-frame">
+              <div class="thumbnail-placeholder"></div>
+              <div class="play-overlay">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                  <path d="M8 5v14l11-7z" fill="currentColor"/>
+                </svg>
+              </div>
+            </div>
+          </figure>
           <div class="work-info">
             <div class="work-index">02 / Dior</div>
             <h3 class="work-title" data-i18n-html="work.dior.title">Maison <span class="it">Perfume</span></h3>
@@ -195,10 +217,81 @@ h<!doctype html>
             </p>
           </div>
         </article>
+         <article class="work-item reveal">
+          <figure class="work-media play-card" data-cursor="play" data-vimeo-id="1200779757" data-vimeo-title="BMW — Dune Taxi">
+            <div class="video-frame">
+              <div class="thumbnail-placeholder"></div>
+              <div class="play-overlay">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                  <path d="M8 5v14l11-7z" fill="currentColor"/>
+                </svg>
+              </div>
+            </div>
+          </figure>
+          <div class="work-info">
+            <div class="work-index">03 / BMW</div>
+            <h3 class="work-title" data-i18n-html="work.bmw.title">Dune <span class="it">Taxi</span></h3>
+            <div class="work-meta">
+              <span data-i18n="work.bmw.meta1">Automotriz</span>
+              <span class="sep"></span>
+              <span data-i18n="work.bmw.meta2">Desert Score</span>
+              <span class="sep"></span>
+              <span>2026</span>
+            </div>
+            <p class="work-desc" data-i18n="work.bmw.desc">
+              Ritmos electrónicos áridos y percusiones contundentes para el desierto. Tensión y potencia acústica diseñada específicamente para empujar la tracción xDrive al límite absoluto.
+            </p>
+          </div>
+        </article>
+                      <!-- === VÍDEO OCULTO (FASHION FILM) === -->
+        <div id="extra-videos" style="display: none; contents: display;">
+           
+           <article class="work-item reveal" style="margin-top: 4rem; direction: rtl;">
+             
+             <!-- El vídeo (Forzado a ltr para que no se voltee por dentro) -->
+             <figure class="work-media play-card" style="direction: ltr;" data-cursor="play" data-vimeo-id="1200905700" data-vimeo-title="Fashion Film — Dark & Cinematic">
+               <div class="video-frame">
+                 <div class="thumbnail-placeholder"></div>
+                 <div class="play-overlay">
+                   <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                     <path d="M8 5v14l11-7z" fill="currentColor"/>
+                   </svg>
+                 </div>
+               </div>
+             </figure>
+             
+             <!-- El texto (Forzado a ltr) -->
+             <div class="work-info" style="direction: ltr;">
+               <div class="work-index">04 / Fashion Film</div>
+               <h3 class="work-title" data-i18n-html="work.fashion.title">Dark <span class="it">Cinematic</span></h3>
+               <div class="work-meta">
+                 <span data-i18n="work.fashion.meta1">Moda & Lujo</span>
+                 <span class="sep"></span>
+                 <span data-i18n="work.fashion.meta2">Diseño Sonoro & Sintetizadores</span>
+                 <span class="sep"></span>
+                 <span>2026</span>
+               </div>
+               <p class="work-desc" data-i18n="work.fashion.desc">
+                 Un viaje visual oscuro y elegante envuelto en una atmósfera electrónica profunda. Bajos potentes, sintetizadores tensos y un diseño de sonido (Foley) hiperrealista, reconstruido íntegramente desde cero para darle peso y misterio a cada movimiento de cámara.
+               </p>
+             </div>
+             
+           </article>
+           
+        </div>
 
+      </div> <!-- Cierra el work-grid principal -->
+
+      <!-- === BOTÓN VER MÁS === -->
+      <div style="text-align: center; margin-top: 5rem; margin-bottom: 2rem;">
+        <button id="load-more-btn" class="btn" style="cursor: pointer; padding: 1rem 2rem; font-family: var(--font-mono); font-size: 14px; text-transform: uppercase; letter-spacing: 1px;" 
+                onclick="document.getElementById('extra-videos').style.display = 'contents'; this.style.display = 'none';">
+          <span data-i18n="work.loadmore">Click para ver más contenido producido por LA 27</span>
+        </button>
       </div>
-    </section>
 
+    </section>
+      
     <!-- =========== WHY / STUDIO =========== -->
     <section id="why" class="why" data-section data-screen-label="El Estudio">
       <div class="section-header reveal">
@@ -246,7 +339,7 @@ h<!doctype html>
 
       <div class="studio-grid">
         <div class="studio-portrait reveal">
-          <img src="assets/tim-helmes.png" alt="Tim Helmes — Founder & Music Director, LA 27 Productions" />
+          <img src="assets/tim-helmes.jpg" alt="Tim Helmes — Founder & Music Director, LA 27 Productions" loading="lazy" />
         </div>
 
         <div class="studio-text reveal">
@@ -262,10 +355,16 @@ h<!doctype html>
               <div class="name">Tim Helmes</div>
               <div class="role" data-i18n="founder.role">Founder &amp; Music Director — LA 27</div>
             </div>
-            <a href="https://www.linkedin.com/in/tim-helmes-boschi-9b9244246/" target="_blank" rel="noopener" class="linkedin" data-cursor="hover">
-              LinkedIn
-              <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M2 8L8 2M8 2H3M8 2v5" stroke="currentColor" stroke-width="1"/></svg>
-            </a>
+            <div class="linkedin-links">
+              <a href="https://www.linkedin.com/in/tim-helmes-boschi-9b9244246/" target="_blank" rel="noopener" class="linkedin" data-cursor="hover">
+                LinkedIn (Tim)
+                <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M2 8L8 2M8 2H3M8 2v5" stroke="currentColor" stroke-width="1"/></svg>
+              </a>
+              <a href="https://www.linkedin.com/company/la-27-productions/" target="_blank" rel="noopener" class="linkedin" data-cursor="hover">
+                LinkedIn (LA 27)
+                <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M2 8L8 2M8 2H3M8 2v5" stroke="currentColor" stroke-width="1"/></svg>
+              </a>
+            </div>
           </div>
         </div>
       </div>
@@ -293,6 +392,7 @@ h<!doctype html>
           <input type="hidden" name="access_key" value="48fe7fa3-de85-46ab-87d2-21f985fd53f4">
           <input type="hidden" name="subject" value="Nuevo contacto — LA 27 Productions">
           <input type="hidden" name="from_name" value="LA 27 Productions Web">
+          <input type="checkbox" name="botcheck" class="hidden" style="display: none;">
           <div class="field">
             <label for="f-name" data-i18n="form.name">Nombre</label>
             <input id="f-name" name="name" type="text" required />
@@ -305,15 +405,17 @@ h<!doctype html>
             <label for="f-company" data-i18n="form.company">Empresa</label>
             <input id="f-company" name="empresa" type="text" />
           </div>
-          <div class="field is-filled">
-            <label for="f-type" data-i18n="form.type">Tipo de proyecto</label>
-            <select id="f-type" name="tipo_proyecto">
-              <option value="" data-i18n="form.type.placeholder">— Elegir —</option>
-              <option data-i18n="form.type.opt1">Spot / Campaña</option>
-              <option data-i18n="form.type.opt2">Film / Cortometraje</option>
-              <option data-i18n="form.type.opt3">Desfile / Evento</option>
-              <option data-i18n="form.type.opt4">Sound Branding</option>
-              <option data-i18n="form.type.opt5">Otro</option>
+            <div class="field is-filled">
+            <label for="f-type" data-i18n="form.type">Tipo de servicio</label>
+            <select id="f-type" name="tipo_servicio" required>
+              <option value="" disabled selected data-i18n="form.type.placeholder">— Selecciona un servicio —</option>
+              <option value="Musica Original" data-i18n="form.type.opt1">Música Original (Custom Score)</option>
+              <option value="Diseno de Sonido" data-i18n="form.type.opt2">Diseño de Sonido (Sound Design & Foley)</option>
+              <option value="Audio Completo" data-i18n="form.type.opt3">Audio Completo (Música + Diseño de Sonido)</option>
+              <option value="Sonic Branding" data-i18n="form.type.opt4">Sonic Branding (Audio Logo)</option>
+              <option value="Otro" data-i18n="form.type.opt5">Otro / Consulta general</option>
+              <option value="VSL" data-i18n="form.type.opt6">VSL / Marketing Video</option>
+              <option value="Video Ad" data-i18n="form.type.opt7">Video Ad (15s–60s)</option>
             </select>
           </div>
           <div class="field">
@@ -369,7 +471,7 @@ h<!doctype html>
     </div>
   </footer>
 
-  <script src="i18n.js"></script>
-  <script src="script.js"></script>
+  <script src="i18n.js?v=20260613_8"></script>
+  <script src="script.js?v=20260613_8"></script>
 </body>
 </html>
