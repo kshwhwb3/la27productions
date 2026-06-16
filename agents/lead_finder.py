@@ -281,6 +281,16 @@ def get_known_emails() -> set:
     return emails
 
 
+def get_known_domains(known_emails: set) -> set:
+    domains = set()
+    for e in known_emails:
+        if "@" in e:
+            domain = e.split("@")[-1].strip().lower()
+            if domain:
+                domains.add(domain)
+    return domains
+
+
 def is_valid_email(email: str) -> bool:
     e = email.lower()
     for p in SKIP_EMAIL_PATTERNS:
@@ -378,6 +388,8 @@ def fetch_ddg_leads(known_emails: set, target: int) -> list:
     queries = DDG_QUERIES.copy()
     random.shuffle(queries)
 
+    known_domains = get_known_domains(known_emails)
+
     try:
         with DDGS() as ddgs:
             for query in queries:
@@ -409,21 +421,31 @@ def fetch_ddg_leads(known_emails: set, target: int) -> list:
                         continue
 
                     parsed = urlparse(url)
-                    domain = parsed.netloc.replace("www.", "")
+                    domain = parsed.netloc.replace("www.", "").lower().strip()
                     base = f"{parsed.scheme}://{parsed.netloc}"
 
-                    if domain in visited:
+                    if domain in visited or domain in known_domains:
                         continue
                     if not is_valid_domain(domain):
                         continue
                     visited.add(domain)
 
                     emails = get_emails_from_site(base)
-                    good = [e for e in emails if e not in known_emails and domain_is_valid(e)]
+                    good = []
+                    for e in emails:
+                        e_lower = e.lower().strip()
+                        e_domain = e_lower.split("@")[-1] if "@" in e_lower else ""
+                        if e_domain in known_domains:
+                            continue
+                        if e_lower not in known_emails and domain_is_valid(e):
+                            good.append(e)
+
                     if not good:
                         continue
 
                     email = good[0]
+                    email_domain = email.lower().strip().split("@")[-1]
+                    known_domains.add(email_domain)
                     company = domain.split(".")[0].replace("-", " ").title()
 
                     # --- NEW: EXTREME AI PERSONALIZATION (ICEBREAKER & SCORE) ---
@@ -554,6 +576,7 @@ def fetch_supplement_leads(known_emails: set, target: int = 30) -> list:
 
     found = []
     visited = set()
+    known_domains = get_known_domains(known_emails)
 
     try:
         with DDGS() as ddgs:
@@ -576,12 +599,12 @@ def fetch_supplement_leads(known_emails: set, target: int = 30) -> list:
                     if not url:
                         continue
                     parsed = urlparse(url)
-                    domain = parsed.netloc.replace("www.", "")
+                    domain = parsed.netloc.replace("www.", "").lower().strip()
                     if not domain:
                         continue
                     if not any(domain.endswith(tld) for tld in [".de", ".at", ".ch"]):
                         continue
-                    if domain in visited:
+                    if domain in visited or domain in known_domains:
                         continue
                     if domain in SUPPLEMENT_SKIP_DOMAINS or domain.split(".")[0] in SUPPLEMENT_SKIP_DOMAINS:
                         continue
@@ -604,7 +627,10 @@ def fetch_supplement_leads(known_emails: set, target: int = 30) -> list:
                         emails = extract_emails_from_url(base.rstrip("/") + path, timeout=5)
                         valid = []
                         for e in emails:
-                            e_lower = e.lower()
+                            e_lower = e.lower().strip()
+                            e_domain = e_lower.split("@")[-1] if "@" in e_lower else ""
+                            if e_domain in known_domains:
+                                continue
                             # Check forbidden email strings
                             forbidden_email_keywords = ["datenschutz", "impressum", "news", "jobs", "redaktion", "presse"]
                             if any(f_kw in e_lower for f_kw in forbidden_email_keywords):
@@ -619,6 +645,9 @@ def fetch_supplement_leads(known_emails: set, target: int = 30) -> list:
                         continue
                     if not domain_is_valid(email):
                         continue
+
+                    email_domain = email.lower().strip().split("@")[-1]
+                    known_domains.add(email_domain)
 
                     company = domain.split(".")[0].replace("-", " ").title()
                     lead = {
