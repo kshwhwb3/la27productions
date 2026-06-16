@@ -21,11 +21,12 @@ load_dotenv(BASE_DIR / ".env")
 
 BREVO_API_KEY_A = os.getenv("BREVO_API_KEY")
 BREVO_API_KEY_B = os.getenv("BREVO_API_KEY_B")
+BREVO_API_KEY_C = os.getenv("BREVO_API_KEY_C")
 ANTHROPIC_API_KEY = os.getenv("ANTHROPIC_API_KEY")
 CRM_PATH = Path(os.getenv("CRM_PATH", BASE_DIR.parent / "LA27_CRM.xlsx"))
 LEADS_CSV = CRM_PATH.parent / "LA27_leads_with_email.csv"
 LOG_PATH = Path(os.getenv("LOG_PATH", BASE_DIR / "logs"))
-DAILY_LIMIT = 580  # Total combined limit
+DAILY_LIMIT = 870  # Total combined limit (290 * 3)
 SENDER_EMAIL = os.getenv("SENDER_EMAIL", "tim@la27productions.com")
 SENDER_NAME = os.getenv("SENDER_NAME", "Tim | LA 27 Productions")
 
@@ -654,7 +655,14 @@ def send_email_brevo(to_email: str, to_name: str, subject: str, body: str, lang:
     from email_template import build_html
     html_body = build_html(body, lang=lang)
 
-    key = BREVO_API_KEY_A if account.upper() == "A" else BREVO_API_KEY_B
+    acc_upper = account.upper()
+    if acc_upper == "A":
+        key = BREVO_API_KEY_A
+    elif acc_upper == "B":
+        key = BREVO_API_KEY_B
+    else:
+        key = BREVO_API_KEY_C
+        
     if not key:
         print(f"  [Send] ERROR: No API key for Brevo Account {account} configured")
         return False
@@ -834,24 +842,35 @@ def run_outreach(dry_run: bool = False) -> dict:
             target_account = None
             can_a = quota_manager.can_send("A")
             can_b = quota_manager.can_send("B")
+            can_c = quota_manager.can_send("C")
 
-            if can_a and can_b:
-                # Alternate based on the number of emails sent today to balance load
+            available_accounts = []
+            if can_a: available_accounts.append("A")
+            if can_b: available_accounts.append("B")
+            if can_c: available_accounts.append("C")
+
+            if not available_accounts:
+                print("  [Outreach] All Brevo accounts (A, B & C) have reached their daily limits (290/290 each).")
+                break
+
+            if len(available_accounts) == 1:
+                target_account = available_accounts[0]
+            else:
+                # Select the account with the minimum sent count among those available
                 try:
                     with open(quota_manager.QUOTA_FILE, "r") as qf:
                         qdata = json.load(qf)
-                    sent_a = qdata.get("sent_a", 0)
-                    sent_b = qdata.get("sent_b", 0)
-                    target_account = "A" if sent_a <= sent_b else "B"
+                    
+                    usage = {
+                        "A": qdata.get("sent_a", 0),
+                        "B": qdata.get("sent_b", 0),
+                        "C": qdata.get("sent_c", 0)
+                    }
+                    # Filter by available accounts
+                    available_usage = {k: v for k, v in usage.items() if k in available_accounts}
+                    target_account = min(available_usage, key=available_usage.get)
                 except Exception:
-                    target_account = "A"
-            elif can_a:
-                target_account = "A"
-            elif can_b:
-                target_account = "B"
-            else:
-                print("  [Outreach] Both Brevo accounts (A & B) have reached their daily limits (290/290 each).")
-                break
+                    target_account = available_accounts[0]
 
             # Validate domain before sending (avoids bounce + protects reputation)
             if not domain_is_valid(email):
