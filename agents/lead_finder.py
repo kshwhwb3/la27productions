@@ -63,7 +63,8 @@ SKIP_DOMAINS = [
     "sharklasers.com","grr.la","yopmail.com","maildrop.cc","dispostable.com",
     "trashmail","fakeinbox","spamgourmet","10minutemail","tempinbox",
     "mailnull","spamex.com","spam4.me","discard.email","mailnesia",
-    "dundermifflin.com","example.com","test.com","fake.com","guerrillamail.com","tempmail.com"
+    "dundermifflin.com","example.com","test.com","fake.com","guerrillamail.com","tempmail.com",
+    "universalproductionmusic.com", "theorchard.com", "hearst.com", "creativebloq.com", "futurenet.com", "wizzair.com", "aciertaretail.com", "umusic.com"
 ]
 
 # Big pool of queries — shuffled each run for variety
@@ -397,7 +398,16 @@ def fetch_ddg_leads(known_emails: set, target: int) -> list:
     found = []
     visited = set()
     queries = DDG_QUERIES.copy()
-    random.shuffle(queries)
+    clutch_queries = [q for q in queries if "clutch.co" in q]
+    adforum_queries = [q for q in queries if "adforum.com" in q]
+    other_queries = [q for q in queries if "clutch.co" not in q and "adforum.com" not in q]
+
+    random.shuffle(clutch_queries)
+    random.shuffle(adforum_queries)
+    random.shuffle(other_queries)
+
+    # Ordered queries: Clutch first, AdForum second, DuckDuckGo third
+    queries = clutch_queries + adforum_queries + other_queries
 
     known_domains = get_known_domains(known_emails)
 

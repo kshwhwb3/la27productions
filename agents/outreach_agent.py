@@ -797,7 +797,8 @@ def run_outreach(dry_run: bool = False) -> dict:
                 "rtl.de", "sparkasse.at", "google.com", "axelspringer.de",
                 "rundfunkbeitrag.de", "otto.de", "amazon.de", "zalando.de",
                 "welt.de", "wiwo.de", "apotheken", "klinik", "krankenhaus",
-                "university", "uni-", "hochschule"
+                "university", "uni-", "hochschule",
+                "universalproductionmusic.com", "theorchard.com", "hearst.com", "creativebloq.com", "futurenet.com", "wizzair.com", "aciertaretail.com", "umusic.com"
             ]
             if any(d in domain or d in email for d in large_corp_domains):
                 print(f"  [Filter-Skip] Blocked large corp/media domain: {email}")
