@@ -77,6 +77,11 @@ DDG_QUERIES = [
     'luxury brand creative agency soundtrack email site:.com',
     'fashion film production company music email contact',
     'luxury automotive brand agency audio production email',
+    # === DIRECTORIES (Clutch & Adforum targets) ===
+    'site:clutch.co/agencies creative OR production OR "video production" OR advertising',
+    'site:adforum.com/agency video OR creative OR music OR branding',
+    'site:clutch.co/agencies/hacker-noon OR "creative" OR "branding"',
+    'site:adforum.com/agency/ "creative directors" OR "production"',
     '"brand film" production company music email contact site:.com',
     'perfume fragrance advertising agency music contact email',
     'jewellery brand advertising music production email contact',
@@ -426,14 +431,39 @@ def fetch_ddg_leads(known_emails: set, target: int) -> list:
                     if not url:
                         continue
 
+                    # Custom resolving for directories (Clutch & Adforum)
+                    is_directory = False
+                    if "clutch.co" in url or "adforum.com" in url:
+                        try:
+                            # Fetch the directory page to extract the real agency website URL
+                            r_dir = requests.get(url, headers=HEADERS, timeout=8)
+                            if r_dir.status_code == 200:
+                                # Find absolute URLs in the page text excluding internal clutch/adforum domains
+                                candidates = re.findall(r'href="(https?://[^"]+)"', r_dir.text)
+                                for cand in candidates:
+                                    cand_domain = urlparse(cand).netloc.replace("www.", "").lower().strip()
+                                    if cand_domain and not any(d in cand_domain for d in ["clutch.co", "adforum.com", "google", "facebook", "twitter", "linkedin", "instagram", "youtube", "pinterest", "apple", "reddit"]):
+                                        url = cand
+                                        is_directory = True
+                                        break
+                        except Exception as e:
+                            print(f"  [Directory Scrape] Error resolving {url}: {e}")
+
                     parsed = urlparse(url)
                     domain = parsed.netloc.replace("www.", "").lower().strip()
                     base = f"{parsed.scheme}://{parsed.netloc}"
 
-                    if domain in visited or domain in known_domains:
-                        continue
-                    if not is_valid_domain(domain):
-                        continue
+                    if not is_directory:
+                        # Standard check for search result domain
+                        if domain in visited or domain in known_domains:
+                            continue
+                        if not is_valid_domain(domain):
+                            continue
+                    else:
+                        # Directory resolved domain checks
+                        if domain in visited or domain in known_domains or not is_valid_domain(domain):
+                            continue
+
                     visited.add(domain)
 
                     emails = get_emails_from_site(base)
