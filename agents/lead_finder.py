@@ -498,7 +498,6 @@ def fetch_ddg_leads(known_emails: set, target: int) -> list:
                     icebreaker = ""
                     ai_score = 50
                     try:
-                        import requests
                         r_site = requests.get(base, headers=HEADERS, timeout=5)
                         site_text = r_site.text[:1500]
                         
