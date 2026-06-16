@@ -19,12 +19,13 @@ from dotenv import load_dotenv
 BASE_DIR = Path(__file__).parent
 load_dotenv(BASE_DIR / ".env")
 
-BREVO_API_KEY = os.getenv("BREVO_API_KEY")
+BREVO_API_KEY_A = os.getenv("BREVO_API_KEY")
+BREVO_API_KEY_B = os.getenv("BREVO_API_KEY_B")
 ANTHROPIC_API_KEY = os.getenv("ANTHROPIC_API_KEY")
 CRM_PATH = Path(os.getenv("CRM_PATH", BASE_DIR.parent / "LA27_CRM.xlsx"))
 LEADS_CSV = CRM_PATH.parent / "LA27_leads_with_email.csv"
 LOG_PATH = Path(os.getenv("LOG_PATH", BASE_DIR / "logs"))
-DAILY_LIMIT = 290
+DAILY_LIMIT = 580  # Total combined limit
 SENDER_EMAIL = os.getenv("SENDER_EMAIL", "tim@la27productions.com")
 SENDER_NAME = os.getenv("SENDER_NAME", "Tim | LA 27 Productions")
 
@@ -648,19 +649,20 @@ def personalize_email(lead: dict, template: dict, use_ai: bool = True) -> tuple:
     return subject, body
 
 
-def send_email_brevo(to_email: str, to_name: str, subject: str, body: str, lang: str = "en") -> bool:
+def send_email_brevo(to_email: str, to_name: str, subject: str, body: str, lang: str = "en", account: str = "A") -> bool:
     """Send email via Brevo API. All emails go from tim@la27productions.com."""
     from email_template import build_html
     html_body = build_html(body, lang=lang)
 
-    if not BREVO_API_KEY:
-        print("  [Send] ERROR: No BREVO_API_KEY configured")
+    key = BREVO_API_KEY_A if account.upper() == "A" else BREVO_API_KEY_B
+    if not key:
+        print(f"  [Send] ERROR: No API key for Brevo Account {account} configured")
         return False
 
-    url = "https://api.brevo.com/v3/smtp/email"
+    url = "https://api.api.brevo.com/v3/smtp/email" if "api.api." in key else "https://api.brevo.com/v3/smtp/email"
     headers = {
         "accept": "application/json",
-        "api-key": BREVO_API_KEY,
+        "api-key": key,
         "content-type": "application/json"
     }
     to_payload = {"email": to_email}
@@ -679,10 +681,10 @@ def send_email_brevo(to_email: str, to_name: str, subject: str, body: str, lang:
         if r.status_code in (200, 201):
             return True
         else:
-            print(f"  [Brevo] Error {r.status_code}: {r.text[:200]}")
+            print(f"  [Brevo Account {account}] Error {r.status_code}: {r.text[:200]}")
             return False
     except Exception as e:
-        print(f"  [Brevo] Exception: {e}")
+        print(f"  [Brevo Account {account}] Exception: {e}")
         return False
 
 
@@ -825,21 +827,46 @@ def run_outreach(dry_run: bool = False) -> dict:
                 sent += 1
                 continue
 
+            # Determine which account has quota and alternate them
+            import quota_manager
+            target_account = None
+            can_a = quota_manager.can_send("A")
+            can_b = quota_manager.can_send("B")
+
+            if can_a and can_b:
+                # Alternate based on the number of emails sent today to balance load
+                try:
+                    with open(quota_manager.QUOTA_FILE, "r") as qf:
+                        qdata = json.load(qf)
+                    sent_a = qdata.get("sent_a", 0)
+                    sent_b = qdata.get("sent_b", 0)
+                    target_account = "A" if sent_a <= sent_b else "B"
+                except Exception:
+                    target_account = "A"
+            elif can_a:
+                target_account = "A"
+            elif can_b:
+                target_account = "B"
+            else:
+                print("  [Outreach] Both Brevo accounts (A & B) have reached their daily limits (290/290 each).")
+                break
+
             # Validate domain before sending (avoids bounce + protects reputation)
             if not domain_is_valid(email):
                 print(f"  [Skip] Invalid domain: {email}")
                 skipped += 1
                 continue
 
-            print(f"  [Outreach] Sending to {email} ({lead['company']}) [{lang.upper()}]...")
-            success = send_email_brevo(email, lead["contact_name"], subject, body, lang=lang)
+            print(f"  [Outreach] Sending to {email} ({lead['company']}) [{lang.upper()}] via Account {target_account}...")
+            success = send_email_brevo(email, lead["contact_name"], subject, body, lang=lang, account=target_account)
 
             if success:
                 sent += 1
                 sent_this_run.add(email)
-                add_to_crm(lead, status="ENVIADO", notes=f"Cold email LANG:{lang.upper()} — {datetime.date.today()}")
+                quota_manager.increment_quota(target_account)
+                add_to_crm(lead, status="ENVIADO", notes=f"Cold email LANG:{lang.upper()} Account:{target_account} — {datetime.date.today()}")
                 _save_sent_tracker(sent_this_run)
-                sent_log.append({"email": email, "company": lead["company"], "lang": lang})
+                sent_log.append({"email": email, "company": lead["company"], "lang": lang, "account": target_account})
                 import random as _r
                 time.sleep(_r.uniform(45, 180))
             else:
