@@ -11,11 +11,11 @@ CTA_DE = "Unsere Arbeit anhören"
 CTA_FR = "Écoutez notre travail"
 CTA_PT = "Ouça o nosso trabalho"
 
-TAGLINE_ES = "Música Original · Barcelona"
-TAGLINE_EN = "Original Music · Barcelona"
-TAGLINE_DE = "Original-Musik · Barcelona"
-TAGLINE_FR = "Musique Originale · Barcelone"
-TAGLINE_PT = "Música Original · Barcelona"
+TAGLINE_ES = "Música & Vídeo · Barcelona"
+TAGLINE_EN = "Music & Video Production · Barcelona"
+TAGLINE_DE = "Musik- & Videoproduktion · Barcelona"
+TAGLINE_FR = "Production Musique & Vidéo · Barcelone"
+TAGLINE_PT = "Produção de Música & Vídeo · Barcelona"
 
 
 def _strip_plain_signature(text: str) -> str:
