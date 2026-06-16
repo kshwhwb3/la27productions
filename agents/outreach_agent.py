@@ -261,6 +261,105 @@ LA 27 Productions | Barcelona"""
     ],
 }
 
+D2C_EMAIL_TEMPLATES = {
+    "en": [
+        {
+            "subject": "bespoke video ads & music for {company}",
+            "body": """Hi,
+
+I checked out {company} and love what you are building.
+
+We produce high-converting marketing videos, VSLs, and social ads (Facebook, YouTube, Instagram) with custom-scored original music built in.
+
+Everything is delivered under one roof: conversion script, premium video editing, B-roll, and a bespoke soundtrack that belongs 100% to your brand — no generic stock, no licensing issues.
+
+Are you looking to scale your conversion rates with video ads soon?
+
+Best,
+
+Tim Helmes
+LA 27 Productions
+la27productions.com"""
+        },
+        {
+            "subject": "VSLs & video ads for {company}",
+            "body": """Hi,
+
+I run LA 27 Productions — we build high-converting VSLs (Video Sales Letters) and social media ads for D2C brands.
+
+Most agencies use the same generic stock music. We do the opposite: we deliver complete premium video production with an original soundtrack composed specifically for your campaign.
+
+You can see examples of our work at la27productions.com.
+
+Would you be open to seeing a quick concept for {company}?
+
+Best,
+
+Tim Helmes
+LA 27 Productions"""
+        }
+    ],
+    "es": [
+        {
+            "subject": "vídeo y audio de conversión para {company}",
+            "body": """Hola,
+
+He estado revisando la web de {company} y tenéis un producto excelente.
+
+Nos dedicamos a producir vídeos de marketing de alta conversión, VSLs y anuncios de vídeo para redes sociales (Facebook, YouTube, Instagram) con música original hecha a medida.
+
+Todo bajo un mismo techo: guión, locución, edición con B-roll premium y una banda sonora compuesta exclusivamente para vosotros (sin royalties ni música de stock que use la competencia).
+
+¿Tenéis pensado lanzar nuevas campañas de vídeo próximamente?
+
+Un saludo,
+
+Tim Helmes
+LA 27 Productions
+la27productions.com"""
+        }
+    ],
+    "de": [
+        {
+            "subject": "Video & Audio für {company}",
+            "body": """Hallo,
+
+ich habe mir die Website von {company} angesehen und euer Produkt ist stark.
+
+Wir produzieren Premium-Werbevideos, VSLs und Social-Media-Ads (für Facebook, YouTube und Instagram) inklusive maßgeschneiderter Originalmusik.
+
+Alles aus einer Hand: Avatar-KI oder echte Sprecher, professioneller Videoschnitt mit Premium-B-Roll und exklusiver Soundtrack – ohne teure Lizenzen oder Urheberrechtsprobleme.
+
+Habt ihr Interesse, eure Conversion-Rate mit neuen Video-Ads zu steigern?
+
+Beste Grüße,
+
+Tim Helmes
+LA 27 Productions
+la27productions.com"""
+        },
+        {
+            "subject": "VSLs & Video Ads für {company}",
+            "body": """Hallo,
+
+ich bin Tim Helmes von LA 27 Productions in Barcelona.
+
+Wir helfen D2C-Marken dabei, mit konvertierenden Werbevideos und VSLs (Video Sales Letters) mehr Kunden zu gewinnen.
+
+Der Unterschied: Wir liefern nicht nur den Videoschnitt und das Skript, sondern komponieren auch den Soundtrack komplett neu und exklusiv für eure Marke. Keine Stock-Musik, die eure Konkurrenz schon nutzt.
+
+Ein kurzes Portfolio findet ihr auf la27productions.com.
+
+Habt ihr in nächster Zeit neue Video-Kampagnen geplant?
+
+Viele Grüße,
+
+Tim Helmes
+LA 27 Productions"""
+        }
+    ]
+}
+
 # Flat-file backup tracker — survives CRM locks
 SENT_TRACKER = LOG_PATH / "sent_emails.json"
 
@@ -763,7 +862,15 @@ def run_outreach(dry_run: bool = False) -> dict:
             lang = detect_language(lead["location"], lead["email"], lead["company"], lead.get("contact_name", ""))
             lead["_lang"] = lang
             import random as _rnd
-            template = _rnd.choice(EMAIL_TEMPLATES.get(lang, EMAIL_TEMPLATES["en"]))
+            industry_lower = lead.get("industry", "").lower()
+            is_d2c = any(x in industry_lower for x in ["nutrition", "supplement", "health", "d2c", "e-commerce", "brand", "product"]) and "agency" not in industry_lower and "marketing" not in industry_lower
+            
+            if is_d2c:
+                templates_list = D2C_EMAIL_TEMPLATES.get(lang, D2C_EMAIL_TEMPLATES["en"])
+            else:
+                templates_list = EMAIL_TEMPLATES.get(lang, EMAIL_TEMPLATES["en"])
+                
+            template = _rnd.choice(templates_list)
             subject, body = personalize_email(lead, template, use_ai=use_ai)
 
             if dry_run:
