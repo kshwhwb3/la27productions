@@ -588,6 +588,13 @@ def fetch_supplement_leads(known_emails: set, target: int = 30) -> list:
                     forbidden_words = ['apotheke', 'klinik', 'gemeinde', 'stadt', 'landkreis', 'farmacia', 'hospital']
                     if any(word in domain.lower() for word in forbidden_words):
                         continue
+                    # Validate URL contains keywords
+                    url_lower = url.lower()
+                    title_lower = result.get("title", "").lower()
+                    valid_keywords = ["kaufen", "bestellen", "shop", "supplement", "nahrungsergänzung"]
+                    if not any(kw in url_lower or kw in title_lower for kw in valid_keywords):
+                        continue
+
                     visited.add(domain)
 
                     base = f"{parsed.scheme}://{parsed.netloc}"
@@ -595,7 +602,15 @@ def fetch_supplement_leads(known_emails: set, target: int = 30) -> list:
                     email = None
                     for path in SUPPLEMENT_IMPRESSUM_PATHS:
                         emails = extract_emails_from_url(base.rstrip("/") + path, timeout=5)
-                        valid = [e for e in emails if is_valid_impressum_email(e, is_small) and e not in known_emails]
+                        valid = []
+                        for e in emails:
+                            e_lower = e.lower()
+                            # Check forbidden email strings
+                            forbidden_email_keywords = ["datenschutz", "impressum", "news", "jobs", "redaktion", "presse"]
+                            if any(f_kw in e_lower for f_kw in forbidden_email_keywords):
+                                continue
+                            if is_valid_impressum_email(e, is_small) and e not in known_emails:
+                                valid.append(e)
                         if valid:
                             email = valid[0]
                             break
