@@ -42,7 +42,7 @@ SKIP_EMAIL_PATTERNS = [
     "domain.com","company.com","example.com","somewhere.com","email.fr",
     "exemple.com","doe.com","domaine.com",
     "jobs", "careers", "interns", "recruitment", "hr@", "hiring", "talent", "apply@",
-    "licensing", "press", "redaccion", "autonews", "support", "assistenza", "hotro"
+    "licensing", "press", "redaccion", "autonews", "support", "assistenza", "hotro", "payroll"
 ]
 
 SKIP_DOMAINS = [
