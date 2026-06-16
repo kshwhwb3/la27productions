@@ -107,9 +107,9 @@
         <span class="word"><span>de</span></span>
         <span class="word"><span class="it">Lujo.</span></span>
         <br />
-        <span class="word"><span>Audio</span></span>
-        <span class="word"><span>a</span></span>
-        <span class="word"><span class="it">medida.</span></span>
+        <span class="word"><span>Vídeo</span></span>
+        <span class="word"><span>que</span></span>
+        <span class="word"><span class="it">convierte.</span></span>
       </h1>
 
       <div class="waveform" aria-hidden="true"></div>
@@ -127,6 +127,15 @@
               <path d="M5 1v8M2 6l3 3 3-3" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
           </span>
+        </a>
+      </div>
+
+      <div class="hero-btns reveal" style="margin-top: 32px; display: flex; gap: 16px; flex-wrap: wrap; z-index: 10;">
+        <a href="#contact" class="btn" data-cursor="hover" onclick="document.getElementById('f-type').value = 'Musica Original'; document.getElementById('f-type').dispatchEvent(new Event('change'));">
+          <span data-i18n="hero.btn.audio">🎵 Custom Music & Audio &rarr;</span>
+        </a>
+        <a href="#contact" class="btn" style="background: transparent; border: 1px solid rgba(255,255,255,0.25); color: var(--ink);" data-cursor="hover" onclick="document.getElementById('f-type').value = 'VSL Completo'; document.getElementById('f-type').dispatchEvent(new Event('change'));">
+          <span data-i18n="hero.btn.video">🎬 VSLs & Marketing Video &rarr;</span>
         </a>
       </div>
 
@@ -292,6 +301,59 @@
 
     </section>
       
+    <!-- =========== SERVICIOS =========== -->
+    <section id="services" class="why" data-section data-screen-label="Servicios">
+      <div class="section-header reveal">
+        <div class="section-eyebrow">
+          <span class="num">005</span>
+          <span data-i18n="services.eyebrow">Servicios</span>
+        </div>
+        <h2 class="section-title" data-i18n-html="services.title">Servicios<br /><span class="it">Audiovisuales.</span></h2>
+      </div>
+
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 40px; padding-bottom: 96px;">
+        <!-- Columna izquierda — Audio -->
+        <div class="pillar-card reveal" style="border: 1px solid var(--line); min-height: auto; padding: 48px; border-radius: 4px;">
+          <div class="pillar-num" style="font-size: 48px; margin-bottom: 24px; color: var(--accent);">01</div>
+          <h3 class="pillar-title" style="margin-bottom: 32px;" data-i18n-html="services.audio.title">Audio <span class="it">Premium</span></h3>
+          <ul style="list-style: none; display: flex; flex-direction: column; gap: 18px; font-family: var(--font-mono); font-size: 14px; color: var(--ink-dim);">
+            <li style="display: flex; align-items: center; gap: 12px;">
+              <span style="color: var(--accent);">—</span> <span data-i18n="services.audio.item1">Música original para campañas</span>
+            </li>
+            <li style="display: flex; align-items: center; gap: 12px;">
+              <span style="color: var(--accent);">—</span> <span data-i18n="services.audio.item2">Diseño de sonido</span>
+            </li>
+            <li style="display: flex; align-items: center; gap: 12px;">
+              <span style="color: var(--accent);">—</span> <span data-i18n="services.audio.item3">Sonic branding</span>
+            </li>
+            <li style="display: flex; align-items: center; gap: 12px;">
+              <span style="color: var(--accent);">—</span> <span data-i18n="services.audio.item4">Sin librerías, sin royalties</span>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Columna derecha — Marketing Video -->
+        <div class="pillar-card reveal" style="border: 1px solid var(--line); min-height: auto; padding: 48px; border-radius: 4px;">
+          <div class="pillar-num" style="font-size: 48px; margin-bottom: 24px; color: var(--accent);">02</div>
+          <h3 class="pillar-title" style="margin-bottom: 32px;" data-i18n-html="services.video.title">Marketing <span class="it">Video</span></h3>
+          <ul style="list-style: none; display: flex; flex-direction: column; gap: 18px; font-family: var(--font-mono); font-size: 14px; color: var(--ink-dim);">
+            <li style="display: flex; align-items: center; gap: 12px;">
+              <span style="color: var(--accent);">—</span> <span data-i18n="services.video.item1">VSLs de 20-30 minutos</span>
+            </li>
+            <li style="display: flex; align-items: center; gap: 12px;">
+              <span style="color: var(--accent);">—</span> <span data-i18n="services.video.item2">Anuncios para Facebook/YouTube</span>
+            </li>
+            <li style="display: flex; align-items: center; gap: 12px;">
+              <span style="color: var(--accent);">—</span> <span data-i18n="services.video.item3">Avatar AI + locución humana</span>
+            </li>
+            <li style="display: flex; align-items: center; gap: 12px;">
+              <span style="color: var(--accent);">—</span> <span data-i18n="services.video.item4">Edición con B-roll premium</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
     <!-- =========== WHY / STUDIO =========== -->
     <section id="why" class="why" data-section data-screen-label="El Estudio">
       <div class="section-header reveal">
@@ -418,8 +480,8 @@
               <option value="Diseno de Sonido" data-i18n="form.type.opt2">Diseño de Sonido (Sound Design & Foley)</option>
               <option value="Audio Completo" data-i18n="form.type.opt3">Audio Completo (Música + Diseño de Sonido)</option>
               <option value="Sonic Branding" data-i18n="form.type.opt4">Sonic Branding (Audio Logo)</option>
-              <option value="VSL / Marketing Video" data-i18n="form.type.opt6">VSL / Marketing Video</option>
-              <option value="Video Ad (15s–60s)" data-i18n="form.type.opt7">Video Ad (15s–60s)</option>
+              <option value="VSL Completo" data-i18n="form.type.opt6">VSL Completo (Avatar + Voz + Edición)</option>
+              <option value="Anuncio de Video" data-i18n="form.type.opt7">Anuncio de Vídeo (15s-60s)</option>
               <option value="Otro" data-i18n="form.type.opt5">Otro / Consulta general</option>
             </select>
           </div>
