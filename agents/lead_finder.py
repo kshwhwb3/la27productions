@@ -63,6 +63,7 @@ SKIP_DOMAINS = [
     "sharklasers.com","grr.la","yopmail.com","maildrop.cc","dispostable.com",
     "trashmail","fakeinbox","spamgourmet","10minutemail","tempinbox",
     "mailnull","spamex.com","spam4.me","discard.email","mailnesia",
+    "dundermifflin.com","example.com","test.com","fake.com","guerrillamail.com","tempmail.com"
 ]
 
 # Big pool of queries — shuffled each run for variety

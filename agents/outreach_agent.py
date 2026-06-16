@@ -765,7 +765,8 @@ def run_outreach(dry_run: bool = False) -> dict:
                 "domain.com", "company.com", "example.com", "youragency.com", 
                 "yourbrand.com", "yourbusiness.com", "yourcompany.com", "acme.com", 
                 "dominio.com", "entreprise.com", "somewhere.com", "email.fr", 
-                "exemple.com", "doe.com", "domaine.com"
+                "exemple.com", "doe.com", "domaine.com",
+                "dundermifflin.com", "test.com", "fake.com", "mailinator.com", "guerrillamail.com", "tempmail.com"
             ]
             if domain in block_domains:
                 print(f"  [Filter-Skip] Blocked generic domain: {email}")
