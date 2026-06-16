@@ -178,7 +178,7 @@ LA 27 Productions | Barcelona"""
     "de": [
         {
             "subject": "exklusive Musik für {company}",
-            "body": """Hallo{first_name},
+            "body": """Hallo{comma_name},
 
 ich bin Tim Helmes, Gründer von LA 27 Productions — ein Musikstudio in Barcelona, das sich auf Originalmusik für Werbung und Marken spezialisiert hat.
 
@@ -191,7 +191,7 @@ LA 27 Productions | Barcelona"""
         },
         {
             "subject": "Musik für {company}s nächste Kampagne",
-            "body": """Hallo{first_name},
+            "body": """Hallo{comma_name},
 
 etwas, das ich oft von Kreativdirektoren höre: Musik kommt immer zuletzt — und man merkt es.
 
@@ -585,12 +585,10 @@ def personalize_email(lead: dict, template: dict, use_ai: bool = True) -> tuple:
     company = lead.get("company", "your company")
     lang = lead.get("_lang", "en")
 
+    comma_name = f", {first_name}" if first_name else ","
     display_name = first_name if first_name else ""
     subject = template["subject"].format(company=company, first_name=display_name)
-    body = template["body"].format(company=company, first_name=display_name)
-
-    if lang == "de" and not first_name:
-        body = body.replace("Hallo,", "Hallo,")
+    body = template["body"].format(company=company, comma_name=comma_name, first_name=display_name)
 
     if use_ai:
         opener = ai_personalized_opener(lead, lang)
