@@ -32,7 +32,7 @@ EMAIL_TEMPLATES = {
     "en": [
         {
             "subject": "custom music for {company}'s next campaign",
-            "body": """Hi {first_name},
+            "body": """Hi,
 
 I run LA 27 Productions — we compose 100% original music for ads and branded content. No stock libraries, no royalties, no music your competitor is already using.
 
@@ -46,7 +46,7 @@ la27productions.com"""
         },
         {
             "subject": "the sound gap in {company}'s campaigns",
-            "body": """Hi {first_name},
+            "body": """Hi,
 
 Most campaigns look great but sound generic. Stock music is fine — until your competitor uses the same track.
 
@@ -60,10 +60,10 @@ Tim
 LA 27 Productions | Barcelona"""
         },
         {
-            "subject": "quick question for {first_name}",
-            "body": """Hi {first_name},
+            "subject": "quick question for {company}",
+            "body": """Hi,
 
-When {company} produces a campaign with video, how do you usually handle the music?
+When {company} produces a campaign with video, how do you usually handle the music? Stock, licenses, or custom?
 
 I ask because we work with agencies and brands who want something original — not pulled from a library. We compose ad soundtracks, sound logos and full sonic identities from scratch.
 
@@ -74,7 +74,7 @@ LA 27 Productions | Barcelona"""
         },
         {
             "subject": "{company} + original music",
-            "body": """Hi {first_name},
+            "body": """Hi,
 
 I'll keep this short: LA 27 Productions composes original music for brands. No stock, no licensing fees, no shared tracks.
 
@@ -89,7 +89,7 @@ LA 27 Productions | Barcelona"""
         },
         {
             "subject": "exclusive audio for {company}",
-            "body": """Hi {first_name},
+            "body": """Hi,
 
 Something I keep hearing from creative directors: the music is always the last thing — and it shows.
 
@@ -104,7 +104,7 @@ LA 27 Productions | Barcelona"""
     "es": [
         {
             "subject": "musica exclusiva para {company}",
-            "body": """Hola {first_name},
+            "body": """Hola,
 
 Soy Tim Helmes, fundador de LA 27 Productions. Somos un estudio de produccion musical en Barcelona.
 
@@ -121,7 +121,7 @@ LA 27 Productions | Barcelona"""
         },
         {
             "subject": "el sonido que {company} merece",
-            "body": """Hola {first_name},
+            "body": """Hola,
 
 La mayoria de campanas suenan igual porque usan la misma musica de stock. Funciona, pero nunca suena a la marca.
 
@@ -133,8 +133,8 @@ Tim Helmes
 LA 27 Productions | Barcelona"""
         },
         {
-            "subject": "pregunta para {first_name} — audio de marca",
-            "body": """Hola {first_name},
+            "subject": "pregunta para {company} — audio de marca",
+            "body": """Hola,
 
 Curiosidad — cuando {company} produce una campana con video, como gestionais la musica? Stock, licencias, o a medida?
 
@@ -148,7 +148,7 @@ Tim Helmes | LA 27 Productions"""
         },
         {
             "subject": "audio original para las campanas de {company}",
-            "body": """Hola {first_name},
+            "body": """Hola,
 
 Directo: en LA 27 Productions componemos musica original para marcas y agencias. No stock. No licenciada. Compuesta para cada campana.
 
@@ -163,7 +163,7 @@ LA 27 Productions | Barcelona"""
         },
         {
             "subject": "{company} + LA 27 Productions",
-            "body": """Hola {first_name},
+            "body": """Hola,
 
 Algo que escucho mucho de directores creativos: la musica siempre llega al final — y se nota.
 
@@ -178,7 +178,7 @@ LA 27 Productions | Barcelona"""
     "de": [
         {
             "subject": "exklusive Musik für {company}",
-            "body": """Hallo{comma_name},
+            "body": """Hallo,
 
 ich bin Tim Helmes, Gründer von LA 27 Productions — ein Musikstudio in Barcelona, das sich auf Originalmusik für Werbung und Marken spezialisiert hat.
 
@@ -191,7 +191,7 @@ LA 27 Productions | Barcelona"""
         },
         {
             "subject": "Musik für {company}s nächste Kampagne",
-            "body": """Hallo{comma_name},
+            "body": """Hallo,
 
 etwas, das ich oft von Kreativdirektoren höre: Musik kommt immer zuletzt — und man merkt es.
 
@@ -206,7 +206,7 @@ LA 27 Productions | Barcelona"""
     "fr": [
         {
             "subject": "musique exclusive pour {company}",
-            "body": """Bonjour {first_name},
+            "body": """Bonjour,
 
 je suis Tim Helmes, fondateur de LA 27 Productions — un studio de musique à Barcelone spécialisé dans la musique originale pour la publicité et les marques.
 
@@ -219,7 +219,7 @@ LA 27 Productions | Barcelone"""
         },
         {
             "subject": "musique pour la prochaine campagne de {company}",
-            "body": """Bonjour {first_name},
+            "body": """Bonjour,
 
 quelque chose que j'entends souvent des directeurs créatifs : la musique arrive toujours en dernier — et ça se sent.
 
@@ -234,7 +234,7 @@ LA 27 Productions | Barcelone"""
     "pt": [
         {
             "subject": "música exclusiva para {company}",
-            "body": """Olá {first_name},
+            "body": """Olá,
 
 sou Tim Helmes, fundador da LA 27 Productions — um estúdio de música em Barcelona especializado em música original para publicidade e marcas.
 
@@ -247,7 +247,7 @@ LA 27 Productions | Barcelona"""
         },
         {
             "subject": "música para a próxima campanha de {company}",
-            "body": """Olá {first_name},
+            "body": """Olá,
 
 algo que ouço frequentemente de diretores criativos: a música é sempre a última coisa — e nota-se.
 
@@ -581,14 +581,11 @@ def ai_personalized_opener(lead: dict, lang: str) -> str:
 
 
 def personalize_email(lead: dict, template: dict, use_ai: bool = True) -> tuple:
-    first_name = lead.get("contact_name", "").split()[0] if lead.get("contact_name") else ""
     company = lead.get("company", "your company")
     lang = lead.get("_lang", "en")
 
-    comma_name = f", {first_name}" if first_name else ","
-    display_name = first_name if first_name else ""
-    subject = template["subject"].format(company=company, first_name=display_name)
-    body = template["body"].format(company=company, comma_name=comma_name, first_name=display_name)
+    subject = template["subject"].format(company=company)
+    body = template["body"].format(company=company)
 
     if use_ai:
         opener = ai_personalized_opener(lead, lang)
