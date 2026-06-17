@@ -29,238 +29,68 @@ LOG_PATH = Path(os.getenv("LOG_PATH", BASE_DIR / "logs"))
 DAILY_LIMIT = 870  # Total combined limit (290 * 3)
 SENDER_EMAIL = os.getenv("SENDER_EMAIL", "tim@la27productions.com")
 SENDER_NAME = os.getenv("SENDER_NAME", "Tim | LA 27 Productions")
-
 EMAIL_TEMPLATES = {
     "en": [
         {
-            "subject": "custom music for {company}'s next campaign",
+            "subject": "Sound for {company}'s next campaign",
             "body": """Hi,
 
-I run LA 27 Productions — we compose 100% original music for ads and branded content. No stock libraries, no royalties, no music your competitor is already using.
+LA 27 Productions is a premium music studio based in Barcelona. We compose 100% original music for brands, agencies and film — built from scratch with live instruments, professional recording and zero stock libraries. Every piece is exclusive to your project. No royalties, no shared licenses, no music your competitors are already using.
 
-I recently scored a conceptual piece for Ferrari and another for Dior — both built from scratch in under 48h.
-
-Would this be useful for any upcoming projects at {company}? Happy to send examples.
+Hear our work at la27productions.com
 
 Tim Helmes
-LA 27 Productions | Barcelona
-la27productions.com"""
-        },
-        {
-            "subject": "the sound gap in {company}'s campaigns",
-            "body": """Hi,
-
-Most campaigns look great but sound generic. Stock music is fine — until your competitor uses the same track.
-
-At LA 27 we compose original scores, audio logos and sonic identities. Everything built from the brief, 100% exclusive to your brand.
-
-Recent work includes scores for luxury and automotive spots — you can hear them at la27productions.com
-
-Worth a look?
-
-Tim
-LA 27 Productions | Barcelona"""
-        },
-        {
-            "subject": "quick question for {company}",
-            "body": """Hi,
-
-When {company} produces a campaign with video, how do you usually handle the music? Stock, licenses, or custom?
-
-I ask because we work with agencies and brands who want something original — not pulled from a library. We compose ad soundtracks, sound logos and full sonic identities from scratch.
-
-2 min of examples here: la27productions.com
-
-Tim Helmes
-LA 27 Productions | Barcelona"""
-        },
-        {
-            "subject": "{company} + original music",
-            "body": """Hi,
-
-I'll keep this short: LA 27 Productions composes original music for brands. No stock, no licensing fees, no shared tracks.
-
-Every piece is written from scratch to match the exact tone and rhythm of the campaign. We deliver in 24-48h when needed.
-
-If {company} ever needs audio that sounds like nobody else — I'd love to show you what we do.
-
-la27productions.com
-
-Tim
-LA 27 Productions | Barcelona"""
-        },
-        {
-            "subject": "exclusive audio for {company}",
-            "body": """Hi,
-
-Something I keep hearing from creative directors: the music is always the last thing — and it shows.
-
-At LA 27 we build audio from day one. 15s, 30s, 60s spots, sound logos, full sonic identities. Fast delivery, built exclusively for your brand.
-
-You can hear recent work at la27productions.com — including pieces scored for Ferrari and Dior concepts.
-
-Tim Helmes
-LA 27 Productions | Barcelona"""
-        },
+Founder & Music Director"""
+        }
     ],
     "es": [
         {
-            "subject": "musica exclusiva para {company}",
+            "subject": "Sonido para la próxima campaña de {company}",
             "body": """Hola,
 
-Soy Tim Helmes, fundador de LA 27 Productions. Somos un estudio de produccion musical en Barcelona.
+LA 27 Productions es un estudio de música premium en Barcelona. Componemos música 100% original para marcas, agencias y film — grabada con instrumentos reales, producción profesional y sin librerías de stock. Cada pieza es exclusiva para tu proyecto. Sin royalties, sin licencias compartidas.
 
-Nos especializamos en crear musica original a medida para marcas y campanas publicitarias. Sin librerias, sin royalties — todo compuesto desde cero.
+Escucha nuestro trabajo en la27productions.com
 
-He preparado piezas conceptuales para Ferrari y Dior que muestran como el sonido transforma las piezas visuales.
-
-Puedes escuchar ejemplos en la27productions.com
-
-Si necesitais audio exclusivo para vuestra proxima campana, me encantaria hablar.
-
-Tim Helmes
-LA 27 Productions | Barcelona"""
-        },
-        {
-            "subject": "el sonido que {company} merece",
-            "body": """Hola,
-
-La mayoria de campanas suenan igual porque usan la misma musica de stock. Funciona, pero nunca suena a la marca.
-
-En LA 27 componemos musica original para cada proyecto. Soundtracks para spots, logos sonoros, identidades sonoras completas — todo exclusivo.
-
-Ejemplos en la27productions.com — 2 minutos que valen la pena.
-
-Tim Helmes
-LA 27 Productions | Barcelona"""
-        },
-        {
-            "subject": "pregunta para {company} — audio de marca",
-            "body": """Hola,
-
-Curiosidad — cuando {company} produce una campana con video, como gestionais la musica? Stock, licencias, o a medida?
-
-Lo pregunto porque hacemos exactamente eso: musica original compuesta desde cero para marcas y agencias. Base en Barcelona, trabajamos internacionalmente.
-
-Entrega en 24-48h cuando hace falta.
-
-Ejemplos: la27productions.com
-
-Tim Helmes | LA 27 Productions"""
-        },
-        {
-            "subject": "audio original para las campanas de {company}",
-            "body": """Hola,
-
-Directo: en LA 27 Productions componemos musica original para marcas y agencias. No stock. No licenciada. Compuesta para cada campana.
-
-Cada pieza se escribe desde cero para encajar con el tono, ritmo y mensaje del proyecto. 100% exclusiva — nadie mas la usa.
-
-Si {company} busca un sonido que realmente suene a la marca, me encantaria mostraros nuestro trabajo.
-
-la27productions.com
-
-Tim
-LA 27 Productions | Barcelona"""
-        },
-        {
-            "subject": "{company} + LA 27 Productions",
-            "body": """Hola,
-
-Algo que escucho mucho de directores creativos: la musica siempre llega al final — y se nota.
-
-En LA 27 lo construimos desde el inicio. Spots de 15s, 30s, 60s, logos sonoros, identidades sonoras. Entregas rapidas, hecho en exclusiva para vuestra marca.
-
-Tenemos piezas conceptuales para marcas como Ferrari y Dior. Puedes verlas en la27productions.com
-
-Tim Helmes
-LA 27 Productions | Barcelona"""
-        },
+Tim Helmes"""
+        }
     ],
     "de": [
         {
-            "subject": "exklusive Musik für {company}",
+            "subject": "Sound für {company}s nächste Kampagne",
             "body": """Hallo,
 
-ich bin Tim Helmes, Gründer von LA 27 Productions — ein Musikstudio in Barcelona, das sich auf Originalmusik für Werbung und Marken spezialisiert hat.
+LA 27 Productions ist ein Premium-Musikstudio mit Sitz in Barcelona. Wir komponieren 100% Originalmusik für Marken, Agenturen und Film — von Grund auf mit echten Instrumenten, professioneller Aufnahme und ohne Stock-Bibliotheken. Jedes Stück ist exklusiv für Ihr Projekt. Keine Lizenzgebühren, keine geteilten Lizenzen, keine Musik, die Ihre Konkurrenz bereits nutzt.
 
-Kein Stock, keine Lizenzen, keine Musik die Ihre Konkurrenz bereits nutzt. Alles wird von Grund auf für jede Kampagne komponiert.
+Hören Sie unsere Arbeiten auf la27productions.com
 
-Beispiele auf meiner Website: la27productions.com
-
-Tim Helmes
-LA 27 Productions | Barcelona"""
-        },
-        {
-            "subject": "Musik für {company}s nächste Kampagne",
-            "body": """Hallo,
-
-etwas, das ich oft von Kreativdirektoren höre: Musik kommt immer zuletzt — und man merkt es.
-
-Bei LA 27 Productions bauen wir Audio vom ersten Briefing an. Spots (15s/30s/60s), Audio-Logos, vollständige Sonic Identities. Alles exklusiv für Ihre Marke.
-
-Beispiele auf der Website: la27productions.com
-
-Tim Helmes
-LA 27 Productions | Barcelona"""
-        },
+Tim Helmes"""
+        }
     ],
     "fr": [
         {
-            "subject": "musique exclusive pour {company}",
+            "subject": "Le son pour la prochaine campagne de {company}",
             "body": """Bonjour,
 
-je suis Tim Helmes, fondateur de LA 27 Productions — un studio de musique à Barcelone spécialisé dans la musique originale pour la publicité et les marques.
+LA 27 Productions est un studio de musique haut de gamme basé à Barcelone. Nous composons de la musique 100% originale pour les marques, les agences et le cinéma — créée de toutes pièces avec des instruments réels, des enregistrements professionnels et sans banques de sons. Chaque pièce est exclusive à votre projet. Pas de royalties, pas de licences partagées, pas de musique que vos concurrents utilisent déjà.
 
-Pas de stock, pas de licences, pas de musique que votre concurrent utilise déjà. Tout est composé sur mesure pour chaque campagne.
+Écoutez notre travail sur la27productions.com
 
-Des exemples sur mon site : la27productions.com
-
-Tim Helmes
-LA 27 Productions | Barcelone"""
-        },
-        {
-            "subject": "musique pour la prochaine campagne de {company}",
-            "body": """Bonjour,
-
-quelque chose que j'entends souvent des directeurs créatifs : la musique arrive toujours en dernier — et ça se sent.
-
-Chez LA 27 Productions, on construit l'audio dès le brief. Spots 15s/30s/60s, logos sonores, identités sonores complètes. Exclusif à votre marque.
-
-Exemples sur le site : la27productions.com
-
-Tim Helmes
-LA 27 Productions | Barcelone"""
-        },
+Tim Helmes"""
+        }
     ],
     "pt": [
         {
-            "subject": "música exclusiva para {company}",
+            "subject": "Som para a próxima campanha da {company}",
             "body": """Olá,
 
-sou Tim Helmes, fundador da LA 27 Productions — um estúdio de música em Barcelona especializado em música original para publicidade e marcas.
+LA 27 Productions é um estúdio de música premium com sede em Barcelona. Compomos música 100% original para marcas, agências e cinema — criada do zero com instrumentos reais, gravação profissional e sem bibliotecas de stock. Cada peça é exclusiva para o seu projeto. Sem royalties, sem licenças partilhadas, sem música que os seus concorrentes já estejam a usar.
 
-Sem stock, sem licenças, sem música que o seu concorrente já usa. Tudo é composto do zero para cada campanha.
+Ouça o nosso trabalho em la27productions.com
 
-Exemplos no meu site: la27productions.com
-
-Tim Helmes
-LA 27 Productions | Barcelona"""
-        },
-        {
-            "subject": "música para a próxima campanha de {company}",
-            "body": """Olá,
-
-algo que ouço frequentemente de diretores criativos: a música é sempre a última coisa — e nota-se.
-
-Na LA 27 Productions, construímos o áudio desde o briefing. Spots 15s/30s/60s, logos sonoros, identidades sonoras completas. Exclusivo para a sua marca.
-
-Exemplos no site: la27productions.com
-
-Tim Helmes
-LA 27 Productions | Barcelona"""
-        },
-    ],
+Tim Helmes"""
+        }
+    ]
 }
 
 D2C_EMAIL_TEMPLATES = {
