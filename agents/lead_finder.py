@@ -598,7 +598,7 @@ def run_lead_finder() -> dict:
     known_emails = get_known_emails()
     print(f"  [LeadFinder] Known emails to skip: {len(known_emails)}")
 
-    ddg_leads = fetch_ddg_leads(known_emails, target=60)
+    ddg_leads = fetch_ddg_leads(known_emails, target=15)
 
     log_file = LOG_PATH / f"lead_finder_{datetime.date.today()}.json"
     with open(log_file, "w", encoding="utf-8") as f:
