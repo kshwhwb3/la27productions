@@ -926,6 +926,16 @@
     });
   };
 
+  // ----- Barcelona Background Parallax -----
+  const initBackgroundParallax = () => {
+    const bg = document.querySelector(".bcn-art-background");
+    if (!bg) return;
+    window.addEventListener("scroll", () => {
+      const y = window.scrollY;
+      bg.style.transform = `translateY(${y * 0.05}px)`;
+    }, { passive: true });
+  };
+
   // Load dynamic assets
   loadThumbnails();
   setHeroDelays();
@@ -934,4 +944,5 @@
   bindMicroSounds();
   bindLogoChime();
   initClickRipples();
+  initBackgroundParallax();
 })();
