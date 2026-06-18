@@ -21,6 +21,11 @@
   padding: 0;
 }
 
+a, a:visited {
+  text-decoration: none;
+  color: inherit;
+}
+
 *:focus-visible {
   outline: 2px solid var(--accent);
   outline-offset: 4px;
@@ -329,15 +334,27 @@ body.is-locked {
   transition: padding 0.3s ease, background 0.3s ease;
 }
 
-.nav-brand {
+.nav-brand, .nav-brand:visited {
   font-family: var(--font-mono);
-  font-size: 12px;
+  font-size: 20px; /* Larger logo */
   letter-spacing: 0.18em;
   text-transform: uppercase;
+  color: #ffffff !important; /* White color */
+  text-decoration: none !important; /* No underline */
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.6), 
+               0 0 20px rgba(255, 255, 255, 0.3); /* Luminescent glow */
+  transition: text-shadow 0.3s ease, color 0.3s ease, transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.nav-brand:hover, .nav-brand:hover:visited {
+  color: #ffffff !important;
+  text-decoration: none !important;
+  text-shadow: 0 0 15px rgba(255, 255, 255, 0.9), 
+               0 0 30px rgba(255, 255, 255, 0.5); /* Stronger glow on hover */
 }
 
 .nav-brand strong {
-  font-weight: 600;
+  font-weight: 700;
 }
 
 .nav-links {
@@ -1468,29 +1485,46 @@ section {
   flex-wrap: wrap;
 }
 
-.btn {
+.btn, .btn:visited {
   appearance: none;
   border: 0;
   background: var(--ink);
-  color: var(--bg);
+  color: var(--bg) !important;
   font-family: var(--font-mono);
-  font-size: 12px;
+  font-size: 13px; /* Slightly larger */
+  font-weight: 700; /* Bold ("más negrita/gorditos") */
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  padding: 18px 28px;
+  padding: 20px 34px; /* Thicker ("más gorditos") */
   border-radius: 999px;
   display: inline-flex;
   align-items: center;
   gap: 12px;
   cursor: none;
+  text-decoration: none !important; /* No subrayados */
   transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
               background 0.3s ease, color 0.3s ease;
 }
 
-.btn:hover {
+.btn:hover, .btn:hover:visited {
   background: var(--accent);
-  color: var(--bg);
+  color: var(--bg) !important;
   transform: translateX(4px);
+  text-decoration: none !important;
+}
+
+.btn-outline, .btn-outline:visited {
+  background: transparent !important;
+  border: 1px solid rgba(255, 255, 255, 0.25) !important;
+  color: var(--ink) !important;
+  text-decoration: none !important;
+}
+
+.btn-outline:hover, .btn-outline:hover:visited {
+  background: var(--accent) !important;
+  border-color: var(--accent) !important;
+  color: var(--bg) !important;
+  text-decoration: none !important;
 }
 
 .btn-meta {

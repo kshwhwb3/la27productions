@@ -81,19 +81,26 @@
   <!-- Barcelona Gaudí-inspired artistic background shapes -->
   <div class="bcn-art-background" aria-hidden="true">
     <svg class="bcn-shape shape-arch" viewBox="0 0 200 400" fill="none" stroke="currentColor">
-      <path d="M20 380 Q100 20 180 380" stroke-width="3.0" stroke-dasharray="6 6"/>
-      <path d="M40 380 Q100 80 160 380" stroke-width="2.0"/>
-      <path d="M60 380 Q100 140 140 380" stroke-width="1.5"/>
-      <circle cx="100" cy="50" r="4" fill="currentColor"/>
+      <!-- Organic catenary arch & Casa Batlló column design -->
+      <path d="M 30,390 C 35,300 45,200 40,150 C 35,100 20,80 50,40 C 80,80 65,100 60,150 C 55,200 65,300 70,390" stroke-width="2.5" />
+      <path d="M 15,380 C 35,280 55,180 90,80 C 125,180 145,280 165,380" stroke-width="1.8" stroke-dasharray="8 6"/>
+      <path d="M 45,150 C 75,140 105,140 135,150" stroke-width="1.2"/>
     </svg>
     <svg class="bcn-shape shape-mosaic" viewBox="0 0 300 300" fill="none" stroke="currentColor">
-      <path d="M50 50 L120 40 L180 90 L130 160 L40 120 Z" stroke-width="2.0"/>
-      <path d="M130 160 L180 90 L240 140 L200 220 L110 200 Z" stroke-width="2.0"/>
-      <path d="M40 120 L130 160 L110 200 L30 220 Z" stroke-width="1.5"/>
-      <path d="M180 90 L270 50 L280 120 L240 140 Z" stroke-width="1.5"/>
+      <!-- Lizard profile & mosaic patterns -->
+      <path d="M 40,150 C 80,90 140,90 180,130 C 220,170 240,130 270,110" stroke-width="2.5" stroke-linecap="round"/>
+      <path d="M 80,110 C 70,80 50,70 50,70" stroke-width="2.0"/>
+      <path d="M 160,110 C 170,70 190,60 190,60" stroke-width="2.0"/>
+      <path d="M 120,150 C 110,190 90,210 90,210" stroke-width="2.0"/>
+      <path d="M 210,150 C 220,200 240,210 240,210" stroke-width="2.0"/>
+      <path d="M 60,120 Q 90,140 120,120 T 180,120" stroke-width="1.5" stroke-dasharray="4 4"/>
+      <path d="M 90,105 Q 120,125 150,105" stroke-width="1.2"/>
     </svg>
-    <svg class="bcn-shape shape-spiral" viewBox="0 0 200 200" fill="none" stroke="currentColor">
-      <path d="M100 100 A10 10 0 0 1 110 110 A20 20 0 0 1 90 130 A40 40 0 0 1 50 90 A80 80 0 0 1 130 10 A160 160 0 0 1 180 170" stroke-width="2.5" stroke-linecap="round"/>
+    <svg class="bcn-shape shape-spiral" viewBox="0 0 300 200" fill="none" stroke="currentColor">
+      <!-- Mask-like organic balcony contour from Casa Batlló -->
+      <path d="M 50,100 C 50,60 100,50 150,80 C 200,50 250,60 250,100 C 250,140 200,150 150,120 C 100,150 50,140 50,100 Z" stroke-width="2.5"/>
+      <path d="M 90,100 C 90,80 110,80 120,100 C 120,120 100,120 90,100 Z" stroke-width="1.5"/>
+      <path d="M 180,100 C 180,80 200,80 210,100 C 210,120 190,120 180,100 Z" stroke-width="1.5"/>
     </svg>
   </div>
 
@@ -186,10 +193,10 @@
 
       <div class="hero-btns reveal" style="margin-top: 32px; display: flex; gap: 16px; flex-wrap: wrap; z-index: 10;">
         <a href="#contact" class="btn" data-cursor="hover" onclick="document.getElementById('f-type').value = 'Musica Original'; document.getElementById('f-type').dispatchEvent(new Event('change'));">
-          <span data-i18n="hero.btn.audio">🎵 Custom Music & Audio &rarr;</span>
+          <span data-i18n="hero.btn.audio">Custom Music & Audio</span>
         </a>
-        <a href="#contact" class="btn" style="background: transparent; border: 1px solid rgba(255,255,255,0.25); color: var(--ink);" data-cursor="hover" onclick="document.getElementById('f-type').value = 'VSL Completo'; document.getElementById('f-type').dispatchEvent(new Event('change'));">
-          <span data-i18n="hero.btn.video">🎬 VSLs & Marketing Video &rarr;</span>
+        <a href="#contact" class="btn btn-outline" data-cursor="hover" onclick="document.getElementById('f-type').value = 'VSL Completo'; document.getElementById('f-type').dispatchEvent(new Event('change'));">
+          <span data-i18n="hero.btn.video">VSLs & Marketing Video</span>
         </a>
       </div>
 
