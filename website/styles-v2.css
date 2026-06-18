@@ -1978,8 +1978,8 @@ footer .right {
 
 .bcn-shape {
   position: absolute;
-  opacity: 0.08; /* Subtle but clearly visible */
-  filter: blur(1.5px);
+  opacity: 0.15; /* Highly visible artistic shapes */
+  filter: blur(1.0px); /* Slightly sharper outlines */
   will-change: transform;
 }
 
@@ -1990,7 +1990,7 @@ footer .right {
   left: -40px;
   color: var(--accent);
   transform-origin: bottom left;
-  animation: driftArch 48s ease-in-out infinite alternate;
+  animation: driftArch 18s ease-in-out infinite alternate;
 }
 
 .shape-mosaic {
@@ -2000,7 +2000,7 @@ footer .right {
   right: -60px;
   color: var(--ink-dim);
   transform-origin: center right;
-  animation: driftMosaic 58s ease-in-out infinite alternate;
+  animation: driftMosaic 24s ease-in-out infinite alternate;
 }
 
 .shape-spiral {
@@ -2010,7 +2010,7 @@ footer .right {
   right: 18%;
   color: var(--accent);
   transform-origin: center;
-  animation: driftSpiral 42s ease-in-out infinite alternate;
+  animation: driftSpiral 20s ease-in-out infinite alternate;
 }
 
 @keyframes driftArch {
