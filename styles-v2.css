@@ -2012,9 +2012,8 @@ footer .right {
 
 .bcn-shape {
   position: absolute;
-  opacity: 0.15; /* Highly visible artistic shapes */
-  filter: blur(1.0px); /* Slightly sharper outlines */
-  will-change: transform;
+  opacity: 0.3; /* Increased base visibility */
+  will-change: transform, opacity;
 }
 
 .shape-arch {
@@ -2024,7 +2023,7 @@ footer .right {
   left: -40px;
   color: var(--accent);
   transform-origin: bottom left;
-  animation: driftArch 18s ease-in-out infinite alternate;
+  animation: driftArch 18s ease-in-out infinite alternate, pulseOpacityArch 10s ease-in-out infinite alternate;
 }
 
 .shape-mosaic {
@@ -2034,7 +2033,7 @@ footer .right {
   right: -60px;
   color: var(--ink-dim);
   transform-origin: center right;
-  animation: driftMosaic 24s ease-in-out infinite alternate;
+  animation: driftMosaic 24s ease-in-out infinite alternate, pulseOpacityMosaic 12s ease-in-out infinite alternate;
 }
 
 .shape-spiral {
@@ -2044,23 +2043,50 @@ footer .right {
   right: 18%;
   color: var(--accent);
   transform-origin: center;
-  animation: driftSpiral 20s ease-in-out infinite alternate;
+  animation: driftSpiral 20s ease-in-out infinite alternate, pulseOpacitySpiral 8s ease-in-out infinite alternate;
+}
+
+/* Flowing dash animation for blueprint lines */
+.bcn-shape path[stroke-dasharray] {
+  stroke-dasharray: 8 6;
+  animation: flowDash 40s linear infinite;
+}
+
+@keyframes flowDash {
+  to {
+    stroke-dashoffset: -1000;
+  }
+}
+
+@keyframes pulseOpacityArch {
+  0% { opacity: 0.22; }
+  100% { opacity: 0.42; }
+}
+
+@keyframes pulseOpacityMosaic {
+  0% { opacity: 0.18; }
+  100% { opacity: 0.38; }
+}
+
+@keyframes pulseOpacitySpiral {
+  0% { opacity: 0.25; }
+  100% { opacity: 0.48; }
 }
 
 @keyframes driftArch {
   0% { transform: translate(0, 0) rotate(0deg) scale(1); }
-  50% { transform: translate(25px, -15px) rotate(4deg) scale(1.04); }
-  100% { transform: translate(-10px, 10px) rotate(-3deg) scale(0.96); }
+  50% { transform: translate(35px, -20px) rotate(6deg) scale(1.05); }
+  100% { transform: translate(-15px, 15px) rotate(-4deg) scale(0.95); }
 }
 
 @keyframes driftMosaic {
   0% { transform: translate(0, 0) rotate(0deg) scale(1); }
-  50% { transform: translate(-30px, 25px) rotate(-6deg) scale(0.95); }
-  100% { transform: translate(15px, -10px) rotate(5deg) scale(1.05); }
+  50% { transform: translate(-40px, 30px) rotate(-8deg) scale(0.92); }
+  100% { transform: translate(20px, -15px) rotate(6deg) scale(1.08); }
 }
 
 @keyframes driftSpiral {
   0% { transform: translate(0, 0) rotate(0deg) scale(1); }
-  50% { transform: translate(-15px, -30px) rotate(10deg) scale(1.08); }
-  100% { transform: translate(20px, 10px) rotate(-6deg) scale(0.92); }
+  50% { transform: translate(-20px, -40px) rotate(12deg) scale(1.1); }
+  100% { transform: translate(25px, 15px) rotate(-8deg) scale(0.9); }
 }
