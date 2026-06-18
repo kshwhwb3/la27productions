@@ -1978,7 +1978,7 @@ footer .right {
 
 .bcn-shape {
   position: absolute;
-  opacity: 0.035; /* Extremely subtle */
+  opacity: 0.08; /* Subtle but clearly visible */
   filter: blur(1.5px);
   will-change: transform;
 }
