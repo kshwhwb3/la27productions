@@ -26,7 +26,7 @@ ANTHROPIC_API_KEY = os.getenv("ANTHROPIC_API_KEY")
 CRM_PATH = Path(os.getenv("CRM_PATH", BASE_DIR.parent / "LA27_CRM.xlsx"))
 LEADS_CSV = CRM_PATH.parent / "LA27_leads_with_email.csv"
 LOG_PATH = Path(os.getenv("LOG_PATH", BASE_DIR / "logs"))
-DAILY_LIMIT = 870  # Total combined limit (290 * 3)
+DAILY_LIMIT = 600  # Total combined limit (200 * 3)
 SENDER_EMAIL = os.getenv("SENDER_EMAIL", "tim@la27productions.com")
 SENDER_NAME = os.getenv("SENDER_NAME", "Tim | LA 27 Productions")
 EMAIL_TEMPLATES = {
@@ -38,6 +38,8 @@ EMAIL_TEMPLATES = {
 LA 27 Productions is a premium music studio based in Barcelona. We compose 100% original music for brands, agencies and film — built from scratch with live instruments, professional recording and zero stock libraries. Every piece is exclusive to your project. No royalties, no shared licenses, no music your competitors are already using.
 
 Hear our work at la27productions.com
+
+Would you be open to a quick call if this fits any upcoming projects?
 
 Tim Helmes
 Founder & Music Director"""
@@ -52,6 +54,8 @@ LA 27 Productions es un estudio de música premium en Barcelona. Componemos mús
 
 Escucha nuestro trabajo en la27productions.com
 
+¿Estarías abierto a una llamada rápida si esto encaja con algún proyecto?
+
 Tim Helmes"""
         }
     ],
@@ -63,6 +67,8 @@ Tim Helmes"""
 LA 27 Productions ist ein Premium-Musikstudio mit Sitz in Barcelona. Wir komponieren 100% Originalmusik für Marken, Agenturen und Film — von Grund auf mit echten Instrumenten, professioneller Aufnahme und ohne Stock-Bibliotheken. Jedes Stück ist exklusiv für Ihr Projekt. Keine Lizenzgebühren, keine geteilten Lizenzen, keine Musik, die Ihre Konkurrenz bereits nutzt.
 
 Hören Sie unsere Arbeiten auf la27productions.com
+
+Wären Sie offen für einen kurzen Call, falls das zu aktuellen Projekten passt?
 
 Tim Helmes"""
         }
@@ -76,6 +82,8 @@ LA 27 Productions est un studio de musique haut de gamme basé à Barcelone. Nou
 
 Écoutez notre travail sur la27productions.com
 
+Seriez-vous ouvert à un rapide appel si cela correspond à des projets en cours?
+
 Tim Helmes"""
         }
     ],
@@ -87,6 +95,8 @@ Tim Helmes"""
 LA 27 Productions é um estúdio de música premium com sede em Barcelona. Compomos música 100% original para marcas, agências e cinema — criada do zero com instrumentos reais, gravação profissional e sem bibliotecas de stock. Cada peça é exclusiva para o seu projeto. Sem royalties, sem licenças partilhadas, sem música que os seus concorrentes já estejam a usar.
 
 Ouça o nosso trabalho em la27productions.com
+
+Estaria aberto a uma chamada rápida se isso se encaixar em algum projeto?
 
 Tim Helmes"""
         }
@@ -101,7 +111,7 @@ D2C_EMAIL_TEMPLATES = {
 
 We produce VSLs and video ads for health & supplement brands — with exclusive music and professional editing. All in-house from Barcelona.
 
-Interested?
+Would you be open to a quick call if this fits any upcoming projects?
 
 Tim Helmes
 LA 27 Productions
@@ -115,7 +125,7 @@ la27productions.com"""
 
 Producimos VSLs y anuncios de vídeo para marcas de salud y suplementos, con música exclusiva y edición profesional. Todo in-house desde Barcelona.
 
-¿Te interesa?
+¿Estarías abierto a una llamada rápida si esto encaja con algún proyecto?
 
 Tim Helmes
 LA 27 Productions
@@ -127,9 +137,9 @@ la27productions.com"""
             "subject": "Video & Audio für {company}",
             "body": """Hallo,
 
-Wir produzieren VSLs und Video-Ads für Health & Supplement-Brands — mit exklusiver Musik und professionellem Schnitt. Alles in-house aus Barcelona.
+Wir produzieren VSLs and Video-Ads für Health & Supplement-Brands — mit exklusiver Musik und professionellem Schnitt. Alles in-house aus Barcelona.
 
-Interesse?
+Wären Sie offen für einen kurzen Call, falls das zu aktuellen Projekten passt?
 
 Tim Helmes
 LA 27 Productions
@@ -527,14 +537,59 @@ def send_email_brevo(to_email: str, to_name: str, subject: str, body: str, lang:
 
 
 def domain_is_valid(email: str) -> bool:
-    """Check that the email's domain is resolvable (basic spam/typo guard)."""
+    """Check MX records and attempt SMTP handshake if possible, otherwise verify MX exists."""
     import socket
+    import smtplib
     try:
-        domain = email.split("@", 1)[1]
-        socket.gethostbyname(domain)
-        return True
+        domain = email.split("@", 1)[1].strip()
     except Exception:
         return False
+    
+    # 1. Strict MX record verification
+    try:
+        import dns.resolver
+        answers = dns.resolver.resolve(domain, 'MX')
+        mx_hosts = sorted([(r.preference, str(r.exchange).strip()) for r in answers])
+        if not mx_hosts:
+            print(f"  [MX-Check] No MX records found for {domain}")
+            return False
+    except Exception as e:
+        # If dns.resolver/DNS resolution fails, fallback to A-record DNS lookup to be safe
+        print(f"  [MX-Check] MX DNS resolution failed for {domain} ({e}). Falling back to A-record.")
+        try:
+            socket.getaddrinfo(domain, None)
+            return True
+        except Exception:
+            return False
+
+    # 2. SMTP Handshake check (port 25)
+    # If connection times out or gets refused (because GCP blocks port 25),
+    # we catch the error and fallback to True (since MX records exist).
+    # If the mail server explicitly rejects the recipient with a 5xx error, we return False!
+    try:
+        mx_host = mx_hosts[0][1]
+        server = smtplib.SMTP(timeout=3)
+        server.connect(mx_host, 25)
+        server.helo("la27productions.com")
+        server.mail("tim@la27productions.com")
+        code, message = server.rcpt(email)
+        server.quit()
+        
+        if code in (250, 251):
+            return True
+        elif code >= 500 and code < 600:
+            print(f"  [SMTP-Check] Mailbox {email} REJECTED by MX server {mx_host}: Code {code} - {message}")
+            return False
+        else:
+            return True
+    except (socket.timeout, ConnectionRefusedError, OSError):
+        # Socket timeout or connection refused (e.g. port 25 blocked outbound).
+        # We fallback to True because the MX record exists and we cannot check the SMTP mailbox.
+        return True
+    except Exception:
+        # Other errors (e.g. SMTP protocol error, SSL required, etc.)
+        # Fallback to True since MX records exist.
+        return True
 
 
 def run_outreach(dry_run: bool = False) -> dict:
@@ -573,156 +628,173 @@ def run_outreach(dry_run: bool = False) -> dict:
                 print(f"  [Outreach] Daily limit ({DAILY_LIMIT}) reached.")
                 break
 
-            email = row.get("Email", "").strip().lower()
-            if not email or "@" not in email:
-                skipped += 1
-                continue
+            try:
+                email = row.get("Email", "").replace("%20", "").strip().lower()
+                if not email or "@" not in email:
+                    skipped += 1
+                    continue
 
-            # Definitive email filters block
-            prefix = email.split("@", 1)[0]
-            domain = email.split("@", 1)[1] if "@" in email else ""
+                # Definitive email filters block
+                prefix = email.split("@", 1)[0]
+                domain = email.split("@", 1)[1] if "@" in email else ""
 
-            # 1. Prefixes to block
-            block_prefixes = [
-                "recruiting", "recrutement", "resume", "rfp", "rh", "hr", "register",
-                "rentals", "referral", "research", "representation", "subscriptions",
-                "sustainability", "tips", "trade", "upgrade", "visitors", "zendesk",
-                "windowscentral", "tecnologia", "tellmemore", "thinkglobal",
-                "datenschutz", "impressum", "news", "presse", "service",
-                "jobs", "careers", "interns", "recruitment", "hiring", "talent", "apply"
-            ]
-            
-            # Check if prefix matches or starts with blocked prefix (allowing exact or starts_with check)
-            if any(prefix == p or prefix.startswith(p + ".") or prefix.startswith(p + "_") or prefix.startswith(p + "-") for p in block_prefixes):
-                print(f"  [Filter-Skip] Blocked prefix: {email}")
-                skipped += 1
-                continue
-
-            # 2. Generic domains to block completely
-            block_domains = [
-                "domain.com", "company.com", "example.com", "youragency.com", 
-                "yourbrand.com", "yourbusiness.com", "yourcompany.com", "acme.com", 
-                "dominio.com", "entreprise.com", "somewhere.com", "email.fr", 
-                "exemple.com", "doe.com", "domaine.com",
-                "dundermifflin.com", "test.com", "fake.com", "mailinator.com", "guerrillamail.com", "tempmail.com"
-            ]
-            if domain in block_domains:
-                print(f"  [Filter-Skip] Blocked generic domain: {email}")
-                skipped += 1
-                continue
-
-            # 3. Forbidden words/domains inside the email address
-            block_words = [
-                "@gap.com", "@gov.", "@gc.ca", ".edu", "@brevo.com", 
-                "@zohocorp.com", "@pipedrive.com", "@adweek.com", "@fashionunited.com",
-                "jobs", "careers", "hiring", "recruitment", "licensing", "press", "redaccion", "autonews", "support", "assistenza", "hotro", "payroll"
-            ]
-            if any(word in email for word in block_words):
-                print(f"  [Filter-Skip] Blocked forbidden word/domain: {email}")
-                skipped += 1
-                continue
-
-            # 4. Large German/Austrian/DACH corporations and media
-            large_corp_domains = [
-                "rtl.de", "sparkasse.at", "google.com", "axelspringer.de",
-                "rundfunkbeitrag.de", "otto.de", "amazon.de", "zalando.de",
-                "welt.de", "wiwo.de", "apotheken", "klinik", "krankenhaus",
-                "university", "uni-", "hochschule",
-                "universalproductionmusic.com", "theorchard.com", "hearst.com", "creativebloq.com", "futurenet.com", "wizzair.com", "aciertaretail.com", "umusic.com"
-            ]
-            if any(d in domain or d in email for d in large_corp_domains):
-                print(f"  [Filter-Skip] Blocked large corp/media domain: {email}")
-                skipped += 1
-                continue
-
-            if email in contacted or email in sent_this_run:
-                skipped += 1
-                continue
-
-            lead = {
-                "contact_name": row.get("Contact name", ""),
-                "email": email,
-                "company": row.get("Company name", ""),
-                "location": row.get("Location", ""),
-                "industry": row.get("Company industry", ""),
-                "title": row.get("Job title", ""),
-                "website": row.get("Company website", ""),
-            }
-
-            lang = detect_language(lead["location"], lead["email"], lead["company"], lead.get("contact_name", ""))
-            lead["_lang"] = lang
-            import random as _rnd
-            industry_lower = lead.get("industry", "").lower()
-            is_d2c = any(x in industry_lower for x in ["nutrition", "supplement", "health", "d2c", "e-commerce", "brand", "product"]) and "agency" not in industry_lower and "marketing" not in industry_lower
-            
-            if is_d2c:
-                templates_list = D2C_EMAIL_TEMPLATES.get(lang, D2C_EMAIL_TEMPLATES["en"])
-            else:
-                templates_list = EMAIL_TEMPLATES.get(lang, EMAIL_TEMPLATES["en"])
+                # 1. Prefixes to block
+                block_prefixes = [
+                    "recruiting", "recrutement", "resume", "rfp", "rh", "hr", "register",
+                    "rentals", "referral", "research", "representation", "subscriptions",
+                    "sustainability", "tips", "trade", "upgrade", "visitors", "zendesk",
+                    "windowscentral", "tecnologia", "tellmemore", "thinkglobal",
+                    "datenschutz", "impressum", "news", "presse", "service",
+                    "jobs", "careers", "interns", "recruitment", "hiring", "talent", "apply",
+                    "press", "help", "logo", "zillow", "yourfriends", "compiled", "ihre"
+                ]
                 
-            template = _rnd.choice(templates_list)
-            subject, body = personalize_email(lead, template, use_ai=use_ai)
+                # Check if prefix matches or starts with blocked prefix (allowing exact or starts_with check)
+                if any(prefix == p or prefix.startswith(p + ".") or prefix.startswith(p + "_") or prefix.startswith(p + "-") for p in block_prefixes):
+                    print(f"  [Filter-Skip] Blocked prefix: {email}")
+                    skipped += 1
+                    continue
 
-            if dry_run:
-                print(f"  [DRY RUN] Would send to: {email} ({lead['company']}) [{lang.upper()}]")
-                sent += 1
-                continue
+                # 2. Generic domains to block completely
+                block_domains = [
+                    "domain.com", "company.com", "example.com", "youragency.com", 
+                    "yourbrand.com", "yourbusiness.com", "yourcompany.com", "acme.com", 
+                    "dominio.com", "entreprise.com", "somewhere.com", "email.fr", 
+                    "exemple.com", "doe.com", "domaine.com",
+                    "dundermifflin.com", "test.com", "fake.com", "mailinator.com", "guerrillamail.com", "tempmail.com",
+                    "email.de", "hospital.org", "logotyp.us", "gannett.com", "marcommnews.com", "militarytimes.com", "syracuse.com", "sior.com", "haymarket.co.in", "monsite.com"
+                ]
+                if domain in block_domains:
+                    print(f"  [Filter-Skip] Blocked generic domain: {email}")
+                    skipped += 1
+                    continue
 
-            # Determine which account has quota and alternate them
-            import quota_manager
-            target_account = None
-            can_a = quota_manager.can_send("A")
-            can_b = quota_manager.can_send("B")
-            can_c = quota_manager.can_send("C")
+                # 3. Forbidden words/domains inside the email address
+                block_words = [
+                    "@gap.com", "@gov.", "@gc.ca", ".edu", "@brevo.com", 
+                    "@zohocorp.com", "@pipedrive.com", "@adweek.com", "@fashionunited.com",
+                    "jobs", "careers", "hiring", "recruitment", "licensing", "press", "redaccion", "autonews", "support", "assistenza", "hotro", "payroll",
+                    "loudly", "ableton", "tunein", "lyst"
+                ]
+                if any(word in email for word in block_words):
+                    print(f"  [Filter-Skip] Blocked forbidden word/domain: {email}")
+                    skipped += 1
+                    continue
 
-            available_accounts = []
-            if can_a: available_accounts.append("A")
-            if can_b: available_accounts.append("B")
-            if can_c: available_accounts.append("C")
+                # 4. Large German/Austrian/DACH corporations and media
+                large_corp_domains = [
+                    "rtl.de", "sparkasse.at", "google.com", "axelspringer.de",
+                    "rundfunkbeitrag.de", "otto.de", "amazon.de", "zalando.de",
+                    "welt.de", "wiwo.de", "apotheken", "klinik", "krankenhaus",
+                    "university", "uni-", "hochschule",
+                    "universalproductionmusic.com", "theorchard.com", "hearst.com", "creativebloq.com", "futurenet.com", "wizzair.com", "aciertaretail.com", "umusic.com",
+                    "loudly.com", "ableton.com", "tunein.com"
+                ]
+                if any(d in domain or d in email for d in large_corp_domains):
+                    print(f"  [Filter-Skip] Blocked large corp/media domain: {email}")
+                    skipped += 1
+                    continue
 
-            if not available_accounts:
-                print("  [Outreach] All Brevo accounts (A, B & C) have reached their daily limits (290/290 each).")
-                break
+                if email in contacted or email in sent_this_run:
+                    skipped += 1
+                    continue
 
-            if len(available_accounts) == 1:
-                target_account = available_accounts[0]
-            else:
-                # Select the account with the minimum sent count among those available
-                try:
-                    with open(quota_manager.QUOTA_FILE, "r") as qf:
-                        qdata = json.load(qf)
+                lead = {
+                    "contact_name": row.get("Contact name", ""),
+                    "email": email,
+                    "company": row.get("Company name", ""),
+                    "location": row.get("Location", ""),
+                    "industry": row.get("Company industry", ""),
+                    "title": row.get("Job title", ""),
+                    "website": row.get("Company website", ""),
+                }
+
+                lang = detect_language(lead["location"], lead["email"], lead["company"], lead.get("contact_name", ""))
+                lead["_lang"] = lang
+                import random as _rnd
+                industry_lower = lead.get("industry", "").lower()
+                is_d2c = "supplement" in industry_lower or "nutrition" in industry_lower
+                
+                if is_d2c:
+                    templates_list = D2C_EMAIL_TEMPLATES.get(lang, D2C_EMAIL_TEMPLATES["en"])
+                else:
+                    templates_list = EMAIL_TEMPLATES.get(lang, EMAIL_TEMPLATES["en"])
                     
-                    usage = {
-                        "A": qdata.get("sent_a", 0),
-                        "B": qdata.get("sent_b", 0),
-                        "C": qdata.get("sent_c", 0)
-                    }
-                    # Filter by available accounts
-                    available_usage = {k: v for k, v in usage.items() if k in available_accounts}
-                    target_account = min(available_usage, key=available_usage.get)
-                except Exception:
-                    target_account = available_accounts[0]
+                template = _rnd.choice(templates_list)
+                subject, body = personalize_email(lead, template, use_ai=use_ai)
 
-            # Validate domain before sending (avoids bounce + protects reputation)
-            if not domain_is_valid(email):
-                print(f"  [Skip] Invalid domain: {email}")
-                skipped += 1
-                continue
+                if dry_run:
+                    print(f"  [DRY RUN] Would send to: {email} ({lead['company']}) [{lang.upper()}]")
+                    sent += 1
+                    continue
 
-            print(f"  [Outreach] Sending to {email} ({lead['company']}) [{lang.upper()}] via Account {target_account}...")
-            success = send_email_brevo(email, lead["contact_name"], subject, body, lang=lang, account=target_account)
+                # Determine which account has quota and alternate them
+                import quota_manager
+                
+                can_a = quota_manager.can_send("A")
+                can_b = quota_manager.can_send("B")
+                can_c = quota_manager.can_send("C")
 
-            if success:
-                sent += 1
-                sent_this_run.add(email)
-                quota_manager.increment_quota(target_account)
-                add_to_crm(lead, status="ENVIADO", notes=f"Cold email LANG:{lang.upper()} Account:{target_account} — {datetime.date.today()}")
-                _save_sent_tracker(sent_this_run)
-                sent_log.append({"email": email, "company": lead["company"], "lang": lang, "account": target_account})
+                available_accounts = []
+                if can_a: available_accounts.append("A")
+                if can_b: available_accounts.append("B")
+                if can_c: available_accounts.append("C")
+
+                if not available_accounts:
+                    print("  [Outreach] All Brevo accounts (A, B & C) have reached their daily limits (290/290 each).")
+                    break
+
+                # Validate domain before sending (avoids bounce + protects reputation)
+                if not domain_is_valid(email):
+                    print(f"  [Skip] Invalid domain: {email}")
+                    skipped += 1
+                    continue
+
+                success = False
+                while available_accounts and not success:
+                    if len(available_accounts) == 1:
+                        target_account = available_accounts[0]
+                    else:
+                        # Select the account with the minimum sent count among those available
+                        try:
+                            with open(quota_manager.QUOTA_FILE, "r") as qf:
+                                qdata = json.load(qf)
+                            usage = {
+                                "A": qdata.get("sent_a", 0),
+                                "B": qdata.get("sent_b", 0),
+                                "C": qdata.get("sent_c", 0)
+                            }
+                            available_usage = {k: v for k, v in usage.items() if k in available_accounts}
+                            target_account = min(available_usage, key=available_usage.get)
+                        except Exception:
+                            target_account = available_accounts[0]
+
+                    print(f"  [Outreach] Sending to {email} ({lead['company']}) [{lang.upper()}] via Account {target_account}...")
+                    success = send_email_brevo(email, lead["contact_name"], subject, body, lang=lang, account=target_account)
+
+                    if success:
+                        sent += 1
+                        sent_this_run.add(email)
+                        quota_manager.increment_quota(target_account)
+                        add_to_crm(lead, status="ENVIADO", notes=f"Cold email LANG:{lang.upper()} Account:{target_account} — {datetime.date.today()}")
+                        _save_sent_tracker(sent_this_run)
+                        sent_log.append({"email": email, "company": lead["company"], "lang": lang, "account": target_account})
+                    else:
+                        errors += 1
+                        print(f"  [Outreach] Account {target_account} failed to send. Removing from available accounts for this run.")
+                        available_accounts.remove(target_account)
+
+                if not success:
+                    print(f"  [Outreach] Failed to send email to {email} using any of the available accounts.")
+                    continue
+
+                # Wait between every sending attempt to prevent hammering and respect delay settings
                 import random as _r
                 time.sleep(_r.uniform(45, 180))
-            else:
+            except Exception as e:
+                print(f"  [Outreach] Exception processing lead {row.get('Email', '')}: {e}")
                 errors += 1
+                continue
 
     log_file = LOG_PATH / f"outreach_{datetime.date.today()}.json"
     with open(log_file, "w", encoding="utf-8") as f:

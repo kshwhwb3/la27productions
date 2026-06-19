@@ -42,7 +42,10 @@ SKIP_EMAIL_PATTERNS = [
     "domain.com","company.com","example.com","somewhere.com","email.fr",
     "exemple.com","doe.com","domaine.com",
     "jobs", "careers", "interns", "recruitment", "hr@", "hiring", "talent", "apply@",
-    "licensing", "press", "redaccion", "autonews", "support", "assistenza", "hotro", "payroll"
+    "licensing", "press", "redaccion", "autonews", "support", "assistenza", "hotro", "payroll",
+    "press@", "help@", "loudly", "ableton", "tunein", "lyst",
+    "exemple", "example", "monsite", "callcenter",
+    "ihre@email.de", "ihre@email", "jane@hospital", "logo@", "zillow", "yourfriends@", "compiled@"
 ]
 
 SKIP_DOMAINS = [
@@ -64,25 +67,35 @@ SKIP_DOMAINS = [
     "trashmail","fakeinbox","spamgourmet","10minutemail","tempinbox",
     "mailnull","spamex.com","spam4.me","discard.email","mailnesia",
     "dundermifflin.com","example.com","test.com","fake.com","guerrillamail.com","tempmail.com",
-    "universalproductionmusic.com", "theorchard.com", "hearst.com", "creativebloq.com", "futurenet.com", "wizzair.com", "aciertaretail.com", "umusic.com"
+    "universalproductionmusic.com", "militarytimes.com", "syracuse.com", "sior.com", "haymarket.co.in", "monsite.com",
+    "email.de", "hospital.org", "logotyp.us", "gannett.com", "marcommnews.com"
 ]
 
 # Big pool of queries — shuffled each run for variety
 DDG_QUERIES = [
-    # === LUXURY & FASHION (high budget, audio matters) ===
-    'luxury brand agency "sonic branding" contact email site:.com',
-    'fashion brand production agency audio contact email',
-    'luxury advertising agency music production email contact',
-    '"creative director" luxury fashion agency audio email',
-    'high-end brand agency "sound logo" email contact site:.com',
-    'luxury brand creative agency soundtrack email site:.com',
-    'fashion film production company music email contact',
-    'luxury automotive brand agency audio production email',
     # === DIRECTORIES (Clutch & Adforum targets) ===
     'site:clutch.co/agencies creative OR production OR "video production" OR advertising',
     'site:adforum.com/agency video OR creative OR music OR branding',
     'site:clutch.co/agencies/hacker-noon OR "creative" OR "branding"',
     'site:adforum.com/agency/ "creative directors" OR "production"',
+    'site:clutch.co/agencies/advertising creative campaign production',
+    'site:clutch.co/agencies/branding audio logo design',
+    'site:clutch.co/agencies/video-production corporate video',
+    'site:clutch.co/agencies/creative-agencies creative directors',
+    'site:clutch.co/profile/ creative marketing video',
+    'site:clutch.co/agencies/social-media-marketing video spots',
+    'site:clutch.co/agencies/digital-design branding strategy',
+    'site:clutch.co/agencies/public-relations communication campaign',
+    'site:clutch.co/agencies/event-marketing brand experience',
+    'site:clutch.co/agencies/media-buying spot advertising',
+    'site:adforum.com/agency/creative-agencies production team',
+    'site:adforum.com/agency/video-production audio identity',
+    'site:adforum.com/agency/branding brand soundtrack',
+    'site:adforum.com/agency/digital-agencies spot campaign',
+    'site:adforum.com/agency/public-relations audio press release',
+    'site:adforum.com/agency/events brand musical theme',
+    'site:adforum.com/agency/media-planning radio campaign',
+    'site:adforum.com/agency/direct-marketing audio branding',
     '"brand film" production company music email contact site:.com',
     'perfume fragrance advertising agency music contact email',
     'jewellery brand advertising music production email contact',
@@ -368,8 +381,21 @@ def extract_emails_from_url(url: str, timeout: int = 8) -> list:
         if r.status_code != 200:
             return []
         text = r.text.replace("&#64;","@").replace("[at]","@").replace("(at)","@")
+        # Replace common HTML entity escapes to avoid picking them up as email parts
+        text = text.replace("u003e", " ").replace("u003c", " ")
+        text = text.replace("\\u003e", " ").replace("\\u003c", " ")
+        text = text.replace("&gt;", " ").replace("&lt;", " ")
         found = list(set(e.lower() for e in EMAIL_REGEX.findall(text)))
-        return [e for e in found if is_valid_email(e)]
+        
+        cleaned = []
+        for e in found:
+            c = e.strip().replace("%20", "").strip()
+            # Remove leading/trailing garbage punctuation/slashes
+            c = re.sub(r'^[>\.<\\/#\s%]+', '', c)
+            c = re.sub(r'[>\.<\\/#\s%]+$', '', c)
+            if is_valid_email(c):
+                cleaned.append(c)
+        return list(set(cleaned))
     except Exception:
         return []
 
@@ -385,231 +411,328 @@ def get_emails_from_site(base_url: str) -> list:
     return list(set(emails))
 
 
-def fetch_ddg_leads(known_emails: set, target: int) -> list:
+def resolve_directory_url(profile_url: str) -> str:
+    print(f"  [Directory Scrape] Resolving {profile_url}...")
+    
+    # Try direct requests first
+    try:
+        r_dir = requests.get(profile_url, headers=HEADERS, timeout=8)
+        if r_dir.status_code == 200:
+            candidates = re.findall(r'href="(https?://[^"]+)"', r_dir.text)
+            for cand in candidates:
+                cand_domain = urlparse(cand).netloc.replace("www.", "").lower().strip()
+                if cand_domain and not any(d in cand_domain for d in ["clutch.co", "adforum.com", "google", "facebook", "twitter", "linkedin", "instagram", "youtube", "pinterest", "apple", "reddit"]):
+                    return cand
+        elif r_dir.status_code == 403:
+            print("  [Directory Scrape] Blocked (403). Falling back to DDG search for company website...")
+    except Exception as e:
+        print(f"  [Directory Scrape] Error: {e}")
+
+    # Fallback to searching company name on DDG
+    company_name = ""
+    if "clutch.co/profile/" in profile_url:
+        company_name = profile_url.split("clutch.co/profile/")[-1].split("?")[0].split("/")[0]
+    elif "adforum.com/agency/" in profile_url:
+        parts = [p.strip() for p in profile_url.split("/") if p.strip()]
+        if 'profile' in parts:
+            idx = parts.index('profile')
+            if idx + 1 < len(parts):
+                company_name = parts[idx + 1]
+        
+        # If still empty or is numeric, search for a valid non-digit slug
+        if not company_name or company_name.isdigit():
+            for p in reversed(parts):
+                if p not in ['agency', 'profile', 'creative-work', 'campaign', 'reviews', 'portfolio', 'work'] and not p.isdigit():
+                    company_name = p
+                    break
+    
+    if not company_name or company_name.isdigit():
+        return None
+        
+    company_name = company_name.replace("-", " ").strip()
     try:
         from ddgs import DDGS
     except ImportError:
-        try:
-            from duckduckgo_search import DDGS
-        except ImportError:
-            print("  [DDG] ddgs not installed.")
-            return []
-
-    found = []
-    visited = set()
-    queries = DDG_QUERIES.copy()
-    clutch_queries = [q for q in queries if "clutch.co" in q]
-    adforum_queries = [q for q in queries if "adforum.com" in q]
-    other_queries = [q for q in queries if "clutch.co" not in q and "adforum.com" not in q]
-
-    random.shuffle(clutch_queries)
-    random.shuffle(adforum_queries)
-    random.shuffle(other_queries)
-
-    # Ordered queries: Clutch first, AdForum second, DuckDuckGo third
-    queries = clutch_queries + adforum_queries + other_queries
-
-    known_domains = get_known_domains(known_emails)
-
+        from duckduckgo_search import DDGS
+        
+    print(f"  [Resolver] Searching website for: '{company_name}'...")
     try:
         with DDGS() as ddgs:
-            for query in queries:
-                if len(found) >= target:
-                    break
+            results = list(ddgs.text(f'"{company_name}" agency', max_results=3))
+            for r in results:
+                url = r.get("href", "")
+                domain = urlparse(url).netloc.replace("www.", "").lower().strip()
+                if domain and not any(d in domain for d in ["clutch.co", "adforum.com", "google", "facebook", "twitter", "linkedin", "instagram", "youtube", "pinterest", "apple", "reddit"]):
+                    print(f"  [Resolver] Found website: {url}")
+                    return f"{urlparse(url).scheme}://{urlparse(url).netloc}"
+    except Exception as e:
+        print(f"  [Resolver] Search error for {company_name}: {e}")
+    return None
 
-                print(f"  [DDG] {query[:65]}...")
-                try:
-                    import concurrent.futures
-                    with concurrent.futures.ThreadPoolExecutor() as executor:
-                        future = executor.submit(lambda q: list(ddgs.text(q, max_results=10)), query)
-                        results = future.result(timeout=15)
-                except concurrent.futures.TimeoutError:
-                    print("  [DDG] Search timed out! DDG is blocking the IP. Aborting search for this cycle.")
-                    break  # Abort queries loop to prevent hanging forever
-                except Exception as e:
-                    print(f"  [DDG] Search error: {e}")
-                    time.sleep(4)
-                    continue
 
-                time.sleep(random.uniform(1.5, 3))
+def fetch_direct_directory_leads(known_emails: set, target: int) -> list:
+    found = []
+    visited = set()
+    known_domains = get_known_domains(known_emails)
 
-                for result in results:
-                    if len(found) >= target:
+    clutch_categories = [
+        "agencies/creative",
+        "agencies/digital",
+        "agencies/branding",
+        "agencies/video-production",
+        "agencies/social-media-marketing",
+        "agencies/content-marketing"
+    ]
+
+    try:
+        import cloudscraper
+        scraper = cloudscraper.create_scraper()
+    except Exception as e:
+        print(f"  [LeadFinder] Failed to import cloudscraper: {e}")
+        return []
+
+    profile_urls = set()
+    
+    # We will loop through categories and pagination to build our pool of profile URLs
+    # We only scrape page=1 of each category to avoid rate-limiting/403 blocks on directories
+    print("  [LeadFinder] Scraping Clutch category directories directly...")
+    for cat in clutch_categories:
+        url = f"https://clutch.co/{cat}?page=1"
+        print(f"  [Clutch-Scrape] Fetching: {url}")
+        try:
+            resp = scraper.get(url, timeout=12)
+            if resp.status_code == 200:
+                # Find all unique profile URLs on this page
+                # Format in Clutch is /profile/name or sometimes with full path
+                matches = re.findall(r'href=["\']/profile/([^"\?#\'\s>]+)', resp.text)
+                page_profiles_count = 0
+                for m in matches:
+                    slug = m.strip().lower()
+                    # Skip numeric suffixes which are duplicates or system copies (e.g. digital-silk-0, studio-m-6)
+                    if re.search(r'-\d+$', slug):
+                        continue
+                    
+                    profile_link = f"https://clutch.co/profile/{slug}"
+                    if profile_link not in profile_urls:
+                        profile_urls.add(profile_link)
+                        page_profiles_count += 1
+                
+                print(f"  [Clutch-Scrape] Added {page_profiles_count} unique profile links")
+            else:
+                print(f"  [Clutch-Scrape] Unexpected status code {resp.status_code} for {url}")
+        except Exception as e:
+            print(f"  [Clutch-Scrape] Error fetching {url}: {e}")
+        
+        # Brief delay to be gentle on Clutch
+        time.sleep(random.uniform(1.5, 3.5))
+
+    if not profile_urls:
+        print("  [Clutch-Scrape] Direct scraping blocked. Falling back to DuckDuckGo search to discover Clutch profiles...")
+        try:
+            from ddgs import DDGS
+        except ImportError:
+            from duckduckgo_search import DDGS
+            
+        search_queries = [
+            'site:clutch.co/profile/ "creative agency"',
+            'site:clutch.co/profile/ "video production"',
+            'site:clutch.co/profile/ "branding agency"',
+            'site:clutch.co/profile/ "digital agency"',
+            'site:clutch.co/profile/ "marketing agency"'
+        ]
+        
+        try:
+            with DDGS() as ddgs:
+                for q in search_queries:
+                    print(f"  [Clutch-DDG-Fallback] Searching: {q}...")
+                    results = list(ddgs.text(q, max_results=15))
+                    for r in results:
+                        url = r.get("href", "")
+                        if "clutch.co/profile/" in url:
+                            # Extract slug
+                            slug = url.split("clutch.co/profile/")[-1].split("?")[0].split("/")[0].strip().lower()
+                            if slug and not re.search(r'-\d+$', slug):
+                                profile_link = f"https://clutch.co/profile/{slug}"
+                                profile_urls.add(profile_link)
+                    time.sleep(random.uniform(2, 4))
+            print(f"  [Clutch-DDG-Fallback] Discovered {len(profile_urls)} Clutch profiles via DuckDuckGo.")
+        except Exception as e:
+            print(f"  [Clutch-DDG-Fallback] Error searching Clutch profiles on DDG: {e}")
+
+    # Convert set back to list and shuffle findings to avoid local clustering
+    profile_list = list(profile_urls)
+    random.shuffle(profile_list)
+    print(f"  [LeadFinder] Found total {len(profile_list)} unique profiles. Crawling up to target: {target}")
+
+    for profile_url in profile_list:
+        if len(found) >= target:
+            break
+
+        # Extract the slug and convert it to agency name directly to avoid fetching individual Clutch profiles
+        company_name = profile_url.split("clutch.co/profile/")[-1].split("?")[0].split("/")[0]
+        if not company_name or company_name.isdigit():
+            continue
+        
+        company_name = company_name.replace("-", " ").strip()
+        print(f"  [Directory Scrape] Resolving website for agency: '{company_name}'...")
+        
+        url = None
+        # Try to resolve agency website using DDGS package (upgraded version)
+        try:
+            from ddgs import DDGS
+            search_query = f'"{company_name}" agency'
+            with DDGS() as ddgs:
+                results = list(ddgs.text(search_query, max_results=3))
+                for r in results:
+                    href = r.get("href", "")
+                    domain = urlparse(href).netloc.replace("www.", "").lower().strip()
+                    if domain and not any(d in domain for d in ["clutch.co", "adforum.com", "google", "facebook", "twitter", "linkedin", "instagram", "youtube", "pinterest", "apple", "reddit"]):
+                        url = f"{urlparse(href).scheme}://{urlparse(href).netloc}"
+                        print(f"  [Resolver] Found website via DDGS: {url}")
                         break
+        except Exception as e:
+            print(f"  [Resolver] DDGS Search error for {company_name}: {e}")
 
-                    url = result.get("href", "")
-                    if not url:
+        # Rate limit between searches to prevent blocking
+        time.sleep(random.uniform(2, 4))
+
+        if not url:
+            continue
+
+        parsed = urlparse(url)
+        domain = parsed.netloc.replace("www.", "").lower().strip()
+        base = f"{parsed.scheme}://{parsed.netloc}"
+
+        if domain in visited or domain in known_domains:
+            continue
+        if not is_valid_domain(domain):
+            continue
+
+        visited.add(domain)
+
+        emails = get_emails_from_site(base)
+        good = []
+        for e in emails:
+            e_lower = e.lower().strip()
+            e_domain = e_lower.split("@")[-1] if "@" in e_lower else ""
+            if e_domain in known_domains:
+                continue
+            if e_lower not in known_emails and domain_is_valid(e):
+                good.append(e)
+
+        if not good:
+            continue
+
+        email = good[0]
+        email_domain = email.lower().strip().split("@")[-1]
+        known_domains.add(email_domain)
+        company = domain.split(".")[0].replace("-", " ").title()
+
+        icebreaker = ""
+        ai_score = 50
+        try:
+            r_site = requests.get(base, headers=HEADERS, timeout=5)
+            site_text = r_site.text[:1500]
+            
+            groq_api_key = os.getenv("GROQ_API_KEY")
+            if groq_api_key:
+                headers = {
+                    "Authorization": f"Bearer {groq_api_key}",
+                    "Content-Type": "application/json"
+                }
+                prompt_filter = (
+                    "You are a strict B2B lead classifier. Analyze this website excerpt and classify if this company is a potential target.\n"
+                    "Respond strictly with 'YES' or 'NO' (no punctuation, no explanation).\n\n"
+                    "CRITERIA TO APPROVE (YES):\n"
+                    "- Advertising or marketing agencies that produce campaigns.\n"
+                    "- Video production companies or film production houses that create commercials/ads.\n"
+                    "- Branding or brand identity design studios.\n"
+                    "- Creative agencies making spots, commercial advertisements, or branded content.\n\n"
+                    "CRITERIA TO REJECT (NO):\n"
+                    "- Music studios, record labels, or music agencies.\n"
+                    "- Music supervisors, music libraries, or sound-only production houses.\n"
+                    "- Magazines, blogs, publishers, or media outlets.\n"
+                    "- Software, SaaS, IT, or technology companies.\n"
+                    "- Universities, schools, or educational institutions.\n"
+                    "- Any entity that does NOT produce audiovisual content for brands.\n\n"
+                    f"Website: {base}\n"
+                    f"Text excerpt: {site_text}\n\n"
+                    "Decision (YES or NO):"
+                )
+                payload_filter = {
+                    "model": "llama3-8b-8192",
+                    "messages": [{"role": "user", "content": prompt_filter}],
+                    "temperature": 0.1
+                }
+                r_filter = requests.post("https://api.groq.com/openai/v1/chat/completions", headers=headers, json=payload_filter, timeout=10)
+                if r_filter.status_code == 200:
+                    answer = r_filter.json().get("choices", [{}])[0].get("message", {}).get("content", "").strip().upper()
+                    if "YES" not in answer:
+                        print(f"  [AI Filter] Skipped {company} — Not a high-ticket target.")
                         continue
+                
+                prompt_ice = f"You are writing a cold email to {company}. Based on their website text, write ONE short, highly personalized opening sentence (max 15 words) referencing their specific work, niche, or a recent project. Do NOT include greetings. Just the sentence.\n\nText: {site_text}"
+                payload_ice = {
+                    "model": "llama3-8b-8192",
+                    "messages": [{"role": "user", "content": prompt_ice}],
+                    "temperature": 0.7
+                }
+                r_ice = requests.post("https://api.groq.com/openai/v1/chat/completions", headers=headers, json=payload_ice, timeout=10)
+                if r_ice.status_code == 200:
+                    icebreaker = r_ice.json().get("choices", [{}])[0].get("message", {}).get("content", "").strip()
+                    ai_score = 90
+        except Exception:
+            pass
 
-                    # Custom resolving for directories (Clutch & Adforum)
-                    is_directory = False
-                    if "clutch.co" in url or "adforum.com" in url:
-                        try:
-                            # Fetch the directory page to extract the real agency website URL
-                            r_dir = requests.get(url, headers=HEADERS, timeout=8)
-                            if r_dir.status_code == 200:
-                                # Find absolute URLs in the page text excluding internal clutch/adforum domains
-                                candidates = re.findall(r'href="(https?://[^"]+)"', r_dir.text)
-                                for cand in candidates:
-                                    cand_domain = urlparse(cand).netloc.replace("www.", "").lower().strip()
-                                    if cand_domain and not any(d in cand_domain for d in ["clutch.co", "adforum.com", "google", "facebook", "twitter", "linkedin", "instagram", "youtube", "pinterest", "apple", "reddit"]):
-                                        url = cand
-                                        is_directory = True
-                                        break
-                        except Exception as e:
-                            print(f"  [Directory Scrape] Error resolving {url}: {e}")
+        contact_info = {}
+        try:
+            from name_extractor import get_contact_from_website
+            contact_info = get_contact_from_website(base, timeout=5)
+        except Exception:
+            pass
 
-                    parsed = urlparse(url)
-                    domain = parsed.netloc.replace("www.", "").lower().strip()
-                    base = f"{parsed.scheme}://{parsed.netloc}"
-
-                    if not is_directory:
-                        # Standard check for search result domain
-                        if domain in visited or domain in known_domains:
-                            continue
-                        if not is_valid_domain(domain):
-                            continue
-                    else:
-                        # Directory resolved domain checks
-                        if domain in visited or domain in known_domains or not is_valid_domain(domain):
-                            continue
-
-                    visited.add(domain)
-
-                    emails = get_emails_from_site(base)
-                    good = []
-                    for e in emails:
-                        e_lower = e.lower().strip()
-                        e_domain = e_lower.split("@")[-1] if "@" in e_lower else ""
-                        if e_domain in known_domains:
-                            continue
-                        if e_lower not in known_emails and domain_is_valid(e):
-                            good.append(e)
-
-                    if not good:
-                        continue
-
-                    email = good[0]
-                    email_domain = email.lower().strip().split("@")[-1]
-                    known_domains.add(email_domain)
-                    company = domain.split(".")[0].replace("-", " ").title()
-
-                    # --- NEW: EXTREME AI PERSONALIZATION (ICEBREAKER & SCORE) ---
-                    icebreaker = ""
-                    ai_score = 50
-                    try:
-                        r_site = requests.get(base, headers=HEADERS, timeout=5)
-                        site_text = r_site.text[:1500]
-                        
-                        groq_api_key = os.getenv("GROQ_API_KEY")
-                        if not groq_api_key:
-                            print("  [AI] No GROQ_API_KEY found, skipping AI personalization.")
-                            pass
-                        else:
-                            headers = {
-                                "Authorization": f"Bearer {groq_api_key}",
-                                "Content-Type": "application/json"
-                            }
-                            # 1. AI Filter
-                            prompt_filter = (
-                                "You are a strict B2B lead classifier. Analyze this website excerpt and classify if this company is a potential target.\n"
-                                "Respond strictly with 'YES' or 'NO' (no punctuation, no explanation).\n\n"
-                                "CRITERIA TO APPROVE (YES):\n"
-                                "- Advertising or marketing agencies that produce campaigns.\n"
-                                "- Video production companies or film production houses that create commercials/ads.\n"
-                                "- Branding or brand identity design studios.\n"
-                                "- Creative agencies making spots, commercial advertisements, or branded content.\n\n"
-                                "CRITERIA TO REJECT (NO):\n"
-                                "- Music studios, record labels, or music agencies.\n"
-                                "- Music supervisors, music libraries, or sound-only production houses.\n"
-                                "- Magazines, blogs, publishers, or media outlets.\n"
-                                "- Software, SaaS, IT, or technology companies.\n"
-                                "- Universities, schools, or educational institutions.\n"
-                                "- Very large corporations (over 500 employees).\n"
-                                "- Any entity that does NOT produce audiovisual content for brands.\n\n"
-                                f"Website: {base}\n"
-                                f"Text excerpt: {site_text}\n\n"
-                                "Decision (YES or NO):"
-                            )
-                            payload_filter = {
-                                "model": "llama3-8b-8192",
-                                "messages": [{"role": "user", "content": prompt_filter}],
-                                "temperature": 0.1
-                            }
-
-                            r_filter = requests.post("https://api.groq.com/openai/v1/chat/completions", headers=headers, json=payload_filter, timeout=10)
-                            if r_filter.status_code == 200:
-                                answer = r_filter.json().get("choices", [{}])[0].get("message", {}).get("content", "").strip().upper()
-                                if "YES" not in answer:
-                                    print(f"  [AI Filter] Skipped {company} — Not a high-ticket target.")
-                                    continue
-                                
-                            # 2. AI Icebreaker
-                            prompt_ice = f"You are writing a cold email to {company}. Based on their website text, write ONE short, highly personalized opening sentence (max 15 words) referencing their specific work, niche, or a recent project. Do NOT include greetings. Just the sentence.\n\nText: {site_text}"
-                            payload_ice = {
-                                "model": "llama3-8b-8192",
-                                "messages": [{"role": "user", "content": prompt_ice}],
-                                "temperature": 0.7
-                            }
-                            r_ice = requests.post("https://api.groq.com/openai/v1/chat/completions", headers=headers, json=payload_ice, timeout=10)
-                            if r_ice.status_code == 200:
-                                icebreaker = r_ice.json().get("choices", [{}])[0].get("message", {}).get("content", "").strip()
-                                ai_score = 90  # Verified by Groq AI and personalized!
-                    except Exception as e:
-                        pass
-                    # -----------------------------------------------------------------
-
-                    # Try to extract a real contact name
-                    contact_info = {}
-                    try:
-                        from name_extractor import get_contact_from_website
-                        contact_info = get_contact_from_website(base, timeout=5)
-                    except Exception:
-                        pass
-                    lead = {
-                        "contact_name": contact_info.get("name", ""),
-                        "title": contact_info.get("title", "Creative Director / Head of Prod"),
-                        "company": company,
-                        "email": email,
-                        "location": "",
-                        "website": base,
-                        "industry": "Premium Advertising / Brand",
-                        "icebreaker": icebreaker,
-                        "_score": ai_score
-                    }
-                    if contact_info.get("name"):
-                        print(f"  [DDG] Found contact: {contact_info['name']} ({contact_info.get('title','')})")
-                    save_lead(lead)
-                    known_emails.add(email)
-                    found.append(lead)
-                    print(f"  [DDG] + {email} ({company}) [AI Verified ✅]")
-                    time.sleep(random.uniform(0.5, 1))
-
-    except KeyboardInterrupt:
-        pass
+        lead = {
+            "contact_name": contact_info.get("name", ""),
+            "title": contact_info.get("title", "Creative Director / Head of Prod"),
+            "company": company,
+            "email": email,
+            "location": "",
+            "website": base,
+            "industry": "Premium Advertising / Brand",
+            "icebreaker": icebreaker,
+            "_score": ai_score
+        }
+        if contact_info.get("name"):
+            print(f"  [Direct-Directory] Found contact: {contact_info['name']} ({contact_info.get('title','')})")
+        save_lead(lead)
+        known_emails.add(email)
+        found.append(lead)
+        print(f"  [Direct-Directory] + {email} ({company}) [AI Verified ✅]")
+        time.sleep(random.uniform(0.5, 1))
 
     return found
 
 
+
 def run_lead_finder() -> dict:
-    print("  [LeadFinder] Starting v4 — DDG focused...")
+    print("  [LeadFinder] Starting v4 — Direct Directory Focused...")
     LOG_PATH.mkdir(exist_ok=True)
 
     known_emails = get_known_emails()
     print(f"  [LeadFinder] Known emails to skip: {len(known_emails)}")
 
-    ddg_leads = fetch_ddg_leads(known_emails, target=15)
+    directory_leads = fetch_direct_directory_leads(known_emails, target=75)
 
     log_file = LOG_PATH / f"lead_finder_{datetime.date.today()}.json"
     with open(log_file, "w", encoding="utf-8") as f:
         json.dump({
             "date": datetime.date.today().isoformat(),
-            "found": len(ddg_leads),
-            "leads": [l["email"] for l in ddg_leads[:50]]
+            "found": len(directory_leads),
+            "leads": [l["email"] for l in directory_leads[:50]]
         }, f, indent=2, ensure_ascii=False)
 
-    print(f"  [LeadFinder] Done. Found {len(ddg_leads)} new leads.")
-    return {"found": len(ddg_leads), "leads": ddg_leads}
+    print(f"  [LeadFinder] Done. Found {len(directory_leads)} new leads.")
+    return {"found": len(directory_leads), "leads": directory_leads}
 
 
 def fetch_supplement_leads(known_emails: set, target: int = 30) -> list:
