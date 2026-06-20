@@ -538,7 +538,15 @@ def fetch_direct_directory_leads(known_emails: set, target: int) -> list:
             'site:clutch.co/profile/ "video production"',
             'site:clutch.co/profile/ "branding agency"',
             'site:clutch.co/profile/ "digital agency"',
-            'site:clutch.co/profile/ "marketing agency"'
+            'site:clutch.co/profile/ "marketing agency"',
+            'site:clutch.co/profile/ "advertising"',
+            'site:clutch.co/profile/ "media production"',
+            'site:clutch.co/profile/ "animation"',
+            'site:clutch.co/profile/ "explainer video"',
+            'site:clutch.co/profile/ "marketing strategy"',
+            'site:clutch.co/profile/ "germany"',
+            'site:clutch.co/profile/ "spain"',
+            'site:clutch.co/profile/ "uk" OR "london"'
         ]
         
         try:
