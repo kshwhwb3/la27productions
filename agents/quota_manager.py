@@ -5,7 +5,7 @@ from pathlib import Path
 
 BASE_DIR = Path(__file__).parent
 QUOTA_FILE = BASE_DIR / "logs" / "daily_quota.json"
-MAX_DAILY_QUOTA = 200  # Max per account
+MAX_DAILY_QUOTA = 290  # Max per account
 
 def init_quota_file():
     if not QUOTA_FILE.parent.exists():
