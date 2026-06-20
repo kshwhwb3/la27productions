@@ -726,6 +726,17 @@ def run_lead_finder() -> dict:
     print("  [LeadFinder] Starting v4 — Direct Directory Focused...")
     LOG_PATH.mkdir(exist_ok=True)
 
+    # Check queue size to maintain healthy pace (~1-2 days of outreach, max 1000 leads in queue)
+    if LEADS_CSV.exists():
+        try:
+            with open(LEADS_CSV, "r", encoding="utf-8") as f:
+                lines_count = sum(1 for _ in f)
+            if lines_count >= 1000:
+                print(f"  [LeadFinder] Skip scraping: Queue is already healthy ({lines_count} leads in CSV).")
+                return {"found": 0, "leads": []}
+        except Exception as e:
+            print(f"  [LeadFinder] Error checking queue size: {e}")
+
     known_emails = get_known_emails()
     print(f"  [LeadFinder] Known emails to skip: {len(known_emails)}")
 
