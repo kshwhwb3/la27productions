@@ -6,15 +6,11 @@
   // ----- Premium Micro-Sound Engine (Web Audio API) -----
   const SoundEngine = (() => {
     let ctx = null;
-    let analyser = null;
     let enabled = localStorage.getItem("la27.sound") !== "false";
 
     const init = () => {
       if (!ctx) {
         ctx = new (window.AudioContext || window.webkitAudioContext)();
-        analyser = ctx.createAnalyser();
-        analyser.fftSize = 256;
-        analyser.connect(ctx.destination);
       }
       if (ctx.state === "suspended") {
         ctx.resume();
@@ -30,7 +26,7 @@
         const gainNode = ctx.createGain();
 
         osc.connect(gainNode);
-        gainNode.connect(analyser || ctx.destination);
+        gainNode.connect(ctx.destination);
 
         if (type === "hover") {
           // Warm Pop Analógico Hover: very quick frequency decay in low mids
@@ -60,81 +56,192 @@
       }
     };
 
-    const playLogoChime = () => {
-      if (!enabled) return;
-      try {
-        init();
-        const now = ctx.currentTime;
-        const notes = [261.63, 392.00, 523.25]; // C4, G4, C5
-        notes.forEach((freq, index) => {
-          const osc = ctx.createOscillator();
-          const gain = ctx.createGain();
-          
-          osc.connect(gain);
-          gain.connect(analyser || ctx.destination);
-          
-          osc.type = "sine";
-          osc.frequency.setValueAtTime(freq, now + index * 0.12);
-          
-          const time = now + index * 0.12;
-          gain.gain.setValueAtTime(0, now);
-          gain.gain.setValueAtTime(0.04, time);
-          gain.gain.exponentialRampToValueAtTime(0.0001, time + 0.8);
-          
-          osc.start(time);
-          osc.stop(time + 0.85);
-        });
-      } catch (err) {
-        console.warn("Logo chime playback failed:", err);
-      }
-    };
-
     const isEnabled = () => enabled;
     const setEnabled = (val) => {
       enabled = val;
       localStorage.setItem("la27.sound", val ? "true" : "false");
     };
 
-    const getFrequencyData = () => {
-      if (!analyser) return null;
-      const dataArray = new Uint8Array(analyser.frequencyBinCount);
-      analyser.getByteFrequencyData(dataArray);
-      return dataArray;
-    };
-
-    return { play, playLogoChime, isEnabled, setEnabled, init, getFrequencyData };
+    return { play, isEnabled, setEnabled, init };
   })();
 
-  const soundBtn = document.querySelector(".sound-toggle-btn");
-  const updateSoundBtn = () => {
-    if (!soundBtn) return;
-    const isMuted = !SoundEngine.isEnabled();
-    soundBtn.classList.toggle("is-muted", isMuted);
-    const textEl = soundBtn.querySelector(".sound-text");
-    if (textEl) {
-      const lang = (i18n && i18n.getLang()) || "es";
-      const key = SoundEngine.isEnabled() ? "nav.sound.on" : "nav.sound.off";
-      textEl.setAttribute("data-i18n", key);
-      if (i18n && i18n.T && i18n.T[lang] && i18n.T[lang][key]) {
-        textEl.textContent = i18n.T[lang][key];
-      } else {
-        textEl.textContent = SoundEngine.isEnabled() ? "SONIDO ON" : "SONIDO OFF";
+  // ----- Interactive Campaign Dashboard Metrics & Data -----
+  const CAMPAIGNS = {
+    es: {
+      nicho: {
+        sent: "183",
+        open: "84.6%",
+        replies: "42 (23%)",
+        meetings: "11",
+        name: "CASO DETALLADO: PROMOTORES DE EVENTOS (ALEMANIA)",
+        desc: "Campaña hiper-segmentada dirigida a 183 managers y promotores de recintos y festivales en Alemania. Filtrado manual riguroso y copywriting personalizado para ofrecer servicios audiovisuales a medida. Cero rebotes de entrega."
+      },
+      enterprise: {
+        sent: "1.200",
+        open: "72.3%",
+        replies: "144 (12%)",
+        meetings: "38",
+        name: "CASO DETALLADO: ADQUISICIÓN DE CUENTAS B2B SAAS",
+        desc: "Campaña outbound de alta gama dirigida a directores de compras y marketing en Europa occidental. Redacción orientada a valor comercial y agendamiento directo de demos con cuentas corporativas."
+      },
+      volume: {
+        sent: "5.400",
+        open: "68.1%",
+        replies: "324 (6%)",
+        meetings: "76",
+        name: "CASO DETALLADO: MINORISTAS & DISTRIBUIDORES PARA D2C",
+        desc: "Campaña a gran escala dirigida a tiendas especializadas y grandes retailers en España y Francia. Presentación del catálogo digital de producto logrando alta conversión y pipeline comercial."
+      }
+    },
+    en: {
+      nicho: {
+        sent: "183",
+        open: "84.6%",
+        replies: "42 (23%)",
+        meetings: "11",
+        name: "DETAILED CASE: EVENT PROMOTERS (GERMANY)",
+        desc: "Highly-targeted campaign sent to 183 venue managers and festival organizers in Germany. Cured lead lists, custom copywriting, and high delivery rate."
+      },
+      enterprise: {
+        sent: "1,200",
+        open: "72.3%",
+        replies: "144 (12%)",
+        meetings: "38",
+        name: "DETAILED CASE: ACQUISITION FOR B2B SAAS ACCOUNTS",
+        desc: "Premium outbound outreach aimed at marketing and operations directors in Western Europe. Value-proposition focused copywriting securing qualified demos."
+      },
+      volume: {
+        sent: "5,400",
+        open: "68.1%",
+        replies: "324 (6%)",
+        meetings: "76",
+        name: "DETAILED CASE: DISTRIBUTORS & RETAILERS FOR D2C BRANDS",
+        desc: "Large scale targeted campaigns aimed at boutique shops and department stores across Spain and France to secure retail listings."
+      }
+    },
+    de: {
+      nicho: {
+        sent: "183",
+        open: "84.6%",
+        replies: "42 (23%)",
+        meetings: "11",
+        name: "FALLSTUDIE: VERANSTALTER & PROMOTOREN (DEUTSCHLAND)",
+        desc: "Personalisierte Kampagne an 183 Festival- und Konzertveranstalter in Deutschland. Manuell verifizierte Listen und erstklassige Zustellungsraten."
+      },
+      enterprise: {
+        sent: "1.200",
+        open: "72.3%",
+        replies: "144 (12%)",
+        meetings: "38",
+        name: "FALLSTUDIE: B2B SAAS ACCOUNT AKQUISE",
+        desc: "Premium Outbound-Kampagnen an Einkaufsleiter und CMOs in Westeuropa. Fokus auf direkten geschäftlichen Mehrwert und Demo-Buchungen."
+      },
+      volume: {
+        sent: "5.400",
+        open: "68.1%",
+        replies: "324 (6%)",
+        meetings: "76",
+        name: "FALLSTUDIE: EINZELHÄNDLER FÜR D2C-MARKEN",
+        desc: "Breit angelegte Akquise für D2C-Marken zur Gewinnung von europäischen Distributoren und Partnerschaften."
+      }
+    },
+    fr: {
+      nicho: {
+        sent: "183",
+        open: "84.6%",
+        replies: "42 (23%)",
+        meetings: "11",
+        name: "ÉTUDE DE CAS : PROMOTEURS DE CONCERTS (ALLEMAGNE)",
+        desc: "Campagne ultra-ciblée auprès de 183 directeurs de salles et de festivals en Allemagne. Fichiers qualifiés et copywriting sur-mesure."
+      },
+      enterprise: {
+        sent: "1 200",
+        open: "72.3%",
+        replies: "144 (12%)",
+        meetings: "38",
+        name: "ÉTUDE DE CAS : ACQUISITION DE COMPTES B2B SAAS",
+        desc: "Campagne outbound de haut niveau ciblant les directeurs achat et marketing en Europe de l'Ouest. Prise de rendez-vous qualifiée directe."
+      },
+      volume: {
+        sent: "5 400",
+        open: "68.1%",
+        replies: "324 (6%)",
+        meetings: "76",
+        name: "ÉTUDE DE CAS : DISTRIBUTEURS POUR MARQUES D2C",
+        desc: "Campagnes ciblées à grande échelle destinées aux détaillants et grands magasins en Espagne et en France pour négocier des points de vente."
+      }
+    },
+    pt: {
+      nicho: {
+        sent: "183",
+        open: "84.6%",
+        replies: "42 (23%)",
+        meetings: "11",
+        name: "CASO DE ESTUDO: PROMOTORES DE EVENTOS (ALEMANHA)",
+        desc: "Campanha altamente segmentada para 183 managers de festivais e salas de concertos na Alemanha. Ficheiros limpos e copywriting outbound."
+      },
+      enterprise: {
+        sent: "1.200",
+        open: "72.3%",
+        replies: "144 (12%)",
+        meetings: "38",
+        name: "CASO DE ESTUDO: AQUISIÇÃO DE CONTAS SAAS B2B",
+        desc: "Outreach premium direcionado a diretores de compras e CMOs na Europa Ocidental, agendando reuniões de demonstração qualificadas."
+      },
+      volume: {
+        sent: "5.400",
+        open: "68.1%",
+        replies: "324 (6%)",
+        meetings: "76",
+        name: "CASO DE ESTUDO: DISTRIBUIDORES PARA MARCAS D2C",
+        desc: "Campanhas a larga escala dirigidas a revendedores e retalho em Espanha e França para fechamento de parcerias comerciais."
       }
     }
   };
 
-  if (soundBtn) {
-    updateSoundBtn();
-    soundBtn.addEventListener("click", (e) => {
-      e.stopPropagation();
-      SoundEngine.setEnabled(!SoundEngine.isEnabled());
-      updateSoundBtn();
-      SoundEngine.init();
-      SoundEngine.play("click");
-    });
-  }
+  let activeCampaign = "nicho";
 
-  // ----- Language: apply stored or default ES, no overlay -----
+  const updateDashboard = () => {
+    const lang = (i18n && i18n.getLang()) || "es";
+    const data = CAMPAIGNS[lang]?.[activeCampaign] || CAMPAIGNS["es"][activeCampaign];
+    
+    const sentEl = document.getElementById("metric-sent");
+    const openEl = document.getElementById("metric-open");
+    const repliesEl = document.getElementById("metric-replies");
+    const meetingsEl = document.getElementById("metric-meetings");
+    const nameEl = document.getElementById("case-name");
+    const descEl = document.getElementById("case-description");
+
+    if (sentEl) sentEl.textContent = data.sent;
+    if (openEl) openEl.textContent = data.open;
+    if (repliesEl) repliesEl.textContent = data.replies;
+    if (meetingsEl) meetingsEl.textContent = data.meetings;
+    if (nameEl) nameEl.textContent = data.name;
+    if (descEl) descEl.textContent = data.desc;
+  };
+
+  const initDashboard = () => {
+    const toggles = document.querySelectorAll(".db-toggle-btn");
+    toggles.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        toggles.forEach((b) => {
+          b.classList.remove("active");
+          b.style.background = "transparent";
+          b.style.color = "var(--ink-dim)";
+        });
+        btn.classList.add("active");
+        btn.style.background = "var(--line)";
+        btn.style.color = "var(--ink)";
+        
+        activeCampaign = btn.dataset.campaign;
+        SoundEngine.play("click");
+        updateDashboard();
+      });
+    });
+    updateDashboard();
+  };
+
+  // ----- Language: apply stored or default ES -----
   const setHeroDelays = () => {
     const heroWords = document.querySelectorAll(".hero-title .word > span");
     heroWords.forEach((sp, i) => {
@@ -145,19 +252,13 @@
   const applyLang = (lang) => {
     if (!i18n) return;
     
-    // Smooth transition: fade out translatable elements
+    // Smooth transition
     const targets = document.querySelectorAll("[data-i18n], [data-i18n-html]");
     targets.forEach((t) => {
       t.classList.add("i18n-fade", "i18n-fade-out");
     });
 
     setTimeout(() => {
-      const soundText = document.querySelector(".sound-toggle-btn .sound-text");
-      if (soundText) {
-        const key = SoundEngine.isEnabled() ? "nav.sound.on" : "nav.sound.off";
-        soundText.setAttribute("data-i18n", key);
-      }
-
       i18n.apply(lang);
       i18n.setLang(lang);
       
@@ -171,7 +272,7 @@
       });
       
       setHeroDelays();
-      updateSoundBtn();
+      updateDashboard();
 
       // Fade back in
       setTimeout(() => {
@@ -219,7 +320,6 @@
 
   if (cursor && window.matchMedia("(hover: hover)").matches) {
     window.addEventListener("mousemove", (e) => {
-      // If we are not hovering over a magnetic element, trace the exact cursor coordinates
       if (!document.querySelector(".cursor-magnetic-hover")) {
         tx = e.clientX;
         ty = e.clientY;
@@ -236,24 +336,13 @@
 
     document.addEventListener("mouseover", (e) => {
       const hover = e.target.closest("[data-cursor='hover']");
-      const play = e.target.closest("[data-cursor='play']");
-      if (play) {
-        cursor.classList.add("is-play");
-        cursor.classList.remove("is-hover");
-        const label = cursor.querySelector(".cursor-label");
-        if (label) label.textContent = play.dataset.cursorLabel || "Play";
-      } else if (hover) {
+      if (hover) {
         cursor.classList.add("is-hover");
-        cursor.classList.remove("is-play");
       }
     });
 
     document.addEventListener("mouseout", (e) => {
       const hover = e.target.closest("[data-cursor='hover']");
-      const play = e.target.closest("[data-cursor='play']");
-      if (play && !e.relatedTarget?.closest("[data-cursor='play']")) {
-        cursor.classList.remove("is-play");
-      }
       if (hover && !e.relatedTarget?.closest("[data-cursor='hover']")) {
         cursor.classList.remove("is-hover");
       }
@@ -321,82 +410,10 @@
   window.addEventListener("scroll", updateIndex, { passive: true });
   updateIndex();
 
-  // ----- Hero waveform -----
-  const wave = document.querySelector(".waveform");
-  if (wave) {
-    const COUNT = 84;
-    const frag = document.createDocumentFragment();
-    for (let i = 0; i < COUNT; i++) {
-      const bar = document.createElement("div");
-      bar.className = "bar";
-      const t = i / COUNT;
-      const env = Math.sin(t * Math.PI);
-      const noise = 0.4 + 0.6 * Math.abs(Math.sin(i * 1.7) * Math.cos(i * 0.6));
-      const h = Math.max(6, env * noise * 72);
-      bar.style.height = h + "px";
-      bar.style.animationDelay = (i * 0.04) + "s";
-      bar.style.animationDuration = (1.6 + (i % 5) * 0.2) + "s";
-      bar.dataset.base = h.toString();
-      frag.appendChild(bar);
-    }
-    wave.appendChild(frag);
-
-    const style = document.createElement("style");
-    style.textContent = `
-      @keyframes wave {
-        0%, 100% { transform: scaleY(0.4); }
-        50% { transform: scaleY(1); }
-      }
-      @keyframes wave-gentle {
-        0%, 100% { transform: scaleY(0.3); }
-        50% { transform: scaleY(0.7); }
-      }
-      @keyframes wave-energetic {
-        0%, 100% { transform: scaleY(0.5); }
-        50% { transform: scaleY(1.4); }
-      }
-      @keyframes wave-deep {
-        0%, 100% { transform: scaleY(0.2); }
-        50% { transform: scaleY(0.5); }
-      }
-    `;
-    document.head.appendChild(style);
-
-    // Interactive Waveform Hover: scale up and color ripple
-    wave.addEventListener("mousemove", (e) => {
-      const rect = wave.getBoundingClientRect();
-      const mouseX = e.clientX - rect.left;
-      const bars = wave.querySelectorAll(".bar");
-      
-      bars.forEach((bar, index) => {
-        const barRect = bar.getBoundingClientRect();
-        const barX = barRect.left + barRect.width / 2 - rect.left;
-        const dist = Math.abs(mouseX - barX);
-        
-        if (dist < 100) {
-          const factor = 1 + (1 - dist / 100) * 0.8;
-          bar.style.transform = `scaleY(${factor})`;
-          bar.style.backgroundColor = "var(--accent)";
-        } else {
-          bar.style.transform = "";
-          bar.style.backgroundColor = "";
-        }
-      });
-    });
-
-    wave.addEventListener("mouseleave", () => {
-      wave.querySelectorAll(".bar").forEach((bar) => {
-        bar.style.transform = "";
-        bar.style.backgroundColor = "";
-      });
-    });
-  }
-
-  // ----- Hero parallax / fade on scroll (desktop only, gentle on tablet) -----
+  // ----- Hero parallax / fade on scroll -----
   const hero = document.querySelector(".hero");
   const heroTitle = document.querySelector(".hero-title");
   const heroSub = document.querySelector(".hero-sub");
-  const heroWave = document.querySelector(".waveform");
   const isMobile = () => window.innerWidth <= 680;
 
   const onHeroScroll = () => {
@@ -406,7 +423,6 @@
     const p = Math.min(1, y / h);
 
     if (isMobile()) {
-      // On mobile: no parallax, just a very subtle title fade
       if (heroTitle) {
         heroTitle.style.transform = "";
         heroTitle.style.opacity = String(Math.max(0, 1 - p * 1.2));
@@ -425,9 +441,6 @@
     if (heroSub) {
       heroSub.style.opacity = String(1 - p * 1.5);
       heroSub.style.transform = `translateY(${y * 0.3}px)`;
-    }
-    if (heroWave) {
-      heroWave.style.transform = `translateY(${y * 0.4}px) scaleY(${1 - p * 0.4})`;
     }
   };
   window.addEventListener("scroll", onHeroScroll, { passive: true });
@@ -506,108 +519,6 @@
   updateTime();
   setInterval(updateTime, 30000);
 
-  // ----- Video lightbox -----
-  const vlb = document.getElementById("vlightbox");
-  const vlbWrap = document.getElementById("vlightbox-iframe-wrap");
-  const vlbTitleEl = document.querySelector(".vlightbox-title-text");
-
-  const openVideo = (id, title) => {
-    if (!vlb || !vlbWrap || !id) return;
-    vlbWrap.innerHTML = "";
-    const iframe = document.createElement("iframe");
-    iframe.src = `https://player.vimeo.com/video/${id}?autoplay=1&api=1&title=0&byline=0&portrait=0&badge=0&color=ffffff&dnt=1&quality=1080p`;
-    iframe.setAttribute("allow", "autoplay; fullscreen; picture-in-picture");
-    iframe.setAttribute("allowfullscreen", "");
-    iframe.setAttribute("frameborder", "0");
-    iframe.setAttribute("title", title || "Video");
-    vlbWrap.appendChild(iframe);
-
-    if (vlbTitleEl) vlbTitleEl.textContent = title || "LA 27 PRODUCTIONS";
-
-    vlb.classList.add("is-open");
-    vlb.setAttribute("aria-hidden", "false");
-    document.body.style.overflow = "hidden";
-
-    activeVideoId = String(id);
-
-    // Subscribe to Vimeo player play/pause events
-    iframe.addEventListener("load", () => {
-      try {
-        const win = iframe.contentWindow;
-        win.postMessage(JSON.stringify({ method: 'addEventListener', value: 'play' }), '*');
-        win.postMessage(JSON.stringify({ method: 'addEventListener', value: 'pause' }), '*');
-      } catch (err) {
-        console.warn("Failed to send addEventListener to Vimeo iframe:", err);
-      }
-    });
-
-    startLightboxVisualizer();
-  };
-
-  const closeVideo = () => {
-    if (!vlb || !vlbWrap) return;
-    vlb.classList.remove("is-open");
-    vlb.setAttribute("aria-hidden", "true");
-    document.body.style.overflow = "";
-    
-    stopLightboxVisualizer();
-    activeVideoId = null;
-    
-    setTimeout(() => { vlbWrap.innerHTML = ""; }, 500);
-  };
-
-  // ----- Dynamic Vimeo thumbnail loader -----
-  const loadThumbnails = () => {
-    document.querySelectorAll(".play-card[data-vimeo-id]").forEach((card) => {
-      const id = card.dataset.vimeoId;
-      const placeholder = card.querySelector(".thumbnail-placeholder");
-      if (!id || !placeholder) return;
-      
-      // Fetch oEmbed JSON to get thumbnail_url
-      fetch(`https://vimeo.com/api/oembed.json?url=https://vimeo.com/${id}`)
-        .then((res) => res.json())
-        .then((data) => {
-          if (data && data.thumbnail_url) {
-            // Replace default low-res thumbnail suffix with higher resolution width
-            const highResUrl = data.thumbnail_url.replace(/_[0-9]+x[0-9]+/, "_1280");
-            placeholder.style.backgroundImage = `url('${highResUrl}')`;
-          }
-        })
-        .catch((err) => console.error("Error loading Vimeo thumbnail:", err));
-    });
-  };
-
-  // Bind portfolio play-card trigger with accessibility roles
-  document.querySelectorAll(".play-card[data-vimeo-id]").forEach((card) => {
-    card.setAttribute("tabindex", "0");
-    card.setAttribute("role", "button");
-
-    const playVideo = (e) => {
-      e.preventDefault();
-      const id = card.dataset.vimeoId;
-      const title = card.dataset.vimeoTitle || "LA 27 PRODUCTIONS";
-      openVideo(id, title);
-    };
-
-    card.addEventListener("click", playVideo);
-    card.addEventListener("keydown", (e) => {
-      if (e.key === "Enter" || e.key === " ") {
-        playVideo(e);
-      }
-    });
-  });
-
-  document.querySelectorAll("[data-vlightbox-close]").forEach((el) => {
-    el.addEventListener("click", (e) => {
-      e.preventDefault();
-      closeVideo();
-    });
-  });
-
-  document.addEventListener("keydown", (e) => {
-    if (e.key === "Escape" && vlb && vlb.classList.contains("is-open")) closeVideo();
-  });
-
   // ----- Inertial Smooth Scroller -----
   const initSmoothScroll = () => {
     if (!window.matchMedia("(hover: hover)").matches) return;
@@ -676,55 +587,10 @@
     });
   };
 
-  // ----- 3D Tilt Effect -----
-  const init3DTilt = () => {
-    if (!window.matchMedia("(hover: hover)").matches) return;
-    
-    document.querySelectorAll(".play-card").forEach((card) => {
-      let rafId = null;
-      const maxTilt = 8;
-      
-      card.addEventListener("mousemove", (e) => {
-        if (rafId) cancelAnimationFrame(rafId);
-        
-        rafId = requestAnimationFrame(() => {
-          const rect = card.getBoundingClientRect();
-          const x = e.clientX - rect.left;
-          const y = e.clientY - rect.top;
-          
-          const xPct = (x / rect.width) - 0.5;
-          const yPct = (y / rect.height) - 0.5;
-          
-          const rotX = -(yPct * maxTilt).toFixed(2);
-          const rotY = (xPct * maxTilt).toFixed(2);
-          
-          card.style.transform = `perspective(1000px) rotateX(${rotX}deg) rotateY(${rotY}deg) scale3d(1.02, 1.02, 1.02)`;
-          
-          const playBtn = card.querySelector(".play-overlay svg, .play-card-btn");
-          if (playBtn) {
-            const transX = (xPct * 15).toFixed(1);
-            const transY = (yPct * 15).toFixed(1);
-            playBtn.style.transform = `translate(${transX}px, ${transY}px) translateZ(30px)`;
-          }
-        });
-      });
-      
-      card.addEventListener("mouseleave", () => {
-        if (rafId) cancelAnimationFrame(rafId);
-        card.style.transform = "perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)";
-        
-        const playBtn = card.querySelector(".play-overlay svg, .play-card-btn");
-        if (playBtn) {
-          playBtn.style.transform = "";
-        }
-      });
-    });
-  };
-
   // ----- Bind Micro-Sounds -----
   const bindMicroSounds = () => {
-    const hoverElements = ".btn, .lang-switch-btn, .sound-toggle-btn, .scroll-cue, .nav-links a, .nav-brand, .play-card, .section-index a, .vlightbox-close, .lang-switch-menu a";
-    const clickElements = ".btn, .lang-switch-btn, .sound-toggle-btn, .scroll-cue, .nav-links a, .nav-brand, .play-card, .section-index a, .vlightbox-close, .lang-switch-menu a, button[type='submit']";
+    const hoverElements = ".btn, .lang-switch-btn, .scroll-cue, .nav-links a, .nav-brand, .section-index a, .lang-switch-menu a";
+    const clickElements = ".btn, .lang-switch-btn, .scroll-cue, .nav-links a, .nav-brand, .section-index a, .lang-switch-menu a, button[type='submit']";
 
     document.querySelectorAll(hoverElements).forEach((el) => {
       el.addEventListener("mouseenter", () => {
@@ -742,169 +608,6 @@
     document.addEventListener("keydown", () => SoundEngine.init(), { once: true });
   };
 
-  // ----- Bind Logo Chime -----
-  const bindLogoChime = () => {
-    const brand = document.querySelector(".nav-brand");
-    if (brand) {
-      brand.addEventListener("mouseenter", () => {
-        SoundEngine.playLogoChime();
-      });
-    }
-  };
-
-  // ----- Sensory Upgrades: Lightbox Technical Visualizer -----
-  let visAnimFrame = null;
-  let isVideoPlaying = false;
-  let activeVideoId = null;
-
-  const buildVisualizerBars = () => {
-    const container = document.getElementById("vis-bars-container");
-    if (!container) return;
-    
-    container.innerHTML = "";
-    
-    const BARS_COUNT = 32;
-    for (let i = 0; i < BARS_COUNT; i++) {
-      const wrap = document.createElement("div");
-      wrap.className = "vis-bar-wrapper";
-      wrap.innerHTML = `<div class="vis-bar"></div><div class="vis-peak" style="bottom: 0%;"></div>`;
-      container.appendChild(wrap);
-    }
-  };
-
-  const startLightboxVisualizer = () => {
-    buildVisualizerBars();
-    
-    const BARS_COUNT = 32;
-    const container = document.getElementById("vis-bars-container");
-    if (!container) return;
-    
-    const wrappers = container.querySelectorAll(".vis-bar-wrapper");
-    const peaks = new Array(BARS_COUNT).fill(0);
-    const currentHeights = new Array(BARS_COUNT).fill(0);
-    
-    isVideoPlaying = true; // autoplays by default
-    let time = 0;
-    
-    const animate = () => {
-      const vlb = document.getElementById("vlightbox");
-      if (!vlb || !vlb.classList.contains("is-open")) return;
-      
-      visAnimFrame = requestAnimationFrame(animate);
-      
-      // Determine customized rhythmic profiles based on the playing video
-      let speedFactor = 1.0;
-      let bassIntensity = 1.0;
-      let midIntensity = 1.0;
-      let highIntensity = 1.0;
-      let noiseLevel = 5;
-      
-      // Ferrari Roma Spider (ID: 1192292542) - Fast Rock score
-      if (activeVideoId === "1192292542") {
-        speedFactor = 1.6;
-        bassIntensity = 1.4; // strong kick drum
-        midIntensity = 1.1;  // electric guitars
-        highIntensity = 0.8;
-      }
-      // Dior Maison Perfume (ID: 1192292538) - Slow acoustic bells
-      else if (activeVideoId === "1192292538") {
-        speedFactor = 0.7;
-        bassIntensity = 0.4; // quiet low end
-        midIntensity = 0.7;
-        highIntensity = 1.6; // bright chime sparks
-        noiseLevel = 2;
-      }
-      // BMW Dune Taxi (ID: 1200779757) - Aggressive electronic
-      else if (activeVideoId === "1200779757") {
-        speedFactor = 1.8;
-        bassIntensity = 1.2;
-        midIntensity = 1.4; // synthesizer waves
-        highIntensity = 1.1;
-      }
-      // Fashion Film (ID: 1200905700) - Cinematic sub-bass drone
-      else if (activeVideoId === "1200905700") {
-        speedFactor = 0.5;
-        bassIntensity = 1.8; // deep rumble
-        midIntensity = 0.4;
-        highIntensity = 0.2;
-      }
-      
-      time += 0.08 * speedFactor;
-      
-      for (let i = 0; i < BARS_COUNT; i++) {
-        let target = 0;
-        
-        if (isVideoPlaying) {
-          if (i < 8) { // Bass
-            const beat = Math.pow(Math.sin(time * 1.5 - i * 0.1), 4) * 0.75 + Math.sin(time * 3.6) * 0.15;
-            target = Math.max(noiseLevel, (beat * 85 * bassIntensity) + Math.random() * 10);
-          } else if (i < 24) { // Mids
-            const wave1 = Math.sin(time * 2.2 + i * 0.3) * 25;
-            const wave2 = Math.cos(time * 3.2 - i * 0.15) * 18;
-            target = Math.max(noiseLevel * 1.5, (45 + wave1 + wave2) * midIntensity + Math.random() * 8);
-          } else { // Treble
-            const flicker = Math.sin(time * 8 + i * 0.8) * 18 + Math.cos(time * 15) * 10;
-            target = Math.max(noiseLevel, (25 + flicker) * highIntensity + Math.random() * 8);
-          }
-          
-          if (Math.random() < 0.05) {
-            target = Math.min(100, target + 25);
-          }
-        }
-        
-        currentHeights[i] += (target - currentHeights[i]) * 0.22;
-        
-        const bar = wrappers[i].querySelector(".vis-bar");
-        const peak = wrappers[i].querySelector(".vis-peak");
-        
-        const h = currentHeights[i];
-        bar.style.height = `${h}%`;
-        
-        if (h > 8) bar.classList.add("active");
-        else bar.classList.remove("active");
-        
-        if (h >= peaks[i]) {
-          peaks[i] = h;
-        } else {
-          peaks[i] = Math.max(0, peaks[i] - 1.6);
-        }
-        
-        peak.style.bottom = `${peaks[i]}%`;
-      }
-    };
-    
-    animate();
-  };
-
-  const stopLightboxVisualizer = () => {
-    if (visAnimFrame) {
-      cancelAnimationFrame(visAnimFrame);
-      visAnimFrame = null;
-    }
-  };
-
-  // Listen to Vimeo player state messages
-  window.addEventListener("message", (e) => {
-    try {
-      const data = typeof e.data === "string" ? JSON.parse(e.data) : e.data;
-      
-      // If Vimeo player sends ready message, register event listeners
-      if (data.event === "ready") {
-        const iframe = vlbWrap.querySelector("iframe");
-        if (iframe && iframe.contentWindow) {
-          iframe.contentWindow.postMessage(JSON.stringify({ method: 'addEventListener', value: 'play' }), '*');
-          iframe.contentWindow.postMessage(JSON.stringify({ method: 'addEventListener', value: 'pause' }), '*');
-        }
-      }
-      
-      if (data.event === "play") {
-        isVideoPlaying = true;
-      } else if (data.event === "pause") {
-        isVideoPlaying = false;
-      }
-    } catch (err) {}
-  });
-
   // ----- Sensory Upgrades: Sonic Click Ripples -----
   const initClickRipples = () => {
     const createRipple = (x, y) => {
@@ -918,7 +621,6 @@
     
     window.addEventListener("click", (e) => {
       if (e.target.closest("iframe") || e.target.closest(".vlightbox-frame")) return;
-      
       createRipple(e.pageX, e.pageY);
       setTimeout(() => {
         createRipple(e.pageX, e.pageY);
@@ -937,12 +639,10 @@
   };
 
   // Load dynamic assets
-  loadThumbnails();
   setHeroDelays();
   initSmoothScroll();
-  init3DTilt();
   bindMicroSounds();
-  bindLogoChime();
   initClickRipples();
   initBackgroundParallax();
+  initDashboard();
 })();
