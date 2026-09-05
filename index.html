@@ -10,7 +10,7 @@
 
 <helmet>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>LA 27 — Marketing & Producción Musical · Barcelona</title>
+  <title>LA 27 — Campañas de Email Marketing & Audiencias · Barcelona</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="true" />
   <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Space+Grotesk:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
@@ -93,63 +93,16 @@
     </svg>
   </div>
 
-  <!-- ============ GATEWAY (no scroll, must pick a division) ============ -->
-  <sc-if value="{{ isGateway }}" hint-placeholder-val="{{ true }}">
-    <div style="{{ styles.gateway }}">
-      <div style="{{ styles.gatewayTop }}">
-        <div style="{{ styles.gatewayBrand }}">LA 27 <span style="font-weight:400;opacity:0.75">Productions</span></div>
-        <div style="{{ styles.gatewayLangWrap }}">
-          <button type="button" data-cursor="hover" onClick="{{ toggleSound }}" style="{{ styles.soundBtnGateway }}">{{ soundLabel }}</button>
-          <div style="position:relative">
-            <button type="button" data-cursor="hover" onClick="{{ toggleLangMenu }}" style="{{ styles.langBtn }}">
-              <span>{{ shared.langCode }}</span>
-              <svg width="8" height="8" viewBox="0 0 8 8" fill="none"><path d="M1.5 3l2.5 2.5L6.5 3" stroke="currentColor" stroke-width="1" stroke-linecap="round"/></svg>
-            </button>
-            <sc-if value="{{ state.langMenuOpen }}">
-              <ul style="{{ styles.langMenu }}">
-                <sc-for list="{{ langOptions }}" as="opt" hint-placeholder-count="5">
-                  <li><a href="#" data-cursor="hover" onClick="{{ opt.select }}" style="{{ styles.langMenuLink }}"><span style="color:var(--accent);font-weight:500">{{ opt.code }}</span> {{ opt.label }}</a></li>
-                </sc-for>
-              </ul>
-            </sc-if>
-          </div>
-        </div>
-      </div>
+  <header style="{{ styles.nav }}">
+    <a href="#hero" data-cursor="hover" data-role="brand" style="{{ styles.navBrand }}">LA 27 <span style="font-weight:400;opacity:0.75">Productions</span></a>
+    <nav style="{{ styles.navLinks }}">
+      <sc-for list="{{ navLinks }}" as="item" hint-placeholder-count="4">
+        <a href="{{ item.href }}" data-cursor="hover" style="{{ styles.navLink }}">{{ item.label }}</a>
+      </sc-for>
+    </nav>
+    <div style="{{ styles.navRight }}">
+      <button type="button" data-cursor="hover" onClick="{{ toggleSound }}" style="{{ styles.soundBtn }}">{{ soundLabel }}</button>
 
-      <div style="{{ styles.gatewayCenter }}">
-        <div style="{{ styles.gatewayEyebrow }}">Barcelona — ES</div>
-        <h1 style="{{ styles.gatewayTitle }}">{{ g.tagline }}</h1>
-
-        <div style="{{ styles.gatewayCards }}">
-          <button type="button" data-cursor="hover" data-magnetic="true" onClick="{{ goMarketing }}" style="{{ styles.gatewayCard }}">
-            <div style="{{ styles.gatewayCardNum }}">01</div>
-            <div style="{{ styles.gatewayCardTitle }}">{{ g.marketingTitle }}</div>
-            <p style="{{ styles.gatewayCardDesc }}">{{ g.marketingDesc }}</p>
-            <div style="{{ styles.gatewayCardCta }}">{{ g.marketingCta }} →</div>
-          </button>
-          <button type="button" data-cursor="hover" data-magnetic="true" onClick="{{ goProduccion }}" style="{{ styles.gatewayCard }}">
-            <div style="{{ styles.gatewayCardNum }}">02</div>
-            <div style="{{ styles.gatewayCardTitle }}">{{ g.produccionTitle }}</div>
-            <p style="{{ styles.gatewayCardDesc }}">{{ g.produccionDesc }}</p>
-            <div style="{{ styles.gatewayCardCta }}">{{ g.produccionCta }} →</div>
-          </button>
-        </div>
-      </div>
-    </div>
-  </sc-if>
-
-  <!-- ============ MARKETING & PRODUCCIÓN (full sites) ============ -->
-  <sc-if value="{{ !isGateway }}">
-    <header style="{{ styles.nav }}">
-      <button type="button" data-cursor="hover" data-role="brand" onClick="{{ goGateway }}" style="{{ styles.navBrand }}">LA 27 <span style="font-weight:400;opacity:0.75">Productions</span></button>
-      <nav style="{{ styles.navLinks }}">
-        <sc-for list="{{ navLinks }}" as="item" hint-placeholder-count="4">
-          <a href="{{ item.href }}" data-cursor="hover" style="{{ styles.navLink }}">{{ item.label }}</a>
-        </sc-for>
-      </nav>
-      <div style="{{ styles.navRight }}">
-        <button type="button" data-cursor="hover" onClick="{{ switchView }}" style="{{ styles.crossLink }}">{{ crossLinkLabel }} ↗</button>
-        <button type="button" data-cursor="hover" onClick="{{ toggleSound }}" style="{{ styles.soundBtn }}">{{ soundLabel }}</button>
         <div style="position:relative">
           <button type="button" data-cursor="hover" onClick="{{ toggleLangMenu }}" style="{{ styles.langBtn }}">
             <span>{{ shared.langCode }}</span>
@@ -175,8 +128,7 @@
 
     <main>
       <!-- ============ MARKETING VIEW ============ -->
-      <sc-if value="{{ isMarketing }}">
-        <section id="hero" data-section="true" style="{{ styles.hero }}">
+              <section id="hero" data-section="true" style="{{ styles.hero }}">
           <div style="{{ styles.heroMeta }}"><span>001 / Intro</span><span>Barcelona — ES</span></div>
           <div style="{{ styles.heroBadge }}">{{ m.heroBadge }}</div>
           <h1 style="{{ styles.heroTitle }}">{{ m.heroTitleMain }} <span style="font-style:italic;color:var(--accent)">{{ m.heroTitleIt }}</span></h1>
@@ -331,12 +283,11 @@
             </sc-for>
           </div>
         </section>
-      </sc-if>
 
-      <!-- ============ SHARED FOUNDER ============ -->
+<!-- ============ SHARED FOUNDER ============ -->
       <section id="founder" data-section="true" style="{{ styles.section }}">
         <div data-reveal="true" style="{{ styles.sectionHeader }}">
-          <div style="{{ styles.eyebrow }}"><span style="color:var(--accent);font-weight:600">{{ founderNum }}</span>{{ shared.founderEyebrow }}</div>
+          <div style="{{ styles.eyebrow }}"><span style="color:var(--accent);font-weight:600">04</span>{{ shared.founderEyebrow }}</div>
           <h2 style="{{ styles.sectionTitle }}">{{ shared.founderTitleMain }} <span style="font-style:italic;color:var(--accent)">{{ shared.founderTitleIt }}</span></h2>
         </div>
         <div style="{{ styles.studioGrid }}">
@@ -393,23 +344,17 @@
       </section>
     </main>
 
-    <sc-if value="{{ state.lightbox.open }}">
-      <div style="{{ styles.lightboxBackdrop }}" onClick="{{ closeLightbox }}"></div>
-      <div style="{{ styles.lightboxInner }}">
-        <div style="{{ styles.lightboxTop }}"><div style="{{ styles.lightboxTitle }}"><span style="{{ styles.statusDot }}"></span>{{ state.lightbox.title }}</div><button type="button" data-cursor="hover" onClick="{{ closeLightbox }}" style="{{ styles.lightboxClose }}">Cerrar</button></div>
-        <div style="{{ styles.lightboxFrame }}"><iframe src="{{ vimeoSrc }}" style="width:100%;height:100%;border:0;display:block" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen="true"></iframe></div>
-      </div>
-    </sc-if>
+    
 
     <footer style="{{ styles.footer }}">
       <div>© LA 27 · Barcelona</div>
       <div style="display:flex;gap:32px"><span>{{ shared.footerMastered }}</span><span>v2026</span></div>
     </footer>
-  </sc-if>
 
 </div>
 
 </x-dc>
+
 <script type="text/x-dc" data-dc-script>
 
 const FONT_DISPLAY = '"Instrument Serif", "Times New Roman", serif';
@@ -423,398 +368,6 @@ const LINE = '#181515';
 const ACCENT = 'oklch(0.58 0.22 25)';
 const LANG_NAMES = { es: 'Español', en: 'English', de: 'Deutsch', fr: 'Français', pt: 'Português' };
 
-const DICT = {
-  es: {
-    shared: {
-      langCode: 'ES', founderEyebrow: 'Quiénes somos', founderTitleMain: 'El', founderTitleIt: 'Founder.',
-      founderQuoteMain: 'Cada marca', founderQuoteIt: 'merece', founderQuoteEnd: ' el mismo nivel de exigencia en su sonido y en su comunicación.',
-      founderRole: 'Founder — LA 27', contactDirect: 'O escríbenos directamente', contactStatus: 'Respuesta en menos de 24h', contactNocost: 'Presupuesto personalizado · Sin compromiso',
-      formName: 'Nombre', formEmail: 'Email', formCompany: 'Empresa', formMessage: 'Mensaje', formSubmit: 'Enviar', formTypePh: '— Selecciona un servicio —',
-      footerMastered: 'Mastered in Barcelona',
-    },
-    gateway: {
-      tagline: 'Dos divisiones. Un mismo estudio.',
-      marketingTitle: 'Marketing', marketingDesc: 'Campañas de email marketing B2B y B2C de alta conversión para cualquier tipo de negocio.', marketingCta: 'Crear Campaña',
-      produccionTitle: 'Producción', produccionDesc: 'Música original, producción de audio y vídeo de altísima calidad para películas, anuncios y marcas.', produccionCta: 'Ver Producción',
-    },
-    marketing: {
-      navWork: 'Soluciones', navWhy: 'Tecnología', navFounder: 'Founder', navContact: 'Contacto',
-      founderBio: 'Tim Helmes es un apasionado de la tecnología y los datos. Aplicando esa misma precisión a la captación de clientes, creó la división de marketing de LA 27: campañas B2B y B2C de alta conversión, con acceso a contactos de todo el mundo gracias a nuestra propia tecnología — todo coordinado desde el estudio en Barcelona.',
-      heroBadge: 'División — Marketing', heroTitleMain: 'Alta', heroTitleIt: 'Entregabilidad.',
-      heroSub: 'Campañas de email marketing de alta conversión para todo tipo de negocio — B2B y B2C. Bases de datos propias, 100% verificadas, libres de bots.',
-      heroScroll: 'Cómo funciona', heroBtn: 'Crear Campaña',
-      pill1: '100% Verificado', pill2: 'Cero Spam / Bots', pill3: 'Entregabilidad 99.8%',
-      trust: ['Email Marketing', 'Audiencias Verificadas', '0% Spam & Bots', 'B2B & B2C Database', 'Entregabilidad 99.8%', 'Cualquier Sector', 'Barcelona'],
-      howEyebrow: 'Cómo funciona', howTitleMain: 'De tu idea a', howTitleIt: 'su bandeja de entrada.',
-      flowLabelRaw: 'Todo internet', flowLabelFilter: 'Filtro en tiempo real', flowLabelReal: 'Contactos reales',
-      compareThemTitle: 'Así lo hacen otros', compareThemSub: 'Sin filtro', compareThemResult: 'Bots, spam, rebotes', compareUsTitle: 'Así lo hacemos en LA 27',
-      sampleContacts: ['B2C · María, 34 · Barcelona · Fan de conciertos indie', 'B2B · Carlos, 41 · CTO Software, Madrid', 'B2C · Laura, 27 · Valencia · Compra suplementos online', 'B2B · Jordi, 38 · Dir. Compras Retail, Barcelona', 'B2C · Ana, 22 · Sevilla · Sigue marcas de moda', 'B2B · Marta, 45 · Directora RRHH, Bilbao', 'B2C · Pol, 30 · Girona · Compra online semanalmente', 'B2B · Sergio, 37 · Fundador startup SaaS, Málaga'],
-      steps: [
-        { title: 'Nos cuentas a quién buscas', desc: 'Nos envías tu propia base de datos o nos explicas el perfil de cliente que necesitas — sea cual sea tu sector.' },
-        { title: 'Buscamos y segmentamos', desc: 'Cruzamos tus criterios con nuestras bases de datos globales B2B y B2C: edad, ubicación, intereses, tipo de negocio — hiperprecisión para cualquier industria.' },
-        { title: 'Lanzamos con datos 100% reales', desc: 'Cada contacto se valida en tiempo real. Cero bots, cero spam, solo personas reales y activas que encajan con lo que buscas.' },
-      ],
-      workEyebrow: 'Soluciones', workTitleMain: 'Cobertura total,', workTitleIt: 'B2B y B2C.',
-      workNote: 'Sea cual sea tu negocio o tu sector, pregúntanos y te decimos exactamente cuántos contactos tenemos para ti.',
-      tiles: [
-        { tag: 'B2C', title: 'De empresa a consumidor final', desc: 'Contactos reales de personas que compran, en cualquier segmento de edad, ubicación e intereses — de cualquier país.' },
-        { tag: 'B2B', title: 'De empresa a empresa', desc: 'Contactos de decisores reales en cualquier sector e industria, segmentados por cargo, tamaño de empresa y ubicación.' },
-      ],
-      whyEyebrow: 'Tecnología', whyTitleMain: 'Entregabilidad', whyTitleIt: 'garantizada.',
-      whyLede: 'Nuestra infraestructura técnica combina validación de correos en tiempo real, rotación de IPs limpias y pre-calentamiento de dominios para superar los filtros de spam.',
-      pillars: [
-        { title: '0% Spam / Bots', body: 'Todos los contactos se limpian, verifican y validan activamente en tiempo real antes de cualquier envío.' },
-        { title: 'Segmentación', body: 'Filtramos y dirigimos tu campaña exactamente al perfil demográfico y región que tu negocio necesita.' },
-        { title: 'Alta Entregabilidad', body: 'Configuración y pre-calentamiento seguro de dominios (SPF, DKIM, DMARC) para tasas de apertura superiores al 60%.' },
-        { title: 'Copy Conversacional', body: 'Redacción limpia y directa, adaptada al idioma local, escrita para generar interés sin resultar intrusiva.' },
-      ],
-      contactTitleMain: 'Inicia tu', contactTitleIt: 'Campaña.',
-      contactAside: 'Cuéntanos cuál es tu público objetivo, en cualquier sector. Te respondemos con una propuesta de volumen y enfoque sin compromiso.',
-      formType: 'Tipo de campaña',
-      formOptions: ['Campaña B2B', 'Campaña B2C', 'Enriquecimiento de Datos', 'Otro / Consulta general'],
-    },
-    produccion: {
-      navWork: 'Trabajo', navWhy: 'Estudio', navFounder: 'Founder', navContact: 'Contacto',
-      founderBio: 'Tim Helmes es un multiinstrumentista apasionado por la música. De esa pasión nació LA 27 Productions, el estudio de producción musical y audiovisual en Barcelona donde cada pieza se compone y graba desde cero, con instrumentos propios y la máxima exigencia sonora.',
-      heroTitleMain: 'Sonido', heroTitleIt: 'de Lujo.',
-      heroSub: 'Estudio de música original exclusiva de altísima calidad para marcas, agencias y film. Compuesta desde cero, 100% exclusiva y libre de royalties.',
-      heroScroll: 'Ver trabajo', heroBtn: 'Custom Music & Audio',
-      pill1: '100% Exclusivo', pill2: 'Sin Royalties', pill3: 'Barcelona',
-      trust: ['Video Production', 'Música Original', 'Diseño de Sonido', 'Sonic Branding', '100% Exclusivo', 'Sin Royalties', 'Estudio en Barcelona'],
-      workEyebrow: 'Reels', workTitleMain: 'Trabajo', workTitleIt: 'Seleccionado.',
-      whyEyebrow: 'El Estudio', whyTitleMain: 'Todo bajo', whyTitleIt: 'un mismo techo.',
-      whyLede: 'Estudio propio en Barcelona — ciudad del arte y la música — con la tecnología y la calidad más avanzadas. Producimos cada pieza enteramente in-house, desde el primer sonido hasta el máster final.',
-      pillars: [
-        { title: 'Estudio en Barcelona.', body: 'Instalaciones tratadas acústicamente, monitoreo de referencia y una colección de instrumentos físicos lista para grabar.' },
-        { title: '100% Exclusivo.', body: 'Cada pieza compuesta desde cero para tu proyecto. Sin librerías, sin stock, nunca reutilizada.' },
-        { title: 'Sin Royalties.', body: 'La música es tuya. Para siempre. Sin licencias, sin renovaciones, sin gestores intermediarios.' },
-        { title: 'Vídeo Adicional.', body: 'También ofrecemos producción completa de vídeo (VSLs y anuncios) como servicio complementario con nuestra música.' },
-      ],
-      contactTitleMain: 'Asegura tu', contactTitleIt: 'proyecto.',
-      contactAside: 'Cuéntanos en qué estás trabajando. Te respondemos con un primer enfoque sonoro y propuesta de tiempos.',
-      formType: 'Tipo de proyecto',
-      formOptions: ['Música Original (Custom Score)', 'Producción de Vídeo', 'Producción de Audio', 'Sonic Branding (Audio Logo)', 'Otro / Consulta general'],
-      work: [
-        { titleMain: 'Roma', titleIt: 'Spider', index: '01 / Ferrari', meta1: 'Automotriz', meta2: 'Rock Score', year: '2025', desc: 'Rock Texas-style, crudo y potente. Guitarras eléctricas, batería en vivo y un bajo que empuja el corte como un motor en sexta.', vimeoId: '1192292542' },
-        { titleMain: 'Maison', titleIt: 'Perfume', index: '02 / Dior', meta1: 'Perfumería', meta2: 'Voz & Guitarra', year: '2026', desc: 'Una voz femenina suspendida sobre una guitarra de paraíso. Escrito sólo para esta campaña.', vimeoId: '1192292538' },
-        { titleMain: 'Dune', titleIt: 'Taxi', index: '03 / BMW', meta1: 'Automotriz', meta2: 'Desert Score', year: '2026', desc: 'Ritmos electrónicos áridos y percusiones contundentes diseñadas para empujar la tracción xDrive al límite.', vimeoId: '1200779757' },
-        { titleMain: 'Dark', titleIt: 'Cinematic', index: '04 / Fashion Film', meta1: 'Moda & Lujo', meta2: 'Diseño Sonoro & Sintetizadores', year: '2026', desc: 'Un viaje visual oscuro y elegante envuelto en una atmósfera electrónica profunda, reconstruido desde cero.', vimeoId: '1200905700' },
-      ],
-    },
-  },
-  en: {
-    shared: {
-      langCode: 'EN', founderEyebrow: 'Who we are', founderTitleMain: 'The', founderTitleIt: 'Founder.',
-      founderQuoteMain: 'Every brand', founderQuoteIt: 'deserves', founderQuoteEnd: ' the same standard in its sound and in its communication.',
-      founderRole: 'Founder — LA 27', contactDirect: 'Or write to us directly', contactStatus: 'Reply within 24h', contactNocost: 'Custom quote · No commitment',
-      formName: 'Name', formEmail: 'Email', formCompany: 'Company', formMessage: 'Message', formSubmit: 'Send', formTypePh: '— Select a service —',
-      footerMastered: 'Mastered in Barcelona',
-    },
-    gateway: {
-      tagline: 'Two divisions. One studio.',
-      marketingTitle: 'Marketing', marketingDesc: 'High-conversion B2B and B2C email marketing campaigns for any type of business.', marketingCta: 'Start a Campaign',
-      produccionTitle: 'Production', produccionDesc: 'Original music, high-end audio and video production for films, ads and brands.', produccionCta: 'See Production',
-    },
-    marketing: {
-      navWork: 'Solutions', navWhy: 'Technology', navFounder: 'Founder', navContact: 'Contact',
-      founderBio: "Tim Helmes is passionate about technology and data. Applying that same precision to client acquisition, he built LA 27's marketing division: high-conversion B2B and B2C campaigns, powered by contacts spanning the world through our own technology — all coordinated from the studio in Barcelona.",
-      heroBadge: 'Division — Marketing', heroTitleMain: 'High', heroTitleIt: 'Deliverability.',
-      heroSub: 'High-conversion email marketing campaigns for any kind of business — B2B and B2C. Our own databases, 100% verified, bot-free.',
-      heroScroll: 'How it works', heroBtn: 'Start a Campaign',
-      pill1: '100% Verified', pill2: 'Zero Spam / Bots', pill3: '99.8% Deliverability',
-      trust: ['Email Marketing', 'Verified Audiences', '0% Spam & Bots', 'B2B & B2C Database', '99.8% Deliverability', 'Any Sector', 'Barcelona'],
-      howEyebrow: 'How it works', howTitleMain: 'From your idea to', howTitleIt: 'their inbox.',
-      flowLabelRaw: 'All of the internet', flowLabelFilter: 'Real-time filter', flowLabelReal: 'Real contacts',
-      compareThemTitle: 'How others do it', compareThemSub: 'No filter', compareThemResult: 'Bots, spam, bounces', compareUsTitle: 'How we do it at LA 27',
-      sampleContacts: ['B2C · Maria, 34 · Barcelona · Indie concert fan', 'B2B · Carlos, 41 · CTO, Software, Madrid', 'B2C · Laura, 27 · Valencia · Buys supplements online', 'B2B · Jordi, 38 · Head of Purchasing, Retail', 'B2C · Ana, 22 · Sevilla · Follows fashion brands', 'B2B · Marta, 45 · HR Director, Bilbao', 'B2C · Pol, 30 · Girona · Weekly online shopper', 'B2B · Sergio, 37 · SaaS Startup Founder, Málaga'],
-      steps: [
-        { title: "You tell us who you're after", desc: 'Send us your own database, or tell us the customer profile you need — whatever your sector.' },
-        { title: 'We search and segment', desc: 'We match your criteria against our global B2B and B2C databases: age, location, interests, business type — hyper-precision for any industry.' },
-        { title: 'We launch with 100% real data', desc: 'Every contact is validated in real time. Zero bots, zero spam — only real, active people who match what you need.' },
-      ],
-      workEyebrow: 'Solutions', workTitleMain: 'Full coverage,', workTitleIt: 'B2B and B2C.',
-      workNote: 'Whatever your business or sector, just ask — we\'ll tell you exactly how many contacts we have for you.',
-      tiles: [
-        { tag: 'B2C', title: 'Business to consumer', desc: 'Real contacts of people who buy, in any age range, location and interest set — in any country.' },
-        { tag: 'B2B', title: 'Business to business', desc: 'Real decision-maker contacts in any sector and industry, segmented by role, company size and location.' },
-      ],
-      whyEyebrow: 'Technology', whyTitleMain: 'Guaranteed', whyTitleIt: 'deliverability.',
-      whyLede: 'Our technical infrastructure combines real-time email validation, clean IP rotation and domain pre-warming to beat spam filters.',
-      pillars: [
-        { title: '0% Spam / Bots', body: 'Every contact is actively cleaned, verified and validated in real time before any send.' },
-        { title: 'Targeting', body: 'We filter and target your campaign to exactly the demographic and region your business needs.' },
-        { title: 'High Deliverability', body: 'Secure domain setup and pre-warming (SPF, DKIM, DMARC) to keep open rates above 60%.' },
-        { title: 'Conversational Copy', body: 'Clean, direct copy adapted to the local language, written to spark interest without feeling intrusive.' },
-      ],
-      contactTitleMain: 'Start your', contactTitleIt: 'Campaign.',
-      contactAside: "Tell us who your target audience is, in any sector. We'll reply with a volume and approach proposal, no commitment.",
-      formType: 'Campaign type',
-      formOptions: ['B2B Campaign', 'B2C Campaign', 'Data Enrichment', 'Other / General inquiry'],
-    },
-    produccion: {
-      navWork: 'Work', navWhy: 'Studio', navFounder: 'Founder', navContact: 'Contact',
-      founderBio: 'Tim Helmes is a multi-instrumentalist passionate about music. That passion gave birth to LA 27 Productions, the music and video production studio in Barcelona where every piece is composed and recorded from scratch, with our own instruments and the highest sonic standard.',
-      heroTitleMain: 'Luxury', heroTitleIt: 'Sound.',
-      heroSub: 'Bespoke original music studio of the highest quality for brands, agencies and film. Composed from scratch, 100% exclusive and royalty-free.',
-      heroScroll: 'See work', heroBtn: 'Custom Music & Audio',
-      pill1: '100% Exclusive', pill2: 'No Royalties', pill3: 'Barcelona',
-      trust: ['Video Production', 'Original Music', 'Sound Design', 'Sonic Branding', '100% Exclusive', 'No Royalties', 'Studio in Barcelona'],
-      workEyebrow: 'Reels', workTitleMain: 'Selected', workTitleIt: 'Work.',
-      whyEyebrow: 'The Studio', whyTitleMain: 'Everything under', whyTitleIt: 'one roof.',
-      whyLede: 'In-house studio in Barcelona — city of art and music — with the most advanced technology and quality. We produce every piece entirely in-house, from the first sound to the final master.',
-      pillars: [
-        { title: 'Studio in Barcelona.', body: 'Acoustically treated rooms, reference monitoring and a curated collection of physical instruments ready to record.' },
-        { title: '100% Exclusive.', body: 'Each piece composed from scratch for your project. No libraries, no stock, never reused.' },
-        { title: 'No Royalties.', body: 'The music is yours. Forever. No licenses, no renewals, no middlemen.' },
-        { title: 'Additional Video.', body: 'We also offer full video production (VSLs and ads) as a complementary service with our original music.' },
-      ],
-      contactTitleMain: 'Lock in your', contactTitleIt: 'project.',
-      contactAside: "Tell us what you're working on. We'll come back with an initial sonic approach and a timing proposal.",
-      formType: 'Project type',
-      formOptions: ['Original Music (Custom Score)', 'Video Production', 'Audio Production', 'Sonic Branding (Audio Logo)', 'Other / General inquiry'],
-      work: [
-        { titleMain: 'Roma', titleIt: 'Spider', index: '01 / Ferrari', meta1: 'Automotive', meta2: 'Rock Score', year: '2025', desc: 'Raw, powerful Texas-style rock. Electric guitars, live drums and a bass line that pushes the cut like a sixth-gear engine.', vimeoId: '1192292542' },
-        { titleMain: 'Maison', titleIt: 'Perfume', index: '02 / Dior', meta1: 'Perfumery', meta2: 'Voice & Guitar', year: '2026', desc: 'A female voice suspended over a paradisiacal guitar. Written for this campaign alone.', vimeoId: '1192292538' },
-        { titleMain: 'Dune', titleIt: 'Taxi', index: '03 / BMW', meta1: 'Automotive', meta2: 'Desert Score', year: '2026', desc: 'Gritty electronic beats and heavy desert percussion designed to push xDrive traction to its limits.', vimeoId: '1200779757' },
-        { titleMain: 'Dark', titleIt: 'Cinematic', index: '04 / Fashion Film', meta1: 'Fashion & Luxury', meta2: 'Sound Design & Synths', year: '2026', desc: 'A dark, elegant visual journey wrapped in a deep electronic atmosphere, rebuilt entirely from scratch.', vimeoId: '1200905700' },
-      ],
-    },
-  },
-  de: {
-    shared: {
-      langCode: 'DE', founderEyebrow: 'Wer wir sind', founderTitleMain: 'Der', founderTitleIt: 'Founder.',
-      founderQuoteMain: 'Jede Marke', founderQuoteIt: 'verdient', founderQuoteEnd: ' denselben Anspruch an ihren Klang und ihre Kommunikation.',
-      founderRole: 'Founder — LA 27', contactDirect: 'Oder schreiben Sie uns direkt', contactStatus: 'Antwort innerhalb von 24 Std.', contactNocost: 'Individuelles Angebot · Unverbindlich',
-      formName: 'Name', formEmail: 'E-Mail', formCompany: 'Firma', formMessage: 'Nachricht', formSubmit: 'Senden', formTypePh: '— Service auswählen —',
-      footerMastered: 'Mastered in Barcelona',
-    },
-    gateway: {
-      tagline: 'Zwei Bereiche. Ein Studio.',
-      marketingTitle: 'Marketing', marketingDesc: 'Hochkonvertierende B2B- und B2C-E-Mail-Marketing-Kampagnen für jede Art von Unternehmen.', marketingCta: 'Kampagne starten',
-      produccionTitle: 'Produktion', produccionDesc: 'Originalmusik sowie erstklassige Audio- und Videoproduktion für Filme, Werbung und Marken.', produccionCta: 'Produktion ansehen',
-    },
-    marketing: {
-      navWork: 'Lösungen', navWhy: 'Technologie', navFounder: 'Founder', navContact: 'Kontakt',
-      founderBio: 'Tim Helmes ist leidenschaftlich an Technologie und Daten interessiert. Mit derselben Präzision auf die Kundengewinnung angewandt, baute er die Marketing-Sparte von LA 27 auf: hochkonvertierende B2B- und B2C-Kampagnen, gestützt auf weltweite Kontakte dank eigener Technologie — alles koordiniert vom Studio in Barcelona aus.',
-      heroBadge: 'Bereich — Marketing', heroTitleMain: 'Hohe', heroTitleIt: 'Zustellbarkeit.',
-      heroSub: 'Hochkonvertierende E-Mail-Marketing-Kampagnen für jede Art von Unternehmen — B2B und B2C. Eigene, zu 100% verifizierte Datenbanken, frei von Bots.',
-      heroScroll: 'So funktioniert es', heroBtn: 'Kampagne starten',
-      pill1: '100% Verifiziert', pill2: 'Keine Bots / Spam', pill3: '99,8% Zustellbarkeit',
-      trust: ['E-Mail-Marketing', 'Verifizierte Zielgruppen', '0% Spam & Bots', 'B2B & B2C Datenbanken', '99,8% Zustellbarkeit', 'Jede Branche', 'Barcelona'],
-      howEyebrow: 'So funktioniert es', howTitleMain: 'Von Ihrer Idee zum', howTitleIt: 'Posteingang.',
-      flowLabelRaw: 'Das ganze Internet', flowLabelFilter: 'Echtzeit-Filter', flowLabelReal: 'Echte Kontakte',
-      compareThemTitle: 'So machen es andere', compareThemSub: 'Kein Filter', compareThemResult: 'Bots, Spam, Bounces', compareUsTitle: 'So machen wir es bei LA 27',
-      sampleContacts: ['B2C · Maria, 34 · Barcelona · Indie-Konzertfan', 'B2B · Carlos, 41 · CTO, Software, Madrid', 'B2C · Laura, 27 · Valencia · Kauft Nahrungsergänzung online', 'B2B · Jordi, 38 · Einkaufsleiter, Einzelhandel', 'B2C · Ana, 22 · Sevilla · Folgt Modemarken', 'B2B · Marta, 45 · HR-Direktorin, Bilbao', 'B2C · Pol, 30 · Girona · Wöchentlicher Online-Käufer', 'B2B · Sergio, 37 · SaaS-Gründer, Málaga'],
-      steps: [
-        { title: 'Sie sagen uns, wen Sie suchen', desc: 'Senden Sie uns Ihre eigene Datenbank oder beschreiben Sie das gewünschte Kundenprofil — unabhängig von Ihrer Branche.' },
-        { title: 'Wir suchen und segmentieren', desc: 'Wir gleichen Ihre Kriterien mit unseren globalen B2B- und B2C-Datenbanken ab: Alter, Standort, Interessen, Branche — Präzision für jede Branche.' },
-        { title: 'Wir starten mit 100% echten Daten', desc: 'Jeder Kontakt wird in Echtzeit validiert. Null Bots, null Spam — nur echte, aktive Menschen, die zu Ihrer Zielgruppe passen.' },
-      ],
-      workEyebrow: 'Lösungen', workTitleMain: 'Volle Abdeckung,', workTitleIt: 'B2B und B2C.',
-      workNote: 'Egal welche Branche oder welches Geschäft — fragen Sie uns, und wir sagen Ihnen genau, wie viele Kontakte wir für Sie haben.',
-      tiles: [
-        { tag: 'B2C', title: 'Von Unternehmen zu Endkunde', desc: 'Echte Kontakte von Käufern, in jeder Altersgruppe, Region und Interessenlage — in jedem Land.' },
-        { tag: 'B2B', title: 'Von Unternehmen zu Unternehmen', desc: 'Echte Entscheider-Kontakte in jeder Branche, segmentiert nach Position, Unternehmensgröße und Region.' },
-      ],
-      whyEyebrow: 'Technologie', whyTitleMain: 'Garantierte', whyTitleIt: 'Zustellbarkeit.',
-      whyLede: 'Unsere technische Infrastruktur kombiniert Echtzeit-Validierung, saubere IP-Rotation und Domain-Warming, um Spam-Filter zu umgehen.',
-      pillars: [
-        { title: '0% Spam / Bots', body: 'Alle Kontakte werden aktiv bereinigt, verifiziert und in Echtzeit validiert.' },
-        { title: 'Segmentierung', body: 'Wir filtern und richten Ihre Kampagne genau auf die Demografie und Region aus, die Ihr Unternehmen braucht.' },
-        { title: 'Hohe Zustellbarkeit', body: 'Sichere Domain-Einrichtung und Warming (SPF, DKIM, DMARC) für Öffnungsraten über 60%.' },
-        { title: 'Konversations-Copy', body: 'Klares, direktes Copywriting, angepasst an die Landessprache, um Interesse ohne Aufdringlichkeit zu wecken.' },
-      ],
-      contactTitleMain: 'Starten Sie Ihre', contactTitleIt: 'Kampagne.',
-      contactAside: 'Teilen Sie uns Ihre Zielgruppe mit, in jeder Branche. Wir antworten mit einem Volumen- und Strategievorschlag, unverbindlich.',
-      formType: 'Kampagnentyp',
-      formOptions: ['B2B-Kampagne', 'B2C-Kampagne', 'Datenanreicherung', 'Sonstiges / Allgemeine Anfrage'],
-    },
-    produccion: {
-      navWork: 'Arbeiten', navWhy: 'Studio', navFounder: 'Founder', navContact: 'Kontakt',
-      founderBio: 'Tim Helmes ist Multiinstrumentalist mit einer Leidenschaft für Musik. Aus dieser Leidenschaft entstand LA 27 Productions, das Musik- und Videoproduktionsstudio in Barcelona, in dem jedes Stück von Grund auf komponiert und aufgenommen wird, mit eigenen Instrumenten und höchstem klanglichen Anspruch.',
-      heroTitleMain: 'Luxuriöser', heroTitleIt: 'Sound.',
-      heroSub: 'High-End-Studio für exklusive Originalmusik für Marken, Agenturen und Film. Von Grund auf komponiert, 100% exklusiv und lizenzfrei.',
-      heroScroll: 'Zur Arbeit', heroBtn: 'Custom Music & Audio',
-      pill1: '100% Exklusiv', pill2: 'Keine Lizenzgebühren', pill3: 'Barcelona',
-      trust: ['Videoproduktion', 'Originalmusik', 'Sounddesign', 'Sonic Branding', '100% Exklusiv', 'Lizenzfrei', 'Studio in Barcelona'],
-      workEyebrow: 'Reels', workTitleMain: 'Ausgewählte', workTitleIt: 'Arbeiten.',
-      whyEyebrow: 'Das Studio', whyTitleMain: 'Alles unter', whyTitleIt: 'einem Dach.',
-      whyLede: 'Eigenes Studio in Barcelona — Stadt der Kunst und Musik — mit modernster Technologie und Qualität. Wir produzieren jedes Stück vollständig in-house, vom ersten Klang bis zum finalen Master.',
-      pillars: [
-        { title: 'Studio in Barcelona.', body: 'Akustisch behandelte Räume, Referenz-Monitoring und eine kuratierte Sammlung physischer Instrumente bereit zur Aufnahme.' },
-        { title: '100% Exklusiv.', body: 'Jedes Stück von Grund auf für dein Projekt komponiert. Keine Bibliotheken, kein Stock, niemals wiederverwendet.' },
-        { title: 'Keine Lizenzgebühren.', body: 'Die Musik gehört dir. Für immer. Keine Lizenzen, keine Verlängerungen, keine Vermittler.' },
-        { title: 'Zusätzliches Video.', body: 'Als ergänzenden Service bieten wir auch die komplette Videoproduktion (VSLs und Anzeigen) mit unserer Originalmusik an.' },
-      ],
-      contactTitleMain: 'Sichern Sie Ihr', contactTitleIt: 'Projekt.',
-      contactAside: 'Erzählen Sie uns, woran Sie arbeiten. Wir antworten mit einem ersten klanglichen Konzept und Zeitplan.',
-      formType: 'Projekttyp',
-      formOptions: ['Originalmusik (Custom Score)', 'Videoproduktion', 'Audioproduktion', 'Sonic Branding (Audio-Logo)', 'Sonstiges / Allgemeine Anfrage'],
-      work: [
-        { titleMain: 'Roma', titleIt: 'Spider', index: '01 / Ferrari', meta1: 'Automotive', meta2: 'Rock-Score', year: '2025', desc: 'Roher, kraftvoller Rock im Texas-Stil. E-Gitarren, Live-Schlagzeug und ein Bass, der den Schnitt vorantreibt wie ein Motor im sechsten Gang.', vimeoId: '1192292542' },
-        { titleMain: 'Maison', titleIt: 'Perfume', index: '02 / Dior', meta1: 'Parfümerie', meta2: 'Stimme & Gitarre', year: '2026', desc: 'Eine weibliche Stimme schwebt über einer paradiesischen Gitarre. Eigens für diese Kampagne geschrieben.', vimeoId: '1192292538' },
-        { titleMain: 'Dune', titleIt: 'Taxi', index: '03 / BMW', meta1: 'Automotive', meta2: 'Wüsten-Score', year: '2026', desc: 'Raue elektronische Beats und wuchtige Wüsten-Percussion, komponiert um die xDrive-Traktion an ihre Grenzen zu bringen.', vimeoId: '1200779757' },
-        { titleMain: 'Dark', titleIt: 'Cinematic', index: '04 / Fashion Film', meta1: 'Mode & Luxus', meta2: 'Sounddesign & Synthesizer', year: '2026', desc: 'Eine dunkle, elegante visuelle Reise in einer tiefen elektronischen Atmosphäre — komplett neu komponiertes Sounddesign.', vimeoId: '1200905700' },
-      ],
-    },
-  },
-  fr: {
-    shared: {
-      langCode: 'FR', founderEyebrow: 'Qui nous sommes', founderTitleMain: 'Le', founderTitleIt: 'Founder.',
-      founderQuoteMain: 'Chaque marque', founderQuoteIt: 'mérite', founderQuoteEnd: ' la même exigence pour son son et sa communication.',
-      founderRole: 'Founder — LA 27', contactDirect: 'Ou écrivez-nous directement', contactStatus: 'Réponse sous 24h', contactNocost: 'Devis personnalisé · Sans engagement',
-      formName: 'Nom', formEmail: 'Email', formCompany: 'Entreprise', formMessage: 'Message', formSubmit: 'Envoyer', formTypePh: '— Sélectionner un service —',
-      footerMastered: 'Mastered in Barcelona',
-    },
-    gateway: {
-      tagline: 'Deux divisions. Un seul studio.',
-      marketingTitle: 'Marketing', marketingDesc: "Campagnes d'email marketing B2B et B2C à forte conversion pour tout type d'entreprise.", marketingCta: 'Lancer une Campagne',
-      produccionTitle: 'Production', produccionDesc: 'Musique originale, production audio et vidéo haut de gamme pour films, publicités et marques.', produccionCta: 'Voir la Production',
-    },
-    marketing: {
-      navWork: 'Solutions', navWhy: 'Technologie', navFounder: 'Founder', navContact: 'Contact',
-      founderBio: "Tim Helmes est passionné de technologie et de données. En appliquant cette même précision à l'acquisition de clients, il a créé la division marketing de LA 27 : des campagnes B2B et B2C à forte conversion, appuyées sur des contacts du monde entier grâce à notre propre technologie — le tout coordonné depuis le studio à Barcelone.",
-      heroBadge: 'Division — Marketing', heroTitleMain: 'Haute', heroTitleIt: 'Délivrabilité.',
-      heroSub: "Campagnes d'email marketing à forte conversion pour tout type d'entreprise — B2B et B2C. Bases de données propres, vérifiées à 100%, sans bots.",
-      heroScroll: 'Comment ça marche', heroBtn: 'Lancer une Campagne',
-      pill1: '100% Vérifié', pill2: 'Zéro Spam / Bots', pill3: 'Délivrabilité 99.8%',
-      trust: ['Email Marketing', 'Audiences Vérifiées', '0% Spam & Bots', 'Bases B2B & B2C', 'Délivrabilité 99.8%', "Tous Secteurs", 'Barcelone'],
-      howEyebrow: 'Comment ça marche', howTitleMain: 'De votre idée à', howTitleIt: 'leur boîte mail.',
-      flowLabelRaw: "Tout l'internet", flowLabelFilter: 'Filtre en temps réel', flowLabelReal: 'Contacts réels',
-      compareThemTitle: 'Comment font les autres', compareThemSub: 'Sans filtre', compareThemResult: 'Bots, spam, rebonds', compareUsTitle: 'Comment on fait chez LA 27',
-      sampleContacts: ['B2C · Maria, 34 · Barcelone · Fan de concerts indie', 'B2B · Carlos, 41 · CTO, Logiciel, Madrid', 'B2C · Laura, 27 · Valence · Achète des compléments en ligne', 'B2B · Jordi, 38 · Resp. achats, Retail', 'B2C · Ana, 22 · Séville · Suit des marques de mode', 'B2B · Marta, 45 · Directrice RH, Bilbao', 'B2C · Pol, 30 · Gérone · Achète en ligne chaque semaine', 'B2B · Sergio, 37 · Fondateur startup SaaS, Málaga'],
-      steps: [
-        { title: 'Vous nous dites qui vous cherchez', desc: 'Envoyez-nous votre propre base de données ou décrivez le profil client recherché — quel que soit votre secteur.' },
-        { title: 'Nous recherchons et segmentons', desc: 'Nous croisons vos critères avec nos bases de données mondiales B2B et B2C : âge, localisation, intérêts, secteur — une précision extrême pour tout secteur.' },
-        { title: 'Nous lançons avec des données 100% réelles', desc: 'Chaque contact est validé en temps réel. Zéro bot, zéro spam — uniquement des personnes réelles et actives qui correspondent à votre cible.' },
-      ],
-      workEyebrow: 'Solutions', workTitleMain: 'Couverture totale,', workTitleIt: 'B2B et B2C.',
-      workNote: "Quel que soit votre secteur ou votre activité, demandez-nous — on vous dira exactement combien de contacts nous avons pour vous.",
-      tiles: [
-        { tag: 'B2C', title: "D'entreprise à consommateur", desc: "Contacts réels de personnes qui achètent, dans toute tranche d'âge, région et centre d'intérêt — dans tout pays." },
-        { tag: 'B2B', title: "D'entreprise à entreprise", desc: "Contacts réels de décideurs dans tout secteur et toute industrie, segmentés par poste, taille d'entreprise et région." },
-      ],
-      whyEyebrow: 'Technologie', whyTitleMain: 'Délivrabilité', whyTitleIt: 'garantie.',
-      whyLede: "Notre infrastructure technique combine validation des emails en temps réel, rotation d'IP propres et préchauffage de domaines pour contourner les filtres anti-spam.",
-      pillars: [
-        { title: '0% Spam / Bots', body: 'Chaque contact est activement nettoyé, vérifié et validé en temps réel avant tout envoi.' },
-        { title: 'Ciblage', body: 'Nous filtrons et ciblons votre campagne exactement selon la démographie et la région dont votre entreprise a besoin.' },
-        { title: 'Haute Délivrabilité', body: 'Configuration et préchauffage sécurisés des domaines (SPF, DKIM, DMARC) pour des taux d\'ouverture supérieurs à 60%.' },
-        { title: 'Copywriting Conversationnel', body: 'Rédaction claire et directe, adaptée à la langue locale, pensée pour susciter l\'intérêt sans être intrusive.' },
-      ],
-      contactTitleMain: 'Lancez votre', contactTitleIt: 'Campagne.',
-      contactAside: 'Dites-nous quelle est votre cible, dans tout secteur. Nous répondrons avec une proposition de volume et de stratégie, sans engagement.',
-      formType: 'Type de campagne',
-      formOptions: ['Campagne B2B', 'Campagne B2C', 'Enrichissement de Données', 'Autre / Demande générale'],
-    },
-    produccion: {
-      navWork: 'Travaux', navWhy: 'Studio', navFounder: 'Founder', navContact: 'Contact',
-      founderBio: "Tim Helmes est un multi-instrumentiste passionné de musique. De cette passion est née LA 27 Productions, le studio de production musicale et vidéo à Barcelone où chaque pièce est composée et enregistrée à partir de zéro, avec nos propres instruments et la plus haute exigence sonore.",
-      heroTitleMain: 'Son', heroTitleIt: 'de Luxe.',
-      heroSub: "Studio de musique originale exclusive de la plus haute qualité pour les marques, les agences et le cinéma. Composée sur mesure, 100% exclusive et libre de droits.",
-      heroScroll: 'Voir le travail', heroBtn: 'Custom Music & Audio',
-      pill1: '100% Exclusif', pill2: 'Sans Droits', pill3: 'Barcelone',
-      trust: ['Production Vidéo', 'Musique Originale', 'Sound Design', 'Sonic Branding', '100% Exclusif', 'Sans Droits', 'Studio à Barcelone'],
-      workEyebrow: 'Reels', workTitleMain: 'Travaux', workTitleIt: 'Sélectionnés.',
-      whyEyebrow: 'Le Studio', whyTitleMain: 'Tout sous', whyTitleIt: 'un même toit.',
-      whyLede: "Studio propre à Barcelone — ville de l'art et de la musique — avec la technologie et la qualité les plus avancées. Nous produisons chaque pièce entièrement en interne, du premier son au master final.",
-      pillars: [
-        { title: 'Studio à Barcelone.', body: "Salles traitées acoustiquement, monitoring de référence et une collection d'instruments physiques prêts à enregistrer." },
-        { title: '100% Exclusif.', body: 'Chaque pièce composée à partir de zéro pour votre projet. Sans bibliothèques, sans stock, jamais réutilisée.' },
-        { title: 'Sans Droits.', body: 'La musique est à vous. Pour toujours. Sans licences, sans renouvellements, sans intermédiaires.' },
-        { title: 'Vidéo Additionnelle.', body: 'Nous proposons également la production vidéo complète (VSLs et publicités) comme service complémentaire avec notre musique.' },
-      ],
-      contactTitleMain: 'Réservez votre', contactTitleIt: 'Projet.',
-      contactAside: 'Dites-nous sur quoi vous travaillez. Nous reviendrons avec une première approche sonore et une proposition de calendrier.',
-      formType: 'Type de projet',
-      formOptions: ['Musique Originale (Custom Score)', 'Production Vidéo', 'Production Audio', 'Sonic Branding (Logo Audio)', 'Autre / Demande générale'],
-      work: [
-        { titleMain: 'Roma', titleIt: 'Spider', index: '01 / Ferrari', meta1: 'Automobile', meta2: 'Score Rock', year: '2025', desc: 'Rock texan brut et puissant. Guitares électriques, batterie live et une basse qui pousse le montage comme un moteur en sixième.', vimeoId: '1192292542' },
-        { titleMain: 'Maison', titleIt: 'Perfume', index: '02 / Dior', meta1: 'Parfumerie', meta2: 'Voix & Guitare', year: '2026', desc: 'Une voix féminine suspendue sur une guitare paradisiaque. Écrit uniquement pour cette campagne.', vimeoId: '1192292538' },
-        { titleMain: 'Dune', titleIt: 'Taxi', index: '03 / BMW', meta1: 'Automobile', meta2: 'Score Désert', year: '2026', desc: 'Des rythmes électroniques bruts et des percussions désertiques puissantes, conçus pour pousser la traction xDrive à ses limites.', vimeoId: '1200779757' },
-        { titleMain: 'Dark', titleIt: 'Cinematic', index: '04 / Fashion Film', meta1: 'Mode & Luxe', meta2: 'Sound Design & Synthés', year: '2026', desc: 'Un voyage visuel sombre et élégant dans une atmosphère électronique profonde — sound design entièrement recomposé.', vimeoId: '1200905700' },
-      ],
-    },
-  },
-  pt: {
-    shared: {
-      langCode: 'PT', founderEyebrow: 'Quem somos', founderTitleMain: 'O', founderTitleIt: 'Founder.',
-      founderQuoteMain: 'Cada marca', founderQuoteIt: 'merece', founderQuoteEnd: ' o mesmo nível de exigência no seu som e na sua comunicação.',
-      founderRole: 'Founder — LA 27', contactDirect: 'Ou escreve-nos diretamente', contactStatus: 'Resposta em menos de 24h', contactNocost: 'Orçamento personalizado · Sem compromisso',
-      formName: 'Nome', formEmail: 'Email', formCompany: 'Empresa', formMessage: 'Mensagem', formSubmit: 'Enviar', formTypePh: '— Seleciona um serviço —',
-      footerMastered: 'Mastered in Barcelona',
-    },
-    gateway: {
-      tagline: 'Duas divisões. Um só estúdio.',
-      marketingTitle: 'Marketing', marketingDesc: 'Campanhas de email marketing B2B e B2C de alta conversão para qualquer tipo de negócio.', marketingCta: 'Criar Campanha',
-      produccionTitle: 'Produção', produccionDesc: 'Música original, produção de áudio e vídeo de altíssima qualidade para filmes, anúncios e marcas.', produccionCta: 'Ver Produção',
-    },
-    marketing: {
-      navWork: 'Soluções', navWhy: 'Tecnologia', navFounder: 'Founder', navContact: 'Contacto',
-      founderBio: 'Tim Helmes é apaixonado por tecnologia e dados. Aplicando essa mesma precisão à captação de clientes, criou a divisão de marketing da LA 27: campanhas B2B e B2C de alta conversão, apoiadas em contactos de todo o mundo graças à nossa própria tecnologia — tudo coordenado a partir do estúdio em Barcelona.',
-      heroBadge: 'Divisão — Marketing', heroTitleMain: 'Alta', heroTitleIt: 'Entregabilidade.',
-      heroSub: 'Campanhas de email marketing de alta conversão para qualquer tipo de negócio — B2B e B2C. Bases de dados próprias, 100% verificadas, livres de bots.',
-      heroScroll: 'Como funciona', heroBtn: 'Criar Campanha',
-      pill1: '100% Verificado', pill2: 'Zero Spam / Bots', pill3: 'Entregabilidade 99.8%',
-      trust: ['Email Marketing', 'Audiências Verificadas', '0% Spam & Bots', 'Bases B2B & B2C', 'Entregabilidade 99.8%', 'Qualquer Setor', 'Barcelona'],
-      howEyebrow: 'Como funciona', howTitleMain: 'Da tua ideia à', howTitleIt: 'caixa de entrada.',
-      flowLabelRaw: 'Toda a internet', flowLabelFilter: 'Filtro em tempo real', flowLabelReal: 'Contactos reais',
-      compareThemTitle: 'Como os outros fazem', compareThemSub: 'Sem filtro', compareThemResult: 'Bots, spam, bounces', compareUsTitle: 'Como fazemos na LA 27',
-      sampleContacts: ['B2C · Maria, 34 · Barcelona · Fã de concertos indie', 'B2B · Carlos, 41 · CTO, Software, Madrid', 'B2C · Laura, 27 · Valência · Compra suplementos online', 'B2B · Jordi, 38 · Diretor de Compras, Retalho', 'B2C · Ana, 22 · Sevilha · Segue marcas de moda', 'B2B · Marta, 45 · Diretora de RH, Bilbau', 'B2C · Pol, 30 · Girona · Compra online semanalmente', 'B2B · Sergio, 37 · Fundador startup SaaS, Málaga'],
-      steps: [
-        { title: 'Dizes-nos quem procuras', desc: 'Envias-nos a tua própria base de dados ou descreves o perfil de cliente que precisas — seja qual for o teu setor.' },
-        { title: 'Procuramos e segmentamos', desc: 'Cruzamos os teus critérios com as nossas bases de dados globais B2B e B2C: idade, localização, interesses, tipo de negócio — hiperprecisão para qualquer indústria.' },
-        { title: 'Lançamos com dados 100% reais', desc: 'Cada contacto é validado em tempo real. Zero bots, zero spam — apenas pessoas reais e ativas que correspondem ao que procuras.' },
-      ],
-      workEyebrow: 'Soluções', workTitleMain: 'Cobertura total,', workTitleIt: 'B2B e B2C.',
-      workNote: 'Seja qual for o teu negócio ou setor, pergunta-nos — dizemos-te exatamente quantos contactos temos para ti.',
-      tiles: [
-        { tag: 'B2C', title: 'De empresa a consumidor', desc: 'Contactos reais de pessoas que compram, em qualquer faixa etária, localização e interesse — em qualquer país.' },
-        { tag: 'B2B', title: 'De empresa a empresa', desc: 'Contactos reais de decisores em qualquer setor e indústria, segmentados por cargo, dimensão da empresa e localização.' },
-      ],
-      whyEyebrow: 'Tecnologia', whyTitleMain: 'Entregabilidade', whyTitleIt: 'garantida.',
-      whyLede: 'A nossa infraestrutura técnica combina validação de emails em tempo real, rotação de IPs limpos e aquecimento de domínios para superar filtros de spam.',
-      pillars: [
-        { title: '0% Spam / Bots', body: 'Todos os contactos são limpos, verificados e validados ativamente em tempo real antes de qualquer envio.' },
-        { title: 'Segmentação', body: 'Filtramos e direcionamos a tua campanha exatamente ao perfil demográfico e região que o teu negócio precisa.' },
-        { title: 'Alta Entregabilidade', body: 'Configuração e aquecimento seguro de domínios (SPF, DKIM, DMARC) para taxas de abertura acima de 60%.' },
-        { title: 'Copy Conversacional', body: 'Redação limpa e direta, adaptada ao idioma local, escrita para gerar interesse sem ser intrusiva.' },
-      ],
-      contactTitleMain: 'Inicia a tua', contactTitleIt: 'Campanha.',
-      contactAside: 'Diz-nos qual é o teu público-alvo, em qualquer setor. Respondemos com uma proposta de volume e abordagem, sem compromisso.',
-      formType: 'Tipo de campanha',
-      formOptions: ['Campanha B2B', 'Campanha B2C', 'Enriquecimento de Dados', 'Outro / Consulta geral'],
-    },
-    produccion: {
-      navWork: 'Trabalho', navWhy: 'Estúdio', navFounder: 'Founder', navContact: 'Contacto',
-      founderBio: 'Tim Helmes é multi-instrumentista e apaixonado por música. Dessa paixão nasceu a LA 27 Productions, o estúdio de produção de música e vídeo em Barcelona onde cada peça é composta e gravada do zero, com instrumentos próprios e a máxima exigência sonora.',
-      heroTitleMain: 'Som', heroTitleIt: 'de Luxo.',
-      heroSub: 'Estúdio de música original exclusiva de altíssima qualidade para marcas, agências e cinema. Composta do zero, 100% exclusiva e livre de royalties.',
-      heroScroll: 'Ver trabalho', heroBtn: 'Custom Music & Audio',
-      pill1: '100% Exclusivo', pill2: 'Sem Royalties', pill3: 'Barcelona',
-      trust: ['Produção de Vídeo', 'Música Original', 'Desenho de Som', 'Sonic Branding', '100% Exclusivo', 'Sem Royalties', 'Estúdio em Barcelona'],
-      workEyebrow: 'Reels', workTitleMain: 'Trabalho', workTitleIt: 'Selecionado.',
-      whyEyebrow: 'O Estúdio', whyTitleMain: 'Tudo sob', whyTitleIt: 'um mesmo teto.',
-      whyLede: 'Estúdio próprio em Barcelona — cidade da arte e da música — com a tecnologia e a qualidade mais avançadas. Produzimos cada peça inteiramente in-house, desde o primeiro som até ao master final.',
-      pillars: [
-        { title: 'Estúdio em Barcelona.', body: 'Instalações tratadas acusticamente, monitorização de referência e uma coleção de instrumentos físicos pronta para gravar.' },
-        { title: '100% Exclusivo.', body: 'Cada peça composta do zero para o teu projeto. Sem bibliotecas, sem stock, nunca reutilizada.' },
-        { title: 'Sem Royalties.', body: 'A música é tua. Para sempre. Sem licenças, sem renovações, sem intermediários.' },
-        { title: 'Vídeo Adicional.', body: 'Também oferecemos produção completa de vídeo (VSLs e anúncios) como serviço complementar com a nossa música.' },
-      ],
-      contactTitleMain: 'Garante o teu', contactTitleIt: 'Projeto.',
-      contactAside: 'Conta-nos no que estás a trabalhar. Respondemos com uma primeira abordagem sonora e proposta de tempos.',
-      formType: 'Tipo de projeto',
-      formOptions: ['Música Original (Custom Score)', 'Produção de Vídeo', 'Produção de Áudio', 'Sonic Branding (Audio Logo)', 'Outro / Consulta geral'],
-      work: [
-        { titleMain: 'Roma', titleIt: 'Spider', index: '01 / Ferrari', meta1: 'Automotivo', meta2: 'Rock Score', year: '2025', desc: 'Rock estilo Texas, cru e poderoso. Guitarras elétricas, bateria ao vivo e um baixo que empurra o corte como um motor em sexta.', vimeoId: '1192292542' },
-        { titleMain: 'Maison', titleIt: 'Perfume', index: '02 / Dior', meta1: 'Perfumaria', meta2: 'Voz & Guitarra', year: '2026', desc: 'Uma voz feminina suspensa sobre uma guitarra de paraíso. Escrito apenas para esta campanha.', vimeoId: '1192292538' },
-        { titleMain: 'Dune', titleIt: 'Taxi', index: '03 / BMW', meta1: 'Automotivo', meta2: 'Desert Score', year: '2026', desc: 'Batidas eletrónicas áridas e percussões fortes desenhadas para levar a tração xDrive ao limite.', vimeoId: '1200779757' },
-        { titleMain: 'Dark', titleIt: 'Cinematic', index: '04 / Fashion Film', meta1: 'Moda & Luxo', meta2: 'Desenho de Som & Sintetizadores', year: '2026', desc: 'Uma viagem visual escura e elegante envolta numa atmosfera eletrónica profunda, reconstruída do zero.', vimeoId: '1200905700' },
-      ],
-    },
-  },
-};
 
 const SoundEngine = (() => {
   let ctx = null, analyser = null;
@@ -847,8 +400,775 @@ const SoundEngine = (() => {
   return { play, isEnabled, setEnabled, init };
 })();
 
+
+const DICT = {
+  "es": {
+    "shared": {
+      "langCode": "ES",
+      "founderEyebrow": "Quiénes somos",
+      "founderTitleMain": "El",
+      "founderTitleIt": "Founder.",
+      "founderQuoteMain": "Cada empresa",
+      "founderQuoteIt": "merece",
+      "founderQuoteEnd": " acceso directo a clientes reales y a audiencias de alta conversión en toda Europa.",
+      "founderRole": "Founder — LA 27",
+      "contactDirect": "O escríbenos directamente",
+      "contactStatus": "Respuesta en menos de 24h",
+      "contactNocost": "Presupuesto personalizado · Sin compromiso",
+      "formName": "Nombre",
+      "formEmail": "Email",
+      "formCompany": "Empresa",
+      "formMessage": "Mensaje",
+      "formSubmit": "Enviar",
+      "formTypePh": "— Selecciona un sector / servicio —",
+      "footerMastered": "Desarrollado en Barcelona"
+    },
+    "marketing": {
+      "navWork": "Sectores",
+      "navWhy": "Tecnología",
+      "navFounder": "Founder",
+      "navContact": "Contacto",
+      "founderBio": "Tim Helmes es un apasionado de la tecnología y los datos. Aplicando esa precisión técnica a la captación y adquisición de clientes, construyó LA 27: campañas de email outreach y audiencias B2B y B2C de alta entregabilidad, con bases verificadas en tiempo real y cobertura directa en toda Europa — todo coordinado desde Barcelona.",
+      "heroBadge": "Email Outreach & Audiencias · Cobertura Europea",
+      "heroTitleMain": "Alta",
+      "heroTitleIt": "Entregabilidad.",
+      "heroSub": "Campañas de email outreach y adquisición de clientes de alta conversión para empresas en toda Europa. Trabajamos con agencias y promotores en todo el continente.",
+      "heroScroll": "Cómo funciona",
+      "heroBtn": "Crear Campaña",
+      "pill1": "100% Verificado",
+      "pill2": "Cero Spam / Bots",
+      "pill3": "Entregabilidad 99.8%",
+      "trust": [
+        "Email Marketing",
+        "Audiencias Verificadas",
+        "0% Spam & Bots",
+        "B2B & B2C Outreach",
+        "Clientes en toda Europa",
+        "Entregabilidad 99.8%",
+        "Cualquier Sector",
+        "Barcelona"
+      ],
+      "howEyebrow": "Cómo funciona",
+      "howTitleMain": "De tu propuesta a",
+      "howTitleIt": "su bandeja de entrada.",
+      "flowLabelRaw": "Todo internet",
+      "flowLabelFilter": "Filtro en tiempo real",
+      "flowLabelReal": "Contactos reales",
+      "compareThemTitle": "Así lo hacen otros",
+      "compareThemSub": "Sin filtro previo",
+      "compareThemResult": "Bots, spam, rebotes",
+      "compareUsTitle": "Así lo hacemos en LA 27",
+      "sampleContacts": [
+        "Eventos · Laura, 31 · Promotora de Festivales, Berlín",
+        "E-commerce · Marc, 39 · Director Digital Retail, Barcelona",
+        "Gastronomía · Sophie, 42 · Resp. Compras Cadena Restauración, París",
+        "Deporte · Lukas, 35 · Operaciones Cadena Fitness, Viena",
+        "Educación · Elena, 38 · Admisiones Business School, Madrid",
+        "Turismo · Jan, 44 · Marketing Operador Hotelero, Ámsterdam"
+      ],
+      "steps": [
+        {
+          "title": "Nos cuentas a quién buscas",
+          "desc": "Nos envías tu base de datos o nos defines el perfil de cliente ideal que necesitas para tu sector o región."
+        },
+        {
+          "title": "Buscamos y segmentamos",
+          "desc": "Cruzamos tus criterios con bases de datos B2B y B2C verificadas: cargo, sector, volumen de facturación o intereses específicos."
+        },
+        {
+          "title": "Lanzamos con datos 100% reales",
+          "desc": "Cada contacto se valida en tiempo real. Cero rebotes innecesarios, superando filtros de spam para que tu mensaje llegue a personas de verdad."
+        }
+      ],
+      "workEyebrow": "Ejemplos de Campañas",
+      "workTitleMain": "Estrategias adaptadas",
+      "workTitleIt": "a cada sector.",
+      "workNote": "Ejemplos representativos de tipos de campaña y flujos de outreach según la industria. Diseñamos cada acción a medida.",
+      "tiles": [
+        {
+          "tag": "Ejemplo de Campaña",
+          "title": "Eventos y Cultura",
+          "desc": "Conexión con promotores, programadores y agencias de booking en toda Europa para venta de entradas y giras."
+        },
+        {
+          "tag": "Ejemplo de Campaña",
+          "title": "Comercio y E-commerce",
+          "desc": "Reactivación de compradores cualificados, acuerdos con distribuidores mayoristas y captación de clientes de alto valor."
+        },
+        {
+          "tag": "Ejemplo de Campaña",
+          "title": "Gastronomía y Hostelería",
+          "desc": "Outreach para reservas de grupos corporativos, acuerdos con distribuidores horeca y captación de turismo gastronómico."
+        },
+        {
+          "tag": "Ejemplo de Campaña",
+          "title": "Deporte y Fitness",
+          "desc": "Campañas de fidelización para clubes, venta de membresías anuales y acuerdos B2B con empresas para planes de bienestar."
+        },
+        {
+          "tag": "Ejemplo de Campaña",
+          "title": "Formación y Educación",
+          "desc": "Captación de admisiones para masters, cursos ejecutivos y formación in-company para departamentos de recursos humanos."
+        },
+        {
+          "tag": "Ejemplo de Campaña",
+          "title": "Turismo y Viajes",
+          "desc": "Campañas estacionales para cadenas hoteleras, experiencias exclusivas y convenios corporativos para agencias de viajes."
+        }
+      ],
+      "whyEyebrow": "Tecnología",
+      "whyTitleMain": "Entregabilidad",
+      "whyTitleIt": "garantizada.",
+      "whyLede": "Nuestra infraestructura técnica combina validación de correos en tiempo real, rotación de IPs limpias y calentamiento de dominios para asegurar que el mensaje llegue a la bandeja principal.",
+      "pillars": [
+        {
+          "title": "0% Spam / Bots",
+          "body": "Todos los contactos se limpian, verifican y validan activamente en tiempo real antes de cualquier envío."
+        },
+        {
+          "title": "Segmentación",
+          "body": "Filtramos y dirigimos tu campaña exactamente al perfil demográfico, cargo o región que tu negocio necesita."
+        },
+        {
+          "title": "Alta Entregabilidad",
+          "body": "Configuración técnica impecable (SPF, DKIM, DMARC) y rotación segura para tasas de apertura superiores al 50-60%."
+        },
+        {
+          "title": "Copy Conversacional",
+          "body": "Redacción personalizada y directa adaptada al idioma local, escrita para generar conversaciones y conversiones reales."
+        }
+      ],
+      "contactTitleMain": "Inicia tu",
+      "contactTitleIt": "Campaña.",
+      "contactAside": "Trabajamos con agencias, promotores y marcas en toda Europa. Cuéntanos qué perfil necesitas y te respondemos con un plan a medida.",
+      "formType": "Sector / Tipo de campaña",
+      "formOptions": [
+        "Eventos y Cultura",
+        "Comercio y E-commerce",
+        "Gastronomía y Hostelería",
+        "Deporte y Fitness",
+        "Formación y Educación",
+        "Turismo y Viajes",
+        "Otro / Consulta general"
+      ]
+    }
+  },
+  "en": {
+    "shared": {
+      "langCode": "EN",
+      "founderEyebrow": "Who we are",
+      "founderTitleMain": "The",
+      "founderTitleIt": "Founder.",
+      "founderQuoteMain": "Every brand",
+      "founderQuoteIt": "deserves",
+      "founderQuoteEnd": " direct access to verified decision-makers and high-converting audiences across Europe.",
+      "founderRole": "Founder — LA 27",
+      "contactDirect": "Or write to us directly",
+      "contactStatus": "Reply within 24h",
+      "contactNocost": "Custom proposal · No commitment",
+      "formName": "Name",
+      "formEmail": "Email",
+      "formCompany": "Company",
+      "formMessage": "Message",
+      "formSubmit": "Send",
+      "formTypePh": "— Select an industry / campaign type —",
+      "footerMastered": "Developed in Barcelona"
+    },
+    "marketing": {
+      "navWork": "Industries",
+      "navWhy": "Technology",
+      "navFounder": "Founder",
+      "navContact": "Contact",
+      "founderBio": "Tim Helmes is passionate about data and outreach technology. Applying that precision to client acquisition, he built LA 27: high-deliverability email outreach and B2B/B2C audience campaigns, backed by real-time verification and European-wide coverage — all orchestrated from Barcelona.",
+      "heroBadge": "Email Outreach & Audiences · Pan-European Reach",
+      "heroTitleMain": "High",
+      "heroTitleIt": "Deliverability.",
+      "heroSub": "High-converting email outreach and client acquisition campaigns across Europe. We work with agencies and promoters throughout the continent.",
+      "heroScroll": "How it works",
+      "heroBtn": "Start a Campaign",
+      "pill1": "100% Verified",
+      "pill2": "Zero Spam / Bots",
+      "pill3": "99.8% Deliverability",
+      "trust": [
+        "Email Marketing",
+        "Verified Audiences",
+        "0% Spam & Bots",
+        "B2B & B2C Outreach",
+        "Clients across Europe",
+        "99.8% Deliverability",
+        "Any Industry",
+        "Barcelona"
+      ],
+      "howEyebrow": "How it works",
+      "howTitleMain": "From your pitch to",
+      "howTitleIt": "their inbox.",
+      "flowLabelRaw": "All of the internet",
+      "flowLabelFilter": "Real-time filter",
+      "flowLabelReal": "Real contacts",
+      "compareThemTitle": "How others do it",
+      "compareThemSub": "No pre-filtering",
+      "compareThemResult": "Bots, spam, bounces",
+      "compareUsTitle": "How we do it at LA 27",
+      "sampleContacts": [
+        "Events · Laura, 31 · Festival Promoter, Berlin",
+        "E-commerce · Marc, 39 · Head of E-commerce, Barcelona",
+        "Hospitality · Sophie, 42 · Corporate Purchasing Director, Paris",
+        "Sports · Lukas, 35 · Fitness Chain Operations, Vienna",
+        "Education · Elena, 38 · Business School Admissions, Madrid",
+        "Tourism · Jan, 44 · Boutique Hotel Marketing, Amsterdam"
+      ],
+      "steps": [
+        {
+          "title": "You tell us who you're after",
+          "desc": "Send us your existing list or define the exact customer profile and region you wish to reach."
+        },
+        {
+          "title": "We search and segment",
+          "desc": "We cross-reference your criteria against verified databases: industry, job title, company size or consumer buying signals."
+        },
+        {
+          "title": "We launch with 100% real data",
+          "desc": "Every address is validated in real time. Zero bot traffic, zero spam traps — reaching genuine, active decision-makers."
+        }
+      ],
+      "workEyebrow": "Campaign Examples",
+      "workTitleMain": "Tailored outreach",
+      "workTitleIt": "by industry.",
+      "workNote": "Representative campaign formats and workflows by sector. Every deployment is engineered bespoke.",
+      "tiles": [
+        {
+          "tag": "Campaign Example",
+          "title": "Events & Culture",
+          "desc": "Connecting festival promoters, venue programmers, and booking managers across Europe for ticket sales and tours."
+        },
+        {
+          "tag": "Campaign Example",
+          "title": "Commerce & E-commerce",
+          "desc": "Reactivating qualified buyers, building wholesale distribution networks, and acquiring high-LTV customer accounts."
+        },
+        {
+          "tag": "Campaign Example",
+          "title": "Gastronomy & Hospitality",
+          "desc": "Outreach for corporate group bookings, Horeca supplier contracts, and regional culinary tourism."
+        },
+        {
+          "tag": "Campaign Example",
+          "title": "Sports & Fitness",
+          "desc": "Membership drive campaigns for health clubs, corporate wellness partnerships, and athletic brand expansion."
+        },
+        {
+          "tag": "Campaign Example",
+          "title": "Education & Training",
+          "desc": "Student recruitment for executive programs, business master degrees, and corporate upskilling programs."
+        },
+        {
+          "tag": "Campaign Example",
+          "title": "Tourism & Travel",
+          "desc": "Seasonal acquisition for independent hotel collections, experiential luxury retreats, and travel agency partnerships."
+        }
+      ],
+      "whyEyebrow": "Technology",
+      "whyTitleMain": "Guaranteed",
+      "whyTitleIt": "deliverability.",
+      "whyLede": "Our technical infrastructure pairs real-time mailbox validation with clean IP rotation and domain warm-ups to bypass spam filters and land in the primary inbox.",
+      "pillars": [
+        {
+          "title": "0% Spam / Bots",
+          "body": "Every contact is actively scrubbed, tested, and validated in real time before sending."
+        },
+        {
+          "title": "Targeting",
+          "body": "Laser-focused filtering by demographic, exact seniority level, company scale, and geographic region."
+        },
+        {
+          "title": "High Deliverability",
+          "body": "Domain authentication (SPF, DKIM, DMARC) and gradual ramp-ups ensuring consistent 50-60%+ open rates."
+        },
+        {
+          "title": "Conversational Copy",
+          "body": "Concise, localized email copy crafted to spark natural business conversations without feeling intrusive."
+        }
+      ],
+      "contactTitleMain": "Start your",
+      "contactTitleIt": "Campaign.",
+      "contactAside": "We work with agencies, promoters, and businesses across Europe. Tell us your target profile and receive a custom outreach proposal.",
+      "formType": "Industry / Campaign type",
+      "formOptions": [
+        "Events & Culture",
+        "Commerce & E-commerce",
+        "Gastronomy & Hospitality",
+        "Sports & Fitness",
+        "Education & Training",
+        "Tourism & Travel",
+        "Other / General inquiry"
+      ]
+    }
+  },
+  "de": {
+    "shared": {
+      "langCode": "DE",
+      "founderEyebrow": "Wer wir sind",
+      "founderTitleMain": "Der",
+      "founderTitleIt": "Founder.",
+      "founderQuoteMain": "Jedes Unternehmen",
+      "founderQuoteIt": "verdient",
+      "founderQuoteEnd": " direkten Zugang zu verifizierten Entscheidern und konvertierenden Zielgruppen in ganz Europa.",
+      "founderRole": "Founder — LA 27",
+      "contactDirect": "Oder schreiben Sie uns direkt",
+      "contactStatus": "Antwort innerhalb von 24 Std.",
+      "contactNocost": "Individuelles Konzept · Unverbindlich",
+      "formName": "Name",
+      "formEmail": "E-Mail",
+      "formCompany": "Firma",
+      "formMessage": "Nachricht",
+      "formSubmit": "Senden",
+      "formTypePh": "— Branche / Kampagnentyp auswählen —",
+      "footerMastered": "Entwickelt in Barcelona"
+    },
+    "marketing": {
+      "navWork": "Branchen",
+      "navWhy": "Technologie",
+      "navFounder": "Founder",
+      "navContact": "Kontakt",
+      "founderBio": "Tim Helmes ist leidenschaftlich an Outreach-Technologie und Datenarchitektur interessiert. Mit dieser Präzision baute er LA 27 auf: hochgradig zustellbare E-Mail-Kampagnen und B2B/B2C-Audience-Akquise mit Echtzeit-Verifizierung und europaweiter Reichweite — gesteuert aus Barcelona.",
+      "heroBadge": "E-Mail-Outreach & Zielgruppen · Europaweite Reichweite",
+      "heroTitleMain": "Hohe",
+      "heroTitleIt": "Zustellbarkeit.",
+      "heroSub": "Hochkonvertierende E-Mail-Outreach- und Kundengewinnungskampagnen für Unternehmen in ganz Europa. Wir arbeiten mit Agenturen und Veranstaltern auf dem gesamten Kontinent.",
+      "heroScroll": "So funktioniert es",
+      "heroBtn": "Kampagne starten",
+      "pill1": "100% Verifiziert",
+      "pill2": "Keine Bots / Spam",
+      "pill3": "99,8% Zustellbarkeit",
+      "trust": [
+        "E-Mail-Marketing",
+        "Verifizierte Zielgruppen",
+        "0% Spam & Bots",
+        "B2B & B2C Outreach",
+        "Kunden in ganz Europa",
+        "99,8% Zustellbarkeit",
+        "Jede Branche",
+        "Barcelona"
+      ],
+      "howEyebrow": "So funktioniert es",
+      "howTitleMain": "Von Ihrer Idee zum",
+      "howTitleIt": "Posteingang.",
+      "flowLabelRaw": "Das ganze Internet",
+      "flowLabelFilter": "Echtzeit-Filter",
+      "flowLabelReal": "Echte Kontakte",
+      "compareThemTitle": "So machen es andere",
+      "compareThemSub": "Kein Vorfilter",
+      "compareThemResult": "Bots, Spam, Bounces",
+      "compareUsTitle": "So machen wir es bei LA 27",
+      "sampleContacts": [
+        "Events · Laura, 31 · Festivalveranstalterin, Berlin",
+        "E-Commerce · Marc, 39 · E-Commerce-Leiter, Barcelona",
+        "Gastronomie · Sophie, 42 · Einkaufsleiterin Hotelgruppe, Paris",
+        "Sport · Lukas, 35 · Fitnessketten-Betrieb, Wien",
+        "Bildung · Elena, 38 · Zulassungsleitung Business School, Madrid",
+        "Tourismus · Jan, 44 · Marketingleitung Boutique-Hotel, Amsterdam"
+      ],
+      "steps": [
+        {
+          "title": "Sie sagen uns, wen Sie suchen",
+          "desc": "Sie senden uns Ihre Kontaktdaten oder beschreiben das ideale Zielkundenprofil für Ihre Branche und Region."
+        },
+        {
+          "title": "Wir suchen und segmentieren",
+          "desc": "Wir gleichen Ihre Kriterien mit verifizierten B2B- und B2C-Datenbanken ab: Position, Branche, Unternehmensgröße oder Kaufinteressen."
+        },
+        {
+          "title": "Wir starten mit 100% echten Daten",
+          "desc": "Jede Adresse wird in Echtzeit geprüft. Keine Spam-Traps, keine Bots — Ihre Nachricht erreicht echte Ansprechpartner."
+        }
+      ],
+      "workEyebrow": "Kampagnen-Beispiele",
+      "workTitleMain": "Maßgeschneidert für",
+      "workTitleIt": "jede Branche.",
+      "workNote": "Beispielhafte Kampagnentypen und Outreach-Strukturen nach Sektor. Jede Kampagne wird individuell aufgesetzt.",
+      "tiles": [
+        {
+          "tag": "Kampagnen-Beispiel",
+          "title": "Events & Kultur",
+          "desc": "Vernetzung mit Konzertveranstaltern, Festival-Bookern und Kulturagenturen in ganz Europa für Vorverkauf und Tourneen."
+        },
+        {
+          "tag": "Kampagnen-Beispiel",
+          "title": "Handel & E-Commerce",
+          "desc": "Reaktivierung kaufkräftiger Kunden, Aufbau von B2B-Händlernetzen und Neukundengewinnung mit hohem Warenkorbwert."
+        },
+        {
+          "tag": "Kampagnen-Beispiel",
+          "title": "Gastronomie & Hotellerie",
+          "desc": "Outreach für Firmenbuchungen, exklusive Gruppenevents sowie B2B-Kooperationen mit Großhändlern."
+        },
+        {
+          "tag": "Kampagnen-Beispiel",
+          "title": "Sport & Fitness",
+          "desc": "Mitgliedergewinnung für Premium-Studios, Corporate-Fitness-Angebote für Unternehmen und Sportevents."
+        },
+        {
+          "tag": "Kampagnen-Beispiel",
+          "title": "Aus- & Weiterbildung",
+          "desc": "Bewerbergewinnung für Executive-Programme, Masterstudiengänge und Weiterbildungsprogramme für HR-Entscheider."
+        },
+        {
+          "tag": "Kampagnen-Beispiel",
+          "title": "Tourismus & Reisen",
+          "desc": "Saisonale Kampagnen für Hotelketten, Luxusresorts und Kooperationen mit europäischen Reiseveranstaltern."
+        }
+      ],
+      "whyEyebrow": "Technologie",
+      "whyTitleMain": "Garantierte",
+      "whyTitleIt": "Zustellbarkeit.",
+      "whyLede": "Unsere technische Infrastruktur kombiniert Echtzeit-Verifikation, saubere IP-Rotation und Domain-Warming für maximale Posteingangs-Platzierung.",
+      "pillars": [
+        {
+          "title": "0% Spam / Bots",
+          "body": "Alle Kontakte werden aktiv bereinigt, verifiziert und in Echtzeit vor jedem Versand validiert."
+        },
+        {
+          "title": "Segmentierung",
+          "body": "Präzise Ausrichtung auf Branche, Hierarchieebene, Unternehmensgröße und Zielregion."
+        },
+        {
+          "title": "Hohe Zustellbarkeit",
+          "body": "Perfekt konfigurierte DNS-Einträge (SPF, DKIM, DMARC) für Öffnungsraten von über 50-60%."
+        },
+        {
+          "title": "Konversations-Copy",
+          "body": "Klares, unaufdringliches Wording in der jeweiligen Landessprache, fokussiert auf echten geschäftlichen Austausch."
+        }
+      ],
+      "contactTitleMain": "Starten Sie Ihre",
+      "contactTitleIt": "Kampagne.",
+      "contactAside": "Wir arbeiten mit Agenturen und Veranstaltern in ganz Europa. Beschreiben Sie Ihr Vorhaben — wir melden uns mit einem maßgeschneiderten Ansatz.",
+      "formType": "Branche / Kampagnentyp",
+      "formOptions": [
+        "Events & Kultur",
+        "Handel & E-Commerce",
+        "Gastronomie & Hotellerie",
+        "Sport & Fitness",
+        "Aus- & Weiterbildung",
+        "Tourismus & Reisen",
+        "Sonstiges / Allgemeine Anfrage"
+      ]
+    }
+  },
+  "fr": {
+    "shared": {
+      "langCode": "FR",
+      "founderEyebrow": "Qui nous sommes",
+      "founderTitleMain": "Le",
+      "founderTitleIt": "Founder.",
+      "founderQuoteMain": "Chaque entreprise",
+      "founderQuoteIt": "mérite",
+      "founderQuoteEnd": " un accès direct à de vrais décideurs et à des audiences qualifiées dans toute l'Europe.",
+      "founderRole": "Founder — LA 27",
+      "contactDirect": "Ou écrivez-nous directement",
+      "contactStatus": "Réponse sous 24h",
+      "contactNocost": "Proposition sur mesure · Sans engagement",
+      "formName": "Nom",
+      "formEmail": "Email",
+      "formCompany": "Entreprise",
+      "formMessage": "Message",
+      "formSubmit": "Envoyer",
+      "formTypePh": "— Sélectionner un secteur / type de campagne —",
+      "footerMastered": "Développé à Barcelone"
+    },
+    "marketing": {
+      "navWork": "Secteurs",
+      "navWhy": "Technologie",
+      "navFounder": "Founder",
+      "navContact": "Contact",
+      "founderBio": "Tim Helmes est passionné de technologie d'outreach et d'architecture de données. En appliquant cette rigueur à l'acquisition client, il a créé LA 27 : des campagnes d'email marketing et d'audiences B2B/B2C à haute délivrabilité, vérifiées en temps réel et actives sur toute l'Europe — pilotées depuis Barcelone.",
+      "heroBadge": "Email Outreach & Audiences · Envergure Européenne",
+      "heroTitleMain": "Haute",
+      "heroTitleIt": "Délivrabilité.",
+      "heroSub": "Campagnes d'email outreach et d'acquisition client à forte conversion pour les entreprises à travers l'Europe. Nous travaillons avec des agences et des promoteurs sur tout le continent.",
+      "heroScroll": "Comment ça marche",
+      "heroBtn": "Lancer une Campagne",
+      "pill1": "100% Vérifié",
+      "pill2": "Zéro Spam / Bots",
+      "pill3": "Délivrabilité 99.8%",
+      "trust": [
+        "Email Marketing",
+        "Audiences Vérifiées",
+        "0% Spam & Bots",
+        "Outreach B2B & B2C",
+        "Clients dans toute l'Europe",
+        "Délivrabilité 99.8%",
+        "Tous Secteurs",
+        "Barcelone"
+      ],
+      "howEyebrow": "Comment ça marche",
+      "howTitleMain": "De votre proposition à",
+      "howTitleIt": "leur boîte de réception.",
+      "flowLabelRaw": "Tout l'internet",
+      "flowLabelFilter": "Filtre en temps réel",
+      "flowLabelReal": "Contacts réels",
+      "compareThemTitle": "Comment font les autres",
+      "compareThemSub": "Sans pré-filtrage",
+      "compareThemResult": "Bots, spam, rebonds",
+      "compareUsTitle": "Comment on fait chez LA 27",
+      "sampleContacts": [
+        "Événements · Laura, 31 · Promotrice de Festivals, Berlin",
+        "E-commerce · Marc, 39 · Directeur E-commerce, Barcelone",
+        "Gastronomie · Sophie, 42 · Directrice Achats Restauration, Paris",
+        "Sport · Lukas, 35 · Responsable Opérations Fitness, Vienne",
+        "Éducation · Elena, 38 · Admissions École de Commerce, Madrid",
+        "Tourisme · Jan, 44 · Marketing Hôtellerie Boutique, Amsterdam"
+      ],
+      "steps": [
+        {
+          "title": "Vous nous dites qui vous cherchez",
+          "desc": "Transmettez-nous votre fichier ou définissez le profil client cible ainsi que la zone géographique visée."
+        },
+        {
+          "title": "Nous recherchons et segmentons",
+          "desc": "Nous croisons vos critères avec nos bases vérifiées B2B et B2C : poste, secteur, chiffre d'affaires ou comportement d'achat."
+        },
+        {
+          "title": "Nous lançons avec des données 100% réelles",
+          "desc": "Chaque adresse est validée en temps réel. Aucun bot, aucun piège à spam — vos messages parviennent aux vrais décideurs."
+        }
+      ],
+      "workEyebrow": "Exemples de Campagnes",
+      "workTitleMain": "Des stratégies adaptées",
+      "workTitleIt": "à chaque industrie.",
+      "workNote": "Exemples types de formats de campagnes et de parcours d'outreach par secteur. Chaque opération est conçue sur mesure.",
+      "tiles": [
+        {
+          "tag": "Exemple de Campagne",
+          "title": "Événements et Culture",
+          "desc": "Mise en relation avec promoteurs de concerts, directeurs de festivals et agences de booking en Europe pour billetterie et tournées."
+        },
+        {
+          "tag": "Exemple de Campagne",
+          "title": "Commerce et E-commerce",
+          "desc": "Réactivation d'acheteurs qualifiés, accords de distribution B2B et acquisition de clients à fort panier moyen."
+        },
+        {
+          "tag": "Exemple de Campagne",
+          "title": "Gastronomie et Hôtellerie",
+          "desc": "Prospection pour réservations de groupes corporate, partenariats grossistes Horeca et tourisme gastronomique."
+        },
+        {
+          "tag": "Exemple de Campagne",
+          "title": "Sport et Fitness",
+          "desc": "Campagnes d'adhésion pour clubs de sport, conventions bien-être en entreprise et promotion d'événements sportifs."
+        },
+        {
+          "tag": "Exemple de Campagne",
+          "title": "Formation et Éducation",
+          "desc": "Recrutement d'étudiants pour programmes exécutifs, masters spécialisés et formations sur mesure pour directions RH."
+        },
+        {
+          "tag": "Exemple de Campagne",
+          "title": "Tourisme et Voyages",
+          "desc": "Campagnes saisonnières pour chaînes hôtelières, séjours expérientiels et accords avec agences de voyages européennes."
+        }
+      ],
+      "whyEyebrow": "Technologie",
+      "whyTitleMain": "Délivrabilité",
+      "whyTitleIt": "garantie.",
+      "whyLede": "Notre infrastructure associe validation en temps réel, rotation d'adresses IP propres et montée en charge des domaines pour garantir l'arrivée en boîte principale.",
+      "pillars": [
+        {
+          "title": "0% Spam / Bots",
+          "body": "Tous les contacts sont nettoyés, vérifiés et testés activement en temps réel avant tout déploiement."
+        },
+        {
+          "title": "Ciblage",
+          "body": "Filtres précis par secteur d'activité, niveau de responsabilité, taille d'entreprise et région géographique."
+        },
+        {
+          "title": "Haute Délivrabilité",
+          "body": "Paramétrage rigoureux (SPF, DKIM, DMARC) assurant des taux d'ouverture réguliers de 50 à 60%+."
+        },
+        {
+          "title": "Copywriting Conversationnel",
+          "body": "Rédaction soignée et directe adaptée à la langue locale, pensée pour engager une conversation authentique."
+        }
+      ],
+      "contactTitleMain": "Lancez votre",
+      "contactTitleIt": "Campagne.",
+      "contactAside": "Nous travaillons avec des agences et des promoteurs dans toute l'Europe. Partagez votre profil cible pour obtenir une proposition adaptée.",
+      "formType": "Secteur / Type de campagne",
+      "formOptions": [
+        "Événements et Culture",
+        "Commerce et E-commerce",
+        "Gastronomie et Hôtellerie",
+        "Sport et Fitness",
+        "Formation et Éducation",
+        "Tourisme et Voyages",
+        "Autre / Demande générale"
+      ]
+    }
+  },
+  "pt": {
+    "shared": {
+      "langCode": "PT",
+      "founderEyebrow": "Quem somos",
+      "founderTitleMain": "O",
+      "founderTitleIt": "Founder.",
+      "founderQuoteMain": "Cada empresa",
+      "founderQuoteIt": "merece",
+      "founderQuoteEnd": " acesso direto a decisores reais e a audiências de alta conversão em toda a Europa.",
+      "founderRole": "Founder — LA 27",
+      "contactDirect": "Ou escreve-nos diretamente",
+      "contactStatus": "Resposta em menos de 24h",
+      "contactNocost": "Proposta personalizada · Sem compromisso",
+      "formName": "Nome",
+      "formEmail": "Email",
+      "formCompany": "Empresa",
+      "formMessage": "Mensagem",
+      "formSubmit": "Enviar",
+      "formTypePh": "— Seleciona um setor / tipo de campanha —",
+      "footerMastered": "Desenvolvido em Barcelona"
+    },
+    "marketing": {
+      "navWork": "Setores",
+      "navWhy": "Tecnologia",
+      "navFounder": "Founder",
+      "navContact": "Contacto",
+      "founderBio": "Tim Helmes é apaixonado por tecnologia e arquitetura de dados de outreach. Aplicando essa precisão à aquisição de clientes, fundou a LA 27: campanhas de email outreach e audiências B2B/B2C de alta entregabilidade, com validação em tempo real e alcance em toda a Europa — tudo coordenado a partir de Barcelona.",
+      "heroBadge": "Email Outreach & Audiências · Alcance Pan-Europeu",
+      "heroTitleMain": "Alta",
+      "heroTitleIt": "Entregabilidade.",
+      "heroSub": "Campanhas de email outreach e aquisição de clientes de alta conversão para empresas em toda a Europa. Trabalhamos com agências e promotores em todo o continente.",
+      "heroScroll": "Como funciona",
+      "heroBtn": "Criar Campanha",
+      "pill1": "100% Verificado",
+      "pill2": "Zero Spam / Bots",
+      "pill3": "Entregabilidade 99.8%",
+      "trust": [
+        "Email Marketing",
+        "Audiências Verificadas",
+        "0% Spam & Bots",
+        "B2B & B2C Outreach",
+        "Clientes em toda a Europa",
+        "Entregabilidade 99.8%",
+        "Qualquer Setor",
+        "Barcelona"
+      ],
+      "howEyebrow": "Como funciona",
+      "howTitleMain": "Da tua proposta à",
+      "howTitleIt": "caixa de entrada.",
+      "flowLabelRaw": "Toda a internet",
+      "flowLabelFilter": "Filtro em tempo real",
+      "flowLabelReal": "Contactos reais",
+      "compareThemTitle": "Como os outros fazem",
+      "compareThemSub": "Sem pré-filtro",
+      "compareThemResult": "Bots, spam, bounces",
+      "compareUsTitle": "Como fazemos na LA 27",
+      "sampleContacts": [
+        "Eventos · Laura, 31 · Promotora de Festivais, Berlim",
+        "E-commerce · Marc, 39 · Diretor de E-commerce, Barcelona",
+        "Gastronomia · Sophie, 42 · Diretora de Compras Restauração, Paris",
+        "Desporto · Lukas, 35 · Operações de Rede Fitness, Viena",
+        "Educação · Elena, 38 · Admissões Business School, Madrid",
+        "Turismo · Jan, 44 · Marketing Hoteleiro Boutique, Amesterdão"
+      ],
+      "steps": [
+        {
+          "title": "Dizes-nos quem procuras",
+          "desc": "Envias-nos a tua lista de contactos ou descreves o perfil de cliente ideal e mercado geográfico pretendido."
+        },
+        {
+          "title": "Procuramos e segmentamos",
+          "desc": "Cruzamos os teus critérios com bases verificadas B2B e B2C: cargo, setor, dimensão empresarial ou interesses de compra."
+        },
+        {
+          "title": "Lançamos com dados 100% reais",
+          "desc": "Cada endereço é validado em tempo real. Sem tráfego de bots nem spam traps — mensagens entregues a decisores autênticos."
+        }
+      ],
+      "workEyebrow": "Exemplos de Campanhas",
+      "workTitleMain": "Estratégias adaptadas",
+      "workTitleIt": "a cada setor.",
+      "workNote": "Exemplos representativos de tipos de campanha e fluxos de outreach por setor. Cada ação é desenhada à medida.",
+      "tiles": [
+        {
+          "tag": "Exemplo de Campanha",
+          "title": "Eventos e Cultura",
+          "desc": "Conexão com promotores de concertos, programadores de festivais e agências de booking na Europa para bilheteira e digressões."
+        },
+        {
+          "tag": "Exemplo de Campanha",
+          "title": "Comércio e E-commerce",
+          "desc": "Reativação de compradores qualificados, parcerias de distribuição grossista e aquisição de clientes com elevado valor médio."
+        },
+        {
+          "tag": "Exemplo de Campanha",
+          "title": "Gastronomia e Hotelaria",
+          "desc": "Outreach para reservas corporativas, acordos com fornecedores Horeca e atração de turismo gastronómico."
+        },
+        {
+          "tag": "Exemplo de Campanha",
+          "title": "Desporto e Fitness",
+          "desc": "Captação de membros para clubes de saúde, parcerias corporativas de bem-estar e expansão de marcas desportivas."
+        },
+        {
+          "tag": "Exemplo de Campanha",
+          "title": "Formação e Educação",
+          "desc": "Captação de alunos para programas executivos, mestrados e formações personalizadas para equipas de RH."
+        },
+        {
+          "tag": "Exemplo de Campanha",
+          "title": "Turismo e Viagens",
+          "desc": "Campanhas sazonais para redes hoteleiras, escapadinhas exclusivas e acordos com agências de viagens europeias."
+        }
+      ],
+      "whyEyebrow": "Tecnologia",
+      "whyTitleMain": "Entregabilidade",
+      "whyTitleIt": "garantida.",
+      "whyLede": "A nossa infraestrutura combina validação em tempo real, rotação de IPs limpos e aquecimento de domínios para assegurar a caixa de entrada principal.",
+      "pillars": [
+        {
+          "title": "0% Spam / Bots",
+          "body": "Todos os contactos são limpos, verificados e validados ativamente em tempo real antes do envio."
+        },
+        {
+          "title": "Segmentação",
+          "body": "Filtros minuciosos por cargo, dimensão da organização, setor de atividade e região geográfica."
+        },
+        {
+          "title": "Alta Entregabilidade",
+          "body": "Configuração técnica impecável (SPF, DKIM, DMARC) garantindo taxas de abertura consistentes de 50 a 60%+."
+        },
+        {
+          "title": "Copy Conversacional",
+          "body": "Redação clara e empática no idioma local, focada em estabelecer relações de negócio genuínas."
+        }
+      ],
+      "contactTitleMain": "Inicia a tua",
+      "contactTitleIt": "Campanha.",
+      "contactAside": "Trabalhamos com agências e promotores em toda a Europa. Diz-nos que perfil procuras e apresentamos uma proposta sob medida.",
+      "formType": "Setor / Tipo de campanha",
+      "formOptions": [
+        "Eventos e Cultura",
+        "Comércio e E-commerce",
+        "Gastronomia e Hotelaria",
+        "Desporto e Fitness",
+        "Formação e Educação",
+        "Turismo e Viagens",
+        "Outro / Consulta geral"
+      ]
+    }
+  }
+};
+
+
 class Component extends DCLogic {
-  state = { view: 'gateway', lang: 'es', isMobile: false, langMenuOpen: false, time: '—:—', soundEnabled: SoundEngine.isEnabled(), sampleIndex: 0, lightbox: { open: false, id: null, title: '' } };
+  state = {
+    lang: 'es',
+    isMobile: false,
+    langMenuOpen: false,
+    time: '—:—',
+    soundEnabled: SoundEngine.isEnabled(),
+    sampleIndex: 0
+  };
 
   componentDidMount() {
     this.onResize();
@@ -862,17 +1182,7 @@ class Component extends DCLogic {
     this.initTilt();
     this.initMagnetic();
     document.addEventListener('click', this.onDocClick);
-    this._lastView = this.state.view;
     this.reinitView();
-  }
-
-  componentDidUpdate() {
-    if (this._lastView !== this.state.view) {
-      this._lastView = this.state.view;
-      window.scrollTo(0, 0);
-      document.body.style.overflow = this.state.view === 'gateway' ? 'hidden' : '';
-      setTimeout(() => this.reinitView(), 60);
-    }
   }
 
   componentWillUnmount() {
@@ -890,11 +1200,8 @@ class Component extends DCLogic {
   }
 
   reinitView() {
-    document.body.style.overflow = this.state.view === 'gateway' ? 'hidden' : '';
     this.initReveal();
     this.initSectionIndex();
-    this.initWaveform();
-    this.initVideoThumbs();
     this.initFlowCanvas('flow-canvas', true);
     this.initFlowCanvas('flow-canvas-bad', false);
     this.initSampleTicker();
@@ -902,9 +1209,10 @@ class Component extends DCLogic {
 
   initSampleTicker() {
     if (this._sampleTimer) clearInterval(this._sampleTimer);
-    if (this.state.view !== 'marketing') return;
     this._sampleTimer = setInterval(() => {
-      this.setState((s) => ({ sampleIndex: (s.sampleIndex + 1) % (DICT[s.lang].marketing.sampleContacts || [1]).length }));
+      this.setState((s) => ({
+        sampleIndex: (s.sampleIndex + 1) % (DICT[s.lang].marketing.sampleContacts || [1]).length
+      }));
     }, 3200);
   }
 
@@ -1010,28 +1318,8 @@ class Component extends DCLogic {
     const safeDraw = () => {
       try { draw(); } catch (e) { particles = []; this[rafKey] = requestAnimationFrame(safeDraw); }
     };
-    // Belt-and-braces: fully reset the simulation periodically so it can never visibly stall or clog.
     this[intervalKey] = setInterval(() => { particles = []; frame = 0; }, 55000);
     safeDraw();
-  }
-
-  initVideoThumbs() {
-    document.querySelectorAll('[data-role="video-thumb"][data-vimeo-id]').forEach((el) => {
-      if (el.dataset.thumbLoaded) return;
-      const id = el.dataset.vimeoId;
-      el.dataset.thumbLoaded = '1';
-      fetch(`https://vimeo.com/api/oembed.json?url=https://vimeo.com/${id}`)
-        .then((r) => r.json())
-        .then((data) => {
-          if (data && data.thumbnail_url) {
-            const hi = data.thumbnail_url.replace(/_\d+x\d+/, '_1280');
-            el.style.backgroundImage = `linear-gradient(180deg, rgba(2,2,2,0.15), rgba(2,2,2,0.65)), url('${hi}')`;
-            el.style.backgroundSize = 'cover';
-            el.style.backgroundPosition = 'center';
-          }
-        })
-        .catch(() => {});
-    });
   }
 
   onDocClick = () => { if (this.state.langMenuOpen) this.setState({ langMenuOpen: false }); };
@@ -1043,20 +1331,11 @@ class Component extends DCLogic {
   toggleLangMenu = (e) => { e.stopPropagation(); this.setState(s => ({ langMenuOpen: !s.langMenuOpen })); };
   selectLang = (lang) => (e) => { e.preventDefault(); e.stopPropagation(); SoundEngine.play('click'); this.setState({ lang, langMenuOpen: false }); };
   toggleSound = () => { SoundEngine.setEnabled(!SoundEngine.isEnabled()); SoundEngine.init(); SoundEngine.play('click'); this.setState({ soundEnabled: SoundEngine.isEnabled() }); };
-  goGateway = () => { SoundEngine.play('click'); this.setState({ view: 'gateway' }); };
-  goMarketing = () => { SoundEngine.play('click'); this.setState({ view: 'marketing' }); };
-  goProduccion = () => { SoundEngine.play('click'); this.setState({ view: 'produccion' }); };
-  switchView = () => { SoundEngine.play('click'); this.setState(s => ({ view: s.view === 'marketing' ? 'produccion' : 'marketing' })); };
 
   openMailClient = (e) => {
-    // Belt-and-braces: some edge proxies (Cloudflare "email obfuscation") can still rewrite the
-    // rendered href after the fact. Force-navigate to the correct mailto regardless of what's in href.
     e.preventDefault();
     window.location.href = 'mail' + 'to:' + ['tim', 'la27productions.com'].join('@');
   };
-
-  openLightbox = (id, title) => { SoundEngine.play('click'); this.setState({ lightbox: { open: true, id, title } }); document.body.style.overflow = 'hidden'; };
-  closeLightbox = () => { this.setState({ lightbox: { open: false, id: null, title: '' } }); document.body.style.overflow = this.state.view === 'gateway' ? 'hidden' : ''; };
 
   initCursor() {
     const cursor = document.querySelector('[data-role="cursor"]');
@@ -1071,14 +1350,12 @@ class Component extends DCLogic {
     render();
     const label = cursor.querySelector('[data-role="cursor-label"]');
     document.addEventListener('mouseover', (e) => {
-      const play = e.target.closest('[data-cursor="play"]');
       const hover = e.target.closest('[data-cursor="hover"]');
-      if (play) { cursor.style.width = '88px'; cursor.style.height = '88px'; cursor.style.background = ACCENT; cursor.style.mixBlendMode = 'normal'; if (label) label.style.opacity = '1'; }
-      else if (hover) { cursor.style.width = '56px'; cursor.style.height = '56px'; cursor.style.background = INK; cursor.style.mixBlendMode = 'difference'; if (label) label.style.opacity = '0'; }
+      if (hover) { cursor.style.width = '56px'; cursor.style.height = '56px'; cursor.style.background = INK; cursor.style.mixBlendMode = 'difference'; if (label) label.style.opacity = '0'; }
     });
     document.addEventListener('mouseout', (e) => {
-      const play = e.target.closest('[data-cursor="play"]'); const hover = e.target.closest('[data-cursor="hover"]');
-      if (play || hover) { cursor.style.width = '8px'; cursor.style.height = '8px'; cursor.style.background = INK; cursor.style.mixBlendMode = 'difference'; if (label) label.style.opacity = '0'; }
+      const hover = e.target.closest('[data-cursor="hover"]');
+      if (hover) { cursor.style.width = '8px'; cursor.style.height = '8px'; cursor.style.background = INK; cursor.style.mixBlendMode = 'difference'; if (label) label.style.opacity = '0'; }
     });
     document.addEventListener('mouseover', (e) => { if (e.target.closest('[data-cursor]')) SoundEngine.play('hover'); });
     document.addEventListener('click', (e) => { if (e.target.closest('[data-cursor]')) SoundEngine.play('click'); }, true);
@@ -1112,7 +1389,6 @@ class Component extends DCLogic {
       if (r.top < window.innerHeight && r.bottom > 0) reveal(el);
     });
     this._io = io;
-    // Safety net: never leave content permanently invisible.
     this._revealSafety = setTimeout(() => { els.forEach(reveal); }, 2500);
   }
 
@@ -1129,22 +1405,6 @@ class Component extends DCLogic {
     update();
   }
 
-  initWaveform() {
-    const wave = document.querySelector('[data-role="waveform"]');
-    if (!wave || wave.childElementCount) return;
-    const COUNT = 60;
-    const frag = document.createDocumentFragment();
-    for (let i = 0; i < COUNT; i++) {
-      const bar = document.createElement('div');
-      const t = i / COUNT; const env = Math.sin(t * Math.PI);
-      const noise = 0.4 + 0.6 * Math.abs(Math.sin(i * 1.7) * Math.cos(i * 0.6));
-      const h = Math.max(6, env * noise * 64);
-      bar.style.cssText = `flex:1;background:${INK};border-radius:1px;height:${h}px;transform-origin:center;animation:la27-wave ${1.6 + (i % 5) * 0.2}s ease-in-out infinite;animation-delay:${i * 0.04}s;`;
-      frag.appendChild(bar);
-    }
-    wave.appendChild(frag);
-  }
-
   initTilt() {
     if (this._tiltBound || !window.matchMedia('(hover: hover)').matches) return;
     this._tiltBound = true;
@@ -1157,8 +1417,6 @@ class Component extends DCLogic {
       const yPct = (e.clientY - rect.top) / rect.height - 0.5;
       card.style.transform = `perspective(900px) rotateX(${(-yPct * maxTilt).toFixed(2)}deg) rotateY(${(xPct * maxTilt).toFixed(2)}deg) scale3d(1.03,1.03,1.03)`;
       card.style.transition = 'transform 0.05s linear';
-      const overlay = card.querySelector('[data-role="play-overlay"]');
-      if (overlay) overlay.style.transform = `translate(${(xPct * 12).toFixed(1)}px, ${(yPct * 12).toFixed(1)}px)`;
     });
     document.addEventListener('mouseout', (e) => {
       const card = e.target.closest && e.target.closest('[data-tilt]');
@@ -1166,8 +1424,6 @@ class Component extends DCLogic {
       if (e.relatedTarget && card.contains(e.relatedTarget)) return;
       card.style.transition = 'transform 0.5s cubic-bezier(0.16,1,0.3,1)';
       card.style.transform = 'perspective(900px) rotateX(0deg) rotateY(0deg) scale3d(1,1,1)';
-      const overlay = card.querySelector('[data-role="play-overlay"]');
-      if (overlay) overlay.style.transform = '';
     });
   }
 
@@ -1209,15 +1465,10 @@ class Component extends DCLogic {
   }
 
   renderVals() {
-    const { lang, isMobile, lightbox, soundEnabled, view, sampleIndex } = this.state;
+    const { lang, isMobile, soundEnabled, sampleIndex } = this.state;
     const d = DICT[lang];
     const shared = d.shared;
-    const isGateway = view === 'gateway';
-    const isMarketing = view === 'marketing';
-    const isProduccion = view === 'produccion';
     const m = d.marketing;
-    const p = d.produccion;
-    const activeViewDict = isMarketing ? m : p;
 
     const styles = {
       root: { '--accent': ACCENT, '--ink': INK, '--line': LINE, background: BG, color: INK, fontFamily: FONT_SANS, fontWeight: 400, fontSize: '16px', lineHeight: 1.5, overflowX: 'hidden', minHeight: '100vh', position: 'relative', zIndex: 0 },
@@ -1233,27 +1484,11 @@ class Component extends DCLogic {
       bgShapeMosaicDots: { position: 'absolute', width: '300px', height: '300px', bottom: '2%', left: '38%', color: ACCENT, opacity: 0.3, animation: 'la27-driftE 16s ease-in-out infinite alternate' },
       gradientWash: { position: 'fixed', inset: '-30%', width: '160%', height: '160%', zIndex: -3, pointerEvents: 'none', filter: 'blur(60px)', animation: 'la27-wash 22s ease-in-out infinite alternate', background: 'radial-gradient(circle at 32% 28%, oklch(0.58 0.22 25 / 0.20), transparent 55%), radial-gradient(circle at 72% 68%, oklch(0.58 0.22 25 / 0.14), transparent 60%), radial-gradient(circle at 50% 90%, oklch(0.5 0.05 250 / 0.10), transparent 55%)' },
 
-      gateway: { position: 'relative', minHeight: '100vh', height: '100vh', display: 'flex', flexDirection: 'column', overflow: 'hidden', padding: isMobile ? '20px' : '32px 48px' },
-      gatewayTop: { display: 'flex', justifyContent: 'space-between', alignItems: 'center' },
-      gatewayBrand: { fontFamily: FONT_MONO, fontSize: isMobile ? '20px' : '26px', letterSpacing: '0.1em', fontWeight: 700, color: INK },
-      gatewayLangWrap: { display: 'flex', alignItems: 'center', gap: '16px' },
-      soundBtnGateway: { appearance: 'none', background: 'transparent', border: 0, color: INK, cursor: 'pointer', fontFamily: FONT_MONO, fontSize: '10px', letterSpacing: '0.14em', textTransform: 'uppercase', opacity: soundEnabled ? 0.85 : 0.4 },
-      gatewayCenter: { flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', textAlign: 'center', gap: isMobile ? '20px' : '32px' },
-      gatewayEyebrow: { fontFamily: FONT_MONO, fontSize: '12px', letterSpacing: '0.2em', textTransform: 'uppercase', color: INK_DIM },
-      gatewayTitle: { fontFamily: FONT_DISPLAY, fontSize: isMobile ? 'clamp(32px,9vw,44px)' : 'clamp(40px,4.5vw,64px)', lineHeight: 1.05, margin: 0, maxWidth: '780px' },
-      gatewayCards: { display: 'flex', flexDirection: isMobile ? 'column' : 'row', gap: isMobile ? '16px' : '24px', marginTop: isMobile ? '12px' : '20px', width: '100%', maxWidth: '860px' },
-      gatewayCard: { appearance: 'none', cursor: 'pointer', flex: 1, background: 'rgba(20,14,14,0.45)', backdropFilter: 'blur(14px) saturate(160%)', boxShadow: '0 8px 30px rgba(0,0,0,0.35), inset 0 1px 0 rgba(255,255,255,0.05)', border: '1px solid ' + LINE, borderRadius: '10px', padding: isMobile ? '28px 24px' : '40px 32px', textAlign: 'left', color: INK, display: 'flex', flexDirection: 'column', gap: '10px', transition: 'border-color 0.3s ease, background 0.3s ease' },
-      gatewayCardNum: { fontFamily: FONT_DISPLAY, fontStyle: 'italic', fontSize: '32px', color: ACCENT },
-      gatewayCardTitle: { fontFamily: FONT_DISPLAY, fontSize: isMobile ? '30px' : '38px' },
-      gatewayCardDesc: { fontFamily: FONT_MONO, fontSize: '13px', color: INK_DIM, lineHeight: 1.6, margin: 0 },
-      gatewayCardCta: { fontFamily: FONT_MONO, fontSize: '11px', letterSpacing: '0.14em', textTransform: 'uppercase', color: ACCENT, marginTop: '8px' },
-
       nav: { position: 'fixed', top: 0, left: 0, right: 0, zIndex: 100, padding: isMobile ? '16px 20px' : '20px 48px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '24px', background: 'rgba(10,10,10,0.65)', backdropFilter: 'blur(12px)', borderBottom: '1px solid rgba(255,255,255,0.05)', color: '#fff' },
-      navBrand: { appearance: 'none', background: 'transparent', border: 0, cursor: 'pointer', fontFamily: FONT_MONO, fontSize: isMobile ? '18px' : '21px', letterSpacing: '0.06em', textTransform: 'uppercase', color: '#fff', fontWeight: 700, whiteSpace: 'nowrap', flexShrink: 0 },
+      navBrand: { appearance: 'none', background: 'transparent', border: 0, cursor: 'pointer', fontFamily: FONT_MONO, fontSize: isMobile ? '18px' : '21px', letterSpacing: '0.06em', textTransform: 'uppercase', color: '#fff', fontWeight: 700, whiteSpace: 'nowrap', flexShrink: 0, textDecoration: 'none' },
       navLinks: { display: isMobile ? 'none' : 'flex', gap: '22px', fontFamily: FONT_MONO, fontSize: '11px', letterSpacing: '0.12em', textTransform: 'uppercase', flexShrink: 1, flexWrap: 'wrap', justifyContent: 'flex-end' },
       navLink: { color: INK, textDecoration: 'none', opacity: 0.75 },
       navRight: { display: 'flex', alignItems: 'center', gap: '16px' },
-      crossLink: { appearance: 'none', background: 'transparent', border: '1px solid ' + LINE, borderRadius: '999px', padding: '7px 14px', color: ACCENT, cursor: 'pointer', display: isMobile ? 'none' : 'inline-flex', fontFamily: FONT_MONO, fontSize: '10px', letterSpacing: '0.12em', textTransform: 'uppercase', whiteSpace: 'nowrap' },
       navMeta: { display: isMobile ? 'none' : 'flex', alignItems: 'center', fontFamily: FONT_MONO, fontSize: '11px', letterSpacing: '0.14em', textTransform: 'uppercase', opacity: 0.7 },
       navDot: { display: 'inline-block', width: '6px', height: '6px', borderRadius: '50%', background: ACCENT, marginRight: '8px', animation: 'la27-pulse 2.4s ease-in-out infinite' },
       soundBtn: { appearance: 'none', background: 'transparent', border: 0, color: INK, cursor: 'pointer', display: isMobile ? 'none' : 'inline-flex', alignItems: 'center', gap: '6px', fontFamily: FONT_MONO, fontSize: '10px', letterSpacing: '0.14em', textTransform: 'uppercase', opacity: soundEnabled ? 0.85 : 0.4, whiteSpace: 'nowrap', flexShrink: 0 },
@@ -1269,9 +1504,8 @@ class Component extends DCLogic {
       heroMeta: { position: 'absolute', top: isMobile ? '76px' : '96px', left: isMobile ? '20px' : '48px', right: isMobile ? '20px' : '48px', display: 'flex', justifyContent: 'space-between', fontFamily: FONT_MONO, fontSize: '11px', letterSpacing: '0.14em', textTransform: 'uppercase', color: INK_DIM },
       heroBadge: { fontFamily: FONT_MONO, fontSize: '11px', letterSpacing: '0.14em', textTransform: 'uppercase', color: ACCENT, marginBottom: '18px', border: '1px solid ' + LINE, display: 'inline-flex', padding: '8px 14px', borderRadius: '999px', width: 'fit-content' },
       heroTitle: { fontFamily: FONT_DISPLAY, fontWeight: 400, fontSize: isMobile ? 'clamp(42px, 12vw, 68px)' : 'clamp(56px, 9.5vw, 140px)', lineHeight: 0.98, letterSpacing: '-0.02em', margin: '0 0 0.15em' },
-      waveform: { display: 'flex', alignItems: 'center', gap: '3px', height: isMobile ? '40px' : '70px', margin: isMobile ? '16px 0' : '24px 0', opacity: 0.45 },
       heroSub: { marginTop: isMobile ? '8px' : '20px', display: 'flex', flexDirection: isMobile ? 'column' : 'row', justifyContent: 'space-between', alignItems: isMobile ? 'flex-start' : 'flex-end', gap: '32px' },
-      heroSubText: { fontFamily: FONT_MONO, fontSize: '12px', letterSpacing: '0.1em', textTransform: 'uppercase', color: INK_DIM, maxWidth: '400px', lineHeight: 1.6, margin: 0 },
+      heroSubText: { fontFamily: FONT_MONO, fontSize: '12px', letterSpacing: '0.1em', textTransform: 'uppercase', color: INK_DIM, maxWidth: '440px', lineHeight: 1.6, margin: 0 },
       scrollCue: { display: 'inline-flex', alignItems: 'center', gap: '12px', color: INK, textDecoration: 'none', fontFamily: FONT_MONO, fontSize: '11px', letterSpacing: '0.14em', textTransform: 'uppercase' },
       scrollArrow: { width: '24px', height: '24px', border: '1px solid ' + INK, borderRadius: '50%', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', animation: 'la27-bounce 2s ease-in-out infinite' },
       heroBtns: { marginTop: '32px', display: 'flex', gap: '16px', flexWrap: 'wrap' },
@@ -1306,21 +1540,11 @@ class Component extends DCLogic {
       processCaptionNum: { fontFamily: FONT_DISPLAY, fontStyle: 'italic', fontSize: '22px', color: ACCENT },
       processCaptionText: { fontFamily: FONT_MONO, fontSize: '13px', color: INK, letterSpacing: '0.02em' },
 
-      capabilityTiles: { display: 'grid', gridTemplateColumns: isMobile ? '1fr' : 'repeat(2, 1fr)', gap: '1px', background: LINE, border: '1px solid ' + LINE, borderRadius: '4px', overflow: 'hidden', marginBottom: isMobile ? '64px' : '120px' },
+      capabilityTiles: { display: 'grid', gridTemplateColumns: isMobile ? '1fr' : 'repeat(3, 1fr)', gap: '1px', background: LINE, border: '1px solid ' + LINE, borderRadius: '4px', overflow: 'hidden', marginBottom: isMobile ? '64px' : '120px' },
       capabilityTile: { background: 'rgba(20,14,14,0.45)', backdropFilter: 'blur(14px) saturate(160%)', boxShadow: '0 8px 30px rgba(0,0,0,0.35), inset 0 1px 0 rgba(255,255,255,0.05)', padding: isMobile ? '24px' : '28px 26px' },
       capabilityTag: { display: 'inline-block', fontFamily: FONT_MONO, fontSize: '10px', letterSpacing: '0.1em', color: ACCENT, border: '1px solid rgba(220,38,38,0.4)', borderRadius: '999px', padding: '3px 10px', marginBottom: '12px' },
       capabilityTitle: { fontFamily: FONT_DISPLAY, fontSize: '21px', marginBottom: '10px', color: INK },
       capabilityDesc: { fontFamily: FONT_MONO, fontSize: '13px', color: INK_DIM, lineHeight: 1.6, margin: 0 },
-
-      workGrid: { display: 'grid', gap: isMobile ? '56px' : '80px', paddingBottom: isMobile ? '64px' : '120px' },
-      workMedia: { position: 'relative', aspectRatio: '16/9', background: '#080808', overflow: 'hidden', borderRadius: '2px', border: '1px solid ' + LINE, cursor: 'pointer', transformStyle: 'preserve-3d', willChange: 'transform' },
-      videoFrame: { position: 'absolute', inset: 0, background: 'linear-gradient(135deg, #161513 0%, #0c0b0a 100%)', filter: 'grayscale(1) brightness(0.6)' },
-      playOverlay: { position: 'absolute', inset: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', color: INK, opacity: 0.75 },
-      workIndex: { fontFamily: FONT_MONO, fontSize: '11px', letterSpacing: '0.18em', textTransform: 'uppercase', color: ACCENT, marginBottom: '20px' },
-      workTitle: { fontFamily: FONT_DISPLAY, fontSize: isMobile ? 'clamp(34px, 9vw, 48px)' : 'clamp(48px, 5.5vw, 80px)', lineHeight: 0.98, letterSpacing: '-0.02em', margin: '0 0 14px' },
-      workMeta: { fontFamily: FONT_MONO, fontSize: '12px', letterSpacing: '0.14em', textTransform: 'uppercase', color: INK_DIM, marginBottom: '24px', display: 'flex', alignItems: 'center', gap: '14px', flexWrap: 'wrap' },
-      workSep: { width: '20px', height: '1px', background: INK_MUTE },
-      workDesc: { color: INK_DIM, fontSize: '15px', lineHeight: 1.65, maxWidth: '420px', margin: 0 },
 
       whyLede: { maxWidth: '900px', margin: isMobile ? '0 0 56px' : '0 auto 96px', fontFamily: FONT_DISPLAY, fontSize: isMobile ? '20px' : 'clamp(26px, 2.8vw, 40px)', lineHeight: 1.3, letterSpacing: '-0.01em', color: INK, textAlign: isMobile ? 'left' : 'center' },
       pillarsGrid: { display: 'grid', gridTemplateColumns: isMobile ? '1fr' : 'repeat(4, 1fr)', gap: '1px', background: LINE, borderTop: '1px solid ' + LINE, borderBottom: '1px solid ' + LINE, marginBottom: isMobile ? '64px' : '120px' },
@@ -1357,63 +1581,60 @@ class Component extends DCLogic {
       formNocost: { fontFamily: FONT_MONO, fontSize: '10px', letterSpacing: '0.14em', textTransform: 'uppercase', color: INK_MUTE, margin: 0, flexBasis: '100%' },
 
       btn: { appearance: 'none', border: 0, background: INK, color: BG, fontFamily: FONT_MONO, fontSize: '13px', fontWeight: 700, letterSpacing: '0.14em', textTransform: 'uppercase', padding: '18px 30px', borderRadius: '999px', display: 'inline-flex', alignItems: 'center', gap: '10px', cursor: 'pointer', textDecoration: 'none' },
-
-      lightboxBackdrop: { position: 'fixed', inset: 0, background: 'rgba(2,2,2,0.9)', backdropFilter: 'blur(16px)', zIndex: 1500 },
-      lightboxInner: { position: 'fixed', top: '50%', left: '50%', transform: 'translate(-50%,-50%)', width: '90%', maxWidth: '1100px', zIndex: 1501, display: 'grid', gap: '14px' },
-      lightboxTop: { display: 'flex', justifyContent: 'space-between', alignItems: 'center', color: INK },
-      lightboxTitle: { display: 'flex', alignItems: 'center', gap: '10px', fontFamily: FONT_MONO, fontSize: '11px', letterSpacing: '0.16em', textTransform: 'uppercase', color: INK_DIM },
-      lightboxClose: { appearance: 'none', background: 'transparent', border: '1px solid ' + LINE, color: INK, fontFamily: FONT_MONO, fontSize: '11px', letterSpacing: '0.14em', textTransform: 'uppercase', padding: '9px 14px', borderRadius: '999px', cursor: 'pointer' },
-      lightboxFrame: { position: 'relative', width: '100%', aspectRatio: '16/9', background: '#000', borderRadius: '4px', overflow: 'hidden', boxShadow: '0 40px 120px -20px rgba(0,0,0,0.7)' },
-
       footer: { position: 'relative', borderTop: '1px solid ' + LINE, padding: isMobile ? '28px 20px' : '40px 48px', display: 'flex', flexDirection: isMobile ? 'column' : 'row', gap: isMobile ? '14px' : 0, alignItems: isMobile ? 'flex-start' : 'center', justifyContent: 'space-between', fontFamily: FONT_MONO, fontSize: '11px', letterSpacing: '0.14em', textTransform: 'uppercase', color: INK_MUTE },
     };
 
-    const langOptions = Object.keys(LANG_NAMES).map((code) => ({ code: code.toUpperCase(), label: LANG_NAMES[code], select: this.selectLang(code) }));
-
-    const navLinks = isMarketing
-      ? [{ label: m.navWork, href: '#work' }, { label: m.navWhy, href: '#why' }, { label: m.navFounder, href: '#founder' }, { label: m.navContact, href: '#contact' }]
-      : [{ label: p.navWork, href: '#work' }, { label: p.navWhy, href: '#why' }, { label: p.navFounder, href: '#founder' }, { label: p.navContact, href: '#contact' }];
-
-    const indexItems = isMarketing
-      ? [{ label: 'Intro', id: 'hero' }, { label: m.howEyebrow, id: 'how' }, { label: m.navWork, id: 'work' }, { label: m.navWhy, id: 'why' }, { label: shared.founderEyebrow, id: 'founder' }, { label: m.navContact, id: 'contact' }]
-      : [{ label: 'Intro', id: 'hero' }, { label: p.navWork, id: 'work' }, { label: p.navWhy, id: 'why' }, { label: shared.founderEyebrow, id: 'founder' }, { label: p.navContact, id: 'contact' }];
-    indexItems.forEach((it, i) => { it.num = '0' + (i + 1); it.href = '#' + it.id; });
-
-    const workItems = (p.work || []).map((w) => ({
-      ...w,
-      itemStyle: { display: 'grid', gridTemplateColumns: isMobile ? '1fr' : '1.3fr 1fr', gap: isMobile ? '24px' : '56px', alignItems: 'center' },
-      openLightbox: () => this.openLightbox(w.vimeoId, w.index + ' — ' + w.titleMain + ' ' + w.titleIt),
+    const langOptions = Object.keys(LANG_NAMES).map((code) => ({
+      code: code.toUpperCase(),
+      label: LANG_NAMES[code],
+      select: this.selectLang(code)
     }));
 
+    const navLinks = [
+      { label: m.navWork, href: '#work' },
+      { label: m.navWhy, href: '#why' },
+      { label: m.navFounder, href: '#founder' },
+      { label: m.navContact, href: '#contact' }
+    ];
+
+    const indexItems = [
+      { label: 'Intro', id: 'hero' },
+      { label: m.howEyebrow, id: 'how' },
+      { label: m.navWork, id: 'work' },
+      { label: m.navWhy, id: 'why' },
+      { label: shared.founderEyebrow, id: 'founder' },
+      { label: m.navContact, id: 'contact' }
+    ];
+    indexItems.forEach((it, i) => { it.num = '0' + (i + 1); it.href = '#' + it.id; });
+
     return {
-      isGateway, isMarketing, isProduccion,
-      styles, isMobile,
+      styles,
+      isMobile,
       state: this.state,
-      shared, g: d.gateway, m, p,
-      view: { contactTitleMain: activeViewDict.contactTitleMain, contactTitleIt: activeViewDict.contactTitleIt, contactAside: activeViewDict.contactAside, formType: activeViewDict.formType },
-      founderNum: isMarketing ? '04' : '03',
+      shared,
+      m,
+      view: {
+        contactTitleMain: m.contactTitleMain,
+        contactTitleIt: m.contactTitleIt,
+        contactAside: m.contactAside,
+        formType: m.formType
+      },
       soundLabel: soundEnabled ? 'SONIDO ON' : 'SONIDO OFF',
       toggleSound: this.toggleSound,
       toggleLangMenu: this.toggleLangMenu,
       langOptions,
-      goGateway: this.goGateway, goMarketing: this.goMarketing, goProduccion: this.goProduccion, switchView: this.switchView,
-      crossLinkLabel: isMarketing ? (lang === 'es' ? 'Producción' : lang === 'de' ? 'Produktion' : lang === 'fr' ? 'Production' : lang === 'pt' ? 'Produção' : 'Production') : 'Marketing',
-      closeLightbox: this.closeLightbox,
-      navLinks, indexItems, workItems,
-      trustItemsDouble: (activeViewDict.trust || []).concat(activeViewDict.trust || []),
+      navLinks,
+      indexItems,
+      trustItemsDouble: (m.trust || []).concat(m.trust || []),
       processSteps: (m.steps || []).map((s, i) => ({ ...s, num: '0' + (i + 1) })),
       capabilityTiles: m.tiles || [],
       marketingPillars: (m.pillars || []).map((pl, i) => ({ ...pl, num: '0' + (i + 1) })),
-      produccionPillars: (p.pillars || []).map((pl, i) => ({ ...pl, num: '0' + (i + 1) })),
-      formOptions: activeViewDict.formOptions || [],
+      formOptions: m.formOptions || [],
       sampleContact: (m.sampleContacts && m.sampleContacts[sampleIndex % m.sampleContacts.length]) || '',
-      // Built at runtime (never as literal text in the markup) so edge proxies with
-      // "email obfuscation" scanners can't detect and mangle a static mailto string.
       contactEmailText: ['tim', 'la27productions.com'].join('@'),
       contactEmailHref: 'mail' + 'to:' + ['tim', 'la27productions.com'].join('@'),
       openMailClient: this.openMailClient,
-      founderBio: isMarketing ? m.founderBio : p.founderBio,
-      vimeoSrc: lightbox.id ? ('https://player.vimeo.com/video/' + lightbox.id + '?autoplay=1&title=0&byline=0&portrait=0') : '',
+      founderBio: m.founderBio
     };
   }
 }
