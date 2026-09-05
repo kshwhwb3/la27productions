@@ -93,42 +93,40 @@
     </svg>
   </div>
 
-  <header style="{{ styles.nav }}">
+    <header style="{{ styles.nav }}">
     <a href="#hero" data-cursor="hover" data-role="brand" style="{{ styles.navBrand }}">LA 27 <span style="font-weight:400;opacity:0.75">Productions</span></a>
     <nav style="{{ styles.navLinks }}">
-      <sc-for list="{{ navLinks }}" as="item" hint-placeholder-count="4">
+      <sc-for list="{{ navLinks }}" as="item" hint-placeholder-count="6">
         <a href="{{ item.href }}" data-cursor="hover" style="{{ styles.navLink }}">{{ item.label }}</a>
       </sc-for>
     </nav>
     <div style="{{ styles.navRight }}">
       <button type="button" data-cursor="hover" onClick="{{ toggleSound }}" style="{{ styles.soundBtn }}">{{ soundLabel }}</button>
-
-        <div style="position:relative">
-          <button type="button" data-cursor="hover" onClick="{{ toggleLangMenu }}" style="{{ styles.langBtn }}">
-            <span>{{ shared.langCode }}</span>
-            <svg width="8" height="8" viewBox="0 0 8 8" fill="none"><path d="M1.5 3l2.5 2.5L6.5 3" stroke="currentColor" stroke-width="1" stroke-linecap="round"/></svg>
-          </button>
-          <sc-if value="{{ state.langMenuOpen }}">
-            <ul style="{{ styles.langMenu }}">
-              <sc-for list="{{ langOptions }}" as="opt" hint-placeholder-count="5">
-                <li><a href="#" data-cursor="hover" onClick="{{ opt.select }}" style="{{ styles.langMenuLink }}"><span style="color:var(--accent);font-weight:500">{{ opt.code }}</span> {{ opt.label }}</a></li>
-              </sc-for>
-            </ul>
-          </sc-if>
-        </div>
-        <div style="{{ styles.navMeta }}"><span style="{{ styles.navDot }}"></span>{{ state.time }} BCN</div>
+      <div style="position:relative">
+        <button type="button" data-cursor="hover" onClick="{{ toggleLangMenu }}" style="{{ styles.langBtn }}">
+          <span>{{ shared.langCode }}</span>
+          <svg width="8" height="8" viewBox="0 0 8 8" fill="none"><path d="M1.5 3l2.5 2.5L6.5 3" stroke="currentColor" stroke-width="1" stroke-linecap="round"/></svg>
+        </button>
+        <sc-if value="{{ state.langMenuOpen }}">
+          <ul style="{{ styles.langMenu }}">
+            <sc-for list="{{ langOptions }}" as="opt" hint-placeholder-count="5">
+              <li><a href="#" data-cursor="hover" onClick="{{ opt.select }}" style="{{ styles.langMenuLink }}"><span style="color:var(--accent);font-weight:500">{{ opt.code }}</span> {{ opt.label }}</a></li>
+            </sc-for>
+          </ul>
+        </sc-if>
       </div>
-    </header>
+      <div style="{{ styles.navMeta }}"><span style="{{ styles.navDot }}"></span>{{ state.time }} BCN</div>
+    </div>
+  </header>
 
-    <aside style="{{ styles.sectionIndex }}" aria-hidden="true">
-      <sc-for list="{{ indexItems }}" as="item" hint-placeholder-count="5">
-        <a href="{{ item.href }}" data-cursor="hover" data-role="section-index-link" data-target="{{ item.id }}" style="{{ styles.indexLink }}"><span style="{{ styles.indexNum }}">{{ item.num }}</span><span>{{ item.label }}</span></a>
-      </sc-for>
-    </aside>
+  <aside style="{{ styles.sectionIndex }}" aria-hidden="true">
+    <sc-for list="{{ indexItems }}" as="item" hint-placeholder-count="6">
+      <a href="{{ item.href }}" data-cursor="hover" data-role="section-index-link" data-target="{{ item.id }}" style="{{ styles.indexLink }}"><span style="{{ styles.indexNum }}">{{ item.num }}</span><span>{{ item.label }}</span></a>
+    </sc-for>
+  </aside>
 
-    <main>
-      <!-- ============ MARKETING VIEW ============ -->
-              <section id="hero" data-section="true" style="{{ styles.hero }}">
+  <main>
+<section id="hero" data-section="true" style="{{ styles.hero }}">
           <div style="{{ styles.heroMeta }}"><span>001 / Intro</span><span>Barcelona — ES</span></div>
           <div style="{{ styles.heroBadge }}">{{ m.heroBadge }}</div>
           <h1 style="{{ styles.heroTitle }}">{{ m.heroTitleMain }} <span style="font-style:italic;color:var(--accent)">{{ m.heroTitleIt }}</span></h1>
@@ -222,72 +220,11 @@
             </sc-for>
           </div>
         </section>
-      </sc-if>
 
-      <!-- ============ PRODUCCIÓN VIEW ============ -->
-      <sc-if value="{{ isProduccion }}">
-        <section id="hero" data-section="true" style="{{ styles.hero }}">
-          <div style="{{ styles.heroMeta }}"><span>001 / Intro</span><span>Barcelona — ES</span></div>
-          <h1 style="{{ styles.heroTitle }}">{{ p.heroTitleMain }} <span style="font-style:italic;color:var(--accent)">{{ p.heroTitleIt }}</span></h1>
-          <div data-role="waveform" style="{{ styles.waveform }}"></div>
-          <div style="{{ styles.heroSub }}">
-            <p style="{{ styles.heroSubText }}">{{ p.heroSub }}</p>
-            <a href="#work" data-cursor="hover" style="{{ styles.scrollCue }}"><span>{{ p.heroScroll }}</span><span style="{{ styles.scrollArrow }}"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M5 1v8M2 6l3 3 3-3" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
-          </div>
-          <div style="{{ styles.heroBtns }}"><a href="#contact" data-cursor="hover" data-magnetic="true" style="{{ styles.btn }}">{{ p.heroBtn }}</a></div>
-          <div style="{{ styles.heroPills }}"><span style="{{ styles.heroPill }}">{{ p.pill1 }}</span><span style="{{ styles.heroPill }}">{{ p.pill2 }}</span><span style="{{ styles.heroPill }}">{{ p.pill3 }}</span></div>
-        </section>
-
-        <section style="{{ styles.trust }}">
-          <div style="{{ styles.trustInner }}"><span style="{{ styles.trustSpan }}">
-            <sc-for list="{{ trustItemsDouble }}" as="item" hint-placeholder-count="14"><span style="{{ styles.trustWord }}">{{ item }}</span><span style="{{ styles.trustDot }}"></span></sc-for>
-          </span></div>
-        </section>
-
-        <section id="work" data-section="true" style="{{ styles.section }}">
-          <div data-reveal="true" style="{{ styles.sectionHeader }}">
-            <div style="{{ styles.eyebrow }}"><span style="color:var(--accent);font-weight:600">01</span>{{ p.workEyebrow }}</div>
-            <h2 style="{{ styles.sectionTitle }}">{{ p.workTitleMain }}<br/><span style="font-style:italic;color:var(--accent)">{{ p.workTitleIt }}</span></h2>
-          </div>
-          <div style="{{ styles.workGrid }}">
-            <sc-for list="{{ workItems }}" as="item" hint-placeholder-count="4">
-              <article data-reveal="true" style="{{ item.itemStyle }}">
-                <figure onClick="{{ item.openLightbox }}" data-cursor="play" data-tilt="true" style="{{ styles.workMedia }}">
-                  <div data-role="video-thumb" data-vimeo-id="{{ item.vimeoId }}" style="{{ styles.videoFrame }}"></div>
-                  <div data-role="play-overlay" style="{{ styles.playOverlay }}"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M8 5v14l11-7z" fill="currentColor"/></svg></div>
-                </figure>
-                <div>
-                  <div style="{{ styles.workIndex }}">{{ item.index }}</div>
-                  <h3 style="{{ styles.workTitle }}">{{ item.titleMain }} <span style="font-style:italic">{{ item.titleIt }}</span></h3>
-                  <div style="{{ styles.workMeta }}"><span>{{ item.meta1 }}</span><span style="{{ styles.workSep }}"></span><span>{{ item.meta2 }}</span><span style="{{ styles.workSep }}"></span><span>{{ item.year }}</span></div>
-                  <p style="{{ styles.workDesc }}">{{ item.desc }}</p>
-                </div>
-              </article>
-            </sc-for>
-          </div>
-        </section>
-
-        <section id="why" data-section="true" style="{{ styles.section }}">
-          <div data-reveal="true" style="{{ styles.sectionHeader }}">
-            <div style="{{ styles.eyebrow }}"><span style="color:var(--accent);font-weight:600">02</span>{{ p.whyEyebrow }}</div>
-            <h2 style="{{ styles.sectionTitle }}">{{ p.whyTitleMain }}<br/><span style="font-style:italic;color:var(--accent)">{{ p.whyTitleIt }}</span></h2>
-          </div>
-          <div data-reveal="true" style="{{ styles.whyLede }}">{{ p.whyLede }}</div>
-          <div style="{{ styles.pillarsGrid }}">
-            <sc-for list="{{ produccionPillars }}" as="pl" hint-placeholder-count="4">
-              <div data-reveal="true" style="{{ styles.pillarCard }}">
-                <div style="{{ styles.pillarNum }}">{{ pl.num }}</div>
-                <h3 style="{{ styles.pillarTitle }}">{{ pl.title }}</h3>
-                <p style="{{ styles.pillarBody }}">{{ pl.body }}</p>
-              </div>
-            </sc-for>
-          </div>
-        </section>
-
-<!-- ============ SHARED FOUNDER ============ -->
+      <!-- ============ SHARED FOUNDER ============ -->
       <section id="founder" data-section="true" style="{{ styles.section }}">
         <div data-reveal="true" style="{{ styles.sectionHeader }}">
-          <div style="{{ styles.eyebrow }}"><span style="color:var(--accent);font-weight:600">04</span>{{ shared.founderEyebrow }}</div>
+          <div style="{{ styles.eyebrow }}"><span style="color:var(--accent);font-weight:600">05</span>{{ shared.founderEyebrow }}</div>
           <h2 style="{{ styles.sectionTitle }}">{{ shared.founderTitleMain }} <span style="font-style:italic;color:var(--accent)">{{ shared.founderTitleIt }}</span></h2>
         </div>
         <div style="{{ styles.studioGrid }}">
@@ -342,11 +279,9 @@
           </form>
         </div>
       </section>
-    </main>
+  </main>
 
-    
-
-    <footer style="{{ styles.footer }}">
+  <footer style="{{ styles.footer }}">
       <div>© LA 27 · Barcelona</div>
       <div style="display:flex;gap:32px"><span>{{ shared.footerMastered }}</span><span>v2026</span></div>
     </footer>
@@ -399,7 +334,6 @@ const SoundEngine = (() => {
   const setEnabled = (v) => { enabled = v; try { localStorage.setItem('la27.sound', v ? 'true' : 'false'); } catch (e) {} };
   return { play, isEnabled, setEnabled, init };
 })();
-
 
 const DICT = {
   "es": {
@@ -550,7 +484,9 @@ const DICT = {
         "Formación y Educación",
         "Turismo y Viajes",
         "Otro / Consulta general"
-      ]
+      ],
+      "navIntro": "Intro",
+      "navHow": "Cómo funciona"
     }
   },
   "en": {
@@ -701,7 +637,9 @@ const DICT = {
         "Education & Training",
         "Tourism & Travel",
         "Other / General inquiry"
-      ]
+      ],
+      "navIntro": "Intro",
+      "navHow": "How it works"
     }
   },
   "de": {
@@ -852,7 +790,9 @@ const DICT = {
         "Aus- & Weiterbildung",
         "Tourismus & Reisen",
         "Sonstiges / Allgemeine Anfrage"
-      ]
+      ],
+      "navIntro": "Intro",
+      "navHow": "Ablauf"
     }
   },
   "fr": {
@@ -1003,7 +943,9 @@ const DICT = {
         "Formation et Éducation",
         "Tourisme et Voyages",
         "Autre / Demande générale"
-      ]
+      ],
+      "navIntro": "Intro",
+      "navHow": "Fonctionnement"
     }
   },
   "pt": {
@@ -1154,187 +1096,102 @@ const DICT = {
         "Formação e Educação",
         "Turismo e Viagens",
         "Outro / Consulta geral"
-      ]
+      ],
+      "navIntro": "Intro",
+      "navHow": "Como funciona"
     }
   }
 };
 
-
 class Component extends DCLogic {
-  state = {
-    lang: 'es',
-    isMobile: false,
-    langMenuOpen: false,
-    time: '—:—',
-    soundEnabled: SoundEngine.isEnabled(),
-    sampleIndex: 0
-  };
+  constructor() {
+    super();
+    let initialLang = 'es';
+    try {
+      const stored = localStorage.getItem('la27.lang');
+      if (stored && DICT[stored]) initialLang = stored;
+      else {
+        const nav = (navigator.language || 'es').slice(0, 2).toLowerCase();
+        if (DICT[nav]) initialLang = nav;
+      }
+    } catch (e) {}
+
+    this.state = {
+      lang: initialLang,
+      langMenuOpen: false,
+      time: this.getBCNTime(),
+      sampleIndex: 0,
+      soundEnabled: SoundEngine.isEnabled()
+    };
+  }
+
+  getBCNTime() {
+    try {
+      return new Intl.DateTimeFormat('en-GB', {
+        timeZone: 'Europe/Madrid',
+        hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false
+      }).format(new Date());
+    } catch (e) {
+      return '12:00:00';
+    }
+  }
 
   componentDidMount() {
-    this.onResize();
-    window.addEventListener('resize', this.onResize);
-    this.updateTime();
-    this._clock = setInterval(this.updateTime, 30000);
+    this._timeInterval = setInterval(() => {
+      this.setState({ time: this.getBCNTime() });
+    }, 1000);
+
+    this._sampleInterval = setInterval(() => {
+      this.setState({ sampleIndex: (this.state.sampleIndex + 1) % 6 });
+    }, 3200);
+
     this.initCursor();
     this.initScrollProgress();
-    this.initBgParallax();
-    this.initRipples();
-    this.initTilt();
-    this.initMagnetic();
-    document.addEventListener('click', this.onDocClick);
-    this.reinitView();
+    this.initReveal();
+    this.initSectionIndex();
+    this.initCanvasBad();
+    this.initCanvasGood();
+
+    document.addEventListener('click', (e) => {
+      if (this.state.langMenuOpen && !e.target.closest('[data-role="lang-menu"]')) {
+        this.setState({ langMenuOpen: false });
+      }
+    });
   }
 
   componentWillUnmount() {
-    window.removeEventListener('resize', this.onResize);
-    clearInterval(this._clock);
-    document.removeEventListener('click', this.onDocClick);
-    if (this._io) this._io.disconnect();
+    clearInterval(this._timeInterval);
+    clearInterval(this._sampleInterval);
+    if (this._animGood) cancelAnimationFrame(this._animGood);
+    if (this._animBad) cancelAnimationFrame(this._animBad);
     if (this._raf) cancelAnimationFrame(this._raf);
-    ['flow-canvas', 'flow-canvas-bad'].forEach((role) => {
-      if (this['_flowRaf_' + role]) cancelAnimationFrame(this['_flowRaf_' + role]);
-      if (this['_flowResize_' + role]) window.removeEventListener('resize', this['_flowResize_' + role]);
-      if (this['_flowInterval_' + role]) clearInterval(this['_flowInterval_' + role]);
-    });
-    if (this._sampleTimer) clearInterval(this._sampleTimer);
   }
 
-  reinitView() {
-    this.initReveal();
-    this.initSectionIndex();
-    this.initFlowCanvas('flow-canvas', true);
-    this.initFlowCanvas('flow-canvas-bad', false);
-    this.initSampleTicker();
+  componentDidUpdate(prevProps, prevState) {
+    if (prevState.lang !== this.state.lang) {
+      setTimeout(() => {
+        this.initReveal();
+        this.initSectionIndex();
+      }, 50);
+    }
   }
 
-  initSampleTicker() {
-    if (this._sampleTimer) clearInterval(this._sampleTimer);
-    this._sampleTimer = setInterval(() => {
-      this.setState((s) => ({
-        sampleIndex: (s.sampleIndex + 1) % (DICT[s.lang].marketing.sampleContacts || [1]).length
-      }));
-    }, 3200);
-  }
-
-  initFlowCanvas(role, filtered) {
-    const rafKey = '_flowRaf_' + role;
-    const resizeKey = '_flowResize_' + role;
-    const intervalKey = '_flowInterval_' + role;
-    if (this[rafKey]) { cancelAnimationFrame(this[rafKey]); this[rafKey] = null; }
-    if (this[resizeKey]) { window.removeEventListener('resize', this[resizeKey]); this[resizeKey] = null; }
-    if (this[intervalKey]) { clearInterval(this[intervalKey]); this[intervalKey] = null; }
-    const canvas = document.querySelector(`[data-role="${role}"]`);
-    if (!canvas) return;
-    const ctx = canvas.getContext('2d');
-    const dpr = Math.min(window.devicePixelRatio || 1, 2);
-    const resize = () => {
-      canvas.width = canvas.clientWidth * dpr;
-      canvas.height = canvas.clientHeight * dpr;
-      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-    };
-    resize();
-    window.addEventListener('resize', resize);
-    this[resizeKey] = resize;
-    const RED = '#dc2626';
-    let particles = [];
-    let frame = 0;
-    const W = () => canvas.clientWidth;
-    const H = () => canvas.clientHeight;
-    const gateX = () => W() * 0.42;
-    const clusterX = () => W() * 0.9;
-    const clusterY = () => H() * 0.5;
-    const draw = () => {
-      frame++;
-      const w = W(), h = H();
-      if (w > 0 && frame % 5 === 0 && particles.length < 140) {
-        particles.push({ x: -6, y: 10 + Math.random() * (h - 20), vx: 0.9 + Math.random() * 0.7, vy: 0, r: 1.6 + Math.random() * 1.6, state: 'raw', life: 0, seed: Math.random() * 100 });
-      }
-      ctx.clearRect(0, 0, w, h);
-      if (filtered) {
-        const pulse = 0.35 + 0.25 * Math.sin(frame * 0.05);
-        ctx.strokeStyle = `rgba(220,38,38,${pulse.toFixed(2)})`;
-        ctx.lineWidth = 1.5;
-        ctx.setLineDash([5, 5]);
-        ctx.beginPath(); ctx.moveTo(gateX(), 0); ctx.lineTo(gateX(), h); ctx.stroke();
-        ctx.setLineDash([]);
-        const grad = ctx.createRadialGradient(clusterX(), clusterY(), 0, clusterX(), clusterY(), 60);
-        grad.addColorStop(0, 'rgba(220,38,38,0.18)');
-        grad.addColorStop(1, 'rgba(220,38,38,0)');
-        ctx.fillStyle = grad;
-        ctx.fillRect(clusterX() - 60, clusterY() - 60, 120, 120);
-      } else {
-        const grad = ctx.createRadialGradient(clusterX(), clusterY(), 0, clusterX(), clusterY(), 70);
-        grad.addColorStop(0, 'rgba(138,132,128,0.16)');
-        grad.addColorStop(1, 'rgba(138,132,128,0)');
-        ctx.fillStyle = grad;
-        ctx.fillRect(clusterX() - 70, clusterY() - 70, 140, 140);
-      }
-
-      particles.forEach((p) => {
-        if (!filtered) {
-          if (!p.settled) {
-            p.x += p.vx * 0.8;
-            p.y += Math.sin((p.x + p.seed) * 0.05) * 0.4;
-            if (p.x >= clusterX() - 10) {
-              p.settled = true;
-              const ang = Math.random() * Math.PI * 2; const rad = Math.random() * 40;
-              p.x = clusterX() + Math.cos(ang) * rad; p.y = clusterY() + Math.sin(ang) * rad;
-            }
-          } else {
-            p.life++;
-          }
-        } else if (p.state === 'raw') {
-          p.x += p.vx;
-          if (p.x >= gateX()) {
-            if (Math.random() < 0.58) { p.state = 'verified'; p.targetY = clusterY() + (Math.random() - 0.5) * 70; }
-            else { p.state = 'reject'; p.vy = (Math.random() - 0.5) * 1.8; }
-          }
-        } else if (p.state === 'verified') {
-          p.x += p.vx * 0.85;
-          p.y += (p.targetY - p.y) * 0.04;
-          if (p.x >= clusterX()) {
-            if (!p.settled) { p.settled = true; const ang = Math.random() * Math.PI * 2; const rad = Math.random() * 34; p.x = clusterX() + Math.cos(ang) * rad; p.y = clusterY() + Math.sin(ang) * rad; p.vx = 0; }
-            p.life++;
-          }
-        } else {
-          p.x += p.vx * 0.6; p.y += p.vy; p.life++;
-        }
-        let color;
-        if (!filtered) {
-          color = p.badColor || (p.badColor = ['rgba(138,132,128,0.55)', 'rgba(150,110,60,0.5)', 'rgba(160,90,90,0.45)'][Math.floor(Math.random() * 3)]);
-        } else {
-          color = p.state === 'verified' ? RED : p.state === 'reject' ? 'rgba(138,132,128,0.35)' : 'rgba(138,132,128,0.65)';
-        }
-        ctx.beginPath();
-        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-        ctx.fillStyle = color;
-        ctx.fill();
-      });
-      particles = particles.filter((p) => filtered
-        ? (p.x < w + 10 && !(p.state === 'reject' && p.life > 45) && !(p.state === 'verified' && p.settled && p.life > 70))
-        : (p.x < clusterX() + 30 && !(p.settled && p.life > 70)));
-      this[rafKey] = requestAnimationFrame(safeDraw);
-    };
-    const safeDraw = () => {
-      try { draw(); } catch (e) { particles = []; this[rafKey] = requestAnimationFrame(safeDraw); }
-    };
-    this[intervalKey] = setInterval(() => { particles = []; frame = 0; }, 55000);
-    safeDraw();
-  }
-
-  onDocClick = () => { if (this.state.langMenuOpen) this.setState({ langMenuOpen: false }); };
-  onResize = () => this.setState({ isMobile: window.innerWidth < 900 });
-  updateTime = () => {
-    try { this.setState({ time: new Date().toLocaleTimeString('en-GB', { timeZone: 'Europe/Madrid', hour: '2-digit', minute: '2-digit' }) }); } catch (e) {}
+  toggleLangMenu = (e) => {
+    e.stopPropagation();
+    this.setState({ langMenuOpen: !this.state.langMenuOpen });
   };
 
-  toggleLangMenu = (e) => { e.stopPropagation(); this.setState(s => ({ langMenuOpen: !s.langMenuOpen })); };
-  selectLang = (lang) => (e) => { e.preventDefault(); e.stopPropagation(); SoundEngine.play('click'); this.setState({ lang, langMenuOpen: false }); };
-  toggleSound = () => { SoundEngine.setEnabled(!SoundEngine.isEnabled()); SoundEngine.init(); SoundEngine.play('click'); this.setState({ soundEnabled: SoundEngine.isEnabled() }); };
-
-  openMailClient = (e) => {
+  selectLang = (code) => (e) => {
     e.preventDefault();
-    window.location.href = 'mail' + 'to:' + ['tim', 'la27productions.com'].join('@');
+    try { localStorage.setItem('la27.lang', code); } catch (err) {}
+    this.setState({ lang: code, langMenuOpen: false });
+  };
+
+  toggleSound = () => {
+    const next = !this.state.soundEnabled;
+    SoundEngine.setEnabled(next);
+    this.setState({ soundEnabled: next });
+    if (next) SoundEngine.play('click');
   };
 
   initCursor() {
@@ -1405,98 +1262,104 @@ class Component extends DCLogic {
     update();
   }
 
-  initTilt() {
-    if (this._tiltBound || !window.matchMedia('(hover: hover)').matches) return;
-    this._tiltBound = true;
-    const maxTilt = 9;
-    document.addEventListener('mousemove', (e) => {
-      const card = e.target.closest && e.target.closest('[data-tilt]');
-      if (!card) return;
-      const rect = card.getBoundingClientRect();
-      const xPct = (e.clientX - rect.left) / rect.width - 0.5;
-      const yPct = (e.clientY - rect.top) / rect.height - 0.5;
-      card.style.transform = `perspective(900px) rotateX(${(-yPct * maxTilt).toFixed(2)}deg) rotateY(${(xPct * maxTilt).toFixed(2)}deg) scale3d(1.03,1.03,1.03)`;
-      card.style.transition = 'transform 0.05s linear';
-    });
-    document.addEventListener('mouseout', (e) => {
-      const card = e.target.closest && e.target.closest('[data-tilt]');
-      if (!card) return;
-      if (e.relatedTarget && card.contains(e.relatedTarget)) return;
-      card.style.transition = 'transform 0.5s cubic-bezier(0.16,1,0.3,1)';
-      card.style.transform = 'perspective(900px) rotateX(0deg) rotateY(0deg) scale3d(1,1,1)';
-    });
+  initCanvasBad() {
+    const c = document.querySelector('[data-role="flow-canvas-bad"]');
+    if (!c) return;
+    const ctx = c.getContext('2d');
+    let w = (c.width = c.clientWidth * (window.devicePixelRatio || 1));
+    let h = (c.height = c.clientHeight * (window.devicePixelRatio || 1));
+    const N = 48;
+    const pts = Array.from({ length: N }, () => ({
+      x: Math.random() * w, y: Math.random() * h,
+      vx: 0.8 + Math.random() * 1.6, vy: (Math.random() - 0.5) * 0.8,
+      rad: 1.5 + Math.random() * 2,
+      isBounce: Math.random() < 0.45
+    }));
+    const draw = () => {
+      ctx.clearRect(0, 0, w, h);
+      pts.forEach((p) => {
+        p.x += p.vx; p.y += p.vy;
+        if (p.x > w) { p.x = 0; p.y = Math.random() * h; }
+        ctx.fillStyle = p.isBounce ? 'rgba(220,38,38,0.75)' : 'rgba(120,120,120,0.4)';
+        ctx.beginPath(); ctx.arc(p.x, p.y, p.rad, 0, Math.PI * 2); ctx.fill();
+      });
+      this._animBad = requestAnimationFrame(draw);
+    };
+    draw();
   }
 
-  initMagnetic() {
-    if (this._magBound || !window.matchMedia('(hover: hover)').matches) return;
-    this._magBound = true;
-    document.addEventListener('mousemove', (e) => {
-      const el = e.target.closest && e.target.closest('[data-magnetic]');
-      if (!el) return;
-      const rect = el.getBoundingClientRect();
-      const x = e.clientX - (rect.left + rect.width / 2);
-      const y = e.clientY - (rect.top + rect.height / 2);
-      el.style.transition = 'transform 0.05s linear';
-      el.style.transform = `translate(${(x * 0.28).toFixed(1)}px, ${(y * 0.28).toFixed(1)}px)`;
-    });
-    document.addEventListener('mouseout', (e) => {
-      const el = e.target.closest && e.target.closest('[data-magnetic]');
-      if (!el) return;
-      if (e.relatedTarget && el.contains(e.relatedTarget)) return;
-      el.style.transition = 'transform 0.4s cubic-bezier(0.16,1,0.3,1)';
-      el.style.transform = '';
-    });
+  initCanvasGood() {
+    const c = document.querySelector('[data-role="flow-canvas"]');
+    if (!c) return;
+    const ctx = c.getContext('2d');
+    let w = (c.width = c.clientWidth * (window.devicePixelRatio || 1));
+    let h = (c.height = c.clientHeight * (window.devicePixelRatio || 1));
+    const N = 56;
+    const pts = Array.from({ length: N }, () => ({
+      x: Math.random() * w, y: Math.random() * h,
+      vx: 0.8 + Math.random() * 1.8, vy: (Math.random() - 0.5) * 0.6,
+      rad: 1.5 + Math.random() * 2.2
+    }));
+    const draw = () => {
+      ctx.clearRect(0, 0, w, h);
+      const filterX = w * 0.5;
+      ctx.strokeStyle = 'rgba(255,255,255,0.12)';
+      ctx.setLineDash([4, 4]);
+      ctx.beginPath(); ctx.moveTo(filterX, 0); ctx.lineTo(filterX, h); ctx.stroke();
+      ctx.setLineDash([]);
+      pts.forEach((p) => {
+        p.x += p.vx; p.y += p.vy;
+        if (p.x > w) { p.x = 0; p.y = Math.random() * h; }
+        const passed = p.x > filterX;
+        ctx.fillStyle = passed ? 'rgba(74,222,128,0.85)' : 'rgba(180,180,180,0.45)';
+        ctx.beginPath(); ctx.arc(p.x, p.y, p.rad, 0, Math.PI * 2); ctx.fill();
+      });
+      this._animGood = requestAnimationFrame(draw);
+    };
+    draw();
   }
 
-  initBgParallax() {
-    const bg = document.querySelector('[data-role="bg-art"]');
-    if (!bg) return;
-    window.addEventListener('scroll', () => { bg.style.transform = `translateY(${window.scrollY * 0.05}px)`; }, { passive: true });
-  }
-
-  initRipples() {
-    window.addEventListener('click', (e) => {
-      if (e.target.closest('iframe')) return;
-      const ripple = document.createElement('span');
-      ripple.style.cssText = `position:absolute;left:${e.pageX}px;top:${e.pageY}px;width:10px;height:10px;border:1px solid ${ACCENT};border-radius:50%;pointer-events:none;transform:translate(-50%,-50%) scale(0);opacity:0.8;animation:la27-ripple 0.8s cubic-bezier(0.1,0.8,0.3,1) forwards;z-index:9998;`;
-      document.body.appendChild(ripple);
-      setTimeout(() => ripple.remove(), 850);
-    });
-  }
+  openMailClient = (e) => {
+    e.preventDefault();
+    const email = ['tim', 'la27productions.com'].join('@');
+    window.location.href = 'mailto:' + email;
+  };
 
   renderVals() {
-    const { lang, isMobile, soundEnabled, sampleIndex } = this.state;
-    const d = DICT[lang];
+    const { lang, soundEnabled, sampleIndex } = this.state;
+    const d = DICT[lang] || DICT.es;
     const shared = d.shared;
     const m = d.marketing;
 
+    const isMobile = typeof window !== 'undefined' ? window.innerWidth < 768 : false;
+
     const styles = {
-      root: { '--accent': ACCENT, '--ink': INK, '--line': LINE, background: BG, color: INK, fontFamily: FONT_SANS, fontWeight: 400, fontSize: '16px', lineHeight: 1.5, overflowX: 'hidden', minHeight: '100vh', position: 'relative', zIndex: 0 },
-      filmGrain: { position: 'fixed', inset: '-10%', width: '120%', height: '120%', zIndex: 1400, pointerEvents: 'none', backgroundImage: "url(\"data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E\")", opacity: 0.02, animation: 'la27-grain 8s steps(10) infinite' },
-      cursor: { position: 'fixed', top: 0, left: 0, width: '8px', height: '8px', borderRadius: '50%', background: INK, pointerEvents: 'none', zIndex: 9999, mixBlendMode: 'difference', transition: 'width 0.3s cubic-bezier(0.16,1,0.3,1), height 0.3s cubic-bezier(0.16,1,0.3,1), background 0.3s ease' },
-      cursorLabel: { position: 'absolute', inset: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', fontFamily: FONT_MONO, fontSize: '10px', letterSpacing: '0.1em', textTransform: 'uppercase', color: BG, opacity: 0 },
-      scrollProgress: { position: 'fixed', top: 0, left: 0, height: '2px', width: '0%', background: ACCENT, zIndex: 99 },
-      bgArt: { position: 'fixed', inset: 0, zIndex: -2, pointerEvents: 'none', overflow: 'hidden' },
-      bgShapeArch: { position: 'absolute', width: '260px', height: '416px', bottom: '-40px', left: '-30px', color: ACCENT, opacity: 0.3, animation: 'la27-driftA 18s ease-in-out infinite alternate' },
-      bgShapeGuitar: { position: 'absolute', width: '340px', height: '170px', top: '15%', right: '2%', color: INK_DIM, opacity: 0.28, animation: 'la27-driftB 24s ease-in-out infinite alternate' },
-      bgShapeSail: { position: 'absolute', width: '220px', height: '220px', bottom: '20%', right: '16%', color: ACCENT, opacity: 0.24, animation: 'la27-driftC 20s ease-in-out infinite alternate' },
-      bgShapeEixample: { position: 'absolute', width: '360px', height: '360px', top: '4%', left: '8%', color: INK_DIM, opacity: 0.16, animation: 'la27-driftD 26s ease-in-out infinite alternate' },
-      bgShapeMosaicDots: { position: 'absolute', width: '300px', height: '300px', bottom: '2%', left: '38%', color: ACCENT, opacity: 0.3, animation: 'la27-driftE 16s ease-in-out infinite alternate' },
-      gradientWash: { position: 'fixed', inset: '-30%', width: '160%', height: '160%', zIndex: -3, pointerEvents: 'none', filter: 'blur(60px)', animation: 'la27-wash 22s ease-in-out infinite alternate', background: 'radial-gradient(circle at 32% 28%, oklch(0.58 0.22 25 / 0.20), transparent 55%), radial-gradient(circle at 72% 68%, oklch(0.58 0.22 25 / 0.14), transparent 60%), radial-gradient(circle at 50% 90%, oklch(0.5 0.05 250 / 0.10), transparent 55%)' },
+      root: { background: BG, color: INK, minHeight: '100vh', position: 'relative', overflowX: 'hidden', fontFamily: FONT_SANS },
+      filmGrain: { position: 'fixed', inset: 0, pointerEvents: 'none', zIndex: 999, opacity: 0.04, backgroundImage: 'radial-gradient(circle at 50% 50%, #fff 1px, transparent 1px)', backgroundSize: '3px 3px' },
+      cursor: { position: 'fixed', top: 0, left: 0, width: '8px', height: '8px', borderRadius: '50%', background: INK, pointerEvents: 'none', zIndex: 1000, mixBlendMode: 'difference', transform: 'translate(-50%, -50%)', transition: 'width 0.2s cubic-bezier(0.2,0.8,0.2,1), height 0.2s cubic-bezier(0.2,0.8,0.2,1), background 0.2s ease', display: isMobile ? 'none' : 'flex', alignItems: 'center', justifyContent: 'center' },
+      cursorLabel: { color: BG, fontFamily: FONT_MONO, fontSize: '9px', fontWeight: 600, letterSpacing: '0.12em', textTransform: 'uppercase', opacity: 0, transition: 'opacity 0.2s ease', pointerEvents: 'none' },
+      scrollProgress: { position: 'fixed', top: 0, left: 0, height: '2px', background: ACCENT, zIndex: 1001, width: '0%' },
+      gradientWash: { position: 'fixed', inset: 0, pointerEvents: 'none', zIndex: 0, background: 'radial-gradient(circle at 18% 25%, rgba(220,38,38,0.06), transparent 50%), radial-gradient(circle at 82% 75%, rgba(220,38,38,0.04), transparent 50%)', animation: 'la27-wash 16s ease-in-out infinite alternate' },
+      bgArt: { position: 'fixed', inset: 0, pointerEvents: 'none', zIndex: 0, overflow: 'hidden' },
+      bgShapeArch: { position: 'absolute', top: '-60px', right: '-40px', width: '380px', height: '620px', color: 'rgba(255,255,255,0.025)', transform: 'rotate(-4deg)', animation: 'la27-driftA 26s ease-in-out infinite' },
+      bgShapeGuitar: { position: 'absolute', top: '38%', left: '-80px', width: '480px', height: '240px', color: 'rgba(255,255,255,0.02)', transform: 'rotate(8deg)', animation: 'la27-driftB 30s ease-in-out infinite' },
+      bgShapeSail: { position: 'absolute', bottom: '8%', right: '-40px', width: '400px', height: '480px', color: 'rgba(255,255,255,0.022)', transform: 'rotate(-6deg)', animation: 'la27-driftC 28s ease-in-out infinite' },
+      bgShapeEixample: { position: 'absolute', top: '22%', right: '8%', width: '360px', height: '360px', color: 'rgba(255,255,255,0.018)', transform: 'rotate(12deg)', animation: 'la27-driftD 34s ease-in-out infinite' },
+      bgShapeMosaicDots: { position: 'absolute', bottom: '15%', left: '6%', width: '320px', height: '320px', color: 'rgba(255,255,255,0.02)', transform: 'rotate(-8deg)', animation: 'la27-driftE 24s ease-in-out infinite' },
 
-      nav: { position: 'fixed', top: 0, left: 0, right: 0, zIndex: 100, padding: isMobile ? '16px 20px' : '20px 48px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '24px', background: 'rgba(10,10,10,0.65)', backdropFilter: 'blur(12px)', borderBottom: '1px solid rgba(255,255,255,0.05)', color: '#fff' },
-      navBrand: { appearance: 'none', background: 'transparent', border: 0, cursor: 'pointer', fontFamily: FONT_MONO, fontSize: isMobile ? '18px' : '21px', letterSpacing: '0.06em', textTransform: 'uppercase', color: '#fff', fontWeight: 700, whiteSpace: 'nowrap', flexShrink: 0, textDecoration: 'none' },
-      navLinks: { display: isMobile ? 'none' : 'flex', gap: '22px', fontFamily: FONT_MONO, fontSize: '11px', letterSpacing: '0.12em', textTransform: 'uppercase', flexShrink: 1, flexWrap: 'wrap', justifyContent: 'flex-end' },
-      navLink: { color: INK, textDecoration: 'none', opacity: 0.75 },
-      navRight: { display: 'flex', alignItems: 'center', gap: '16px' },
-      navMeta: { display: isMobile ? 'none' : 'flex', alignItems: 'center', fontFamily: FONT_MONO, fontSize: '11px', letterSpacing: '0.14em', textTransform: 'uppercase', opacity: 0.7 },
-      navDot: { display: 'inline-block', width: '6px', height: '6px', borderRadius: '50%', background: ACCENT, marginRight: '8px', animation: 'la27-pulse 2.4s ease-in-out infinite' },
-      soundBtn: { appearance: 'none', background: 'transparent', border: 0, color: INK, cursor: 'pointer', display: isMobile ? 'none' : 'inline-flex', alignItems: 'center', gap: '6px', fontFamily: FONT_MONO, fontSize: '10px', letterSpacing: '0.14em', textTransform: 'uppercase', opacity: soundEnabled ? 0.85 : 0.4, whiteSpace: 'nowrap', flexShrink: 0 },
-      langBtn: { appearance: 'none', background: 'transparent', border: 0, color: INK, cursor: 'pointer', display: 'inline-flex', alignItems: 'center', gap: '6px', fontFamily: FONT_MONO, fontSize: '11px', letterSpacing: '0.14em', textTransform: 'uppercase' },
-      langMenu: { position: 'absolute', top: 'calc(100% + 10px)', right: 0, listStyle: 'none', background: '#0a0a0a', border: '1px solid ' + LINE, borderRadius: '4px', padding: '6px', margin: 0, minWidth: '150px', display: 'flex', flexDirection: 'column', gap: '2px', zIndex: 200 },
-      langMenuLink: { display: 'flex', alignItems: 'center', gap: '10px', padding: '8px 12px', color: INK, textDecoration: 'none', fontFamily: FONT_MONO, fontSize: '11px', letterSpacing: '0.1em', textTransform: 'uppercase' },
+      nav: { position: 'fixed', top: 0, left: 0, right: 0, height: isMobile ? '64px' : '76px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: isMobile ? '0 20px' : '0 48px', zIndex: 100, backdropFilter: 'blur(20px) saturate(180%)', background: 'rgba(2,2,2,0.7)', borderBottom: '1px solid ' + LINE },
+      navBrand: { fontFamily: FONT_DISPLAY, fontSize: '24px', letterSpacing: '-0.02em', color: INK, textDecoration: 'none', display: 'inline-flex', alignItems: 'baseline', gap: '8px' },
+      navLinks: { display: isMobile ? 'none' : 'flex', gap: '28px', alignItems: 'center' },
+      navLink: { color: INK_DIM, textDecoration: 'none', fontFamily: FONT_MONO, fontSize: '11px', letterSpacing: '0.14em', textTransform: 'uppercase', transition: 'color 0.2s ease' },
+      navRight: { display: 'flex', alignItems: 'center', gap: isMobile ? '12px' : '20px' },
+      soundBtn: { appearance: 'none', background: 'transparent', border: '1px solid ' + LINE, color: INK_DIM, fontFamily: FONT_MONO, fontSize: '10px', letterSpacing: '0.12em', padding: '7px 12px', borderRadius: '999px', cursor: 'pointer' },
+      langBtn: { appearance: 'none', background: 'transparent', border: '1px solid ' + LINE, color: INK, fontFamily: FONT_MONO, fontSize: '11px', letterSpacing: '0.12em', padding: '7px 12px', borderRadius: '999px', cursor: 'pointer', display: 'inline-flex', alignItems: 'center', gap: '6px' },
+      langMenu: { position: 'absolute', top: '100%', right: 0, marginTop: '8px', background: 'rgba(10,10,10,0.95)', backdropFilter: 'blur(16px)', border: '1px solid ' + LINE, borderRadius: '6px', listStyle: 'none', padding: '6px 0', minWidth: '140px', zIndex: 200, boxShadow: '0 12px 32px rgba(0,0,0,0.6)' },
+      langMenuLink: { display: 'block', padding: '8px 16px', color: INK, textDecoration: 'none', fontFamily: FONT_MONO, fontSize: '11px', letterSpacing: '0.08em', textTransform: 'uppercase' },
+      navMeta: { fontFamily: FONT_MONO, fontSize: '11px', letterSpacing: '0.12em', color: INK_MUTE, display: isMobile ? 'none' : 'inline-flex', alignItems: 'center', gap: '8px' },
+      navDot: { width: '6px', height: '6px', borderRadius: '50%', background: ACCENT, display: 'inline-block' },
 
-      sectionIndex: { display: isMobile ? 'none' : 'flex', position: 'fixed', right: '28px', top: '50%', transform: 'translateY(-50%)', zIndex: 50, flexDirection: 'column', gap: '16px', mixBlendMode: 'difference', color: '#fff' },
+      sectionIndex: { position: 'fixed', right: '32px', top: '50%', transform: 'translateY(-50%)', display: isMobile ? 'none' : 'flex', flexDirection: 'column', gap: '14px', zIndex: 90 },
       indexLink: { display: 'flex', alignItems: 'center', gap: '10px', color: 'inherit', textDecoration: 'none', fontFamily: FONT_MONO, fontSize: '10px', letterSpacing: '0.14em', textTransform: 'uppercase', opacity: 0.45, transition: 'opacity 0.3s ease' },
       indexNum: { width: '22px' },
 
@@ -1590,13 +1453,17 @@ class Component extends DCLogic {
       select: this.selectLang(code)
     }));
 
+    // All 6 sections in top nav:
     const navLinks = [
+      { label: m.navIntro || 'Intro', href: '#hero' },
+      { label: m.navHow || m.howEyebrow, href: '#how' },
       { label: m.navWork, href: '#work' },
       { label: m.navWhy, href: '#why' },
       { label: m.navFounder, href: '#founder' },
       { label: m.navContact, href: '#contact' }
     ];
 
+    // All 6 sections in section index:
     const indexItems = [
       { label: 'Intro', id: 'hero' },
       { label: m.howEyebrow, id: 'how' },
