@@ -1,0 +1,5 @@
+# LA 27 Productions
+User-agent: *
+Allow: /
+
+Sitemap: https://la27productions.com/sitemap.xml

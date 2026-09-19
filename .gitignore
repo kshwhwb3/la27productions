@@ -1,0 +1,44 @@
+# Este repositorio sirve UNICAMENTE la web publica de la27productions.com
+# a traves de GitHub Pages. Nada de codigo de negocio, datos de clientes,
+# claves ni documentos internos.
+
+# --- Secretos ---
+.env
+*.env
+**/.env
+**/credentials*.json
+**/token*.json
+*.key
+*.pem
+
+# --- Codigo y datos internos: viven en el servidor, no aqui ---
+agents/
+scratch/
+*.py
+*.bat
+.agents/
+AGENTS.md
+CLAUDE.md
+FACTURAS/
+CONTRATOS/
+*_CRM.xlsx
+*.xlsx
+*leads*.csv
+*leads*.json
+LA27_*.csv
+LA27_*.json
+sent_emails.json
+all_sent_emails_consolidated.json
+venues_blacklist.json
+agency_seed_universe.json
+batch_approved*.json
+TEST_WRITE.csv
+
+# --- Ruido ---
+__pycache__/
+*.pyc
+*.log
+venv/
+node_modules/
+.DS_Store
+Thumbs.db

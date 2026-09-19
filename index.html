@@ -1,0 +1,1555 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- Estos van en el <head> ESTATICO a proposito: el bloque <helmet> de abajo
+     lo aplica JavaScript, y el robot de Google que busca el favicon no
+     ejecuta JavaScript. Si solo estuvieran ahi, en los resultados de
+     busqueda seguiria saliendo el globo terraqueo generico. -->
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/assets/favicon-180.png">
+<link rel="manifest" href="/site.webmanifest">
+<meta name="theme-color" content="#070304">
+<meta name="description" content="LA 27 Productions — E-Mail-Marketing B2C para promotores de conciertos y agencias de booking. Audiencias verificadas segmentadas por género musical, región y edad. Barcelona.">
+
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+
+<helmet>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>LA 27 — Campañas de Email Marketing & Audiencias · Barcelona</title>
+
+  <!-- Descripción para buscadores. Sin esto Google rapiña el texto de la
+       página y saca las variables de plantilla sin renderizar ({{ soundLabel }}). -->
+  <meta name="description" content="LA 27 Productions — E-Mail-Marketing B2C para promotores de conciertos y agencias de booking. Audiencias verificadas segmentadas por género musical, región y edad. Barcelona." />
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large" />
+  <link rel="canonical" href="https://la27productions.com/" />
+
+  <!-- Favicon: el 27 en rojo sobre obsidiana -->
+  <link rel="icon" href="/assets/favicon.ico" sizes="any" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/favicon-180.png" />
+  <link rel="manifest" href="/site.webmanifest" />
+  <meta name="theme-color" content="#070304" />
+
+  <!-- Al compartir el enlace (WhatsApp, LinkedIn, Slack) -->
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="LA 27 Productions" />
+  <meta property="og:url" content="https://la27productions.com/" />
+  <meta property="og:title" content="LA 27 — B2C E-Mail-Marketing · Barcelona" />
+  <meta property="og:description" content="Audiencias verificadas de público de conciertos, segmentadas por género musical, región y edad. Para promotores y agencias de booking." />
+  <meta property="og:image" content="https://la27productions.com/assets/favicon-512.png" />
+  <meta name="twitter:card" content="summary" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="true" />
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Space+Grotesk:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    @keyframes la27-marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+    @keyframes la27-bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(4px); } }
+    @keyframes la27-pulse { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.5; transform: scale(1.4); } }
+    @keyframes la27-wave { 0%, 100% { transform: scaleY(0.4); } 50% { transform: scaleY(1); } }
+    @keyframes la27-grain { 0%,100% { transform: translate(0,0); } 20% { transform: translate(-2%,1%); } 40% { transform: translate(-1%,3%); } 60% { transform: translate(1%,-2%); } 80% { transform: translate(2%,1%); } }
+    @keyframes la27-driftA { 0% { transform: translate(0,0) rotate(0deg); } 50% { transform: translate(30px,-18px) rotate(5deg); } 100% { transform: translate(-14px,12px) rotate(-4deg); } }
+    @keyframes la27-driftB { 0% { transform: translate(0,0) rotate(0deg); } 50% { transform: translate(-34px,26px) rotate(-7deg); } 100% { transform: translate(18px,-12px) rotate(6deg); } }
+    @keyframes la27-driftC { 0% { transform: translate(0,0) rotate(0deg); } 50% { transform: translate(-18px,-30px) rotate(10deg); } 100% { transform: translate(20px,12px) rotate(-7deg); } }
+    @keyframes la27-ripple { to { transform: translate(-50%,-50%) scale(6); opacity: 0; } }
+    @keyframes la27-driftD { 0% { transform: translate(0,0) rotate(0deg) scale(1); } 50% { transform: translate(24px,-16px) rotate(4deg) scale(1.06); } 100% { transform: translate(-16px,10px) rotate(-3deg) scale(0.96); } }
+    @keyframes la27-driftE { 0% { transform: translate(0,0) scale(1); } 50% { transform: translate(-14px,18px) scale(1.08); } 100% { transform: translate(18px,-10px) scale(0.94); } }
+    @keyframes la27-wash { 0% { transform: translate(-4%,-4%) scale(1); } 50% { transform: translate(5%,7%) scale(1.15); } 100% { transform: translate(-7%,3%) scale(0.95); } }
+    @keyframes la27-chipfade { 0%, 8% { opacity: 0; transform: translateY(6px); } 15%, 85% { opacity: 1; transform: translateY(0); } 95%, 100% { opacity: 0; transform: translateY(-4px); } }
+    body { margin: 0; background: #070304; cursor: none; }
+  </style>
+</helmet>
+
+<template id="__bundler_thumbnail"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect width="100" height="100" fill="#020202"/><text x="50" y="62" font-family="Georgia,serif" font-size="40" font-weight="bold" fill="#dc2626" text-anchor="middle">27</text></svg></template>
+
+<template id="__bundler_thumbnail"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect width="100" height="100" fill="#020202"/><text x="50" y="62" font-family="Georgia,serif" font-size="40" font-weight="bold" fill="#dc2626" text-anchor="middle">27</text></svg></template>
+
+<div style="{{ styles.root }}">
+
+  <div data-role="film-grain" style="{{ styles.filmGrain }}"></div>
+  <div data-role="cursor" style="{{ styles.cursor }}"><span data-role="cursor-label" style="{{ styles.cursorLabel }}">Play</span></div>
+  <div data-role="scroll-progress" style="{{ styles.scrollProgress }}"></div>
+
+  <div data-role="gradient-wash" style="{{ styles.gradientWash }}" aria-hidden="true"></div>
+
+  <div data-role="bg-art" style="{{ styles.bgArt }}" aria-hidden="true">
+    <!-- Sagrada Família — clean tapering spire silhouette, three towers -->
+    <svg style="{{ styles.bgShapeArch }}" viewBox="0 0 200 320" fill="none" stroke="currentColor">
+      <path d="M 28,320 C 20,250 19,190 27,140 C 31,112 29,90 36,64 L 36,50 C 33,50 31,48 31,45 C 31,41 33,38 36,38 C 39,38 41,41 41,45 C 41,48 39,50 36,50 M 36,64 C 43,90 41,112 45,140 C 53,190 52,250 44,320 Z" stroke-width="1.4"/>
+      <path d="M 78,320 C 68,240 66,175 76,120 C 81,88 78,62 87,32 L 87,14 C 83,14 80,11 80,7 C 80,3 83,0 87,0 C 91,0 94,3 94,7 C 94,11 91,14 87,14 M 87,32 C 96,62 93,88 98,120 C 108,175 106,240 96,320 Z" stroke-width="1.6"/>
+      <path d="M 128,320 C 120,255 118,198 126,150 C 130,124 128,102 135,78 L 135,62 C 132,62 130,60 130,57 C 130,53 132,51 135,51 C 138,51 140,53 140,57 C 140,60 138,62 135,62 M 135,78 C 142,102 140,124 144,150 C 152,198 150,255 142,320 Z" stroke-width="1.4"/>
+      <path d="M 8,270 Q 65,235 122,270 T 192,262" stroke-width="1.0" stroke-dasharray="5 5" opacity="0.35"/>
+    </svg>
+    <!-- Gaudí's trencadís lizard — Park Güell salamander (El Drac) -->
+    <svg style="{{ styles.bgShapeGuitar }}" viewBox="0 0 240 120" fill="none" stroke="currentColor">
+      <path d="M 6,96 C 20,90 26,78 24,66 C 22,54 32,46 44,50 C 54,53 58,44 56,36 C 66,44 64,56 72,60 C 84,66 98,58 100,46 C 112,58 108,72 120,78 C 136,86 154,80 160,66 C 168,72 166,84 178,88 C 194,93 210,86 216,72 C 222,60 232,56 238,46" stroke-width="2"/>
+      <path d="M 216,72 C 220,64 228,60 236,60" stroke-width="1.6"/>
+      <circle cx="233" cy="48" r="2.8" fill="currentColor" stroke="none"/>
+      <path d="M 44,50 L 40,66 M 100,46 L 98,62 M 160,66 L 158,82" stroke-width="1.4" opacity="0.6"/>
+    </svg>
+    <svg style="{{ styles.bgShapeSail }}" viewBox="0 0 200 240" fill="none" stroke="currentColor">
+      <path d="M 10,190 L 190,190 M 10,196 L 190,196 M 10,202 L 190,202 M 10,208 L 190,208 M 10,214 L 190,214" stroke-width="1.0" opacity="0.6"/>
+      <path d="M 110,190 L 110,40 C 95,55 75,85 62,120 C 50,155 52,190 110,190 Z" stroke-width="1.8"/>
+      <path d="M 110,120 C 125,135 138,165 142,190 L 110,190" stroke-width="1.5"/>
+    </svg>
+    <!-- Eixample chamfered-block grid — iconic Barcelona urban plan -->
+    <svg style="{{ styles.bgShapeEixample }}" viewBox="0 0 300 300" fill="none" stroke="currentColor">
+      <path d="M 20,0 L 100,0 L 120,20 L 120,100 L 100,120 L 20,120 L 0,100 L 0,20 Z" stroke-width="1.2"/>
+      <path d="M 180,0 L 260,0 L 280,20 L 280,100 L 260,120 L 180,120 L 160,100 L 160,20 Z" stroke-width="1.2"/>
+      <path d="M 20,160 L 100,160 L 120,180 L 120,260 L 100,280 L 20,280 L 0,260 L 0,180 Z" stroke-width="1.2"/>
+      <path d="M 180,160 L 260,160 L 280,180 L 280,260 L 260,280 L 180,280 L 160,260 L 160,180 Z" stroke-width="1.2"/>
+      <path d="M 130,10 L 150,10 M 140,0 L 140,20" stroke-width="0.8" opacity="0.5"/>
+      <path d="M 130,290 L 150,290 M 140,280 L 140,300" stroke-width="0.8" opacity="0.5"/>
+    </svg>
+    <!-- Trencadís mosaic — broken-tile texture from Park Güell -->
+    <svg style="{{ styles.bgShapeMosaicDots }}" viewBox="0 0 260 260" fill="currentColor" stroke="none">
+      <circle cx="30" cy="40" r="6" opacity="0.5"/>
+      <circle cx="55" cy="25" r="4" opacity="0.4"/>
+      <circle cx="70" cy="55" r="8" opacity="0.6"/>
+      <circle cx="20" cy="80" r="5" opacity="0.35"/>
+      <circle cx="95" cy="30" r="5" opacity="0.45"/>
+      <circle cx="120" cy="60" r="7" opacity="0.5"/>
+      <circle cx="150" cy="20" r="4" opacity="0.4"/>
+      <circle cx="175" cy="50" r="6" opacity="0.55"/>
+      <circle cx="200" cy="15" r="5" opacity="0.4"/>
+      <circle cx="225" cy="45" r="7" opacity="0.5"/>
+      <circle cx="60" cy="100" r="6" opacity="0.4"/>
+      <circle cx="100" cy="110" r="4" opacity="0.45"/>
+      <circle cx="140" cy="95" r="8" opacity="0.55"/>
+      <circle cx="180" cy="115" r="5" opacity="0.4"/>
+      <circle cx="220" cy="90" r="6" opacity="0.5"/>
+    </svg>
+  </div>
+
+    <header style="{{ styles.nav }}">
+    <a href="#hero" data-cursor="hover" data-role="brand" style="{{ styles.navBrand }}">LA 27 <span style="font-weight:400;opacity:0.75">Productions</span></a>
+    <nav style="{{ styles.navLinks }}">
+      <sc-for list="{{ navLinks }}" as="item" hint-placeholder-count="6">
+        <a href="{{ item.href }}" data-cursor="hover" style="{{ styles.navLink }}">{{ item.label }}</a>
+      </sc-for>
+    </nav>
+    <div style="{{ styles.navRight }}">
+      <button type="button" data-cursor="hover" onClick="{{ toggleSound }}" style="{{ styles.soundBtn }}">{{ soundLabel }}</button>
+      <div style="position:relative">
+        <button type="button" data-cursor="hover" onClick="{{ toggleLangMenu }}" style="{{ styles.langBtn }}">
+          <span>{{ shared.langCode }}</span>
+          <svg width="8" height="8" viewBox="0 0 8 8" fill="none"><path d="M1.5 3l2.5 2.5L6.5 3" stroke="currentColor" stroke-width="1" stroke-linecap="round"/></svg>
+        </button>
+        <sc-if value="{{ state.langMenuOpen }}">
+          <ul style="{{ styles.langMenu }}">
+            <sc-for list="{{ langOptions }}" as="opt" hint-placeholder-count="5">
+              <li><a href="#" data-cursor="hover" onClick="{{ opt.select }}" style="{{ styles.langMenuLink }}"><span style="color:var(--accent);font-weight:500">{{ opt.code }}</span> {{ opt.label }}</a></li>
+            </sc-for>
+          </ul>
+        </sc-if>
+      </div>
+      <div style="{{ styles.navMeta }}"><span style="{{ styles.navDot }}"></span>{{ state.time }} BCN</div>
+    </div>
+  </header>
+
+  <aside style="{{ styles.sectionIndex }}" aria-hidden="true">
+    <sc-for list="{{ indexItems }}" as="item" hint-placeholder-count="6">
+      <a href="{{ item.href }}" data-cursor="hover" data-role="section-index-link" data-target="{{ item.id }}" style="{{ styles.indexLink }}"><span style="{{ styles.indexNum }}">{{ item.num }}</span><span>{{ item.label }}</span></a>
+    </sc-for>
+  </aside>
+
+  <main>
+<section id="hero" data-section="true" style="{{ styles.hero }}">
+          <div style="{{ styles.heroMeta }}"><span>001 / Intro</span><span>Barcelona — ES</span></div>
+          <div style="{{ styles.heroBadge }}">{{ m.heroBadge }}</div>
+          <h1 style="{{ styles.heroTitle }}">{{ m.heroTitleMain }} <span style="font-style:italic;color:var(--accent)">{{ m.heroTitleIt }}</span></h1>
+          <div style="{{ styles.heroSub }}">
+            <p style="{{ styles.heroSubText }}">{{ m.heroSub }}</p>
+            <a href="#how" data-cursor="hover" style="{{ styles.scrollCue }}"><span>{{ m.heroScroll }}</span><span style="{{ styles.scrollArrow }}"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M5 1v8M2 6l3 3 3-3" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
+          </div>
+          <div style="{{ styles.heroBtns }}"><a href="#contact" data-cursor="hover" data-magnetic="true" style="{{ styles.btn }}">{{ m.heroBtn }}</a></div>
+          <div style="{{ styles.heroPills }}"><span style="{{ styles.heroPill }}">{{ m.pill1 }}</span><span style="{{ styles.heroPill }}">{{ m.pill2 }}</span><span style="{{ styles.heroPill }}">{{ m.pill3 }}</span></div>
+        </section>
+
+        <section style="{{ styles.trust }}">
+          <div style="{{ styles.trustInner }}"><span style="{{ styles.trustSpan }}">
+            <sc-for list="{{ trustItemsDouble }}" as="item" hint-placeholder-count="14"><span style="{{ styles.trustWord }}">{{ item }}</span><span style="{{ styles.trustDot }}"></span></sc-for>
+          </span></div>
+        </section>
+
+        <section id="how" data-section="true" style="{{ styles.section }}">
+          <div data-reveal="true" style="{{ styles.sectionHeader }}">
+            <div style="{{ styles.eyebrow }}"><span style="color:var(--accent);font-weight:600">01</span>{{ m.howEyebrow }}</div>
+            <h2 style="{{ styles.sectionTitle }}">{{ m.howTitleMain }}<br/><span style="font-style:italic;color:var(--accent)">{{ m.howTitleIt }}</span></h2>
+          </div>
+          <div style="{{ styles.compareGrid }}">
+            <div data-reveal="true" style="{{ styles.flowWrap }}">
+              <div style="{{ styles.flowPanelLabel }}{{ styles.flowPanelLabelBad }}">{{ m.compareThemTitle }}</div>
+              <canvas data-role="flow-canvas-bad" style="{{ styles.flowCanvas }}"></canvas>
+              <div style="{{ styles.flowLabels }}">
+                <span style="{{ styles.flowLabelLeft }}">{{ m.flowLabelRaw }}</span>
+                <span style="{{ styles.flowLabelMidBad }}">{{ m.compareThemSub }}</span>
+                <span style="{{ styles.flowLabelRight }}">{{ m.compareThemResult }}</span>
+              </div>
+            </div>
+
+            <div data-reveal="true" style="{{ styles.flowWrap }}">
+              <div style="{{ styles.flowPanelLabel }}{{ styles.flowPanelLabelGood }}">{{ m.compareUsTitle }}</div>
+              <div style="{{ styles.flowCanvasHolder }}">
+                <canvas data-role="flow-canvas" style="{{ styles.flowCanvas }}"></canvas>
+                <div style="{{ styles.contactChip }}">
+                  <div style="{{ styles.contactChipDot }}"></div>
+                  <span>{{ sampleContact }}</span>
+                </div>
+              </div>
+              <div style="{{ styles.flowLabels }}">
+                <span style="{{ styles.flowLabelLeft }}">{{ m.flowLabelRaw }}</span>
+                <span style="{{ styles.flowLabelMid }}">{{ m.flowLabelFilter }}</span>
+                <span style="{{ styles.flowLabelRight }}">{{ m.flowLabelReal }}</span>
+              </div>
+            </div>
+          </div>
+
+          <div style="{{ styles.processCaptions }}">
+            <sc-for list="{{ processSteps }}" as="step" hint-placeholder-count="3">
+              <div data-reveal="true" style="{{ styles.processCaption }}">
+                <span style="{{ styles.processCaptionNum }}">{{ step.num }}</span>
+                <span style="{{ styles.processCaptionText }}">{{ step.title }}</span>
+              </div>
+            </sc-for>
+          </div>
+        </section>
+
+        <section id="work" data-section="true" style="{{ styles.section }}">
+          <div data-reveal="true" style="{{ styles.sectionHeader }}">
+            <div style="{{ styles.eyebrow }}"><span style="color:var(--accent);font-weight:600">02</span>{{ m.workEyebrow }}</div>
+            <h2 style="{{ styles.sectionTitle }}">{{ m.workTitleMain }}<br/><span style="font-style:italic;color:var(--accent)">{{ m.workTitleIt }}</span></h2>
+          </div>
+          <p data-reveal="true" style="{{ styles.exampleNote }}">{{ m.workNote }}</p>
+          <div style="{{ styles.capabilityTiles }}">
+            <sc-for list="{{ capabilityTiles }}" as="tile" hint-placeholder-count="3">
+              <div data-reveal="true" style="{{ styles.capabilityTile }}">
+                <div style="{{ styles.capabilityTag }}">{{ tile.tag }}</div>
+                <div style="{{ styles.capabilityTitle }}">{{ tile.title }}</div>
+                <p style="{{ styles.capabilityDesc }}">{{ tile.desc }}</p>
+              </div>
+            </sc-for>
+          </div>
+        </section>
+
+        <section id="why" data-section="true" style="{{ styles.section }}">
+          <div data-reveal="true" style="{{ styles.sectionHeader }}">
+            <div style="{{ styles.eyebrow }}"><span style="color:var(--accent);font-weight:600">03</span>{{ m.whyEyebrow }}</div>
+            <h2 style="{{ styles.sectionTitle }}">{{ m.whyTitleMain }}<br/><span style="font-style:italic;color:var(--accent)">{{ m.whyTitleIt }}</span></h2>
+          </div>
+          <div data-reveal="true" style="{{ styles.whyLede }}">{{ m.whyLede }}</div>
+          <div style="{{ styles.pillarsGrid }}">
+            <sc-for list="{{ marketingPillars }}" as="p" hint-placeholder-count="4">
+              <div data-reveal="true" style="{{ styles.pillarCard }}">
+                <div style="{{ styles.pillarNum }}">{{ p.num }}</div>
+                <h3 style="{{ styles.pillarTitle }}">{{ p.title }}</h3>
+                <p style="{{ styles.pillarBody }}">{{ p.body }}</p>
+              </div>
+            </sc-for>
+          </div>
+        </section>
+
+      <!-- ============ SHARED FOUNDER ============ -->
+      <section id="founder" data-section="true" style="{{ styles.section }}">
+        <div data-reveal="true" style="{{ styles.sectionHeader }}">
+          <div style="{{ styles.eyebrow }}"><span style="color:var(--accent);font-weight:600">05</span>{{ shared.founderEyebrow }}</div>
+          <h2 style="{{ styles.sectionTitle }}">{{ shared.founderTitleMain }} <span style="font-style:italic;color:var(--accent)">{{ shared.founderTitleIt }}</span></h2>
+        </div>
+        <div style="{{ styles.studioGrid }}">
+          <div data-reveal="true" style="{{ styles.studioPortrait }}"><img src="assets/tim-helmes.jpg" alt="Tim Helmes — Founder, LA 27" style="width:100%;height:100%;object-fit:cover;display:block" /></div>
+          <div data-reveal="true">
+            <p style="{{ styles.studioQuote }}">"{{ shared.founderQuoteMain }} <span style="font-style:italic;color:var(--accent)">{{ shared.founderQuoteIt }}</span>{{ shared.founderQuoteEnd }}"</p>
+            <p style="{{ styles.studioBio }}">{{ founderBio }}</p>
+            <div style="{{ styles.studioSignature }}">
+              <div><div style="{{ styles.founderName }}">Tim Helmes</div><div style="{{ styles.studioRole }}">{{ shared.founderRole }}</div></div>
+              <div style="display:flex;flex-direction:column;align-items:flex-end;gap:6px">
+                <a href="https://www.linkedin.com/in/tim-helmes-boschi-9b9244246/" target="_blank" rel="noopener" data-cursor="hover" style="{{ styles.linkedinBtn }}">LinkedIn (Tim)</a>
+                <a href="https://www.linkedin.com/company/la-27-productions/" target="_blank" rel="noopener" data-cursor="hover" style="{{ styles.linkedinBtn }}">LinkedIn (LA 27)</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ SHARED CONTACT (form options vary by view) ============ -->
+      <section id="contact" data-section="true" style="{{ styles.contact }}">
+        <div style="{{ styles.contactGrid }}">
+          <div data-reveal="true">
+            <h2 style="{{ styles.contactTitle }}">{{ view.contactTitleMain }}<br/><span style="font-style:italic;color:var(--accent)">{{ view.contactTitleIt }}</span></h2>
+            <p style="{{ styles.contactAside }}">{{ view.contactAside }}</p>
+            <div style="{{ styles.contactDirect }}">
+              <div style="{{ styles.contactLab }}">{{ shared.contactDirect }}</div>
+              <a href="{{ contactEmailHref }}" onClick="{{ openMailClient }}" data-cursor="hover" style="{{ styles.contactMail }}">{{ contactEmailText }}</a>
+              <div style="{{ styles.contactStatus }}"><span style="{{ styles.statusDot }}"></span>{{ shared.contactStatus }}</div>
+            </div>
+          </div>
+          <form data-reveal="true" style="{{ styles.form }}" autocomplete="off" action="https://api.web3forms.com/submit" method="POST">
+            <input type="hidden" name="access_key" value="48fe7fa3-de85-46ab-87d2-21f985fd53f4" />
+            <input type="hidden" name="subject" value="Nuevo contacto — LA 27" />
+            <input type="hidden" name="from_name" value="LA 27 Web" />
+            <div style="{{ styles.field }}"><label style="{{ styles.fieldLabelUp }}">{{ shared.formName }}</label><input name="name" type="text" required="true" style="{{ styles.fieldInput }}" /></div>
+            <div style="{{ styles.field }}"><label style="{{ styles.fieldLabelUp }}">{{ shared.formEmail }}</label><input name="email" type="email" required="true" style="{{ styles.fieldInput }}" /></div>
+            <div style="{{ styles.field }}"><label style="{{ styles.fieldLabelUp }}">{{ shared.formCompany }}</label><input name="empresa" type="text" style="{{ styles.fieldInput }}" /></div>
+            <div style="{{ styles.field }}">
+              <label style="{{ styles.fieldLabelUp }}">{{ view.formType }}</label>
+              <select name="tipo_servicio" required="true" style="{{ styles.fieldInput }}">
+                <option value="" disabled="true" selected="true">{{ shared.formTypePh }}</option>
+                <sc-for list="{{ formOptions }}" as="opt" hint-placeholder-count="4">
+                  <option value="{{ opt }}">{{ opt }}</option>
+                </sc-for>
+              </select>
+            </div>
+            <div style="{{ styles.field }}"><label style="{{ styles.fieldLabelUp }}">{{ shared.formMessage }}</label><textarea name="message" rows="2" style="{{ styles.fieldTextarea }}"></textarea></div>
+            <div style="{{ styles.formSubmit }}">
+              <button type="submit" data-cursor="hover" data-magnetic="true" style="{{ styles.btn }}">{{ shared.formSubmit }}<svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+              <p style="{{ styles.formNocost }}">{{ shared.contactNocost }}</p>
+            </div>
+          </form>
+        </div>
+      </section>
+  </main>
+
+  <footer style="{{ styles.footer }}">
+      <div>© LA 27 · Barcelona</div>
+      <div style="display:flex;gap:32px"><span>{{ shared.footerMastered }}</span><span>v2026</span></div>
+    </footer>
+
+</div>
+
+</x-dc>
+
+<script type="text/x-dc" data-dc-script>
+
+const FONT_DISPLAY = '"Instrument Serif", "Times New Roman", serif';
+const FONT_SANS = '"Space Grotesk", system-ui, sans-serif';
+const FONT_MONO = '"JetBrains Mono", ui-monospace, monospace';
+const BG = '#070304';
+const INK = '#f5f1ef';
+const INK_DIM = '#8a8480';
+const INK_MUTE = '#4a4644';
+const LINE = '#181515';
+const ACCENT = 'oklch(0.58 0.22 25)';
+const LANG_NAMES = { es: 'Español', en: 'English', de: 'Deutsch', fr: 'Français', pt: 'Português' };
+
+
+const SoundEngine = (() => {
+  let ctx = null, analyser = null;
+  let enabled = true;
+  try { enabled = localStorage.getItem('la27.sound') !== 'false'; } catch (e) {}
+  const init = () => {
+    if (!ctx) { ctx = new (window.AudioContext || window.webkitAudioContext)(); analyser = ctx.createAnalyser(); analyser.connect(ctx.destination); }
+    if (ctx.state === 'suspended') ctx.resume();
+  };
+  const play = (type) => {
+    if (!enabled) return;
+    try {
+      init();
+      const now = ctx.currentTime;
+      const osc = ctx.createOscillator(); const gain = ctx.createGain();
+      osc.connect(gain); gain.connect(analyser || ctx.destination);
+      if (type === 'hover') {
+        osc.type = 'sine'; osc.frequency.setValueAtTime(180, now); osc.frequency.exponentialRampToValueAtTime(70, now + 0.02);
+        gain.gain.setValueAtTime(0.08, now); gain.gain.linearRampToValueAtTime(0, now + 0.02);
+        osc.start(now); osc.stop(now + 0.025);
+      } else {
+        osc.type = 'triangle'; osc.frequency.setValueAtTime(120, now); osc.frequency.exponentialRampToValueAtTime(50, now + 0.045);
+        gain.gain.setValueAtTime(0.18, now); gain.gain.linearRampToValueAtTime(0, now + 0.045);
+        osc.start(now); osc.stop(now + 0.05);
+      }
+    } catch (e) {}
+  };
+  const isEnabled = () => enabled;
+  const setEnabled = (v) => { enabled = v; try { localStorage.setItem('la27.sound', v ? 'true' : 'false'); } catch (e) {} };
+  return { play, isEnabled, setEnabled, init };
+})();
+
+const DICT = {
+  "es": {
+    "shared": {
+      "langCode": "ES",
+      "founderEyebrow": "Quiénes somos",
+      "founderTitleMain": "El",
+      "founderTitleIt": "Founder.",
+      "founderQuoteMain": "Cada empresa",
+      "founderQuoteIt": "merece",
+      "founderQuoteEnd": " acceso directo a clientes reales y a audiencias de alta conversión en toda Europa.",
+      "founderRole": "Founder — LA 27",
+      "contactDirect": "O escríbenos directamente",
+      "contactStatus": "Respuesta en menos de 24h",
+      "contactNocost": "Presupuesto personalizado · Sin compromiso",
+      "formName": "Nombre",
+      "formEmail": "Email",
+      "formCompany": "Empresa",
+      "formMessage": "Mensaje",
+      "formSubmit": "Enviar",
+      "formTypePh": "— Selecciona un sector / servicio —",
+      "footerMastered": "Desarrollado en Barcelona"
+    },
+    "marketing": {
+      "navWork": "Sectores",
+      "navWhy": "Tecnología",
+      "navFounder": "Founder",
+      "navContact": "Contacto",
+      "founderBio": "Tim Helmes es un apasionado de la tecnología y los datos. Aplicando esa precisión técnica a la captación y adquisición de clientes, construyó LA 27: campañas de email outreach y audiencias B2B y B2C de alta entregabilidad, con bases verificadas en tiempo real y cobertura directa en toda Europa — todo coordinado desde Barcelona.",
+      "heroBadge": "Email Outreach & Audiencias · Cobertura Europea",
+      "heroTitleMain": "Alta",
+      "heroTitleIt": "Entregabilidad.",
+      "heroSub": "Campañas de email outreach y adquisición de clientes de alta conversión para empresas en toda Europa. Trabajamos con agencias y promotores en todo el continente.",
+      "heroScroll": "Cómo funciona",
+      "heroBtn": "Crear Campaña",
+      "pill1": "100% Verificado",
+      "pill2": "Cero Spam / Bots",
+      "pill3": "Entregabilidad 99.8%",
+      "trust": [
+        "Email Marketing",
+        "Audiencias Verificadas",
+        "0% Spam & Bots",
+        "B2B & B2C Outreach",
+        "Clientes en toda Europa",
+        "Entregabilidad 99.8%",
+        "Cualquier Sector",
+        "Barcelona"
+      ],
+      "howEyebrow": "Cómo funciona",
+      "howTitleMain": "De tu propuesta a",
+      "howTitleIt": "su bandeja de entrada.",
+      "flowLabelRaw": "Todo internet",
+      "flowLabelFilter": "Filtro en tiempo real",
+      "flowLabelReal": "Contactos reales",
+      "compareThemTitle": "Así lo hacen otros",
+      "compareThemSub": "Sin filtro previo",
+      "compareThemResult": "Bots, spam, rebotes",
+      "compareUsTitle": "Así lo hacemos en LA 27",
+      "sampleContacts": [
+        "Eventos · Laura, 31 · Promotora de Festivales, Berlín",
+        "E-commerce · Marc, 39 · Director Digital Retail, Barcelona",
+        "Gastronomía · Sophie, 42 · Resp. Compras Cadena Restauración, París",
+        "Deporte · Lukas, 35 · Operaciones Cadena Fitness, Viena",
+        "Educación · Elena, 38 · Admisiones Business School, Madrid",
+        "Turismo · Jan, 44 · Marketing Operador Hotelero, Ámsterdam"
+      ],
+      "steps": [
+        {
+          "title": "Nos cuentas a quién buscas",
+          "desc": "Nos envías tu base de datos o nos defines el perfil de cliente ideal que necesitas para tu sector o región."
+        },
+        {
+          "title": "Buscamos y segmentamos",
+          "desc": "Cruzamos tus criterios con bases de datos B2B y B2C verificadas: cargo, sector, volumen de facturación o intereses específicos."
+        },
+        {
+          "title": "Lanzamos con datos 100% reales",
+          "desc": "Cada contacto se valida en tiempo real. Cero rebotes innecesarios, superando filtros de spam para que tu mensaje llegue a personas de verdad."
+        }
+      ],
+      "workEyebrow": "Ejemplos de Campañas",
+      "workTitleMain": "Estrategias adaptadas",
+      "workTitleIt": "a cada sector.",
+      "workNote": "Ejemplos representativos de tipos de campaña y flujos de outreach según la industria. Diseñamos cada acción a medida.",
+      "tiles": [
+        {
+          "tag": "Ejemplo de Campaña",
+          "title": "Música en Vivo, Conciertos y Giras",
+          "desc": "Audiencias cualificadas de fans para promotores, programadores y agencias de booking en toda Europa para venta de entradas y giras."
+        },
+        {
+          "tag": "Ejemplo de Campaña",
+          "title": "Comercio y E-commerce",
+          "desc": "Reactivación de compradores cualificados, acuerdos con distribuidores mayoristas y captación de clientes de alto valor."
+        },
+        {
+          "tag": "Ejemplo de Campaña",
+          "title": "Gastronomía y Hostelería",
+          "desc": "Outreach para reservas de grupos corporativos, acuerdos con distribuidores horeca y captación de turismo gastronómico."
+        },
+        {
+          "tag": "Ejemplo de Campaña",
+          "title": "Deporte y Fitness",
+          "desc": "Campañas de fidelización para clubes, venta de membresías anuales y acuerdos B2B con empresas para planes de bienestar."
+        },
+        {
+          "tag": "Ejemplo de Campaña",
+          "title": "Formación y Educación",
+          "desc": "Captación de admisiones para masters, cursos ejecutivos y formación in-company para departamentos de recursos humanos."
+        },
+        {
+          "tag": "Ejemplo de Campaña",
+          "title": "Turismo y Viajes",
+          "desc": "Campañas estacionales para cadenas hoteleras, experiencias exclusivas y convenios corporativos para agencias de viajes."
+        }
+      ],
+      "whyEyebrow": "Tecnología",
+      "whyTitleMain": "Entregabilidad",
+      "whyTitleIt": "garantizada.",
+      "whyLede": "Nuestra infraestructura técnica combina validación de correos en tiempo real, rotación de IPs limpias y calentamiento de dominios para asegurar que el mensaje llegue a la bandeja principal.",
+      "pillars": [
+        {
+          "title": "0% Spam / Bots",
+          "body": "Todos los contactos se limpian, verifican y validan activamente en tiempo real antes de cualquier envío."
+        },
+        {
+          "title": "Segmentación",
+          "body": "Filtramos y dirigimos tu campaña exactamente al perfil demográfico, cargo o región que tu negocio necesita."
+        },
+        {
+          "title": "Alta Entregabilidad",
+          "body": "Configuración técnica impecable (SPF, DKIM, DMARC) y rotación segura para tasas de apertura superiores al 50-60%."
+        },
+        {
+          "title": "Copy Conversacional",
+          "body": "Redacción personalizada y directa adaptada al idioma local, escrita para generar conversaciones y conversiones reales."
+        }
+      ],
+      "contactTitleMain": "Inicia tu",
+      "contactTitleIt": "Campaña.",
+      "contactAside": "Trabajamos con agencias, promotores y marcas en toda Europa. Cuéntanos qué perfil necesitas y te respondemos con un plan a medida.",
+      "formType": "Sector / Tipo de campaña",
+      "formOptions": [
+        "Eventos y Cultura",
+        "Comercio y E-commerce",
+        "Gastronomía y Hostelería",
+        "Deporte y Fitness",
+        "Formación y Educación",
+        "Turismo y Viajes",
+        "Otro / Consulta general"
+      ],
+      "navIntro": "Intro",
+      "navHow": "Cómo funciona"
+    }
+  },
+  "en": {
+    "shared": {
+      "langCode": "EN",
+      "founderEyebrow": "Who we are",
+      "founderTitleMain": "The",
+      "founderTitleIt": "Founder.",
+      "founderQuoteMain": "Every brand",
+      "founderQuoteIt": "deserves",
+      "founderQuoteEnd": " direct access to verified decision-makers and high-converting audiences across Europe.",
+      "founderRole": "Founder — LA 27",
+      "contactDirect": "Or write to us directly",
+      "contactStatus": "Reply within 24h",
+      "contactNocost": "Custom proposal · No commitment",
+      "formName": "Name",
+      "formEmail": "Email",
+      "formCompany": "Company",
+      "formMessage": "Message",
+      "formSubmit": "Send",
+      "formTypePh": "— Select an industry / campaign type —",
+      "footerMastered": "Developed in Barcelona"
+    },
+    "marketing": {
+      "navWork": "Industries",
+      "navWhy": "Technology",
+      "navFounder": "Founder",
+      "navContact": "Contact",
+      "founderBio": "Tim Helmes is passionate about data and outreach technology. Applying that precision to client acquisition, he built LA 27: high-deliverability email outreach and B2B/B2C audience campaigns, backed by real-time verification and European-wide coverage — all orchestrated from Barcelona.",
+      "heroBadge": "Email Outreach & Audiences · Pan-European Reach",
+      "heroTitleMain": "High",
+      "heroTitleIt": "Deliverability.",
+      "heroSub": "High-converting email outreach and client acquisition campaigns across Europe. We work with agencies and promoters throughout the continent.",
+      "heroScroll": "How it works",
+      "heroBtn": "Start a Campaign",
+      "pill1": "100% Verified",
+      "pill2": "Zero Spam / Bots",
+      "pill3": "99.8% Deliverability",
+      "trust": [
+        "Email Marketing",
+        "Verified Audiences",
+        "0% Spam & Bots",
+        "B2B & B2C Outreach",
+        "Clients across Europe",
+        "99.8% Deliverability",
+        "Any Industry",
+        "Barcelona"
+      ],
+      "howEyebrow": "How it works",
+      "howTitleMain": "From your pitch to",
+      "howTitleIt": "their inbox.",
+      "flowLabelRaw": "All of the internet",
+      "flowLabelFilter": "Real-time filter",
+      "flowLabelReal": "Real contacts",
+      "compareThemTitle": "How others do it",
+      "compareThemSub": "No pre-filtering",
+      "compareThemResult": "Bots, spam, bounces",
+      "compareUsTitle": "How we do it at LA 27",
+      "sampleContacts": [
+        "Events · Laura, 31 · Festival Promoter, Berlin",
+        "E-commerce · Marc, 39 · Head of E-commerce, Barcelona",
+        "Hospitality · Sophie, 42 · Corporate Purchasing Director, Paris",
+        "Sports · Lukas, 35 · Fitness Chain Operations, Vienna",
+        "Education · Elena, 38 · Business School Admissions, Madrid",
+        "Tourism · Jan, 44 · Boutique Hotel Marketing, Amsterdam"
+      ],
+      "steps": [
+        {
+          "title": "You tell us who you're after",
+          "desc": "Send us your existing list or define the exact customer profile and region you wish to reach."
+        },
+        {
+          "title": "We search and segment",
+          "desc": "We cross-reference your criteria against verified databases: industry, job title, company size or consumer buying signals."
+        },
+        {
+          "title": "We launch with 100% real data",
+          "desc": "Every address is validated in real time. Zero bot traffic, zero spam traps — reaching genuine, active decision-makers."
+        }
+      ],
+      "workEyebrow": "Campaign Examples",
+      "workTitleMain": "Tailored outreach",
+      "workTitleIt": "by industry.",
+      "workNote": "Representative campaign formats and workflows by sector. Every deployment is engineered bespoke.",
+      "tiles": [
+        {
+          "tag": "Campaign Example",
+          "title": "Live Music, Concerts & Tours",
+          "desc": "Connecting concert promoters, festival bookers, and artist management agencies across Europe for ticket sales and tours."
+        },
+        {
+          "tag": "Campaign Example",
+          "title": "Commerce & E-commerce",
+          "desc": "Reactivating qualified buyers, building wholesale distribution networks, and acquiring high-LTV customer accounts."
+        },
+        {
+          "tag": "Campaign Example",
+          "title": "Gastronomy & Hospitality",
+          "desc": "Outreach for corporate group bookings, Horeca supplier contracts, and regional culinary tourism."
+        },
+        {
+          "tag": "Campaign Example",
+          "title": "Sports & Fitness",
+          "desc": "Membership drive campaigns for health clubs, corporate wellness partnerships, and athletic brand expansion."
+        },
+        {
+          "tag": "Campaign Example",
+          "title": "Education & Training",
+          "desc": "Student recruitment for executive programs, business master degrees, and corporate upskilling programs."
+        },
+        {
+          "tag": "Campaign Example",
+          "title": "Tourism & Travel",
+          "desc": "Seasonal acquisition for independent hotel collections, experiential luxury retreats, and travel agency partnerships."
+        }
+      ],
+      "whyEyebrow": "Technology",
+      "whyTitleMain": "Guaranteed",
+      "whyTitleIt": "deliverability.",
+      "whyLede": "Our technical infrastructure pairs real-time mailbox validation with clean IP rotation and domain warm-ups to bypass spam filters and land in the primary inbox.",
+      "pillars": [
+        {
+          "title": "0% Spam / Bots",
+          "body": "Every contact is actively scrubbed, tested, and validated in real time before sending."
+        },
+        {
+          "title": "Targeting",
+          "body": "Laser-focused filtering by demographic, exact seniority level, company scale, and geographic region."
+        },
+        {
+          "title": "High Deliverability",
+          "body": "Domain authentication (SPF, DKIM, DMARC) and gradual ramp-ups ensuring consistent 50-60%+ open rates."
+        },
+        {
+          "title": "Conversational Copy",
+          "body": "Concise, localized email copy crafted to spark natural business conversations without feeling intrusive."
+        }
+      ],
+      "contactTitleMain": "Start your",
+      "contactTitleIt": "Campaign.",
+      "contactAside": "We work with agencies, promoters, and businesses across Europe. Tell us your target profile and receive a custom outreach proposal.",
+      "formType": "Industry / Campaign type",
+      "formOptions": [
+        "Events & Culture",
+        "Commerce & E-commerce",
+        "Gastronomy & Hospitality",
+        "Sports & Fitness",
+        "Education & Training",
+        "Tourism & Travel",
+        "Other / General inquiry"
+      ],
+      "navIntro": "Intro",
+      "navHow": "How it works"
+    }
+  },
+  "de": {
+    "shared": {
+      "langCode": "DE",
+      "founderEyebrow": "Wer wir sind",
+      "founderTitleMain": "Der",
+      "founderTitleIt": "Founder.",
+      "founderQuoteMain": "Jedes Unternehmen",
+      "founderQuoteIt": "verdient",
+      "founderQuoteEnd": " direkten Zugang zu verifizierten Entscheidern und konvertierenden Zielgruppen in ganz Europa.",
+      "founderRole": "Founder — LA 27",
+      "contactDirect": "Oder schreiben Sie uns direkt",
+      "contactStatus": "Antwort innerhalb von 24 Std.",
+      "contactNocost": "Individuelles Konzept · Unverbindlich",
+      "formName": "Name",
+      "formEmail": "E-Mail",
+      "formCompany": "Firma",
+      "formMessage": "Nachricht",
+      "formSubmit": "Senden",
+      "formTypePh": "— Branche / Kampagnentyp auswählen —",
+      "footerMastered": "Entwickelt in Barcelona"
+    },
+    "marketing": {
+      "navWork": "Branchen",
+      "navWhy": "Technologie",
+      "navFounder": "Founder",
+      "navContact": "Kontakt",
+      "founderBio": "Tim Helmes ist leidenschaftlich an Outreach-Technologie und Datenarchitektur interessiert. Mit dieser Präzision baute er LA 27 auf: hochgradig zustellbare E-Mail-Kampagnen und B2B/B2C-Audience-Akquise mit Echtzeit-Verifizierung und europaweiter Reichweite — gesteuert aus Barcelona.",
+      "heroBadge": "E-Mail-Outreach & Zielgruppen · Europaweite Reichweite",
+      "heroTitleMain": "Hohe",
+      "heroTitleIt": "Zustellbarkeit.",
+      "heroSub": "Hochkonvertierende E-Mail-Outreach- und Kundengewinnungskampagnen für Unternehmen in ganz Europa. Wir arbeiten mit Agenturen und Veranstaltern auf dem gesamten Kontinent.",
+      "heroScroll": "So funktioniert es",
+      "heroBtn": "Kampagne starten",
+      "pill1": "100% Verifiziert",
+      "pill2": "Keine Bots / Spam",
+      "pill3": "99,8% Zustellbarkeit",
+      "trust": [
+        "E-Mail-Marketing",
+        "Verifizierte Zielgruppen",
+        "0% Spam & Bots",
+        "B2B & B2C Outreach",
+        "Kunden in ganz Europa",
+        "99,8% Zustellbarkeit",
+        "Jede Branche",
+        "Barcelona"
+      ],
+      "howEyebrow": "So funktioniert es",
+      "howTitleMain": "Von Ihrer Idee zum",
+      "howTitleIt": "Posteingang.",
+      "flowLabelRaw": "Das ganze Internet",
+      "flowLabelFilter": "Echtzeit-Filter",
+      "flowLabelReal": "Echte Kontakte",
+      "compareThemTitle": "So machen es andere",
+      "compareThemSub": "Kein Vorfilter",
+      "compareThemResult": "Bots, Spam, Bounces",
+      "compareUsTitle": "So machen wir es bei LA 27",
+      "sampleContacts": [
+        "Events · Laura, 31 · Festivalveranstalterin, Berlin",
+        "E-Commerce · Marc, 39 · E-Commerce-Leiter, Barcelona",
+        "Gastronomie · Sophie, 42 · Einkaufsleiterin Hotelgruppe, Paris",
+        "Sport · Lukas, 35 · Fitnessketten-Betrieb, Wien",
+        "Bildung · Elena, 38 · Zulassungsleitung Business School, Madrid",
+        "Tourismus · Jan, 44 · Marketingleitung Boutique-Hotel, Amsterdam"
+      ],
+      "steps": [
+        {
+          "title": "Sie sagen uns, wen Sie suchen",
+          "desc": "Sie senden uns Ihre Kontaktdaten oder beschreiben das ideale Zielkundenprofil für Ihre Branche und Region."
+        },
+        {
+          "title": "Wir suchen und segmentieren",
+          "desc": "Wir gleichen Ihre Kriterien mit verifizierten B2B- und B2C-Datenbanken ab: Position, Branche, Unternehmensgröße oder Kaufinteressen."
+        },
+        {
+          "title": "Wir starten mit 100% echten Daten",
+          "desc": "Jede Adresse wird in Echtzeit geprüft. Keine Spam-Traps, keine Bots — Ihre Nachricht erreicht echte Ansprechpartner."
+        }
+      ],
+      "workEyebrow": "Kampagnen-Beispiele",
+      "workTitleMain": "Maßgeschneidert für",
+      "workTitleIt": "jede Branche.",
+      "workNote": "Beispielhafte Kampagnentypen und Outreach-Strukturen nach Sektor. Jede Kampagne wird individuell aufgesetzt.",
+      "tiles": [
+        {
+          "tag": "Kampagnen-Beispiel",
+          "title": "Live-Musik, Konzerte & Tourneen",
+          "desc": "Qualifizierte Fan-Zielgruppen für Konzertveranstalter, Festival-Booker und Booking-Agenturen in ganz Europa für Vorverkauf und Tourneen."
+        },
+        {
+          "tag": "Kampagnen-Beispiel",
+          "title": "Handel & E-Commerce",
+          "desc": "Reaktivierung kaufkräftiger Kunden, Aufbau von B2B-Händlernetzen und Neukundengewinnung mit hohem Warenkorbwert."
+        },
+        {
+          "tag": "Kampagnen-Beispiel",
+          "title": "Gastronomie & Hotellerie",
+          "desc": "Outreach für Firmenbuchungen, exklusive Gruppenevents sowie B2B-Kooperationen mit Großhändlern."
+        },
+        {
+          "tag": "Kampagnen-Beispiel",
+          "title": "Sport & Fitness",
+          "desc": "Mitgliedergewinnung für Premium-Studios, Corporate-Fitness-Angebote für Unternehmen und Sportevents."
+        },
+        {
+          "tag": "Kampagnen-Beispiel",
+          "title": "Aus- & Weiterbildung",
+          "desc": "Bewerbergewinnung für Executive-Programme, Masterstudiengänge und Weiterbildungsprogramme für HR-Entscheider."
+        },
+        {
+          "tag": "Kampagnen-Beispiel",
+          "title": "Tourismus & Reisen",
+          "desc": "Saisonale Kampagnen für Hotelketten, Luxusresorts und Kooperationen mit europäischen Reiseveranstaltern."
+        }
+      ],
+      "whyEyebrow": "Technologie",
+      "whyTitleMain": "Garantierte",
+      "whyTitleIt": "Zustellbarkeit.",
+      "whyLede": "Unsere technische Infrastruktur kombiniert Echtzeit-Verifikation, saubere IP-Rotation und Domain-Warming für maximale Posteingangs-Platzierung.",
+      "pillars": [
+        {
+          "title": "0% Spam / Bots",
+          "body": "Alle Kontakte werden aktiv bereinigt, verifiziert und in Echtzeit vor jedem Versand validiert."
+        },
+        {
+          "title": "Segmentierung",
+          "body": "Präzise Ausrichtung auf Branche, Hierarchieebene, Unternehmensgröße und Zielregion."
+        },
+        {
+          "title": "Hohe Zustellbarkeit",
+          "body": "Perfekt konfigurierte DNS-Einträge (SPF, DKIM, DMARC) für Öffnungsraten von über 50-60%."
+        },
+        {
+          "title": "Konversations-Copy",
+          "body": "Klares, unaufdringliches Wording in der jeweiligen Landessprache, fokussiert auf echten geschäftlichen Austausch."
+        }
+      ],
+      "contactTitleMain": "Starten Sie Ihre",
+      "contactTitleIt": "Kampagne.",
+      "contactAside": "Wir arbeiten mit Agenturen und Veranstaltern in ganz Europa. Beschreiben Sie Ihr Vorhaben — wir melden uns mit einem maßgeschneiderten Ansatz.",
+      "formType": "Branche / Kampagnentyp",
+      "formOptions": [
+        "Events & Kultur",
+        "Handel & E-Commerce",
+        "Gastronomie & Hotellerie",
+        "Sport & Fitness",
+        "Aus- & Weiterbildung",
+        "Tourismus & Reisen",
+        "Sonstiges / Allgemeine Anfrage"
+      ],
+      "navIntro": "Intro",
+      "navHow": "Ablauf"
+    }
+  },
+  "fr": {
+    "shared": {
+      "langCode": "FR",
+      "founderEyebrow": "Qui nous sommes",
+      "founderTitleMain": "Le",
+      "founderTitleIt": "Founder.",
+      "founderQuoteMain": "Chaque entreprise",
+      "founderQuoteIt": "mérite",
+      "founderQuoteEnd": " un accès direct à de vrais décideurs et à des audiences qualifiées dans toute l'Europe.",
+      "founderRole": "Founder — LA 27",
+      "contactDirect": "Ou écrivez-nous directement",
+      "contactStatus": "Réponse sous 24h",
+      "contactNocost": "Proposition sur mesure · Sans engagement",
+      "formName": "Nom",
+      "formEmail": "Email",
+      "formCompany": "Entreprise",
+      "formMessage": "Message",
+      "formSubmit": "Envoyer",
+      "formTypePh": "— Sélectionner un secteur / type de campagne —",
+      "footerMastered": "Développé à Barcelone"
+    },
+    "marketing": {
+      "navWork": "Secteurs",
+      "navWhy": "Technologie",
+      "navFounder": "Founder",
+      "navContact": "Contact",
+      "founderBio": "Tim Helmes est passionné de technologie d'outreach et d'architecture de données. En appliquant cette rigueur à l'acquisition client, il a créé LA 27 : des campagnes d'email marketing et d'audiences B2B/B2C à haute délivrabilité, vérifiées en temps réel et actives sur toute l'Europe — pilotées depuis Barcelone.",
+      "heroBadge": "Email Outreach & Audiences · Envergure Européenne",
+      "heroTitleMain": "Haute",
+      "heroTitleIt": "Délivrabilité.",
+      "heroSub": "Campagnes d'email outreach et d'acquisition client à forte conversion pour les entreprises à travers l'Europe. Nous travaillons avec des agences et des promoteurs sur tout le continent.",
+      "heroScroll": "Comment ça marche",
+      "heroBtn": "Lancer une Campagne",
+      "pill1": "100% Vérifié",
+      "pill2": "Zéro Spam / Bots",
+      "pill3": "Délivrabilité 99.8%",
+      "trust": [
+        "Email Marketing",
+        "Audiences Vérifiées",
+        "0% Spam & Bots",
+        "Outreach B2B & B2C",
+        "Clients dans toute l'Europe",
+        "Délivrabilité 99.8%",
+        "Tous Secteurs",
+        "Barcelone"
+      ],
+      "howEyebrow": "Comment ça marche",
+      "howTitleMain": "De votre proposition à",
+      "howTitleIt": "leur boîte de réception.",
+      "flowLabelRaw": "Tout l'internet",
+      "flowLabelFilter": "Filtre en temps réel",
+      "flowLabelReal": "Contacts réels",
+      "compareThemTitle": "Comment font les autres",
+      "compareThemSub": "Sans pré-filtrage",
+      "compareThemResult": "Bots, spam, rebonds",
+      "compareUsTitle": "Comment on fait chez LA 27",
+      "sampleContacts": [
+        "Événements · Laura, 31 · Promotrice de Festivals, Berlin",
+        "E-commerce · Marc, 39 · Directeur E-commerce, Barcelone",
+        "Gastronomie · Sophie, 42 · Directrice Achats Restauration, Paris",
+        "Sport · Lukas, 35 · Responsable Opérations Fitness, Vienne",
+        "Éducation · Elena, 38 · Admissions École de Commerce, Madrid",
+        "Tourisme · Jan, 44 · Marketing Hôtellerie Boutique, Amsterdam"
+      ],
+      "steps": [
+        {
+          "title": "Vous nous dites qui vous cherchez",
+          "desc": "Transmettez-nous votre fichier ou définissez le profil client cible ainsi que la zone géographique visée."
+        },
+        {
+          "title": "Nous recherchons et segmentons",
+          "desc": "Nous croisons vos critères avec nos bases vérifiées B2B et B2C : poste, secteur, chiffre d'affaires ou comportement d'achat."
+        },
+        {
+          "title": "Nous lançons avec des données 100% réelles",
+          "desc": "Chaque adresse est validée en temps réel. Aucun bot, aucun piège à spam — vos messages parviennent aux vrais décideurs."
+        }
+      ],
+      "workEyebrow": "Exemples de Campagnes",
+      "workTitleMain": "Des stratégies adaptées",
+      "workTitleIt": "à chaque industrie.",
+      "workNote": "Exemples types de formats de campagnes et de parcours d'outreach par secteur. Chaque opération est conçue sur mesure.",
+      "tiles": [
+        {
+          "tag": "Exemple de Campagne",
+          "title": "Événements et Culture",
+          "desc": "Mise en relation avec promoteurs de concerts, directeurs de festivals et agences de booking en Europe pour billetterie et tournées."
+        },
+        {
+          "tag": "Exemple de Campagne",
+          "title": "Commerce et E-commerce",
+          "desc": "Réactivation d'acheteurs qualifiés, accords de distribution B2B et acquisition de clients à fort panier moyen."
+        },
+        {
+          "tag": "Exemple de Campagne",
+          "title": "Gastronomie et Hôtellerie",
+          "desc": "Prospection pour réservations de groupes corporate, partenariats grossistes Horeca et tourisme gastronomique."
+        },
+        {
+          "tag": "Exemple de Campagne",
+          "title": "Sport et Fitness",
+          "desc": "Campagnes d'adhésion pour clubs de sport, conventions bien-être en entreprise et promotion d'événements sportifs."
+        },
+        {
+          "tag": "Exemple de Campagne",
+          "title": "Formation et Éducation",
+          "desc": "Recrutement d'étudiants pour programmes exécutifs, masters spécialisés et formations sur mesure pour directions RH."
+        },
+        {
+          "tag": "Exemple de Campagne",
+          "title": "Tourisme et Voyages",
+          "desc": "Campagnes saisonnières pour chaînes hôtelières, séjours expérientiels et accords avec agences de voyages européennes."
+        }
+      ],
+      "whyEyebrow": "Technologie",
+      "whyTitleMain": "Délivrabilité",
+      "whyTitleIt": "garantie.",
+      "whyLede": "Notre infrastructure associe validation en temps réel, rotation d'adresses IP propres et montée en charge des domaines pour garantir l'arrivée en boîte principale.",
+      "pillars": [
+        {
+          "title": "0% Spam / Bots",
+          "body": "Tous les contacts sont nettoyés, vérifiés et testés activement en temps réel avant tout déploiement."
+        },
+        {
+          "title": "Ciblage",
+          "body": "Filtres précis par secteur d'activité, niveau de responsabilité, taille d'entreprise et région géographique."
+        },
+        {
+          "title": "Haute Délivrabilité",
+          "body": "Paramétrage rigoureux (SPF, DKIM, DMARC) assurant des taux d'ouverture réguliers de 50 à 60%+."
+        },
+        {
+          "title": "Copywriting Conversationnel",
+          "body": "Rédaction soignée et directe adaptée à la langue locale, pensée pour engager une conversation authentique."
+        }
+      ],
+      "contactTitleMain": "Lancez votre",
+      "contactTitleIt": "Campagne.",
+      "contactAside": "Nous travaillons avec des agences et des promoteurs dans toute l'Europe. Partagez votre profil cible pour obtenir une proposition adaptée.",
+      "formType": "Secteur / Type de campagne",
+      "formOptions": [
+        "Événements et Culture",
+        "Commerce et E-commerce",
+        "Gastronomie et Hôtellerie",
+        "Sport et Fitness",
+        "Formation et Éducation",
+        "Tourisme et Voyages",
+        "Autre / Demande générale"
+      ],
+      "navIntro": "Intro",
+      "navHow": "Fonctionnement"
+    }
+  },
+  "pt": {
+    "shared": {
+      "langCode": "PT",
+      "founderEyebrow": "Quem somos",
+      "founderTitleMain": "O",
+      "founderTitleIt": "Founder.",
+      "founderQuoteMain": "Cada empresa",
+      "founderQuoteIt": "merece",
+      "founderQuoteEnd": " acesso direto a decisores reais e a audiências de alta conversão em toda a Europa.",
+      "founderRole": "Founder — LA 27",
+      "contactDirect": "Ou escreve-nos diretamente",
+      "contactStatus": "Resposta em menos de 24h",
+      "contactNocost": "Proposta personalizada · Sem compromisso",
+      "formName": "Nome",
+      "formEmail": "Email",
+      "formCompany": "Empresa",
+      "formMessage": "Mensagem",
+      "formSubmit": "Enviar",
+      "formTypePh": "— Seleciona um setor / tipo de campanha —",
+      "footerMastered": "Desenvolvido em Barcelona"
+    },
+    "marketing": {
+      "navWork": "Setores",
+      "navWhy": "Tecnologia",
+      "navFounder": "Founder",
+      "navContact": "Contacto",
+      "founderBio": "Tim Helmes é apaixonado por tecnologia e arquitetura de dados de outreach. Aplicando essa precisão à aquisição de clientes, fundou a LA 27: campanhas de email outreach e audiências B2B/B2C de alta entregabilidade, com validação em tempo real e alcance em toda a Europa — tudo coordenado a partir de Barcelona.",
+      "heroBadge": "Email Outreach & Audiências · Alcance Pan-Europeu",
+      "heroTitleMain": "Alta",
+      "heroTitleIt": "Entregabilidade.",
+      "heroSub": "Campanhas de email outreach e aquisição de clientes de alta conversão para empresas em toda a Europa. Trabalhamos com agências e promotores em todo o continente.",
+      "heroScroll": "Como funciona",
+      "heroBtn": "Criar Campanha",
+      "pill1": "100% Verificado",
+      "pill2": "Zero Spam / Bots",
+      "pill3": "Entregabilidade 99.8%",
+      "trust": [
+        "Email Marketing",
+        "Audiências Verificadas",
+        "0% Spam & Bots",
+        "B2B & B2C Outreach",
+        "Clientes em toda a Europa",
+        "Entregabilidade 99.8%",
+        "Qualquer Setor",
+        "Barcelona"
+      ],
+      "howEyebrow": "Como funciona",
+      "howTitleMain": "Da tua proposta à",
+      "howTitleIt": "caixa de entrada.",
+      "flowLabelRaw": "Toda a internet",
+      "flowLabelFilter": "Filtro em tempo real",
+      "flowLabelReal": "Contactos reais",
+      "compareThemTitle": "Como os outros fazem",
+      "compareThemSub": "Sem pré-filtro",
+      "compareThemResult": "Bots, spam, bounces",
+      "compareUsTitle": "Como fazemos na LA 27",
+      "sampleContacts": [
+        "Eventos · Laura, 31 · Promotora de Festivais, Berlim",
+        "E-commerce · Marc, 39 · Diretor de E-commerce, Barcelona",
+        "Gastronomia · Sophie, 42 · Diretora de Compras Restauração, Paris",
+        "Desporto · Lukas, 35 · Operações de Rede Fitness, Viena",
+        "Educação · Elena, 38 · Admissões Business School, Madrid",
+        "Turismo · Jan, 44 · Marketing Hoteleiro Boutique, Amesterdão"
+      ],
+      "steps": [
+        {
+          "title": "Dizes-nos quem procuras",
+          "desc": "Envias-nos a tua lista de contactos ou descreves o perfil de cliente ideal e mercado geográfico pretendido."
+        },
+        {
+          "title": "Procuramos e segmentamos",
+          "desc": "Cruzamos os teus critérios com bases verificadas B2B e B2C: cargo, setor, dimensão empresarial ou interesses de compra."
+        },
+        {
+          "title": "Lançamos com dados 100% reais",
+          "desc": "Cada endereço é validado em tempo real. Sem tráfego de bots nem spam traps — mensagens entregues a decisores autênticos."
+        }
+      ],
+      "workEyebrow": "Exemplos de Campanhas",
+      "workTitleMain": "Estratégias adaptadas",
+      "workTitleIt": "a cada setor.",
+      "workNote": "Exemplos representativos de tipos de campanha e fluxos de outreach por setor. Cada ação é desenhada à medida.",
+      "tiles": [
+        {
+          "tag": "Exemplo de Campanha",
+          "title": "Eventos e Cultura",
+          "desc": "Conexão com promotores de concertos, programadores de festivais e agências de booking na Europa para bilheteira e digressões."
+        },
+        {
+          "tag": "Exemplo de Campanha",
+          "title": "Comércio e E-commerce",
+          "desc": "Reativação de compradores qualificados, parcerias de distribuição grossista e aquisição de clientes com elevado valor médio."
+        },
+        {
+          "tag": "Exemplo de Campanha",
+          "title": "Gastronomia e Hotelaria",
+          "desc": "Outreach para reservas corporativas, acordos com fornecedores Horeca e atração de turismo gastronómico."
+        },
+        {
+          "tag": "Exemplo de Campanha",
+          "title": "Desporto e Fitness",
+          "desc": "Captação de membros para clubes de saúde, parcerias corporativas de bem-estar e expansão de marcas desportivas."
+        },
+        {
+          "tag": "Exemplo de Campanha",
+          "title": "Formação e Educação",
+          "desc": "Captação de alunos para programas executivos, mestrados e formações personalizadas para equipas de RH."
+        },
+        {
+          "tag": "Exemplo de Campanha",
+          "title": "Turismo e Viagens",
+          "desc": "Campanhas sazonais para redes hoteleiras, escapadinhas exclusivas e acordos com agências de viagens europeias."
+        }
+      ],
+      "whyEyebrow": "Tecnologia",
+      "whyTitleMain": "Entregabilidade",
+      "whyTitleIt": "garantida.",
+      "whyLede": "A nossa infraestrutura combina validação em tempo real, rotação de IPs limpos e aquecimento de domínios para assegurar a caixa de entrada principal.",
+      "pillars": [
+        {
+          "title": "0% Spam / Bots",
+          "body": "Todos os contactos são limpos, verificados e validados ativamente em tempo real antes do envio."
+        },
+        {
+          "title": "Segmentação",
+          "body": "Filtros minuciosos por cargo, dimensão da organização, setor de atividade e região geográfica."
+        },
+        {
+          "title": "Alta Entregabilidade",
+          "body": "Configuração técnica impecável (SPF, DKIM, DMARC) garantindo taxas de abertura consistentes de 50 a 60%+."
+        },
+        {
+          "title": "Copy Conversacional",
+          "body": "Redação clara e empática no idioma local, focada em estabelecer relações de negócio genuínas."
+        }
+      ],
+      "contactTitleMain": "Inicia a tua",
+      "contactTitleIt": "Campanha.",
+      "contactAside": "Trabalhamos com agências e promotores em toda a Europa. Diz-nos que perfil procuras e apresentamos uma proposta sob medida.",
+      "formType": "Setor / Tipo de campanha",
+      "formOptions": [
+        "Eventos e Cultura",
+        "Comércio e E-commerce",
+        "Gastronomia e Hotelaria",
+        "Desporto e Fitness",
+        "Formação e Educação",
+        "Turismo e Viagens",
+        "Outro / Consulta geral"
+      ],
+      "navIntro": "Intro",
+      "navHow": "Como funciona"
+    }
+  }
+};
+
+class Component extends DCLogic {
+  constructor() {
+    super();
+    let initialLang = 'de';
+    try {
+      const urlParams = new URLSearchParams(window.location.search);
+      const urlLang = urlParams.get('lang');
+      const stored = localStorage.getItem('la27.lang');
+      if (urlLang && DICT[urlLang.toLowerCase()]) {
+        initialLang = urlLang.toLowerCase();
+        localStorage.setItem('la27.lang', initialLang);
+      } else if (stored && DICT[stored]) {
+        initialLang = stored;
+      } else {
+        const nav = (navigator.language || 'de').slice(0, 2).toLowerCase();
+        if (DICT[nav]) initialLang = nav;
+        else initialLang = 'en';
+      }
+    } catch (e) {}
+
+    this.state = {
+      lang: initialLang,
+      langMenuOpen: false,
+      time: this.getBCNTime(),
+      sampleIndex: 0,
+      soundEnabled: SoundEngine.isEnabled()
+    };
+  }
+
+  getBCNTime() {
+    try {
+      return new Intl.DateTimeFormat('en-GB', {
+        timeZone: 'Europe/Madrid',
+        hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false
+      }).format(new Date());
+    } catch (e) {
+      return '12:00:00';
+    }
+  }
+
+  componentDidMount() {
+    this._timeInterval = setInterval(() => {
+      this.setState({ time: this.getBCNTime() });
+    }, 1000);
+
+    this._sampleInterval = setInterval(() => {
+      this.setState({ sampleIndex: (this.state.sampleIndex + 1) % 6 });
+    }, 3200);
+
+    this.initCursor();
+    this.initScrollProgress();
+    this.initReveal();
+    this.initSectionIndex();
+    this.initCanvasBad();
+    this.initCanvasGood();
+
+    document.addEventListener('click', (e) => {
+      if (this.state.langMenuOpen && !e.target.closest('[data-role="lang-menu"]')) {
+        this.setState({ langMenuOpen: false });
+      }
+    });
+  }
+
+  componentWillUnmount() {
+    clearInterval(this._timeInterval);
+    clearInterval(this._sampleInterval);
+    if (this._animGood) cancelAnimationFrame(this._animGood);
+    if (this._animBad) cancelAnimationFrame(this._animBad);
+    if (this._raf) cancelAnimationFrame(this._raf);
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    if (prevState.lang !== this.state.lang) {
+      setTimeout(() => {
+        this.initReveal();
+        this.initSectionIndex();
+      }, 50);
+    }
+  }
+
+  toggleLangMenu = (e) => {
+    e.stopPropagation();
+    this.setState({ langMenuOpen: !this.state.langMenuOpen });
+  };
+
+  selectLang = (code) => (e) => {
+    e.preventDefault();
+    try { localStorage.setItem('la27.lang', code); } catch (err) {}
+    this.setState({ lang: code, langMenuOpen: false });
+  };
+
+  toggleSound = () => {
+    const next = !this.state.soundEnabled;
+    SoundEngine.setEnabled(next);
+    this.setState({ soundEnabled: next });
+    if (next) SoundEngine.play('click');
+  };
+
+  initCursor() {
+    const cursor = document.querySelector('[data-role="cursor"]');
+    if (!cursor || !window.matchMedia('(hover: hover)').matches) return;
+    let cx = window.innerWidth / 2, cy = window.innerHeight / 2, tx = cx, ty = cy;
+    window.addEventListener('mousemove', (e) => { tx = e.clientX; ty = e.clientY; });
+    const render = () => {
+      cx += (tx - cx) * 0.22; cy += (ty - cy) * 0.22;
+      cursor.style.transform = `translate(${cx}px, ${cy}px) translate(-50%, -50%)`;
+      this._raf = requestAnimationFrame(render);
+    };
+    render();
+    const label = cursor.querySelector('[data-role="cursor-label"]');
+    document.addEventListener('mouseover', (e) => {
+      const hover = e.target.closest('[data-cursor="hover"]');
+      if (hover) { cursor.style.width = '56px'; cursor.style.height = '56px'; cursor.style.background = INK; cursor.style.mixBlendMode = 'difference'; if (label) label.style.opacity = '0'; }
+    });
+    document.addEventListener('mouseout', (e) => {
+      const hover = e.target.closest('[data-cursor="hover"]');
+      if (hover) { cursor.style.width = '8px'; cursor.style.height = '8px'; cursor.style.background = INK; cursor.style.mixBlendMode = 'difference'; if (label) label.style.opacity = '0'; }
+    });
+    document.addEventListener('mouseover', (e) => { if (e.target.closest('[data-cursor]')) SoundEngine.play('hover'); });
+    document.addEventListener('click', (e) => { if (e.target.closest('[data-cursor]')) SoundEngine.play('click'); }, true);
+    document.addEventListener('click', () => SoundEngine.init(), { once: true });
+  }
+
+  initScrollProgress() {
+    const bar = document.querySelector('[data-role="scroll-progress"]');
+    const onScroll = () => {
+      const h = document.documentElement.scrollHeight - window.innerHeight;
+      const p = h > 0 ? Math.min(1, Math.max(0, window.scrollY / h)) : 0;
+      if (bar) bar.style.width = (p * 100) + '%';
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+  }
+
+  initReveal() {
+    if (this._io) this._io.disconnect();
+    if (this._revealSafety) clearTimeout(this._revealSafety);
+    const reveal = (el) => { el.style.opacity = '1'; el.style.transform = 'translateY(0)'; };
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((e) => { if (e.isIntersecting) { reveal(e.target); io.unobserve(e.target); } });
+    }, { threshold: 0, rootMargin: '0px 0px 0px 0px' });
+    const els = [...document.querySelectorAll('[data-reveal]')].filter((el) => el.offsetParent !== null);
+    els.forEach((el) => {
+      el.style.opacity = '0'; el.style.transform = 'translateY(32px)';
+      el.style.transition = 'opacity 0.9s cubic-bezier(0.16,1,0.3,1), transform 0.9s cubic-bezier(0.16,1,0.3,1)';
+      io.observe(el);
+      const r = el.getBoundingClientRect();
+      if (r.top < window.innerHeight && r.bottom > 0) reveal(el);
+    });
+    this._io = io;
+    this._revealSafety = setTimeout(() => { els.forEach(reveal); }, 2500);
+  }
+
+  initSectionIndex() {
+    const sections = [...document.querySelectorAll('section[data-section]')];
+    const links = [...document.querySelectorAll('[data-role="section-index-link"]')];
+    const update = () => {
+      const mid = window.scrollY + window.innerHeight * 0.4;
+      let active = sections[0];
+      sections.forEach((s) => { if (s.offsetTop <= mid) active = s; });
+      links.forEach((a) => { a.style.opacity = (active && a.dataset.target === active.id) ? '1' : '0.4'; });
+    };
+    window.addEventListener('scroll', update, { passive: true });
+    update();
+  }
+
+  initCanvasBad() {
+    const c = document.querySelector('[data-role="flow-canvas-bad"]');
+    if (!c) return;
+    const ctx = c.getContext('2d');
+    let w = (c.width = c.clientWidth * (window.devicePixelRatio || 1));
+    let h = (c.height = c.clientHeight * (window.devicePixelRatio || 1));
+    const N = 48;
+    const pts = Array.from({ length: N }, () => ({
+      x: Math.random() * w, y: Math.random() * h,
+      vx: 0.8 + Math.random() * 1.6, vy: (Math.random() - 0.5) * 0.8,
+      rad: 1.5 + Math.random() * 2,
+      isBounce: Math.random() < 0.45
+    }));
+    const draw = () => {
+      ctx.clearRect(0, 0, w, h);
+      pts.forEach((p) => {
+        p.x += p.vx; p.y += p.vy;
+        if (p.x > w) { p.x = 0; p.y = Math.random() * h; }
+        ctx.fillStyle = p.isBounce ? 'rgba(220,38,38,0.75)' : 'rgba(120,120,120,0.4)';
+        ctx.beginPath(); ctx.arc(p.x, p.y, p.rad, 0, Math.PI * 2); ctx.fill();
+      });
+      this._animBad = requestAnimationFrame(draw);
+    };
+    draw();
+  }
+
+  initCanvasGood() {
+    const c = document.querySelector('[data-role="flow-canvas"]');
+    if (!c) return;
+    const ctx = c.getContext('2d');
+    let w = (c.width = c.clientWidth * (window.devicePixelRatio || 1));
+    let h = (c.height = c.clientHeight * (window.devicePixelRatio || 1));
+    const N = 56;
+    const pts = Array.from({ length: N }, () => ({
+      x: Math.random() * w, y: Math.random() * h,
+      vx: 0.8 + Math.random() * 1.8, vy: (Math.random() - 0.5) * 0.6,
+      rad: 1.5 + Math.random() * 2.2
+    }));
+    const draw = () => {
+      ctx.clearRect(0, 0, w, h);
+      const filterX = w * 0.5;
+      ctx.strokeStyle = 'rgba(255,255,255,0.12)';
+      ctx.setLineDash([4, 4]);
+      ctx.beginPath(); ctx.moveTo(filterX, 0); ctx.lineTo(filterX, h); ctx.stroke();
+      ctx.setLineDash([]);
+      pts.forEach((p) => {
+        p.x += p.vx; p.y += p.vy;
+        if (p.x > w) { p.x = 0; p.y = Math.random() * h; }
+        const passed = p.x > filterX;
+        ctx.fillStyle = passed ? 'rgba(74,222,128,0.85)' : 'rgba(180,180,180,0.45)';
+        ctx.beginPath(); ctx.arc(p.x, p.y, p.rad, 0, Math.PI * 2); ctx.fill();
+      });
+      this._animGood = requestAnimationFrame(draw);
+    };
+    draw();
+  }
+
+  openMailClient = (e) => {
+    e.preventDefault();
+    const email = ['tim', 'la27productions.com'].join('@');
+    window.location.href = 'mailto:' + email;
+  };
+
+  renderVals() {
+    const { lang, soundEnabled, sampleIndex } = this.state;
+    const d = DICT[lang] || DICT.es;
+    const shared = d.shared;
+    const m = d.marketing;
+
+    const isMobile = typeof window !== 'undefined' ? window.innerWidth < 768 : false;
+
+    const styles = {
+      root: { background: BG, color: INK, minHeight: '100vh', position: 'relative', overflowX: 'hidden', fontFamily: FONT_SANS },
+      filmGrain: { position: 'fixed', inset: 0, pointerEvents: 'none', zIndex: 999, opacity: 0.04, backgroundImage: 'radial-gradient(circle at 50% 50%, #fff 1px, transparent 1px)', backgroundSize: '3px 3px' },
+      cursor: { position: 'fixed', top: 0, left: 0, width: '8px', height: '8px', borderRadius: '50%', background: INK, pointerEvents: 'none', zIndex: 1000, mixBlendMode: 'difference', transform: 'translate(-50%, -50%)', transition: 'width 0.2s cubic-bezier(0.2,0.8,0.2,1), height 0.2s cubic-bezier(0.2,0.8,0.2,1), background 0.2s ease', display: isMobile ? 'none' : 'flex', alignItems: 'center', justifyContent: 'center' },
+      cursorLabel: { color: BG, fontFamily: FONT_MONO, fontSize: '9px', fontWeight: 600, letterSpacing: '0.12em', textTransform: 'uppercase', opacity: 0, transition: 'opacity 0.2s ease', pointerEvents: 'none' },
+      scrollProgress: { position: 'fixed', top: 0, left: 0, height: '2px', background: ACCENT, zIndex: 1001, width: '0%' },
+      gradientWash: { position: 'fixed', inset: 0, pointerEvents: 'none', zIndex: 0, background: 'radial-gradient(circle at 20% 18%, rgba(204,0,0,0.18), transparent 55%), radial-gradient(circle at 80% 65%, rgba(160,10,20,0.14), transparent 60%), radial-gradient(circle at 50% 85%, rgba(220,20,30,0.12), transparent 50%)', animation: 'la27-wash 16s ease-in-out infinite alternate' },
+      bgArt: { position: 'fixed', inset: 0, pointerEvents: 'none', zIndex: 0, overflow: 'hidden' },
+      bgShapeArch: { position: 'absolute', top: '-60px', right: '-40px', width: '380px', height: '620px', color: 'rgba(255,255,255,0.025)', transform: 'rotate(-4deg)', animation: 'la27-driftA 26s ease-in-out infinite' },
+      bgShapeGuitar: { position: 'absolute', top: '38%', left: '-80px', width: '480px', height: '240px', color: 'rgba(255,255,255,0.02)', transform: 'rotate(8deg)', animation: 'la27-driftB 30s ease-in-out infinite' },
+      bgShapeSail: { position: 'absolute', bottom: '8%', right: '-40px', width: '400px', height: '480px', color: 'rgba(255,255,255,0.022)', transform: 'rotate(-6deg)', animation: 'la27-driftC 28s ease-in-out infinite' },
+      bgShapeEixample: { position: 'absolute', top: '22%', right: '8%', width: '360px', height: '360px', color: 'rgba(255,255,255,0.018)', transform: 'rotate(12deg)', animation: 'la27-driftD 34s ease-in-out infinite' },
+      bgShapeMosaicDots: { position: 'absolute', bottom: '15%', left: '6%', width: '320px', height: '320px', color: 'rgba(255,255,255,0.02)', transform: 'rotate(-8deg)', animation: 'la27-driftE 24s ease-in-out infinite' },
+
+      nav: { position: 'fixed', top: 0, left: 0, right: 0, height: isMobile ? '64px' : '76px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: isMobile ? '0 20px' : '0 48px', zIndex: 100, backdropFilter: 'blur(24px) saturate(180%)', background: 'rgba(7,3,4,0.75)', borderBottom: '1px solid rgba(255,255,255,0.08)', boxShadow: '0 4px 24px rgba(0,0,0,0.4)' },
+      navBrand: { fontFamily: FONT_DISPLAY, fontSize: '24px', letterSpacing: '-0.02em', color: INK, textDecoration: 'none', display: 'inline-flex', alignItems: 'baseline', gap: '8px' },
+      navLinks: { display: isMobile ? 'none' : 'flex', gap: '28px', alignItems: 'center' },
+      navLink: { color: INK_DIM, textDecoration: 'none', fontFamily: FONT_MONO, fontSize: '11px', letterSpacing: '0.14em', textTransform: 'uppercase', transition: 'color 0.2s ease' },
+      navRight: { display: 'flex', alignItems: 'center', gap: isMobile ? '12px' : '20px' },
+      soundBtn: { appearance: 'none', background: 'transparent', border: '1px solid ' + LINE, color: INK_DIM, fontFamily: FONT_MONO, fontSize: '10px', letterSpacing: '0.12em', padding: '7px 12px', borderRadius: '999px', cursor: 'pointer' },
+      langBtn: { appearance: 'none', background: 'transparent', border: '1px solid ' + LINE, color: INK, fontFamily: FONT_MONO, fontSize: '11px', letterSpacing: '0.12em', padding: '7px 12px', borderRadius: '999px', cursor: 'pointer', display: 'inline-flex', alignItems: 'center', gap: '6px' },
+      langMenu: { position: 'absolute', top: '100%', right: 0, marginTop: '8px', background: 'rgba(10,10,10,0.95)', backdropFilter: 'blur(16px)', border: '1px solid ' + LINE, borderRadius: '6px', listStyle: 'none', padding: '6px 0', minWidth: '140px', zIndex: 200, boxShadow: '0 12px 32px rgba(0,0,0,0.6)' },
+      langMenuLink: { display: 'block', padding: '8px 16px', color: INK, textDecoration: 'none', fontFamily: FONT_MONO, fontSize: '11px', letterSpacing: '0.08em', textTransform: 'uppercase' },
+      navMeta: { fontFamily: FONT_MONO, fontSize: '11px', letterSpacing: '0.12em', color: INK_MUTE, display: isMobile ? 'none' : 'inline-flex', alignItems: 'center', gap: '8px' },
+      navDot: { width: '6px', height: '6px', borderRadius: '50%', background: ACCENT, display: 'inline-block' },
+
+      sectionIndex: { position: 'fixed', right: '32px', top: '50%', transform: 'translateY(-50%)', display: isMobile ? 'none' : 'flex', flexDirection: 'column', gap: '14px', zIndex: 90 },
+      indexLink: { display: 'flex', alignItems: 'center', gap: '10px', color: 'inherit', textDecoration: 'none', fontFamily: FONT_MONO, fontSize: '10px', letterSpacing: '0.14em', textTransform: 'uppercase', opacity: 0.45, transition: 'opacity 0.3s ease' },
+      indexNum: { width: '22px' },
+
+      hero: { position: 'relative', minHeight: '100vh', display: 'flex', flexDirection: 'column', justifyContent: 'center', padding: isMobile ? '150px 20px 60px' : '170px 48px 60px' },
+      heroMeta: { position: 'absolute', top: isMobile ? '76px' : '96px', left: isMobile ? '20px' : '48px', right: isMobile ? '20px' : '48px', display: 'flex', justifyContent: 'space-between', fontFamily: FONT_MONO, fontSize: '11px', letterSpacing: '0.14em', textTransform: 'uppercase', color: INK_DIM },
+      heroBadge: { fontFamily: FONT_MONO, fontSize: '11px', letterSpacing: '0.14em', textTransform: 'uppercase', color: ACCENT, marginBottom: '18px', border: '1px solid ' + LINE, display: 'inline-flex', padding: '8px 14px', borderRadius: '999px', width: 'fit-content' },
+      heroTitle: { fontFamily: FONT_DISPLAY, fontWeight: 400, fontSize: isMobile ? 'clamp(42px, 12vw, 68px)' : 'clamp(56px, 9.5vw, 140px)', lineHeight: 0.98, letterSpacing: '-0.02em', margin: '0 0 0.15em' },
+      heroSub: { marginTop: isMobile ? '8px' : '20px', display: 'flex', flexDirection: isMobile ? 'column' : 'row', justifyContent: 'space-between', alignItems: isMobile ? 'flex-start' : 'flex-end', gap: '32px' },
+      heroSubText: { fontFamily: FONT_MONO, fontSize: '12px', letterSpacing: '0.1em', textTransform: 'uppercase', color: INK_DIM, maxWidth: '440px', lineHeight: 1.6, margin: 0 },
+      scrollCue: { display: 'inline-flex', alignItems: 'center', gap: '12px', color: INK, textDecoration: 'none', fontFamily: FONT_MONO, fontSize: '11px', letterSpacing: '0.14em', textTransform: 'uppercase' },
+      scrollArrow: { width: '24px', height: '24px', border: '1px solid ' + INK, borderRadius: '50%', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', animation: 'la27-bounce 2s ease-in-out infinite' },
+      heroBtns: { marginTop: '32px', display: 'flex', gap: '16px', flexWrap: 'wrap' },
+      heroPills: { display: 'flex', gap: '10px', flexWrap: 'wrap', marginTop: '28px', fontFamily: FONT_MONO, fontSize: '10px', letterSpacing: '0.1em', textTransform: 'uppercase' },
+      heroPill: { background: 'rgba(255,255,255,0.03)', backdropFilter: 'blur(16px)', border: '1px solid rgba(255,255,255,0.12)', boxShadow: '0 4px 16px rgba(0,0,0,0.35), inset 0 1px 0 rgba(255,255,255,0.18)', borderRadius: '999px', padding: '8px 16px', color: INK_DIM },
+
+      trust: { borderTop: '1px solid ' + LINE, borderBottom: '1px solid ' + LINE, padding: '24px 0', overflow: 'hidden' },
+      trustInner: { display: 'flex', whiteSpace: 'nowrap', animation: 'la27-marquee 26s linear infinite' },
+      trustSpan: { display: 'inline-flex', alignItems: 'center', fontFamily: FONT_DISPLAY, fontStyle: 'italic', fontSize: isMobile ? '20px' : '30px', color: INK_MUTE },
+      trustWord: { padding: '0 40px' },
+      trustDot: { display: 'inline-block', width: '4px', height: '4px', borderRadius: '50%', background: ACCENT },
+
+      section: { position: 'relative', padding: isMobile ? '0 20px' : '0 96px 0 48px' },
+      sectionHeader: { display: 'flex', flexDirection: isMobile ? 'column' : 'row', justifyContent: 'space-between', alignItems: isMobile ? 'flex-start' : 'flex-end', gap: '12px', padding: isMobile ? '56px 0 24px' : '96px 0 40px', borderBottom: '1px solid ' + LINE, marginBottom: '32px' },
+      eyebrow: { fontFamily: FONT_MONO, fontSize: '11px', letterSpacing: '0.18em', textTransform: 'uppercase', color: INK_DIM, display: 'flex', alignItems: 'center', gap: '12px' },
+      sectionTitle: { fontFamily: FONT_DISPLAY, fontSize: isMobile ? 'clamp(36px, 10vw, 56px)' : 'clamp(44px, 6.5vw, 96px)', lineHeight: 0.98, letterSpacing: '-0.02em', fontWeight: 400, margin: 0 },
+      exampleNote: { fontFamily: FONT_MONO, fontSize: '13px', letterSpacing: '0.05em', color: ACCENT, marginBottom: '32px' },
+
+      compareGrid: { display: 'grid', gridTemplateColumns: isMobile ? '1fr' : '1fr 1fr', gap: isMobile ? '20px' : '24px', marginBottom: isMobile ? '8px' : '12px' },
+      flowWrap: { position: 'relative', border: '1px solid rgba(255,255,255,0.18)', borderRadius: '20px', background: 'rgba(255,255,255,0.035)', backdropFilter: 'blur(24px) saturate(180%)', boxShadow: '0 20px 48px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.35), inset 0 -1px 0 rgba(220,38,38,0.15)', padding: isMobile ? '18px 14px 10px' : '24px 24px 14px' },
+      flowCanvasHolder: { position: 'relative' },
+      flowCanvas: { display: 'block', width: '100%', height: isMobile ? '150px' : '220px' },
+      flowLabels: { display: 'flex', justifyContent: 'space-between', fontFamily: FONT_MONO, fontSize: isMobile ? '9px' : '10px', letterSpacing: '0.08em', textTransform: 'uppercase', color: INK_DIM, paddingTop: '10px', borderTop: '1px solid ' + LINE, gap: '6px' },
+      flowLabelLeft: { flex: 1 }, flowLabelMid: { flex: 1.4, textAlign: 'center', color: ACCENT }, flowLabelMidBad: { flex: 1.4, textAlign: 'center', color: INK_MUTE }, flowLabelRight: { flex: 1, textAlign: 'right' },
+      flowPanelLabel: { fontFamily: FONT_MONO, fontSize: isMobile ? '11px' : '12px', letterSpacing: '0.1em', textTransform: 'uppercase', marginBottom: '10px', fontWeight: 600 },
+      flowPanelLabelBad: { color: INK_MUTE },
+      flowPanelLabelGood: { color: ACCENT },
+      contactChip: { position: 'absolute', bottom: isMobile ? '14px' : '18px', right: isMobile ? '8px' : '16px', display: 'flex', alignItems: 'center', gap: '8px', background: 'rgba(2,2,2,0.85)', border: '1px solid ' + LINE, borderRadius: '999px', padding: isMobile ? '6px 10px' : '8px 14px', fontFamily: FONT_MONO, fontSize: isMobile ? '9px' : '10.5px', letterSpacing: '0.02em', color: INK, maxWidth: isMobile ? '160px' : '220px', animation: 'la27-chipfade 3.2s ease-in-out infinite' },
+      contactChipDot: { width: '6px', height: '6px', borderRadius: '50%', background: 'oklch(0.7 0.15 145)', flexShrink: 0 },
+      processCaptions: { display: 'grid', gridTemplateColumns: isMobile ? '1fr' : 'repeat(3, 1fr)', gap: isMobile ? '10px' : '24px', marginBottom: isMobile ? '56px' : '100px' },
+      processCaption: { display: 'flex', alignItems: 'center', gap: '12px' },
+      processCaptionNum: { fontFamily: FONT_DISPLAY, fontStyle: 'italic', fontSize: '22px', color: ACCENT },
+      processCaptionText: { fontFamily: FONT_MONO, fontSize: '13px', color: INK, letterSpacing: '0.02em' },
+
+      capabilityTiles: { display: 'grid', gridTemplateColumns: isMobile ? '1fr' : 'repeat(3, 1fr)', gap: '16px', marginBottom: isMobile ? '64px' : '120px' },
+      capabilityTile: { background: 'rgba(255,255,255,0.04)', backdropFilter: 'blur(24px) saturate(180%)', border: '1px solid rgba(255,255,255,0.18)', borderRadius: '20px', boxShadow: '0 20px 48px rgba(0,0,0,0.55), inset 0 1px 0 rgba(255,255,255,0.35), inset 0 -1px 0 rgba(220,38,38,0.15)', padding: isMobile ? '28px 20px' : '34px 28px' },
+      capabilityTag: { display: 'inline-block', fontFamily: FONT_MONO, fontSize: '10px', letterSpacing: '0.1em', color: ACCENT, border: '1px solid rgba(220,38,38,0.4)', borderRadius: '999px', padding: '3px 10px', marginBottom: '12px' },
+      capabilityTitle: { fontFamily: FONT_DISPLAY, fontSize: '21px', marginBottom: '10px', color: INK },
+      capabilityDesc: { fontFamily: FONT_MONO, fontSize: '13px', color: INK_DIM, lineHeight: 1.6, margin: 0 },
+
+      whyLede: { maxWidth: '900px', margin: isMobile ? '0 0 56px' : '0 auto 96px', fontFamily: FONT_DISPLAY, fontSize: isMobile ? '20px' : 'clamp(26px, 2.8vw, 40px)', lineHeight: 1.3, letterSpacing: '-0.01em', color: INK, textAlign: isMobile ? 'left' : 'center' },
+      pillarsGrid: { display: 'grid', gridTemplateColumns: isMobile ? '1fr' : 'repeat(4, 1fr)', gap: '16px', marginBottom: isMobile ? '64px' : '120px' },
+      pillarCard: { background: 'rgba(255,255,255,0.04)', backdropFilter: 'blur(24px) saturate(180%)', border: '1px solid rgba(255,255,255,0.18)', borderRadius: '20px', boxShadow: '0 20px 48px rgba(0,0,0,0.55), inset 0 1px 0 rgba(255,255,255,0.35), inset 0 -1px 0 rgba(220,38,38,0.15)', padding: isMobile ? '40px 24px' : '48px 32px 56px', display: 'flex', flexDirection: 'column', gap: '18px', minHeight: isMobile ? 'auto' : '320px' },
+      pillarNum: { fontFamily: FONT_DISPLAY, fontStyle: 'italic', fontSize: isMobile ? '56px' : '72px', lineHeight: 0.9, color: ACCENT },
+      pillarTitle: { fontFamily: FONT_DISPLAY, fontSize: isMobile ? 'clamp(24px,6vw,30px)' : 'clamp(26px, 2.2vw, 32px)', lineHeight: 1.05, letterSpacing: '-0.015em', margin: 0 },
+      pillarBody: { color: INK_DIM, fontSize: '14px', lineHeight: 1.65, marginTop: 'auto' },
+
+      studioGrid: { display: 'grid', gridTemplateColumns: isMobile ? '1fr' : '5fr 7fr', gap: isMobile ? '32px' : '80px', paddingBottom: isMobile ? '64px' : '120px' },
+      studioPortrait: { position: 'relative', aspectRatio: isMobile ? '3/2' : '4/5', background: '#0a0506', border: '1px solid rgba(255,255,255,0.18)', boxShadow: '0 24px 56px rgba(0,0,0,0.65), inset 0 1px 0 rgba(255,255,255,0.35)', borderRadius: '20px', overflow: 'hidden' },
+      studioQuote: { fontFamily: FONT_DISPLAY, fontSize: isMobile ? 'clamp(22px,5.5vw,30px)' : 'clamp(26px, 2.6vw, 38px)', lineHeight: 1.25, letterSpacing: '-0.01em', marginBottom: '36px' },
+      studioBio: { color: INK_DIM, fontSize: '16px', lineHeight: 1.7, maxWidth: '560px', marginBottom: '36px' },
+      studioSignature: { display: 'flex', flexDirection: isMobile ? 'column' : 'row', alignItems: isMobile ? 'flex-start' : 'center', gap: isMobile ? '20px' : 0, justifyContent: 'space-between', paddingTop: '28px', borderTop: '1px solid ' + LINE, maxWidth: '560px' },
+      founderName: { fontFamily: FONT_DISPLAY, fontStyle: 'italic', fontSize: '22px' },
+      studioRole: { fontFamily: FONT_MONO, fontSize: '11px', letterSpacing: '0.14em', textTransform: 'uppercase', color: INK_DIM, marginTop: '4px' },
+      linkedinBtn: { fontFamily: FONT_MONO, fontSize: '11px', letterSpacing: '0.14em', textTransform: 'uppercase', color: INK, textDecoration: 'none', padding: '10px 16px', border: '1px solid ' + LINE, borderRadius: '999px' },
+
+      contact: { padding: isMobile ? '0 20px 64px' : '0 96px 80px 48px', borderTop: '1px solid ' + LINE },
+      contactGrid: { display: 'grid', gridTemplateColumns: isMobile ? '1fr' : '1fr 1fr', gap: isMobile ? '40px' : '96px', paddingTop: isMobile ? '56px' : '96px' },
+      contactTitle: { fontFamily: FONT_DISPLAY, fontSize: isMobile ? 'clamp(44px, 12vw, 64px)' : 'clamp(56px, 8vw, 120px)', lineHeight: 0.92, letterSpacing: '-0.02em', margin: 0 },
+      contactAside: { marginTop: '32px', color: INK_DIM, fontSize: '15px', lineHeight: 1.7, maxWidth: '400px' },
+      contactDirect: { marginTop: '40px', paddingTop: '28px', borderTop: '1px solid ' + LINE, maxWidth: '400px' },
+      contactLab: { fontFamily: FONT_MONO, fontSize: '11px', letterSpacing: '0.14em', textTransform: 'uppercase', color: INK_MUTE, marginBottom: '8px' },
+      contactMail: { fontFamily: FONT_DISPLAY, fontStyle: 'italic', fontSize: '24px', color: INK, textDecoration: 'none', borderBottom: '1px solid ' + INK_MUTE },
+      contactStatus: { marginTop: '20px', display: 'inline-flex', alignItems: 'center', gap: '10px', fontFamily: FONT_MONO, fontSize: '11px', letterSpacing: '0.14em', textTransform: 'uppercase', color: INK_DIM },
+      statusDot: { width: '7px', height: '7px', borderRadius: '50%', background: 'oklch(0.7 0.15 145)', display: 'inline-block' },
+
+      form: { display: 'grid', gap: '8px', marginTop: '24px', background: 'rgba(255,255,255,0.035)', backdropFilter: 'blur(24px) saturate(180%)', border: '1px solid rgba(255,255,255,0.16)', borderRadius: '22px', padding: isMobile ? '24px 18px' : '36px 32px', boxShadow: '0 24px 56px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.35), inset 0 -1px 0 rgba(220,38,38,0.15)' },
+      field: { position: 'relative', borderBottom: '1px solid ' + LINE, padding: '18px 0 10px' },
+      fieldLabelUp: { display: 'block', fontFamily: FONT_MONO, fontSize: '11px', letterSpacing: '0.12em', textTransform: 'uppercase', color: ACCENT, marginBottom: '6px' },
+      fieldInput: { width: '100%', background: 'transparent', border: 0, outline: 0, color: INK, fontFamily: FONT_SANS, fontSize: '17px', padding: 0 },
+      fieldTextarea: { width: '100%', background: 'transparent', border: 0, outline: 0, color: INK, fontFamily: FONT_SANS, fontSize: '16px', padding: 0, resize: 'none', minHeight: '64px' },
+      formSubmit: { marginTop: '28px', display: 'flex', alignItems: 'center', gap: '16px', flexWrap: 'wrap' },
+      formNocost: { fontFamily: FONT_MONO, fontSize: '10px', letterSpacing: '0.14em', textTransform: 'uppercase', color: INK_MUTE, margin: 0, flexBasis: '100%' },
+
+      btn: { appearance: 'none', border: 0, background: INK, color: BG, fontFamily: FONT_MONO, fontSize: '13px', fontWeight: 700, letterSpacing: '0.14em', textTransform: 'uppercase', padding: '18px 30px', borderRadius: '999px', display: 'inline-flex', alignItems: 'center', gap: '10px', cursor: 'pointer', textDecoration: 'none' },
+      footer: { position: 'relative', borderTop: '1px solid ' + LINE, padding: isMobile ? '28px 20px' : '40px 48px', display: 'flex', flexDirection: isMobile ? 'column' : 'row', gap: isMobile ? '14px' : 0, alignItems: isMobile ? 'flex-start' : 'center', justifyContent: 'space-between', fontFamily: FONT_MONO, fontSize: '11px', letterSpacing: '0.14em', textTransform: 'uppercase', color: INK_MUTE },
+    };
+
+    const langOptions = Object.keys(LANG_NAMES).map((code) => ({
+      code: code.toUpperCase(),
+      label: LANG_NAMES[code],
+      select: this.selectLang(code)
+    }));
+
+    // All 6 sections in top nav:
+    const navLinks = [
+      { label: m.navIntro || 'Intro', href: '#hero' },
+      { label: m.navHow || m.howEyebrow, href: '#how' },
+      { label: m.navWork, href: '#work' },
+      { label: m.navWhy, href: '#why' },
+      { label: m.navFounder, href: '#founder' },
+      { label: m.navContact, href: '#contact' }
+    ];
+
+    // All 6 sections in section index:
+    const indexItems = [
+      { label: 'Intro', id: 'hero' },
+      { label: m.howEyebrow, id: 'how' },
+      { label: m.navWork, id: 'work' },
+      { label: m.navWhy, id: 'why' },
+      { label: shared.founderEyebrow, id: 'founder' },
+      { label: m.navContact, id: 'contact' }
+    ];
+    indexItems.forEach((it, i) => { it.num = '0' + (i + 1); it.href = '#' + it.id; });
+
+    return {
+      styles,
+      isMobile,
+      state: this.state,
+      shared,
+      m,
+      view: {
+        contactTitleMain: m.contactTitleMain,
+        contactTitleIt: m.contactTitleIt,
+        contactAside: m.contactAside,
+        formType: m.formType
+      },
+      soundLabel: soundEnabled ? 'SOUND ON' : 'SOUND OFF',
+      toggleSound: this.toggleSound,
+      toggleLangMenu: this.toggleLangMenu,
+      langOptions,
+      navLinks,
+      indexItems,
+      trustItemsDouble: (m.trust || []).concat(m.trust || []),
+      processSteps: (m.steps || []).map((s, i) => ({ ...s, num: '0' + (i + 1) })),
+      capabilityTiles: m.tiles || [],
+      marketingPillars: (m.pillars || []).map((pl, i) => ({ ...pl, num: '0' + (i + 1) })),
+      formOptions: m.formOptions || [],
+      sampleContact: (m.sampleContacts && m.sampleContacts[sampleIndex % m.sampleContacts.length]) || '',
+      contactEmailText: ['tim', 'la27productions.com'].join('@'),
+      contactEmailHref: 'mail' + 'to:' + ['tim', 'la27productions.com'].join('@'),
+      openMailClient: this.openMailClient,
+      founderBio: m.founderBio
+    };
+  }
+}
+
+</script>
+</body>
+</html>
