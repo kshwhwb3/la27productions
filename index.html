@@ -17,6 +17,7 @@
 <meta name="description" content="LA 27 Productions — E-Mail-Marketing B2C para promotores de conciertos y agencias de booking. Audiencias verificadas segmentadas por género musical, región y edad. Barcelona.">
 
 <script src="./support.js"></script>
+<script src="/legal.js" defer></script>
 </head>
 <body>
 <x-dc>
@@ -48,9 +49,7 @@
   <meta property="og:image" content="https://la27productions.com/assets/favicon-512.png" />
   <meta name="twitter:card" content="summary" />
 
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="true" />
-  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Space+Grotesk:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link href="/fonts/fonts.css" rel="stylesheet" />
   <style>
     @keyframes la27-marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
     @keyframes la27-bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(4px); } }
@@ -312,6 +311,7 @@
             <div style="{{ styles.formSubmit }}">
               <button type="submit" data-cursor="hover" data-magnetic="true" style="{{ styles.btn }}">{{ shared.formSubmit }}<svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
               <p style="{{ styles.formNocost }}">{{ shared.contactNocost }}</p>
+              <p style="{{ styles.formNocost }}">{{ shared.formPrivacy }} <a href="/privacidad.html" style="color:inherit;text-decoration:underline">{{ shared.formPrivacyLink }}</a>.</p>
             </div>
           </form>
         </div>
@@ -320,6 +320,7 @@
 
   <footer style="{{ styles.footer }}">
       <div>© LA 27 · Barcelona</div>
+      <div style="display:flex;gap:20px;flex-wrap:wrap"><a href="/privacidad.html#aviso-legal" style="color:inherit;text-decoration:none">{{ shared.footerLegal }}</a><a href="/privacidad.html#privacidad" style="color:inherit;text-decoration:none">{{ shared.footerPrivacy }}</a><a href="/privacidad.html#cookies" style="color:inherit;text-decoration:none">{{ shared.footerCookies }}</a></div>
       <div style="display:flex;gap:32px"><span>{{ shared.footerMastered }}</span><span>v2026</span></div>
     </footer>
 
@@ -392,7 +393,12 @@ const DICT = {
       "formMessage": "Mensaje",
       "formSubmit": "Enviar",
       "formTypePh": "— Selecciona un sector / servicio —",
-      "footerMastered": "Desarrollado en Barcelona"
+      "footerMastered": "Desarrollado en Barcelona",
+      "footerLegal": "Aviso legal",
+      "footerPrivacy": "Privacidad",
+      "footerCookies": "Cookies",
+      "formPrivacy": "Usamos tus datos solo para responderte. Más información en la",
+      "formPrivacyLink": "política de privacidad"
     },
     "marketing": {
       "navWork": "Sectores",
@@ -545,7 +551,12 @@ const DICT = {
       "formMessage": "Message",
       "formSubmit": "Send",
       "formTypePh": "— Select an industry / campaign type —",
-      "footerMastered": "Developed in Barcelona"
+      "footerMastered": "Developed in Barcelona",
+      "footerLegal": "Legal notice",
+      "footerPrivacy": "Privacy",
+      "footerCookies": "Cookies",
+      "formPrivacy": "We only use your details to reply to you. More in our",
+      "formPrivacyLink": "privacy policy"
     },
     "marketing": {
       "navWork": "Industries",
@@ -698,7 +709,12 @@ const DICT = {
       "formMessage": "Nachricht",
       "formSubmit": "Senden",
       "formTypePh": "— Branche / Kampagnentyp auswählen —",
-      "footerMastered": "Entwickelt in Barcelona"
+      "footerMastered": "Entwickelt in Barcelona",
+      "footerLegal": "Impressum",
+      "footerPrivacy": "Datenschutz",
+      "footerCookies": "Cookies",
+      "formPrivacy": "Wir verwenden Ihre Daten nur, um Ihnen zu antworten. Mehr dazu in der",
+      "formPrivacyLink": "Datenschutzerklärung"
     },
     "marketing": {
       "navWork": "Branchen",
@@ -851,7 +867,12 @@ const DICT = {
       "formMessage": "Message",
       "formSubmit": "Envoyer",
       "formTypePh": "— Sélectionner un secteur / type de campagne —",
-      "footerMastered": "Développé à Barcelone"
+      "footerMastered": "Développé à Barcelone",
+      "footerLegal": "Mentions légales",
+      "footerPrivacy": "Confidentialité",
+      "footerCookies": "Cookies",
+      "formPrivacy": "Nous utilisons vos données uniquement pour vous répondre. Plus d’infos dans notre",
+      "formPrivacyLink": "politique de confidentialité"
     },
     "marketing": {
       "navWork": "Secteurs",
@@ -1004,7 +1025,12 @@ const DICT = {
       "formMessage": "Mensagem",
       "formSubmit": "Enviar",
       "formTypePh": "— Seleciona um setor / tipo de campanha —",
-      "footerMastered": "Desenvolvido em Barcelona"
+      "footerMastered": "Desenvolvido em Barcelona",
+      "footerLegal": "Aviso legal",
+      "footerPrivacy": "Privacidade",
+      "footerCookies": "Cookies",
+      "formPrivacy": "Usamos os seus dados apenas para lhe responder. Mais informações na",
+      "formPrivacyLink": "política de privacidade"
     },
     "marketing": {
       "navWork": "Setores",
