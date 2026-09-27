@@ -17,7 +17,7 @@
 <meta name="description" content="LA 27 Productions — E-Mail-Marketing B2C para promotores de conciertos y agencias de booking. Audiencias verificadas segmentadas por género musical, región y edad. Barcelona.">
 
 <script src="./support.js"></script>
-<script src="/legal.js" defer></script>
+<script src="/legal.js?v=3" defer></script>
 </head>
 <body>
 <x-dc>
@@ -64,7 +64,14 @@
     @keyframes la27-driftE { 0% { transform: translate(0,0) scale(1); } 50% { transform: translate(-14px,18px) scale(1.08); } 100% { transform: translate(18px,-10px) scale(0.94); } }
     @keyframes la27-wash { 0% { transform: translate(-4%,-4%) scale(1); } 50% { transform: translate(5%,7%) scale(1.15); } 100% { transform: translate(-7%,3%) scale(0.95); } }
     @keyframes la27-chipfade { 0%, 8% { opacity: 0; transform: translateY(6px); } 15%, 85% { opacity: 1; transform: translateY(0); } 95%, 100% { opacity: 0; transform: translateY(-4px); } }
-    body { margin: 0; background: #070304; cursor: none; }
+    :root { --accent: oklch(0.58 0.22 25); --ink-2: oklch(0.56 0.2 25); }
+    html { background: #070304; }
+    body { margin: 0; background: #070304; -webkit-font-smoothing: antialiased; }
+    ::selection { background: rgba(220,38,38,0.35); color: #fff; }
+    select option { background: #140b0c; color: #f5f1ef; }
+    a[data-cursor], button[data-cursor] { transition: opacity .2s ease, background-color .2s ease, border-color .2s ease; }
+    a[data-cursor]:hover, button[data-cursor]:hover { opacity: .82; }
+    @media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; } }
   </style>
 </helmet>
 
@@ -74,6 +81,7 @@
 
 <div style="{{ styles.root }}">
 
+  <canvas data-role="stars" style="{{ styles.stars }}" aria-hidden="true"></canvas>
   <div data-role="film-grain" style="{{ styles.filmGrain }}"></div>
   <div data-role="cursor" style="{{ styles.cursor }}"><span data-role="cursor-label" style="{{ styles.cursorLabel }}">Play</span></div>
   <div data-role="scroll-progress" style="{{ styles.scrollProgress }}"></div>
@@ -163,14 +171,15 @@
 
   <main>
 <section id="hero" data-section="true" style="{{ styles.hero }}">
+          <canvas data-role="globe" style="{{ styles.globe }}" aria-hidden="true"></canvas>
+          <canvas data-role="routes" style="{{ styles.globe }}" aria-hidden="true"></canvas>
           <div style="{{ styles.heroMeta }}"><span>001 / Intro</span><span>Barcelona — ES</span></div>
           <div style="{{ styles.heroBadge }}">{{ m.heroBadge }}</div>
-          <h1 style="{{ styles.heroTitle }}">{{ m.heroTitleMain }} <span style="font-style:italic;color:var(--accent)">{{ m.heroTitleIt }}</span></h1>
+          <h1 style="{{ styles.heroTitle }}">{{ m.heroTitleMain }} <span style="color:var(--ink-2)">{{ m.heroTitleIt }}</span></h1>
           <div style="{{ styles.heroSub }}">
             <p style="{{ styles.heroSubText }}">{{ m.heroSub }}</p>
-            <a href="#how" data-cursor="hover" style="{{ styles.scrollCue }}"><span>{{ m.heroScroll }}</span><span style="{{ styles.scrollArrow }}"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M5 1v8M2 6l3 3 3-3" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
           </div>
-          <div style="{{ styles.heroBtns }}"><a href="#contact" data-cursor="hover" data-magnetic="true" style="{{ styles.btn }}">{{ m.heroBtn }}</a></div>
+          <div style="{{ styles.heroBtns }}"><a href="#contact" data-cursor="hover" data-magnetic="true" style="{{ styles.btn }}">{{ m.heroBtn }}</a><a href="#how" data-cursor="hover" style="{{ styles.scrollCue }}"><span>{{ m.heroScroll }}</span><span style="{{ styles.scrollArrow }}"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M5 1v8M2 6l3 3 3-3" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a></div>
           <div style="{{ styles.heroPills }}"><span style="{{ styles.heroPill }}">{{ m.pill1 }}</span><span style="{{ styles.heroPill }}">{{ m.pill2 }}</span><span style="{{ styles.heroPill }}">{{ m.pill3 }}</span></div>
         </section>
 
@@ -183,7 +192,7 @@
         <section id="how" data-section="true" style="{{ styles.section }}">
           <div data-reveal="true" style="{{ styles.sectionHeader }}">
             <div style="{{ styles.eyebrow }}"><span style="color:var(--accent);font-weight:600">01</span>{{ m.howEyebrow }}</div>
-            <h2 style="{{ styles.sectionTitle }}">{{ m.howTitleMain }}<br/><span style="font-style:italic;color:var(--accent)">{{ m.howTitleIt }}</span></h2>
+            <h2 style="{{ styles.sectionTitle }}">{{ m.howTitleMain }}<br/><span style="color:var(--ink-2)">{{ m.howTitleIt }}</span></h2>
           </div>
           <div style="{{ styles.compareGrid }}">
             <div data-reveal="true" style="{{ styles.flowWrap }}">
@@ -226,7 +235,7 @@
         <section id="work" data-section="true" style="{{ styles.section }}">
           <div data-reveal="true" style="{{ styles.sectionHeader }}">
             <div style="{{ styles.eyebrow }}"><span style="color:var(--accent);font-weight:600">02</span>{{ m.workEyebrow }}</div>
-            <h2 style="{{ styles.sectionTitle }}">{{ m.workTitleMain }}<br/><span style="font-style:italic;color:var(--accent)">{{ m.workTitleIt }}</span></h2>
+            <h2 style="{{ styles.sectionTitle }}">{{ m.workTitleMain }}<br/><span style="color:var(--ink-2)">{{ m.workTitleIt }}</span></h2>
           </div>
           <p data-reveal="true" style="{{ styles.exampleNote }}">{{ m.workNote }}</p>
           <div style="{{ styles.capabilityTiles }}">
@@ -243,7 +252,7 @@
         <section id="why" data-section="true" style="{{ styles.section }}">
           <div data-reveal="true" style="{{ styles.sectionHeader }}">
             <div style="{{ styles.eyebrow }}"><span style="color:var(--accent);font-weight:600">03</span>{{ m.whyEyebrow }}</div>
-            <h2 style="{{ styles.sectionTitle }}">{{ m.whyTitleMain }}<br/><span style="font-style:italic;color:var(--accent)">{{ m.whyTitleIt }}</span></h2>
+            <h2 style="{{ styles.sectionTitle }}">{{ m.whyTitleMain }}<br/><span style="color:var(--ink-2)">{{ m.whyTitleIt }}</span></h2>
           </div>
           <div data-reveal="true" style="{{ styles.whyLede }}">{{ m.whyLede }}</div>
           <div style="{{ styles.pillarsGrid }}">
@@ -261,12 +270,12 @@
       <section id="founder" data-section="true" style="{{ styles.section }}">
         <div data-reveal="true" style="{{ styles.sectionHeader }}">
           <div style="{{ styles.eyebrow }}"><span style="color:var(--accent);font-weight:600">05</span>{{ shared.founderEyebrow }}</div>
-          <h2 style="{{ styles.sectionTitle }}">{{ shared.founderTitleMain }} <span style="font-style:italic;color:var(--accent)">{{ shared.founderTitleIt }}</span></h2>
+          <h2 style="{{ styles.sectionTitle }}">{{ shared.founderTitleMain }} <span style="color:var(--ink-2)">{{ shared.founderTitleIt }}</span></h2>
         </div>
         <div style="{{ styles.studioGrid }}">
           <div data-reveal="true" style="{{ styles.studioPortrait }}"><img src="assets/tim-helmes.jpg" alt="Tim Helmes — Founder, LA 27" style="width:100%;height:100%;object-fit:cover;display:block" /></div>
           <div data-reveal="true">
-            <p style="{{ styles.studioQuote }}">"{{ shared.founderQuoteMain }} <span style="font-style:italic;color:var(--accent)">{{ shared.founderQuoteIt }}</span>{{ shared.founderQuoteEnd }}"</p>
+            <p style="{{ styles.studioQuote }}">"{{ shared.founderQuoteMain }} <span style="color:var(--ink-2)">{{ shared.founderQuoteIt }}</span>{{ shared.founderQuoteEnd }}"</p>
             <p style="{{ styles.studioBio }}">{{ founderBio }}</p>
             <div style="{{ styles.studioSignature }}">
               <div><div style="{{ styles.founderName }}">Tim Helmes</div><div style="{{ styles.studioRole }}">{{ shared.founderRole }}</div></div>
@@ -283,7 +292,7 @@
       <section id="contact" data-section="true" style="{{ styles.contact }}">
         <div style="{{ styles.contactGrid }}">
           <div data-reveal="true">
-            <h2 style="{{ styles.contactTitle }}">{{ view.contactTitleMain }}<br/><span style="font-style:italic;color:var(--accent)">{{ view.contactTitleIt }}</span></h2>
+            <h2 style="{{ styles.contactTitle }}">{{ view.contactTitleMain }}<br/><span style="color:var(--ink-2)">{{ view.contactTitleIt }}</span></h2>
             <p style="{{ styles.contactAside }}">{{ view.contactAside }}</p>
             <div style="{{ styles.contactDirect }}">
               <div style="{{ styles.contactLab }}">{{ shared.contactDirect }}</div>
@@ -318,6 +327,7 @@
       </section>
   </main>
 
+  <div aria-hidden="true" style="{{ styles.footerMark }}">LA 27</div>
   <footer style="{{ styles.footer }}">
       <div>© LA 27 · Barcelona</div>
       <div style="display:flex;gap:20px;flex-wrap:wrap"><a href="/privacidad.html#aviso-legal" style="color:inherit;text-decoration:none">{{ shared.footerLegal }}</a><a href="/privacidad.html#privacidad" style="color:inherit;text-decoration:none">{{ shared.footerPrivacy }}</a><a href="/privacidad.html#cookies" style="color:inherit;text-decoration:none">{{ shared.footerCookies }}</a></div>
@@ -330,16 +340,17 @@
 
 <script type="text/x-dc" data-dc-script>
 
-const FONT_DISPLAY = '"Instrument Serif", "Times New Roman", serif';
+const FONT_DISPLAY = '"Space Grotesk", system-ui, sans-serif';
 const FONT_SANS = '"Space Grotesk", system-ui, sans-serif';
 const FONT_MONO = '"JetBrains Mono", ui-monospace, monospace';
 const BG = '#070304';
 const INK = '#f5f1ef';
-const INK_DIM = '#8a8480';
-const INK_MUTE = '#4a4644';
-const LINE = '#181515';
+const INK_DIM = '#a39a97';
+const INK_MUTE = '#6b6260';
+const LINE = 'rgba(245,241,239,0.09)';
 const ACCENT = 'oklch(0.58 0.22 25)';
-const LANG_NAMES = { es: 'Español', en: 'English', de: 'Deutsch', fr: 'Français', pt: 'Português' };
+const RED_DEEP = '#8f1111';
+const LANG_NAMES = { de: 'Deutsch', en: 'English', es: 'Español', fr: 'Français', pt: 'Português' };
 
 
 const SoundEngine = (() => {
@@ -1180,9 +1191,7 @@ class Component extends DCLogic {
       } else if (stored && DICT[stored]) {
         initialLang = stored;
       } else {
-        const nav = (navigator.language || 'de').slice(0, 2).toLowerCase();
-        if (DICT[nav]) initialLang = nav;
-        else initialLang = 'en';
+        initialLang = 'de'; // el alemán es siempre el primer idioma (mercado DACH)
       }
     } catch (e) {}
 
@@ -1221,6 +1230,8 @@ class Component extends DCLogic {
     this.initSectionIndex();
     this.initCanvasBad();
     this.initCanvasGood();
+    this.initStars();
+    this.initGlobe();
 
     document.addEventListener('click', (e) => {
       if (this.state.langMenuOpen && !e.target.closest('[data-role="lang-menu"]')) {
@@ -1235,10 +1246,14 @@ class Component extends DCLogic {
     if (this._animGood) cancelAnimationFrame(this._animGood);
     if (this._animBad) cancelAnimationFrame(this._animBad);
     if (this._raf) cancelAnimationFrame(this._raf);
+    if (this._animStars) cancelAnimationFrame(this._animStars);
+    if (this._animGlobe) cancelAnimationFrame(this._animGlobe);
   }
 
-  componentDidUpdate(prevProps, prevState) {
-    if (prevState.lang !== this.state.lang) {
+  componentDidUpdate() {
+    if (this._lastLang === undefined) this._lastLang = this.state.lang;
+    if (this._lastLang !== this.state.lang) {
+      this._lastLang = this.state.lang;
       setTimeout(() => {
         this.initReveal();
         this.initSectionIndex();
@@ -1350,7 +1365,7 @@ class Component extends DCLogic {
       pts.forEach((p) => {
         p.x += p.vx; p.y += p.vy;
         if (p.x > w) { p.x = 0; p.y = Math.random() * h; }
-        ctx.fillStyle = p.isBounce ? 'rgba(220,38,38,0.75)' : 'rgba(120,120,120,0.4)';
+        ctx.fillStyle = p.isBounce ? 'rgba(220,38,38,0.75)' : 'rgba(245,241,239,0.2)';
         ctx.beginPath(); ctx.arc(p.x, p.y, p.rad, 0, Math.PI * 2); ctx.fill();
       });
       this._animBad = requestAnimationFrame(draw);
@@ -1373,7 +1388,7 @@ class Component extends DCLogic {
     const draw = () => {
       ctx.clearRect(0, 0, w, h);
       const filterX = w * 0.5;
-      ctx.strokeStyle = 'rgba(255,255,255,0.12)';
+      ctx.strokeStyle = 'rgba(250,250,249,0.14)';
       ctx.setLineDash([4, 4]);
       ctx.beginPath(); ctx.moveTo(filterX, 0); ctx.lineTo(filterX, h); ctx.stroke();
       ctx.setLineDash([]);
@@ -1381,10 +1396,189 @@ class Component extends DCLogic {
         p.x += p.vx; p.y += p.vy;
         if (p.x > w) { p.x = 0; p.y = Math.random() * h; }
         const passed = p.x > filterX;
-        ctx.fillStyle = passed ? 'rgba(74,222,128,0.85)' : 'rgba(180,180,180,0.45)';
+        ctx.fillStyle = passed ? 'rgba(245,241,239,0.95)' : 'rgba(245,241,239,0.2)';
         ctx.beginPath(); ctx.arc(p.x, p.y, p.rad, 0, Math.PI * 2); ctx.fill();
       });
       this._animGood = requestAnimationFrame(draw);
+    };
+    draw();
+  }
+
+  initStars() {
+    const c = document.querySelector('[data-role="stars"]');
+    if (!c) return;
+    const ctx = c.getContext('2d');
+    const quieto = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    let w, h, dpr, stars;
+    const size = () => {
+      dpr = Math.min(window.devicePixelRatio || 1, 2);
+      w = c.width = window.innerWidth * dpr; h = c.height = window.innerHeight * dpr;
+      const n = Math.round((window.innerWidth * window.innerHeight) / 9000);
+      stars = Array.from({ length: n }, () => ({ x: Math.random() * w, y: Math.random() * h, r: (Math.random() * 0.9 + 0.3) * dpr, a: Math.random() * 0.35 + 0.05, t: Math.random() * Math.PI * 2, v: Math.random() * 0.012 + 0.004 }));
+    };
+    size();
+    window.addEventListener('resize', size);
+    const draw = () => {
+      ctx.clearRect(0, 0, w, h);
+      stars.forEach((st) => {
+        st.t += st.v;
+        const a = quieto ? st.a : st.a * (0.6 + 0.4 * Math.sin(st.t));
+        ctx.fillStyle = 'rgba(245,236,234,' + a.toFixed(3) + ')';
+        ctx.beginPath(); ctx.arc(st.x, st.y, st.r, 0, Math.PI * 2); ctx.fill();
+      });
+      if (!quieto) this._animStars = requestAnimationFrame(draw);
+    };
+    draw();
+  }
+
+  initGlobe() {
+    const cg = document.querySelector('[data-role="globe"]');
+    const cr = document.querySelector('[data-role="routes"]');
+    if (!cg || !cr) return;
+    const quieto = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const RAD = Math.PI / 180;
+    const HUB = [41.39, 2.17]; // Barcelona
+    const CITIES = [[52.52, 13.40], [50.94, 6.96], [48.21, 16.37], [48.86, 2.35], [51.51, -0.13], [45.46, 9.19], [52.37, 4.90], [40.42, -3.70], [47.37, 8.54], [48.14, 11.58], [59.33, 18.07], [38.72, -9.14],
+      [41.90, 12.50], [52.23, 21.01], [50.08, 14.44], [53.35, -6.26], [55.68, 12.57], [47.50, 19.04], [37.98, 23.73], [60.17, 24.94], [53.55, 9.99], [50.85, 4.35]];
+    const vec = (lat, lon) => [Math.cos(lat * RAD) * Math.sin(lon * RAD), Math.sin(lat * RAD), Math.cos(lat * RAD) * Math.cos(lon * RAD)];
+    const slerp = (p, q, t) => {
+      const d = Math.acos(Math.min(1, p[0] * q[0] + p[1] * q[1] + p[2] * q[2])), sn = Math.sin(d) || 1;
+      const k1 = Math.sin((1 - t) * d) / sn, k2 = Math.sin(t * d) / sn;
+      return [p[0] * k1 + q[0] * k2, p[1] * k1 + q[1] * k2, p[2] * k1 + q[2] * k2];
+    };
+    const hub = vec(HUB[0], HUB[1]);
+    const arcs = CITIES.map((c, i) => { const to = vec(c[0], c[1]); return { to, off: (i * 0.37) % 1, d: Math.acos(Math.min(1, hub[0] * to[0] + hub[1] * to[1] + hub[2] * to[2])) }; });
+    const TILT = 40 * RAD; // Europa mirando al frente
+    const RADIO = 0.40;    // radio del globo respecto al lado menor del lienzo
+
+    // ---- WebGL: esfera trazada por píxel sobre un cuadrado, textura NASA Black Marble (dominio público)
+    const gl = cg.getContext('webgl', { premultipliedAlpha: true, alpha: true, antialias: true });
+    let prog = null, uni = {}, texOk = false;
+    if (gl) {
+      const vs = 'attribute vec2 p; varying vec2 v; void main(){ v = p; gl_Position = vec4(p, 0.0, 1.0); }';
+      const fs = [
+        'precision highp float; varying vec2 v; uniform sampler2D tex; uniform float yaw, tilt, rad, aspect, ok;',
+        'void main(){',
+        '  vec2 q = vec2(v.x * aspect, v.y) / rad;',
+        '  float r2 = dot(q, q);',
+        '  vec3 atm = vec3(0.55, 0.04, 0.035);',
+        '  if (r2 > 1.0) {',
+        '    float d = sqrt(r2) - 1.0;',
+        '    float g = exp(-d * 16.0) * 0.32;',
+        '    gl_FragColor = vec4(atm * g, g); return;',
+        '  }',
+        '  float z = sqrt(1.0 - r2);',
+        '  float ct = cos(tilt), st = sin(tilt), cy = cos(yaw), sy = sin(yaw);',
+        '  float y = q.y * ct + z * st; float z1 = -q.y * st + z * ct;',
+        '  float x = q.x * cy - z1 * sy; float zz = q.x * sy + z1 * cy;',
+        '  float lat = asin(clamp(y, -1.0, 1.0)); float lon = atan(x, zz);',
+        '  vec2 uv = vec2((lon + 3.14159265) / 6.2831853, 0.5 - lat / 3.14159265);',
+        '  vec3 c = ok > 0.5 ? texture2D(tex, uv).rgb : vec3(0.05, 0.05, 0.1);',
+        '  float lights = smoothstep(0.16, 0.62, max(c.r, c.g) - c.b * 0.35);',
+        '  float land = smoothstep(0.07, 0.30, c.b) * (1.0 - lights);',
+        '  vec3 col = vec3(0.022, 0.010, 0.012);',
+        '  col += land * vec3(0.13, 0.085, 0.085);',
+        '  col += lights * vec3(0.95, 0.16, 0.10) * 1.25;',
+        '  col += pow(lights, 3.0) * vec3(1.0, 0.72, 0.55) * 0.7;',
+        '  vec3 n = vec3(q, z);',
+        '  float dif = clamp(dot(n, normalize(vec3(-0.45, 0.5, 0.75))), 0.0, 1.0);',
+        '  col *= 0.35 + 0.85 * dif;',
+        '  float fr = pow(1.0 - z, 3.0);',
+        '  col += atm * fr * 0.55;',
+        '  float edge = smoothstep(1.0, 0.985, sqrt(r2));',
+        '  gl_FragColor = vec4(col * edge, edge);',
+        '}'].join('\n');
+      const sh = (t, src) => { const o = gl.createShader(t); gl.shaderSource(o, src); gl.compileShader(o); if (!gl.getShaderParameter(o, gl.COMPILE_STATUS)) { console.warn(gl.getShaderInfoLog(o)); return null; } return o; };
+      const v1 = sh(gl.VERTEX_SHADER, vs), f1 = sh(gl.FRAGMENT_SHADER, fs);
+      if (v1 && f1) {
+        prog = gl.createProgram(); gl.attachShader(prog, v1); gl.attachShader(prog, f1); gl.linkProgram(prog);
+        gl.useProgram(prog);
+        const buf = gl.createBuffer(); gl.bindBuffer(gl.ARRAY_BUFFER, buf);
+        gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, 1, -1, -1, 1, 1, 1]), gl.STATIC_DRAW);
+        const loc = gl.getAttribLocation(prog, 'p'); gl.enableVertexAttribArray(loc); gl.vertexAttribPointer(loc, 2, gl.FLOAT, false, 0, 0);
+        ['yaw', 'tilt', 'rad', 'aspect', 'ok'].forEach((k) => { uni[k] = gl.getUniformLocation(prog, k); });
+        const tex = gl.createTexture(); gl.bindTexture(gl.TEXTURE_2D, tex);
+        gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, 1, 1, 0, gl.RGBA, gl.UNSIGNED_BYTE, new Uint8Array([10, 10, 20, 255]));
+        const img = new Image();
+        img.onload = () => {
+          gl.bindTexture(gl.TEXTURE_2D, tex);
+          gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, img);
+          gl.generateMipmap(gl.TEXTURE_2D);
+          gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR_MIPMAP_LINEAR);
+          gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
+          texOk = true; if (quieto) draw(0);
+        };
+        img.src = '/assets/globe/tierra-noche.jpg';
+        gl.enable(gl.BLEND); gl.blendFunc(gl.ONE, gl.ONE_MINUS_SRC_ALPHA);
+      } else { prog = null; }
+    }
+
+    const ctx = cr.getContext('2d');
+    let w, h, dpr, R, cx, cy;
+    const size = () => {
+      dpr = Math.min(window.devicePixelRatio || 1, 2);
+      w = cg.width = cr.width = Math.round(cg.clientWidth * dpr);
+      h = cg.height = cr.height = Math.round(cg.clientHeight * dpr);
+      R = Math.min(w, h) * RADIO; cx = w / 2; cy = h / 2;
+      if (gl) gl.viewport(0, 0, w, h);
+    };
+    size();
+    window.addEventListener('resize', size);
+
+    const t0 = performance.now();
+    const draw = (now) => {
+      const t = ((now || t0) - t0) / 1000;
+      const yaw = -(8 + Math.sin(t * 0.08) * 16) * RAD;
+      // globo
+      if (gl && prog) {
+        gl.clearColor(0, 0, 0, 0); gl.clear(gl.COLOR_BUFFER_BIT);
+        gl.uniform1f(uni.yaw, yaw); gl.uniform1f(uni.tilt, TILT);
+        gl.uniform1f(uni.rad, (R * 2) / h); gl.uniform1f(uni.aspect, w / h); gl.uniform1f(uni.ok, texOk ? 1 : 0);
+        gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+      }
+      // rutas desde Barcelona (misma rotación que el globo)
+      const cyw = Math.cos(yaw), syw = Math.sin(yaw), ct = Math.cos(TILT), st = Math.sin(TILT);
+      const rot = (p) => {
+        const x1 = p[0] * cyw + p[2] * syw, z1 = -p[0] * syw + p[2] * cyw;
+        const y2 = p[1] * ct - z1 * st, z2 = p[1] * st + z1 * ct;
+        return [cx + x1 * R, cy - y2 * R, z2];
+      };
+      ctx.clearRect(0, 0, w, h);
+      ctx.lineCap = 'round';
+      arcs.forEach((a) => {
+        const seg = 48, pos = [];
+        for (let k = 0; k <= seg; k++) {
+          const f = k / seg, v = slerp(hub, a.to, f), lift = 1 + Math.sin(f * Math.PI) * (0.03 + a.d * 0.42);
+          pos.push(rot([v[0] * lift, v[1] * lift, v[2] * lift]));
+        }
+        const f = quieto ? 1 : Math.min(1, ((t * 0.22 + a.off) % 1.6)); // el arco se dibuja y luego descansa
+        const hasta = Math.floor(f * seg);
+        for (let k = 0; k < hasta; k++) {
+          const p1 = pos[k], p2 = pos[k + 1];
+          if (p1[2] < 0 || p2[2] < 0) continue;
+          const al = 0.18 + 0.55 * (k / seg);
+          ctx.strokeStyle = 'rgba(255,120,110,' + al.toFixed(3) + ')';
+          ctx.lineWidth = 1.1 * dpr;
+          ctx.beginPath(); ctx.moveTo(p1[0], p1[1]); ctx.lineTo(p2[0], p2[1]); ctx.stroke();
+        }
+        const head = pos[Math.max(0, hasta)];
+        if (head && head[2] > 0 && f < 1) {
+          ctx.fillStyle = 'rgba(255,225,215,0.95)';
+          ctx.beginPath(); ctx.arc(head[0], head[1], 1.7 * dpr, 0, Math.PI * 2); ctx.fill();
+        }
+        const end = pos[seg];
+        if (f >= 1 && end[2] > 0) {
+          ctx.fillStyle = 'rgba(255,90,80,0.35)'; ctx.beginPath(); ctx.arc(end[0], end[1], 4 * dpr, 0, Math.PI * 2); ctx.fill();
+          ctx.fillStyle = 'rgba(255,230,220,0.95)'; ctx.beginPath(); ctx.arc(end[0], end[1], 1.5 * dpr, 0, Math.PI * 2); ctx.fill();
+        }
+      });
+      const hb = rot(hub);
+      const pulse = quieto ? 0.5 : (t * 0.5) % 1;
+      ctx.strokeStyle = 'rgba(220,38,38,' + (0.8 * (1 - pulse)).toFixed(3) + ')';
+      ctx.lineWidth = 1.3 * dpr; ctx.beginPath(); ctx.arc(hb[0], hb[1], (4 + pulse * 18) * dpr, 0, Math.PI * 2); ctx.stroke();
+      ctx.fillStyle = 'rgb(220,38,38)'; ctx.beginPath(); ctx.arc(hb[0], hb[1], 3.2 * dpr, 0, Math.PI * 2); ctx.fill();
+      ctx.fillStyle = '#fff'; ctx.beginPath(); ctx.arc(hb[0], hb[1], 1.2 * dpr, 0, Math.PI * 2); ctx.fill();
+      if (!quieto) this._animGlobe = requestAnimationFrame(draw);
     };
     draw();
   }
@@ -1403,118 +1597,123 @@ class Component extends DCLogic {
 
     const isMobile = typeof window !== 'undefined' ? window.innerWidth < 768 : false;
 
+    const W = isMobile ? '20px' : '48px';
+    const isNarrow = typeof window !== 'undefined' ? window.innerWidth < 1100 : false;
+    const CARD = { background: 'linear-gradient(180deg, rgba(245,241,239,0.035), rgba(245,241,239,0.012))', border: '1px solid ' + LINE, borderRadius: '24px' };
+    const TITLE = { fontFamily: FONT_SANS, fontWeight: 400, letterSpacing: '-0.045em', color: INK };  // la 2.ª línea va en rojo (--ink-2)
+    const MONO_S = { fontFamily: FONT_MONO, fontSize: '11px', letterSpacing: '0.08em', textTransform: 'uppercase' };
     const styles = {
-      root: { background: BG, color: INK, minHeight: '100vh', position: 'relative', overflowX: 'hidden', fontFamily: FONT_SANS },
-      filmGrain: { position: 'fixed', inset: 0, pointerEvents: 'none', zIndex: 999, opacity: 0.04, backgroundImage: 'radial-gradient(circle at 50% 50%, #fff 1px, transparent 1px)', backgroundSize: '3px 3px' },
-      cursor: { position: 'fixed', top: 0, left: 0, width: '8px', height: '8px', borderRadius: '50%', background: INK, pointerEvents: 'none', zIndex: 1000, mixBlendMode: 'difference', transform: 'translate(-50%, -50%)', transition: 'width 0.2s cubic-bezier(0.2,0.8,0.2,1), height 0.2s cubic-bezier(0.2,0.8,0.2,1), background 0.2s ease', display: isMobile ? 'none' : 'flex', alignItems: 'center', justifyContent: 'center' },
-      cursorLabel: { color: BG, fontFamily: FONT_MONO, fontSize: '9px', fontWeight: 600, letterSpacing: '0.12em', textTransform: 'uppercase', opacity: 0, transition: 'opacity 0.2s ease', pointerEvents: 'none' },
+      root: { background: BG, color: INK, minHeight: '100vh', position: 'relative', overflowX: 'hidden', fontFamily: FONT_SANS, isolation: 'isolate' },
+      stars: { position: 'fixed', inset: 0, width: '100%', height: '100%', pointerEvents: 'none', zIndex: -1 },
+      filmGrain: { display: 'none' },
+      cursor: { display: 'none' },
+      cursorLabel: { display: 'none' },
       scrollProgress: { position: 'fixed', top: 0, left: 0, height: '2px', background: ACCENT, zIndex: 1001, width: '0%' },
-      gradientWash: { position: 'fixed', inset: 0, pointerEvents: 'none', zIndex: 0, background: 'radial-gradient(circle at 20% 18%, rgba(204,0,0,0.18), transparent 55%), radial-gradient(circle at 80% 65%, rgba(160,10,20,0.14), transparent 60%), radial-gradient(circle at 50% 85%, rgba(220,20,30,0.12), transparent 50%)', animation: 'la27-wash 16s ease-in-out infinite alternate' },
-      bgArt: { position: 'fixed', inset: 0, pointerEvents: 'none', zIndex: 0, overflow: 'hidden' },
-      bgShapeArch: { position: 'absolute', top: '-60px', right: '-40px', width: '380px', height: '620px', color: 'rgba(255,255,255,0.025)', transform: 'rotate(-4deg)', animation: 'la27-driftA 26s ease-in-out infinite' },
-      bgShapeGuitar: { position: 'absolute', top: '38%', left: '-80px', width: '480px', height: '240px', color: 'rgba(255,255,255,0.02)', transform: 'rotate(8deg)', animation: 'la27-driftB 30s ease-in-out infinite' },
-      bgShapeSail: { position: 'absolute', bottom: '8%', right: '-40px', width: '400px', height: '480px', color: 'rgba(255,255,255,0.022)', transform: 'rotate(-6deg)', animation: 'la27-driftC 28s ease-in-out infinite' },
-      bgShapeEixample: { position: 'absolute', top: '22%', right: '8%', width: '360px', height: '360px', color: 'rgba(255,255,255,0.018)', transform: 'rotate(12deg)', animation: 'la27-driftD 34s ease-in-out infinite' },
-      bgShapeMosaicDots: { position: 'absolute', bottom: '15%', left: '6%', width: '320px', height: '320px', color: 'rgba(255,255,255,0.02)', transform: 'rotate(-8deg)', animation: 'la27-driftE 24s ease-in-out infinite' },
+      gradientWash: { position: 'fixed', inset: 0, pointerEvents: 'none', zIndex: -1, background: 'radial-gradient(ellipse 55% 45% at 75% 18%, rgba(160,12,16,0.16), transparent 70%), radial-gradient(ellipse 50% 40% at 10% 95%, rgba(120,8,12,0.10), transparent 70%)' },
+      bgArt: { display: 'none' },
+      bgShapeArch: {}, bgShapeGuitar: {}, bgShapeSail: {}, bgShapeEixample: {}, bgShapeMosaicDots: {},
 
-      nav: { position: 'fixed', top: 0, left: 0, right: 0, height: isMobile ? '64px' : '76px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: isMobile ? '0 20px' : '0 48px', zIndex: 100, backdropFilter: 'blur(24px) saturate(180%)', background: 'rgba(7,3,4,0.75)', borderBottom: '1px solid rgba(255,255,255,0.08)', boxShadow: '0 4px 24px rgba(0,0,0,0.4)' },
-      navBrand: { fontFamily: FONT_DISPLAY, fontSize: '24px', letterSpacing: '-0.02em', color: INK, textDecoration: 'none', display: 'inline-flex', alignItems: 'baseline', gap: '8px' },
-      navLinks: { display: isMobile ? 'none' : 'flex', gap: '28px', alignItems: 'center' },
-      navLink: { color: INK_DIM, textDecoration: 'none', fontFamily: FONT_MONO, fontSize: '11px', letterSpacing: '0.14em', textTransform: 'uppercase', transition: 'color 0.2s ease' },
-      navRight: { display: 'flex', alignItems: 'center', gap: isMobile ? '12px' : '20px' },
-      soundBtn: { appearance: 'none', background: 'transparent', border: '1px solid ' + LINE, color: INK_DIM, fontFamily: FONT_MONO, fontSize: '10px', letterSpacing: '0.12em', padding: '7px 12px', borderRadius: '999px', cursor: 'pointer' },
-      langBtn: { appearance: 'none', background: 'transparent', border: '1px solid ' + LINE, color: INK, fontFamily: FONT_MONO, fontSize: '11px', letterSpacing: '0.12em', padding: '7px 12px', borderRadius: '999px', cursor: 'pointer', display: 'inline-flex', alignItems: 'center', gap: '6px' },
-      langMenu: { position: 'absolute', top: '100%', right: 0, marginTop: '8px', background: 'rgba(10,10,10,0.95)', backdropFilter: 'blur(16px)', border: '1px solid ' + LINE, borderRadius: '6px', listStyle: 'none', padding: '6px 0', minWidth: '140px', zIndex: 200, boxShadow: '0 12px 32px rgba(0,0,0,0.6)' },
-      langMenuLink: { display: 'block', padding: '8px 16px', color: INK, textDecoration: 'none', fontFamily: FONT_MONO, fontSize: '11px', letterSpacing: '0.08em', textTransform: 'uppercase' },
-      navMeta: { fontFamily: FONT_MONO, fontSize: '11px', letterSpacing: '0.12em', color: INK_MUTE, display: isMobile ? 'none' : 'inline-flex', alignItems: 'center', gap: '8px' },
-      navDot: { width: '6px', height: '6px', borderRadius: '50%', background: ACCENT, display: 'inline-block' },
+      nav: { position: 'fixed', top: 0, left: 0, right: 0, height: isMobile ? '60px' : '68px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '0 ' + W, zIndex: 100, backdropFilter: 'blur(18px) saturate(160%)', WebkitBackdropFilter: 'blur(18px) saturate(160%)', background: 'rgba(7,3,4,0.72)', borderBottom: '1px solid ' + LINE },
+      navBrand: { fontFamily: FONT_SANS, fontSize: '19px', fontWeight: 600, letterSpacing: '-0.03em', color: INK, textDecoration: 'none', display: 'inline-flex', alignItems: 'baseline', gap: '6px', whiteSpace: 'nowrap' },
+      navLinks: { display: isNarrow ? 'none' : 'flex', gap: '28px', alignItems: 'center', whiteSpace: 'nowrap' },
+      navLink: { color: INK_DIM, textDecoration: 'none', fontFamily: FONT_SANS, fontSize: '14px', letterSpacing: '-0.01em', whiteSpace: 'nowrap' },
+      navRight: { display: 'flex', alignItems: 'center', gap: isMobile ? '8px' : '12px' },
+      soundBtn: { appearance: 'none', background: 'transparent', border: '1px solid ' + LINE, color: INK_DIM, fontFamily: FONT_MONO, fontSize: '10px', letterSpacing: '0.08em', padding: '8px 12px', borderRadius: '12px', cursor: 'pointer', whiteSpace: 'nowrap', display: isMobile ? 'none' : 'inline-block' },
+      langBtn: { appearance: 'none', background: 'transparent', border: '1px solid ' + LINE, color: INK, fontFamily: FONT_MONO, fontSize: '11px', letterSpacing: '0.08em', padding: '8px 12px', borderRadius: '12px', cursor: 'pointer', display: 'inline-flex', alignItems: 'center', gap: '6px' },
+      langMenu: { position: 'absolute', top: '100%', right: 0, marginTop: '10px', background: 'rgba(18,10,11,0.97)', backdropFilter: 'blur(16px)', border: '1px solid ' + LINE, borderRadius: '16px', listStyle: 'none', padding: '6px', minWidth: '160px', zIndex: 200, boxShadow: '0 16px 40px rgba(0,0,0,0.6)' },
+      langMenuLink: { display: 'block', padding: '9px 12px', color: INK, textDecoration: 'none', fontFamily: FONT_SANS, fontSize: '14px', borderRadius: '10px' },
+      navMeta: { fontFamily: FONT_MONO, fontSize: '11px', letterSpacing: '0.06em', color: INK_MUTE, display: isNarrow ? 'none' : 'inline-flex', alignItems: 'center', gap: '8px', whiteSpace: 'nowrap' },
+      navDot: { width: '6px', height: '6px', borderRadius: '50%', background: ACCENT, display: 'inline-block', boxShadow: '0 0 10px ' + ACCENT },
 
-      sectionIndex: { position: 'fixed', right: '32px', top: '50%', transform: 'translateY(-50%)', display: isMobile ? 'none' : 'flex', flexDirection: 'column', gap: '14px', zIndex: 90 },
-      indexLink: { display: 'flex', alignItems: 'center', gap: '10px', color: 'inherit', textDecoration: 'none', fontFamily: FONT_MONO, fontSize: '10px', letterSpacing: '0.14em', textTransform: 'uppercase', opacity: 0.45, transition: 'opacity 0.3s ease' },
-      indexNum: { width: '22px' },
+      sectionIndex: { display: 'none' },
+      indexLink: {}, indexNum: {},
 
-      hero: { position: 'relative', minHeight: '100vh', display: 'flex', flexDirection: 'column', justifyContent: 'center', padding: isMobile ? '150px 20px 60px' : '170px 48px 60px' },
-      heroMeta: { position: 'absolute', top: isMobile ? '76px' : '96px', left: isMobile ? '20px' : '48px', right: isMobile ? '20px' : '48px', display: 'flex', justifyContent: 'space-between', fontFamily: FONT_MONO, fontSize: '11px', letterSpacing: '0.14em', textTransform: 'uppercase', color: INK_DIM },
-      heroBadge: { fontFamily: FONT_MONO, fontSize: '11px', letterSpacing: '0.14em', textTransform: 'uppercase', color: ACCENT, marginBottom: '18px', border: '1px solid ' + LINE, display: 'inline-flex', padding: '8px 14px', borderRadius: '999px', width: 'fit-content' },
-      heroTitle: { fontFamily: FONT_DISPLAY, fontWeight: 400, fontSize: isMobile ? 'clamp(42px, 12vw, 68px)' : 'clamp(56px, 9.5vw, 140px)', lineHeight: 0.98, letterSpacing: '-0.02em', margin: '0 0 0.15em' },
-      heroSub: { marginTop: isMobile ? '8px' : '20px', display: 'flex', flexDirection: isMobile ? 'column' : 'row', justifyContent: 'space-between', alignItems: isMobile ? 'flex-start' : 'flex-end', gap: '32px' },
-      heroSubText: { fontFamily: FONT_MONO, fontSize: '12px', letterSpacing: '0.1em', textTransform: 'uppercase', color: INK_DIM, maxWidth: '440px', lineHeight: 1.6, margin: 0 },
-      scrollCue: { display: 'inline-flex', alignItems: 'center', gap: '12px', color: INK, textDecoration: 'none', fontFamily: FONT_MONO, fontSize: '11px', letterSpacing: '0.14em', textTransform: 'uppercase' },
-      scrollArrow: { width: '24px', height: '24px', border: '1px solid ' + INK, borderRadius: '50%', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', animation: 'la27-bounce 2s ease-in-out infinite' },
-      heroBtns: { marginTop: '32px', display: 'flex', gap: '16px', flexWrap: 'wrap' },
-      heroPills: { display: 'flex', gap: '10px', flexWrap: 'wrap', marginTop: '28px', fontFamily: FONT_MONO, fontSize: '10px', letterSpacing: '0.1em', textTransform: 'uppercase' },
-      heroPill: { background: 'rgba(255,255,255,0.03)', backdropFilter: 'blur(16px)', border: '1px solid rgba(255,255,255,0.12)', boxShadow: '0 4px 16px rgba(0,0,0,0.35), inset 0 1px 0 rgba(255,255,255,0.18)', borderRadius: '999px', padding: '8px 16px', color: INK_DIM },
+      hero: { position: 'relative', isolation: 'isolate', minHeight: isNarrow ? 'auto' : '100vh', display: 'flex', flexDirection: 'column', justifyContent: 'center', padding: isMobile ? '330px 20px 64px' : (isNarrow ? '520px 48px 96px' : '140px 48px 80px'), maxWidth: '1320px', margin: '0 auto', boxSizing: 'border-box' },
+      globe: isNarrow
+        ? { position: 'absolute', zIndex: -1, top: isMobile ? '56px' : '80px', left: '50%', transform: 'translateX(-50%)', width: isMobile ? '380px' : '600px', height: isMobile ? '320px' : '460px', pointerEvents: 'none' }
+        : { position: 'absolute', zIndex: -1, top: '50%', right: '-2%', transform: 'translateY(-47%)', width: '58%', height: '760px', pointerEvents: 'none' },
+      heroMeta: { position: 'absolute', top: isMobile ? '76px' : '96px', left: W, right: W, display: isMobile ? 'none' : 'flex', justifyContent: 'space-between', ...MONO_S, color: INK_MUTE },
+      heroBadge: { fontFamily: FONT_SANS, fontSize: '13px', color: INK_DIM, marginBottom: '24px', border: '1px solid rgba(220,38,38,0.35)', background: 'rgba(220,38,38,0.07)', display: 'inline-flex', alignItems: 'center', padding: '7px 14px', borderRadius: '999px', width: 'fit-content' },
+      heroTitle: { ...TITLE, fontSize: isMobile ? 'clamp(40px, 11vw, 56px)' : 'clamp(52px, 6vw, 88px)', lineHeight: 1.02, margin: '0 0 24px', maxWidth: isMobile ? 'none' : '620px' },
+      heroSub: { display: 'flex', flexDirection: 'column', alignItems: 'flex-start', gap: '28px', maxWidth: '520px' },
+      heroSubText: { fontFamily: FONT_SANS, fontSize: isMobile ? '17px' : '19px', lineHeight: 1.5, letterSpacing: '-0.01em', color: 'rgba(245,241,239,0.86)', margin: 0 },
+      scrollCue: { order: 2, display: 'inline-flex', alignItems: 'center', gap: '10px', color: INK, textDecoration: 'none', fontFamily: FONT_SANS, fontSize: '15px', fontWeight: 500, padding: '13px 20px', border: '1px solid rgba(245,241,239,0.18)', borderRadius: '16px' },
+      scrollArrow: { display: 'inline-flex', alignItems: 'center', justifyContent: 'center', opacity: 0.8 },
+      heroBtns: { marginTop: '14px', display: 'flex', gap: '12px', flexWrap: 'wrap' },
+      heroPills: { display: 'flex', gap: '8px', flexWrap: 'wrap', marginTop: '40px' },
+      heroPill: { fontFamily: FONT_SANS, fontSize: '13px', color: INK_DIM, border: '1px solid ' + LINE, borderRadius: '999px', padding: '6px 12px' },
 
-      trust: { borderTop: '1px solid ' + LINE, borderBottom: '1px solid ' + LINE, padding: '24px 0', overflow: 'hidden' },
-      trustInner: { display: 'flex', whiteSpace: 'nowrap', animation: 'la27-marquee 26s linear infinite' },
-      trustSpan: { display: 'inline-flex', alignItems: 'center', fontFamily: FONT_DISPLAY, fontStyle: 'italic', fontSize: isMobile ? '20px' : '30px', color: INK_MUTE },
-      trustWord: { padding: '0 40px' },
+      trust: { borderTop: '1px solid ' + LINE, borderBottom: '1px solid ' + LINE, padding: isMobile ? '22px 0' : '30px 0', overflow: 'hidden', WebkitMaskImage: 'linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent)', maskImage: 'linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent)' },
+      trustInner: { display: 'flex', whiteSpace: 'nowrap', animation: 'la27-marquee 40s linear infinite' },
+      trustSpan: { display: 'inline-flex', alignItems: 'center', fontFamily: FONT_SANS, fontSize: isMobile ? '18px' : '22px', letterSpacing: '-0.03em', color: INK_MUTE },
+      trustWord: { padding: isMobile ? '0 24px' : '0 40px' },
       trustDot: { display: 'inline-block', width: '4px', height: '4px', borderRadius: '50%', background: ACCENT },
 
-      section: { position: 'relative', padding: isMobile ? '0 20px' : '0 96px 0 48px' },
-      sectionHeader: { display: 'flex', flexDirection: isMobile ? 'column' : 'row', justifyContent: 'space-between', alignItems: isMobile ? 'flex-start' : 'flex-end', gap: '12px', padding: isMobile ? '56px 0 24px' : '96px 0 40px', borderBottom: '1px solid ' + LINE, marginBottom: '32px' },
-      eyebrow: { fontFamily: FONT_MONO, fontSize: '11px', letterSpacing: '0.18em', textTransform: 'uppercase', color: INK_DIM, display: 'flex', alignItems: 'center', gap: '12px' },
-      sectionTitle: { fontFamily: FONT_DISPLAY, fontSize: isMobile ? 'clamp(36px, 10vw, 56px)' : 'clamp(44px, 6.5vw, 96px)', lineHeight: 0.98, letterSpacing: '-0.02em', fontWeight: 400, margin: 0 },
-      exampleNote: { fontFamily: FONT_MONO, fontSize: '13px', letterSpacing: '0.05em', color: ACCENT, marginBottom: '32px' },
+      section: { position: 'relative', padding: '0 ' + W, maxWidth: '1320px', margin: '0 auto', boxSizing: 'border-box' },
+      sectionHeader: { display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center', gap: '20px', padding: isMobile ? '88px 0 32px' : '168px 0 64px' },
+      eyebrow: { ...MONO_S, color: INK_MUTE, display: 'flex', alignItems: 'center', gap: '10px' },
+      sectionTitle: { ...TITLE, fontSize: isMobile ? 'clamp(34px, 9.5vw, 48px)' : 'clamp(44px, 4.8vw, 72px)', lineHeight: 1.04, margin: 0 },
+      exampleNote: { fontFamily: FONT_SANS, fontSize: '16px', color: INK_DIM, margin: '0 auto 40px', maxWidth: '620px', lineHeight: 1.6, textAlign: 'center' },
 
-      compareGrid: { display: 'grid', gridTemplateColumns: isMobile ? '1fr' : '1fr 1fr', gap: isMobile ? '20px' : '24px', marginBottom: isMobile ? '8px' : '12px' },
-      flowWrap: { position: 'relative', border: '1px solid rgba(255,255,255,0.18)', borderRadius: '20px', background: 'rgba(255,255,255,0.035)', backdropFilter: 'blur(24px) saturate(180%)', boxShadow: '0 20px 48px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.35), inset 0 -1px 0 rgba(220,38,38,0.15)', padding: isMobile ? '18px 14px 10px' : '24px 24px 14px' },
+      compareGrid: { display: 'grid', gridTemplateColumns: isMobile ? '1fr' : '1fr 1fr', gap: '16px', marginBottom: '20px' },
+      flowWrap: { ...CARD, position: 'relative', padding: isMobile ? '20px 16px 12px' : '28px 28px 16px' },
       flowCanvasHolder: { position: 'relative' },
       flowCanvas: { display: 'block', width: '100%', height: isMobile ? '150px' : '220px' },
-      flowLabels: { display: 'flex', justifyContent: 'space-between', fontFamily: FONT_MONO, fontSize: isMobile ? '9px' : '10px', letterSpacing: '0.08em', textTransform: 'uppercase', color: INK_DIM, paddingTop: '10px', borderTop: '1px solid ' + LINE, gap: '6px' },
+      flowLabels: { display: 'flex', justifyContent: 'space-between', ...MONO_S, fontSize: isMobile ? '9px' : '10px', color: INK_MUTE, paddingTop: '12px', borderTop: '1px solid ' + LINE, gap: '6px' },
       flowLabelLeft: { flex: 1 }, flowLabelMid: { flex: 1.4, textAlign: 'center', color: ACCENT }, flowLabelMidBad: { flex: 1.4, textAlign: 'center', color: INK_MUTE }, flowLabelRight: { flex: 1, textAlign: 'right' },
-      flowPanelLabel: { fontFamily: FONT_MONO, fontSize: isMobile ? '11px' : '12px', letterSpacing: '0.1em', textTransform: 'uppercase', marginBottom: '10px', fontWeight: 600 },
+      flowPanelLabel: { fontFamily: FONT_SANS, fontSize: '15px', fontWeight: 500, letterSpacing: '-0.01em', marginBottom: '12px' },
       flowPanelLabelBad: { color: INK_MUTE },
-      flowPanelLabelGood: { color: ACCENT },
-      contactChip: { position: 'absolute', bottom: isMobile ? '14px' : '18px', right: isMobile ? '8px' : '16px', display: 'flex', alignItems: 'center', gap: '8px', background: 'rgba(2,2,2,0.85)', border: '1px solid ' + LINE, borderRadius: '999px', padding: isMobile ? '6px 10px' : '8px 14px', fontFamily: FONT_MONO, fontSize: isMobile ? '9px' : '10.5px', letterSpacing: '0.02em', color: INK, maxWidth: isMobile ? '160px' : '220px', animation: 'la27-chipfade 3.2s ease-in-out infinite' },
-      contactChipDot: { width: '6px', height: '6px', borderRadius: '50%', background: 'oklch(0.7 0.15 145)', flexShrink: 0 },
-      processCaptions: { display: 'grid', gridTemplateColumns: isMobile ? '1fr' : 'repeat(3, 1fr)', gap: isMobile ? '10px' : '24px', marginBottom: isMobile ? '56px' : '100px' },
-      processCaption: { display: 'flex', alignItems: 'center', gap: '12px' },
-      processCaptionNum: { fontFamily: FONT_DISPLAY, fontStyle: 'italic', fontSize: '22px', color: ACCENT },
-      processCaptionText: { fontFamily: FONT_MONO, fontSize: '13px', color: INK, letterSpacing: '0.02em' },
+      flowPanelLabelGood: { color: INK },
+      contactChip: { position: 'absolute', bottom: isMobile ? '12px' : '16px', right: isMobile ? '8px' : '14px', display: 'flex', alignItems: 'center', gap: '8px', background: 'rgba(14,8,9,0.92)', border: '1px solid ' + LINE, borderRadius: '12px', padding: isMobile ? '6px 10px' : '8px 12px', fontFamily: FONT_SANS, fontSize: isMobile ? '11px' : '12.5px', color: INK, maxWidth: isMobile ? '170px' : '240px', animation: 'la27-chipfade 3.2s ease-in-out infinite' },
+      contactChipDot: { width: '6px', height: '6px', borderRadius: '50%', background: ACCENT, boxShadow: '0 0 8px ' + ACCENT, flexShrink: 0 },
+      processCaptions: { display: 'grid', gridTemplateColumns: isMobile ? '1fr' : 'repeat(3, 1fr)', gap: isMobile ? '12px' : '16px', marginBottom: '0' },
+      processCaption: { display: 'flex', alignItems: 'center', gap: '14px', padding: '18px 0', borderTop: '1px solid ' + LINE },
+      processCaptionNum: { fontFamily: FONT_MONO, fontSize: '12px', color: ACCENT },
+      processCaptionText: { fontFamily: FONT_SANS, fontSize: '16px', letterSpacing: '-0.015em', color: INK },
 
-      capabilityTiles: { display: 'grid', gridTemplateColumns: isMobile ? '1fr' : 'repeat(3, 1fr)', gap: '16px', marginBottom: isMobile ? '64px' : '120px' },
-      capabilityTile: { background: 'rgba(255,255,255,0.04)', backdropFilter: 'blur(24px) saturate(180%)', border: '1px solid rgba(255,255,255,0.18)', borderRadius: '20px', boxShadow: '0 20px 48px rgba(0,0,0,0.55), inset 0 1px 0 rgba(255,255,255,0.35), inset 0 -1px 0 rgba(220,38,38,0.15)', padding: isMobile ? '28px 20px' : '34px 28px' },
-      capabilityTag: { display: 'inline-block', fontFamily: FONT_MONO, fontSize: '10px', letterSpacing: '0.1em', color: ACCENT, border: '1px solid rgba(220,38,38,0.4)', borderRadius: '999px', padding: '3px 10px', marginBottom: '12px' },
-      capabilityTitle: { fontFamily: FONT_DISPLAY, fontSize: '21px', marginBottom: '10px', color: INK },
-      capabilityDesc: { fontFamily: FONT_MONO, fontSize: '13px', color: INK_DIM, lineHeight: 1.6, margin: 0 },
+      capabilityTiles: { display: 'grid', gridTemplateColumns: isMobile ? '1fr' : (isNarrow ? 'repeat(2, 1fr)' : 'repeat(3, 1fr)'), gap: '16px' },
+      capabilityTile: { ...CARD, padding: isMobile ? '28px 22px' : '36px 32px', minHeight: isMobile ? 'auto' : '240px' },
+      capabilityTag: { display: 'inline-block', fontFamily: FONT_MONO, fontSize: '10px', letterSpacing: '0.08em', textTransform: 'uppercase', color: ACCENT, marginBottom: '28px' },
+      capabilityTitle: { fontFamily: FONT_SANS, fontSize: '22px', fontWeight: 500, letterSpacing: '-0.03em', lineHeight: 1.2, marginBottom: '12px', color: INK },
+      capabilityDesc: { fontFamily: FONT_SANS, fontSize: '15px', color: INK_DIM, lineHeight: 1.6, margin: 0 },
 
-      whyLede: { maxWidth: '900px', margin: isMobile ? '0 0 56px' : '0 auto 96px', fontFamily: FONT_DISPLAY, fontSize: isMobile ? '20px' : 'clamp(26px, 2.8vw, 40px)', lineHeight: 1.3, letterSpacing: '-0.01em', color: INK, textAlign: isMobile ? 'left' : 'center' },
-      pillarsGrid: { display: 'grid', gridTemplateColumns: isMobile ? '1fr' : 'repeat(4, 1fr)', gap: '16px', marginBottom: isMobile ? '64px' : '120px' },
-      pillarCard: { background: 'rgba(255,255,255,0.04)', backdropFilter: 'blur(24px) saturate(180%)', border: '1px solid rgba(255,255,255,0.18)', borderRadius: '20px', boxShadow: '0 20px 48px rgba(0,0,0,0.55), inset 0 1px 0 rgba(255,255,255,0.35), inset 0 -1px 0 rgba(220,38,38,0.15)', padding: isMobile ? '40px 24px' : '48px 32px 56px', display: 'flex', flexDirection: 'column', gap: '18px', minHeight: isMobile ? 'auto' : '320px' },
-      pillarNum: { fontFamily: FONT_DISPLAY, fontStyle: 'italic', fontSize: isMobile ? '56px' : '72px', lineHeight: 0.9, color: ACCENT },
-      pillarTitle: { fontFamily: FONT_DISPLAY, fontSize: isMobile ? 'clamp(24px,6vw,30px)' : 'clamp(26px, 2.2vw, 32px)', lineHeight: 1.05, letterSpacing: '-0.015em', margin: 0 },
-      pillarBody: { color: INK_DIM, fontSize: '14px', lineHeight: 1.65, marginTop: 'auto' },
+      whyLede: { maxWidth: '900px', margin: isMobile ? '0 0 48px' : '0 auto 72px', fontFamily: FONT_SANS, fontWeight: 400, fontSize: isMobile ? '21px' : 'clamp(24px, 2.3vw, 32px)', lineHeight: 1.35, letterSpacing: '-0.03em', color: INK_DIM, textAlign: 'center' },
+      pillarsGrid: { display: 'grid', gridTemplateColumns: isMobile ? '1fr' : (isNarrow ? 'repeat(2, 1fr)' : 'repeat(4, 1fr)'), gap: '16px' },
+      pillarCard: { ...CARD, padding: isMobile ? '28px 22px' : '32px 28px', display: 'flex', flexDirection: 'column', gap: '14px', minHeight: isMobile ? 'auto' : '280px' },
+      pillarNum: { fontFamily: FONT_MONO, fontSize: '12px', color: ACCENT, marginBottom: 'auto', paddingBottom: '40px' },
+      pillarTitle: { fontFamily: FONT_SANS, fontSize: '22px', fontWeight: 500, lineHeight: 1.2, letterSpacing: '-0.03em', margin: 0 },
+      pillarBody: { color: INK_DIM, fontSize: '15px', lineHeight: 1.6, margin: 0 },
 
-      studioGrid: { display: 'grid', gridTemplateColumns: isMobile ? '1fr' : '5fr 7fr', gap: isMobile ? '32px' : '80px', paddingBottom: isMobile ? '64px' : '120px' },
-      studioPortrait: { position: 'relative', aspectRatio: isMobile ? '3/2' : '4/5', background: '#0a0506', border: '1px solid rgba(255,255,255,0.18)', boxShadow: '0 24px 56px rgba(0,0,0,0.65), inset 0 1px 0 rgba(255,255,255,0.35)', borderRadius: '20px', overflow: 'hidden' },
-      studioQuote: { fontFamily: FONT_DISPLAY, fontSize: isMobile ? 'clamp(22px,5.5vw,30px)' : 'clamp(26px, 2.6vw, 38px)', lineHeight: 1.25, letterSpacing: '-0.01em', marginBottom: '36px' },
-      studioBio: { color: INK_DIM, fontSize: '16px', lineHeight: 1.7, maxWidth: '560px', marginBottom: '36px' },
-      studioSignature: { display: 'flex', flexDirection: isMobile ? 'column' : 'row', alignItems: isMobile ? 'flex-start' : 'center', gap: isMobile ? '20px' : 0, justifyContent: 'space-between', paddingTop: '28px', borderTop: '1px solid ' + LINE, maxWidth: '560px' },
-      founderName: { fontFamily: FONT_DISPLAY, fontStyle: 'italic', fontSize: '22px' },
-      studioRole: { fontFamily: FONT_MONO, fontSize: '11px', letterSpacing: '0.14em', textTransform: 'uppercase', color: INK_DIM, marginTop: '4px' },
-      linkedinBtn: { fontFamily: FONT_MONO, fontSize: '11px', letterSpacing: '0.14em', textTransform: 'uppercase', color: INK, textDecoration: 'none', padding: '10px 16px', border: '1px solid ' + LINE, borderRadius: '999px' },
+      studioGrid: { display: 'grid', gridTemplateColumns: isMobile ? '1fr' : '5fr 7fr', gap: isMobile ? '32px' : '72px', alignItems: 'center' },
+      studioPortrait: { position: 'relative', aspectRatio: isMobile ? '4/3' : '4/5', background: '#120a0b', border: '1px solid ' + LINE, borderRadius: '24px', overflow: 'hidden' },
+      studioQuote: { fontFamily: FONT_SANS, fontWeight: 400, fontSize: isMobile ? '24px' : 'clamp(26px, 2.4vw, 34px)', lineHeight: 1.28, letterSpacing: '-0.035em', margin: '0 0 28px' },
+      studioBio: { color: INK_DIM, fontSize: '16px', lineHeight: 1.7, maxWidth: '560px', margin: '0 0 32px' },
+      studioSignature: { display: 'flex', flexDirection: isMobile ? 'column' : 'row', alignItems: isMobile ? 'flex-start' : 'center', gap: isMobile ? '18px' : 0, justifyContent: 'space-between', paddingTop: '24px', borderTop: '1px solid ' + LINE, maxWidth: '560px' },
+      founderName: { fontFamily: FONT_SANS, fontSize: '18px', fontWeight: 500, letterSpacing: '-0.02em' },
+      studioRole: { fontFamily: FONT_SANS, fontSize: '14px', color: INK_DIM, marginTop: '2px' },
+      linkedinBtn: { fontFamily: FONT_SANS, fontSize: '13px', fontWeight: 500, color: INK, textDecoration: 'none', padding: '9px 14px', border: '1px solid rgba(250,250,249,0.16)', borderRadius: '12px' },
 
-      contact: { padding: isMobile ? '0 20px 64px' : '0 96px 80px 48px', borderTop: '1px solid ' + LINE },
-      contactGrid: { display: 'grid', gridTemplateColumns: isMobile ? '1fr' : '1fr 1fr', gap: isMobile ? '40px' : '96px', paddingTop: isMobile ? '56px' : '96px' },
-      contactTitle: { fontFamily: FONT_DISPLAY, fontSize: isMobile ? 'clamp(44px, 12vw, 64px)' : 'clamp(56px, 8vw, 120px)', lineHeight: 0.92, letterSpacing: '-0.02em', margin: 0 },
-      contactAside: { marginTop: '32px', color: INK_DIM, fontSize: '15px', lineHeight: 1.7, maxWidth: '400px' },
-      contactDirect: { marginTop: '40px', paddingTop: '28px', borderTop: '1px solid ' + LINE, maxWidth: '400px' },
-      contactLab: { fontFamily: FONT_MONO, fontSize: '11px', letterSpacing: '0.14em', textTransform: 'uppercase', color: INK_MUTE, marginBottom: '8px' },
-      contactMail: { fontFamily: FONT_DISPLAY, fontStyle: 'italic', fontSize: '24px', color: INK, textDecoration: 'none', borderBottom: '1px solid ' + INK_MUTE },
-      contactStatus: { marginTop: '20px', display: 'inline-flex', alignItems: 'center', gap: '10px', fontFamily: FONT_MONO, fontSize: '11px', letterSpacing: '0.14em', textTransform: 'uppercase', color: INK_DIM },
-      statusDot: { width: '7px', height: '7px', borderRadius: '50%', background: 'oklch(0.7 0.15 145)', display: 'inline-block' },
+      contact: { padding: '0 ' + W + (isMobile ? ' 72px' : ' 120px'), maxWidth: '1320px', margin: isMobile ? '88px auto 0' : '160px auto 0', boxSizing: 'border-box' },
+      contactGrid: { ...CARD, display: 'grid', gridTemplateColumns: isMobile ? '1fr' : '1fr 1fr', gap: isMobile ? '32px' : '72px', padding: isMobile ? '32px 20px' : '64px', background: 'radial-gradient(ellipse 70% 70% at 0% 0%, rgba(160,12,16,0.22), transparent 60%), rgba(245,241,239,0.02)' },
+      contactTitle: { ...TITLE, fontSize: isMobile ? 'clamp(38px, 10vw, 52px)' : 'clamp(48px, 5vw, 76px)', lineHeight: 1.02, margin: 0 },
+      contactAside: { marginTop: '24px', color: INK_DIM, fontSize: '16px', lineHeight: 1.65, maxWidth: '420px' },
+      contactDirect: { marginTop: '36px', paddingTop: '24px', borderTop: '1px solid ' + LINE, maxWidth: '420px' },
+      contactLab: { ...MONO_S, color: INK_MUTE, marginBottom: '10px' },
+      contactMail: { fontFamily: FONT_SANS, fontSize: isMobile ? '19px' : '22px', letterSpacing: '-0.02em', color: INK, textDecoration: 'none', borderBottom: '1px solid ' + ACCENT, paddingBottom: '2px' },
+      contactStatus: { marginTop: '20px', display: 'inline-flex', alignItems: 'center', gap: '10px', fontFamily: FONT_SANS, fontSize: '14px', color: INK_DIM },
+      statusDot: { width: '7px', height: '7px', borderRadius: '50%', background: 'oklch(0.75 0.15 145)', boxShadow: '0 0 8px oklch(0.75 0.15 145)', display: 'inline-block' },
 
-      form: { display: 'grid', gap: '8px', marginTop: '24px', background: 'rgba(255,255,255,0.035)', backdropFilter: 'blur(24px) saturate(180%)', border: '1px solid rgba(255,255,255,0.16)', borderRadius: '22px', padding: isMobile ? '24px 18px' : '36px 32px', boxShadow: '0 24px 56px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.35), inset 0 -1px 0 rgba(220,38,38,0.15)' },
-      field: { position: 'relative', borderBottom: '1px solid ' + LINE, padding: '18px 0 10px' },
-      fieldLabelUp: { display: 'block', fontFamily: FONT_MONO, fontSize: '11px', letterSpacing: '0.12em', textTransform: 'uppercase', color: ACCENT, marginBottom: '6px' },
-      fieldInput: { width: '100%', background: 'transparent', border: 0, outline: 0, color: INK, fontFamily: FONT_SANS, fontSize: '17px', padding: 0 },
-      fieldTextarea: { width: '100%', background: 'transparent', border: 0, outline: 0, color: INK, fontFamily: FONT_SANS, fontSize: '16px', padding: 0, resize: 'none', minHeight: '64px' },
-      formSubmit: { marginTop: '28px', display: 'flex', alignItems: 'center', gap: '16px', flexWrap: 'wrap' },
-      formNocost: { fontFamily: FONT_MONO, fontSize: '10px', letterSpacing: '0.14em', textTransform: 'uppercase', color: INK_MUTE, margin: 0, flexBasis: '100%' },
+      form: { display: 'grid', gap: '4px', alignContent: 'start' },
+      field: { position: 'relative', borderBottom: '1px solid ' + LINE, padding: '16px 0 10px' },
+      fieldLabelUp: { display: 'block', fontFamily: FONT_SANS, fontSize: '13px', color: INK_DIM, marginBottom: '6px' },
+      fieldInput: { width: '100%', background: 'transparent', border: 0, outline: 0, color: INK, fontFamily: FONT_SANS, fontSize: '17px', padding: 0, colorScheme: 'dark' },
+      fieldTextarea: { width: '100%', background: 'transparent', border: 0, outline: 0, color: INK, fontFamily: FONT_SANS, fontSize: '16px', padding: 0, resize: 'none', minHeight: '64px', colorScheme: 'dark' },
+      formSubmit: { marginTop: '24px', display: 'flex', alignItems: 'center', gap: '14px', flexWrap: 'wrap' },
+      formNocost: { fontFamily: FONT_SANS, fontSize: '12px', color: INK_MUTE, margin: 0, flexBasis: '100%', lineHeight: 1.5 },
 
-      btn: { appearance: 'none', border: 0, background: INK, color: BG, fontFamily: FONT_MONO, fontSize: '13px', fontWeight: 700, letterSpacing: '0.14em', textTransform: 'uppercase', padding: '18px 30px', borderRadius: '999px', display: 'inline-flex', alignItems: 'center', gap: '10px', cursor: 'pointer', textDecoration: 'none' },
-      footer: { position: 'relative', borderTop: '1px solid ' + LINE, padding: isMobile ? '28px 20px' : '40px 48px', display: 'flex', flexDirection: isMobile ? 'column' : 'row', gap: isMobile ? '14px' : 0, alignItems: isMobile ? 'flex-start' : 'center', justifyContent: 'space-between', fontFamily: FONT_MONO, fontSize: '11px', letterSpacing: '0.14em', textTransform: 'uppercase', color: INK_MUTE },
+      btn: { appearance: 'none', border: '1px solid ' + ACCENT, background: ACCENT, color: '#fff', fontFamily: FONT_SANS, fontSize: '15px', fontWeight: 500, letterSpacing: '-0.01em', padding: '13px 21px', borderRadius: '16px', display: 'inline-flex', alignItems: 'center', gap: '10px', cursor: 'pointer', textDecoration: 'none', boxShadow: '0 8px 28px rgba(200,20,20,0.28)' },
+      footer: { position: 'relative', borderTop: '1px solid ' + LINE, padding: isMobile ? '28px 20px' : '36px 48px', display: 'flex', flexDirection: isMobile ? 'column' : 'row', gap: isMobile ? '14px' : 0, alignItems: isMobile ? 'flex-start' : 'center', justifyContent: 'space-between', fontFamily: FONT_SANS, fontSize: '13px', color: INK_MUTE },
+      footerMark: { fontFamily: FONT_SANS, fontWeight: 600, letterSpacing: '-0.06em', lineHeight: 0.8, fontSize: isMobile ? '38vw' : '30vw', textAlign: 'center', whiteSpace: 'nowrap', margin: isMobile ? '96px 0 0' : '140px 0 0', height: isMobile ? '24vw' : '19vw', overflow: 'hidden', userSelect: 'none', pointerEvents: 'none', background: 'linear-gradient(180deg, rgba(220,38,38,0.30) 0%, rgba(120,10,14,0.10) 55%, rgba(7,3,4,0) 100%)', WebkitBackgroundClip: 'text', backgroundClip: 'text', color: 'transparent' },
     };
 
     const langOptions = Object.keys(LANG_NAMES).map((code) => ({
