@@ -15,7 +15,7 @@
   function idioma() {
     var l = '';
     try { l = new URLSearchParams(location.search).get('lang') || localStorage.getItem('la27.lang') || ''; } catch (e) {}
-    l = (l || document.documentElement.lang || navigator.language || 'en').slice(0, 2).toLowerCase();
+    l = (l || 'de').slice(0, 2).toLowerCase(); // como la web: el alemán es el primer idioma
     return TXT[l] ? l : 'en';
   }
 
