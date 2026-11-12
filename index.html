@@ -1374,7 +1374,10 @@ class Component extends DCLogic {
       rad: 1.5 + Math.random() * 2,
       isBounce: Math.random() < 0.45
     }));
+    let visible = false;   // 12/11 rendimiento: solo se anima mientras está en pantalla
+    if ('IntersectionObserver' in window) new IntersectionObserver((es) => { visible = es[0].isIntersecting; }).observe(c); else visible = true;
     const draw = () => {
+      if (!visible) { this._animBad = requestAnimationFrame(draw); return; }
       ctx.clearRect(0, 0, w, h);
       pts.forEach((p) => {
         p.x += p.vx; p.y += p.vy;
@@ -1399,7 +1402,10 @@ class Component extends DCLogic {
       vx: 0.8 + Math.random() * 1.8, vy: (Math.random() - 0.5) * 0.6,
       rad: 1.5 + Math.random() * 2.2
     }));
+    let visible = false;   // 12/11 rendimiento: solo se anima mientras está en pantalla
+    if ('IntersectionObserver' in window) new IntersectionObserver((es) => { visible = es[0].isIntersecting; }).observe(c); else visible = true;
     const draw = () => {
+      if (!visible) { this._animGood = requestAnimationFrame(draw); return; }
       ctx.clearRect(0, 0, w, h);
       const filterX = w * 0.5;
       ctx.strokeStyle = 'rgba(250,250,249,0.14)';
@@ -1432,10 +1438,13 @@ class Component extends DCLogic {
     };
     size();
     window.addEventListener('resize', size);
-    const draw = () => {
+    let ultEst = -1e9;   // 12/11 rendimiento: 30 fps, mismo ritmo de parpadeo (paso doble)
+    const draw = (now) => {
+      if (!quieto && now && now - ultEst < 30) { this._animStars = requestAnimationFrame(draw); return; }
+      ultEst = now || 0;
       ctx.clearRect(0, 0, w, h);
       stars.forEach((st) => {
-        st.t += st.v;
+        st.t += st.v * 2;
         const a = quieto ? st.a : st.a * (0.6 + 0.4 * Math.sin(st.t));
         ctx.fillStyle = 'rgba(245,236,234,' + a.toFixed(3) + ')';
         ctx.beginPath(); ctx.arc(st.x, st.y, st.r, 0, Math.PI * 2); ctx.fill();
@@ -1540,11 +1549,17 @@ class Component extends DCLogic {
     window.addEventListener('resize', size);
 
     const t0 = performance.now();
+    // Rendimiento (12/11): el globo gira ~1 grado/s, así que basta redibujar la esfera a ~12 fps (idéntico a la vista);
+    // las rutas siguen a 60 fps. Y nada se dibuja mientras el globo no está en pantalla.
+    let visible = true, ultGlobo = -1e9;
+    if ('IntersectionObserver' in window) new IntersectionObserver((es) => { visible = es[0].isIntersecting; }).observe(cg);
     const draw = (now) => {
+      if (!visible && !quieto) { this._animGlobe = requestAnimationFrame(draw); return; }
       const t = ((now || t0) - t0) / 1000;
       const yaw = -(8 + Math.sin(t * 0.08) * 16) * RAD;
       // globo
-      if (gl && prog) {
+      if (gl && prog && (quieto || !now || now - ultGlobo > 80)) {
+        ultGlobo = now || 0;
         gl.clearColor(0, 0, 0, 0); gl.clear(gl.COLOR_BUFFER_BIT);
         gl.uniform1f(uni.yaw, yaw); gl.uniform1f(uni.tilt, TILT);
         gl.uniform1f(uni.rad, (R * 2) / h); gl.uniform1f(uni.aspect, w / h); gl.uniform1f(uni.ok, texOk ? 1 : 0);
