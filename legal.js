@@ -42,7 +42,7 @@
     var p = document.createElement('p');
     p.textContent = t[0];
     var a = document.createElement('a');
-    a.href = '/privacidad.html#cookies';
+    a.href = { de: '/privacidad.html#de-cookies', es: '/privacidad.html#cookies' }[idioma()] || '/privacidad.html#en';
     a.textContent = t[1];
     p.appendChild(a);
     var b = document.createElement('button');
