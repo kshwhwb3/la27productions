@@ -111,3 +111,8 @@ footer.site .brandf{font-family:"Instrument Serif",Georgia,serif;font-size:1.4re
 .cc-sw input:focus-visible+i{outline:2px solid var(--cream);outline-offset:2px}
 .cc-icon{position:fixed;left:1rem;bottom:1rem;z-index:40;width:44px;height:44px;border-radius:50%;border:1px solid #3a2a2b;background:var(--bg);color:var(--cream);cursor:pointer;display:flex;align-items:center;justify-content:center;padding:0}
 .cc-icon:hover{border-color:var(--red)}
+/* Portada con el globo LA 27 */
+.herogrid{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:2rem;align-items:center}
+.globo{position:relative;width:520px;height:520px;max-width:100%;justify-self:end}
+.globo canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
+@media(max-width:900px){.herogrid{grid-template-columns:1fr}.globo{width:320px;height:320px;justify-self:center;margin-top:1rem}}
