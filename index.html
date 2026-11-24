@@ -205,34 +205,6 @@
             <div style="{{ styles.eyebrow }}"><span style="color:var(--accent);font-weight:600">01</span>{{ m.howEyebrow }}</div>
             <h2 style="{{ styles.sectionTitle }}">{{ m.howTitleMain }}<br/><span style="color:var(--ink-2)">{{ m.howTitleIt }}</span></h2>
           </div>
-          <div style="{{ styles.compareGrid }}">
-            <div data-reveal="true" style="{{ styles.flowWrap }}">
-              <div style="{{ styles.flowPanelLabel }}{{ styles.flowPanelLabelBad }}">{{ m.compareThemTitle }}</div>
-              <canvas data-role="flow-canvas-bad" style="{{ styles.flowCanvas }}"></canvas>
-              <div style="{{ styles.flowLabels }}">
-                <span style="{{ styles.flowLabelLeft }}">{{ m.flowLabelRaw }}</span>
-                <span style="{{ styles.flowLabelMidBad }}">{{ m.compareThemSub }}</span>
-                <span style="{{ styles.flowLabelRight }}">{{ m.compareThemResult }}</span>
-              </div>
-            </div>
-
-            <div data-reveal="true" style="{{ styles.flowWrap }}">
-              <div style="{{ styles.flowPanelLabel }}{{ styles.flowPanelLabelGood }}">{{ m.compareUsTitle }}</div>
-              <div style="{{ styles.flowCanvasHolder }}">
-                <canvas data-role="flow-canvas" style="{{ styles.flowCanvas }}"></canvas>
-                <div style="{{ styles.contactChip }}">
-                  <div style="{{ styles.contactChipDot }}"></div>
-                  <span>{{ sampleContact }}</span>
-                </div>
-              </div>
-              <div style="{{ styles.flowLabels }}">
-                <span style="{{ styles.flowLabelLeft }}">{{ m.flowLabelRaw }}</span>
-                <span style="{{ styles.flowLabelMid }}">{{ m.flowLabelFilter }}</span>
-                <span style="{{ styles.flowLabelRight }}">{{ m.flowLabelReal }}</span>
-              </div>
-            </div>
-          </div>
-
           <div style="{{ styles.processCaptions }}">
             <sc-for list="{{ processSteps }}" as="step" hint-placeholder-count="4">
               <div data-reveal="true" style="{{ styles.processCaption }}">
@@ -243,26 +215,9 @@
           </div>
         </section>
 
-        <section id="work" data-section="true" style="{{ styles.section }}">
-          <div data-reveal="true" style="{{ styles.sectionHeader }}">
-            <div style="{{ styles.eyebrow }}"><span style="color:var(--accent);font-weight:600">02</span>{{ m.workEyebrow }}</div>
-            <h2 style="{{ styles.sectionTitle }}">{{ m.workTitleMain }}<br/><span style="color:var(--ink-2)">{{ m.workTitleIt }}</span></h2>
-          </div>
-          <p data-reveal="true" style="{{ styles.exampleNote }}">{{ m.workNote }}</p>
-          <div style="{{ styles.capabilityTiles }}">
-            <sc-for list="{{ capabilityTiles }}" as="tile" hint-placeholder-count="3">
-              <div data-reveal="true" style="{{ styles.capabilityTile }}">
-                <div style="{{ styles.capabilityTag }}">{{ tile.tag }}</div>
-                <div style="{{ styles.capabilityTitle }}">{{ tile.title }}</div>
-                <p style="{{ styles.capabilityDesc }}">{{ tile.desc }}</p>
-              </div>
-            </sc-for>
-          </div>
-        </section>
-
         <section id="why" data-section="true" style="{{ styles.section }}">
           <div data-reveal="true" style="{{ styles.sectionHeader }}">
-            <div style="{{ styles.eyebrow }}"><span style="color:var(--accent);font-weight:600">03</span>{{ m.whyEyebrow }}</div>
+            <div style="{{ styles.eyebrow }}"><span style="color:var(--accent);font-weight:600">02</span>{{ m.whyEyebrow }}</div>
             <h2 style="{{ styles.sectionTitle }}">{{ m.whyTitleMain }}<br/><span style="color:var(--ink-2)">{{ m.whyTitleIt }}</span></h2>
           </div>
           <div data-reveal="true" style="{{ styles.whyLede }}">{{ m.whyLede }}</div>
@@ -393,26 +348,26 @@ const DICT = {
       "founderQuoteMain": "Cada buen evento",
       "founderQuoteIt": "merece",
       "founderQuoteEnd": " que la gente de su zona se entere.",
-      "founderRole": "Fundador — LA 27",
+      "founderRole": "Propietario, LA 27 Productions",
       "contactDirect": "O escríbenos directamente",
-      "contactStatus": "Tim te responde personalmente, normalmente el mismo día laborable.",
+      "contactStatus": "Tu consulta la atiende Tim Helmes personalmente. Normalmente recibes respuesta el mismo día laborable.",
       "contactNocost": "Borrador gratuito · Sin compromiso",
       "formName": "Nombre",
       "formEmail": "Email",
       "formCompany": "Empresa",
       "formMessage": "Mensaje",
       "formSubmit": "Pedir borrador gratis",
-      "formTypePh": "— Selecciona tu sector —",
-      "footerMastered": "Desarrollado en Barcelona",
+      "formTypePh": "Selecciona tu sector",
+      "footerMastered": "LA 27 Productions · E-mail marketing",
       "footerLegal": "Aviso legal",
       "footerPrivacy": "Privacidad",
       "footerCookies": "Cookies",
       "formPrivacy": "Usamos tus datos solo para responderte. Más información en la",
       "formPrivacyLink": "política de privacidad",
-      "reverseCharge": "Empresas de otros países de la UE: factura con inversión del sujeto pasivo (Reverse Charge); el IVA se declara en su país.",
-      "pageTitle": "LA 27 Productions — Campañas de e-mail para organizadores de eventos y ocio",
-      "metaDesc": "LA 27 Productions diseña tu evento u oferta de temporada como e-mail y lo envía a personas de tu región que han pedido recibir ofertas (doble opt-in). Borrador gratis antes de decidir e informe después del envío.",
-      "paymentNote": "Pago por transferencia: solo después de tu aprobación y antes del envío.",
+      "reverseCharge": "Factura con inversión del sujeto pasivo (Reverse Charge). El IVA lo declaras en tu país como de costumbre.",
+      "pageTitle": "LA 27 Productions | E-mail marketing con diseño individual",
+      "metaDesc": "LA 27 Productions diseña tu evento u oferta de temporada como e-mail y lo envía a personas de tu región que han pedido recibir ofertas con doble opt-in. Borrador previo gratis e informe tras el envío.",
+      "paymentNote": "Pago por transferencia, solo tras tu aprobación y antes del envío.",
       "formMessagePh": "p. ej. Qué: concierto de Navidad, Cuándo: 19/12, Dónde: 25 km alrededor de Girona",
       "legalHref": "/privacidad.html#aviso-legal",
       "privacyHref": "/privacidad.html#privacidad",
@@ -421,18 +376,18 @@ const DICT = {
     "marketing": {
       "navWork": "Ejemplos",
       "navWhy": "Tu ventaja",
-      "navFounder": "Fundador",
+      "navFounder": "Contacto personal",
       "navContact": "Contacto",
-      "founderBio": "Tim Helmes es alemán y vive en Barcelona. Con LA 27 crea campañas de e-mail para organizadores de eventos, ocio, turismo y comercio local: tu oferta llega como e-mail diseñado a personas de tu región que se apuntaron ellas mismas para recibir este tipo de ofertas. Tim es tu contacto personal, desde el primer borrador hasta el informe después del envío.",
-      "heroBadge": "Campañas de e-mail para organizadores, ocio, turismo y comercio local",
+      "founderBio": "Tim Helmes es el propietario de LA 27 Productions. Para organizadores de eventos, ocio, turismo y comercio local, LA 27 se encarga de todo el e-mail marketing: concepto, texto, diseño individual, envío a personas de tu región con consentimiento e informe después. Tim es tu contacto personal, desde la primera idea hasta el resultado.",
+      "heroBadge": "E-mail marketing con diseño individual, atención personal",
       "heroTitleMain": "Tu oferta en la bandeja de entrada",
       "heroTitleIt": "de la gente de tu zona.",
-      "heroSub": "Evento, oferta de temporada o feria propia: enviamos tu oferta como e-mail diseñado a personas de la zona que elijas que han pedido expresamente recibir este tipo de ofertas. Ves el borrador antes, gratis.",
+      "heroSub": "Concepto, texto, diseño y envío en un solo sitio. Diseñamos tu e-mail de forma individual con tu imagen y lo enviamos a personas de tu región que aceptaron con doble opt-in recibir publicidad. Ves tu borrador antes, gratis y en poco tiempo.",
       "heroScroll": "Cómo funciona",
       "heroBtn": "Pedir borrador gratis",
-      "pill1": "Borrador gratis antes de decidir",
-      "pill2": "Solo gente de tu zona",
-      "pill3": "Con doble opt-in",
+      "pill1": "Diseño individual, sin plantilla",
+      "pill2": "Borrador en poco tiempo, gratis",
+      "pill3": "Atención personal, con doble opt-in",
       "trust": [
         "Conciertos y teatro",
         "Carnaval y festivales",
@@ -448,12 +403,12 @@ const DICT = {
       "flowLabelRaw": "Tu oferta",
       "flowLabelFilter": "Zona + consentimiento",
       "flowLabelReal": "Tu región",
-      "compareThemTitle": "Publicidad para todos",
-      "compareThemSub": "Sin destinatario claro",
-      "compareThemResult": "Mucho se pierde",
-      "compareUsTitle": "E-mail a gente de tu zona que quiere recibir ofertas",
+      "compareThemTitle": "Newsletter estándar",
+      "compareThemSub": "Plantilla, sin zona de destino",
+      "compareThemResult": "Poco efecto",
+      "compareUsTitle": "Diseño individual, para personas de tu región con consentimiento",
       "sampleContacts": [
-        "Borrador previo gratis",
+        "Borrador previo, gratis",
         "Radio a elegir, p. ej. 25 km",
         "Solo con doble opt-in",
         "Enlace de baja en cada e-mail",
@@ -478,54 +433,54 @@ const DICT = {
           "desc": "El e-mail llega a personas de tu región con doble opt-in. Después recibes el informe: entregados, aperturas, clics."
         }
       ],
-      "workEyebrow": "Ejemplos de campañas",
-      "workTitleMain": "Lo que enviamos",
-      "workTitleIt": "por ti.",
-      "workNote": "Así puede ser una campaña en tu sector. Diseñamos cada e-mail a medida para tu oferta y tu zona.",
+      "workEyebrow": "Sectores",
+      "workTitleMain": "Para quién",
+      "workTitleIt": "trabajamos.",
+      "workNote": "Trabajamos para empresas que quieren llegar a la gente de su región. Diseñamos cada e-mail de forma individual para tu oferta, tu local y tu zona.",
       "tiles": [
         {
-          "tag": "Ejemplo",
+          "tag": "Sector",
           "title": "Conciertos, teatro y comedia",
           "desc": "Tu concierto de Navidad, tu noche de comedia o tu cena espectáculo como e-mail a la gente de la zona, con fecha, imagen y enlace directo a las entradas, con tiempo."
         },
         {
-          "tag": "Ejemplo",
+          "tag": "Sector",
           "title": "Carnaval, Nochevieja y festivales",
           "desc": "Fiestas, Nochevieja o festival: como e-mail a la gente cercana, con fecha, programa y acceso directo a las entradas."
         },
         {
-          "tag": "Ejemplo",
+          "tag": "Sector",
           "title": "Hoteles y spa",
           "desc": "Tu escapada de fin de semana o tu oferta de bienestar para temporada baja, enviada a quien vive lo bastante cerca."
         },
         {
-          "tag": "Ejemplo",
+          "tag": "Sector",
           "title": "Ocio: termas, escape rooms, bodegas",
           "desc": "Inicio de temporada, cata de vinos, oferta de vacaciones o vale regalo como e-mail a gente de tu región que busca planes cerca."
         },
         {
-          "tag": "Ejemplo",
+          "tag": "Sector",
           "title": "Viajes en autobús y excursiones",
           "desc": "Tu nuevo programa de viajes, excursiones de un día o charlas de viaje, enviados a la gente de tus puntos de salida."
         },
         {
-          "tag": "Ejemplo",
+          "tag": "Sector",
           "title": "Comercio local y ferias propias",
           "desc": "Caravanas, estudios de cocina, audífonos: tu feria propia, tu jornada de puertas abiertas o tu oferta de temporada como e-mail a quien vive cerca de tu tienda, con fecha, cómo llegar y oferta."
         }
       ],
-      "whyEyebrow": "Tu ventaja",
-      "whyTitleMain": "Lo que",
-      "whyTitleIt": "recibes.",
-      "whyLede": "Ves tu e-mail antes de decidir. Solo se envía a personas que viven en tu región y que aceptaron con doble opt-in recibir ofertas de eventos, ocio y su zona.",
+      "whyEyebrow": "Nuestro servicio",
+      "whyTitleMain": "Servicio premium,",
+      "whyTitleIt": "personal y rápido.",
+      "whyLede": "Tienes un contacto fijo que atiende tu campaña desde la primera idea hasta el informe. Ves tu e-mail antes de decidir, y solo se envía a personas de tu región que aceptaron con doble opt-in.",
       "pillars": [
         {
-          "title": "Borrador previo gratis",
-          "body": "Diseñamos tu e-mail con tus imágenes y textos. Ves el resultado final antes de decidir."
+          "title": "Borrador previo, gratis",
+          "body": "Nada de plantillas de catálogo: diseñamos tu e-mail con tu imagen, tus fotos, colores y textos. Ves el borrador terminado antes, gratis."
         },
         {
-          "title": "Primero apruebas, luego pagas",
-          "body": "Apruebas el borrador y después recibes la factura. Se paga tras la aprobación y antes del envío."
+          "title": "Rápido y personal",
+          "body": "Recibes tu borrador en poco tiempo. Un contacto fijo te atiende personalmente. La factura llega solo tras tu aprobación y se paga antes del envío."
         },
         {
           "title": "Solo tu zona, con consentimiento",
@@ -538,7 +493,7 @@ const DICT = {
       ],
       "contactTitleMain": "Cuéntanos",
       "contactTitleIt": "tu oferta.",
-      "contactAside": "Escríbenos qué quieres promocionar, cuándo es y en qué zona. Te preparamos un borrador gratuito de tu e-mail, sin compromiso.",
+      "contactAside": "Escríbenos qué quieres promocionar, cuándo y en qué zona. Recibes un borrador gratuito y sin compromiso de tu e-mail.",
       "formType": "Sector",
       "formOptions": [
         "Conciertos y giras",
@@ -554,12 +509,16 @@ const DICT = {
       "navIntro": "Intro",
       "navHow": "Cómo funciona",
       "faqEyebrow": "Preguntas frecuentes",
-      "faqTitleMain": "Buenas preguntas,",
+      "faqTitleMain": "Preguntas frecuentes,",
       "faqTitleIt": "respuestas cortas.",
       "faq": [
         {
+          "q": "¿Qué tan rápido es?",
+          "a": "Recibes tu borrador individual poco después de tu consulta. Tras tu aprobación y el pago, planificamos el envío para la fecha que prefieras."
+        },
+        {
           "q": "¿De dónde salen los destinatarios?",
-          "a": "Se dieron de alta ellos mismos para recibir ofertas de su región y lo confirmaron con un e-mail de verificación (doble opt-in). El consentimiento queda registrado con fecha y hora, y cada e-mail lleva un enlace de baja. No entregamos direcciones: enviamos nosotros por ti."
+          "a": "Se dieron de alta ellos mismos para recibir ofertas de su región y lo confirmaron con un e-mail de verificación (doble opt-in). El consentimiento queda registrado con fecha y hora, y cada e-mail lleva un enlace de baja. No entregamos direcciones, enviamos nosotros por ti."
         },
         {
           "q": "¿Cuánto cuesta?",
@@ -581,26 +540,26 @@ const DICT = {
       "founderQuoteMain": "Every good event",
       "founderQuoteIt": "deserves",
       "founderQuoteEnd": " to be known by the people who live nearby.",
-      "founderRole": "Founder — LA 27",
+      "founderRole": "Owner, LA 27 Productions",
       "contactDirect": "Or write to us directly",
-      "contactStatus": "Tim replies to you personally – usually on the same working day.",
+      "contactStatus": "Tim Helmes handles your enquiry personally. You will usually get a reply the same working day.",
       "contactNocost": "Free draft · No commitment",
       "formName": "Name",
       "formEmail": "Email",
       "formCompany": "Company",
       "formMessage": "Message",
       "formSubmit": "Request a free draft",
-      "formTypePh": "— Select your industry —",
-      "footerMastered": "Developed in Barcelona",
+      "formTypePh": "Select your industry",
+      "footerMastered": "LA 27 Productions · Email marketing",
       "footerLegal": "Legal notice",
       "footerPrivacy": "Privacy",
       "footerCookies": "Cookies",
       "formPrivacy": "We only use your details to reply to you. More in our",
       "formPrivacyLink": "privacy policy",
-      "reverseCharge": "Businesses in other EU countries: invoiced under the reverse charge – you account for VAT in your own country.",
-      "pageTitle": "LA 27 Productions — Email campaigns for event organisers & leisure businesses",
-      "metaDesc": "LA 27 Productions designs your event or seasonal offer as an email and sends it to people in your region who signed up for offers (double opt-in). Free draft before you decide, report after sending.",
-      "paymentNote": "Payment by bank transfer – only after your approval, before sending.",
+      "reverseCharge": "Invoice under reverse charge. You account for VAT in your own country as usual.",
+      "pageTitle": "LA 27 Productions | Email marketing with individual design",
+      "metaDesc": "LA 27 Productions designs your event or seasonal offer as an email and sends it to people in your region who opted in (double opt-in) to receive offers. Free draft first, report after sending.",
+      "paymentNote": "Payment by bank transfer, only after your approval and before sending.",
       "formMessagePh": "e.g. What: Christmas concert, When: 19 Dec, Where: 25 km around Kassel",
       "legalHref": "/privacidad.html#en",
       "privacyHref": "/privacidad.html#en",
@@ -609,18 +568,18 @@ const DICT = {
     "marketing": {
       "navWork": "Examples",
       "navWhy": "Your benefits",
-      "navFounder": "Founder",
+      "navFounder": "Your contact",
       "navContact": "Contact",
-      "founderBio": "Tim Helmes is German and lives in Barcelona. With LA 27 he builds email campaigns for event organisers, leisure and tourism businesses and local retailers: your offer goes out as a designed email to people in your region who signed up themselves for offers like yours. Tim is your personal contact, from the first draft to the report after sending.",
-      "heroBadge": "Email campaigns for event organisers, leisure, tourism & local retail",
+      "founderBio": "Tim Helmes is the owner of LA 27 Productions. For event organisers, leisure and tourism businesses and local retailers, LA 27 takes care of the complete email marketing: concept, copy, individual design, sending to people in your region who have given consent, and the report afterwards. Tim is your personal contact, from the first idea to the result.",
+      "heroBadge": "Email marketing with individual design, personal service",
       "heroTitleMain": "Your offer in the inbox",
       "heroTitleIt": "of people in your region.",
-      "heroSub": "Event, seasonal offer or open day: we send your offer as a designed email to people in your chosen area who have explicitly asked for offers like this. You see the draft first – free.",
+      "heroSub": "Concept, copy, design and sending from one source. We design your email individually in your own look and send it to people in your region who agreed via double opt-in to receive advertising. You see your draft first, free of charge and within a short time.",
       "heroScroll": "How it works",
       "heroBtn": "Request a free draft",
-      "pill1": "Free draft before you decide",
-      "pill2": "Only people in your region",
-      "pill3": "Double opt-in",
+      "pill1": "Individual design, no template",
+      "pill2": "Draft in a short time, free",
+      "pill3": "Personal service, with double opt-in",
       "trust": [
         "Concerts & theatre",
         "Carnival & festivals",
@@ -636,13 +595,13 @@ const DICT = {
       "flowLabelRaw": "Your offer",
       "flowLabelFilter": "Area + consent",
       "flowLabelReal": "Your region",
-      "compareThemTitle": "Advertising to everyone",
-      "compareThemSub": "No clear audience",
-      "compareThemResult": "Much of it is wasted",
-      "compareUsTitle": "Email to people in your region who want offers",
+      "compareThemTitle": "Standard newsletter",
+      "compareThemSub": "Template, no target region",
+      "compareThemResult": "Little effect",
+      "compareUsTitle": "Individually designed, for people in your region who gave consent",
       "sampleContacts": [
-        "Free draft upfront",
-        "Choose your radius, e.g. 25 km",
+        "Draft first, free of charge",
+        "Radius of your choice, e.g. 25 km",
         "Double opt-in only",
         "Unsubscribe link in every email",
         "Approve first, then pay",
@@ -651,7 +610,7 @@ const DICT = {
       "steps": [
         {
           "title": "You tell us about your offer",
-          "desc": "Event or seasonal offer, date and area – for example 25 km around your venue."
+          "desc": "Event or seasonal offer, date and area, for example 25 km around your venue."
         },
         {
           "title": "You get a free draft",
@@ -666,54 +625,54 @@ const DICT = {
           "desc": "The email goes to people in your region with double opt-in. Afterwards you get the report: delivered, opens, clicks."
         }
       ],
-      "workEyebrow": "Campaign examples",
-      "workTitleMain": "What we send",
-      "workTitleIt": "for you.",
-      "workNote": "This is what a campaign in your industry can look like. Every email is designed individually for your offer and your region.",
+      "workEyebrow": "Industries",
+      "workTitleMain": "Who we",
+      "workTitleIt": "work for.",
+      "workNote": "We work for businesses that want to reach people in their region. We design every email individually for your offer, your venue and your region.",
       "tiles": [
         {
-          "tag": "Example",
+          "tag": "Industry",
           "title": "Concerts, theatre & comedy",
-          "desc": "Your Christmas concert, comedy night or dinner show as an email to people nearby – with date, image and a direct ticket link, in good time before the night."
+          "desc": "Your Christmas concert, comedy night or dinner show as an email to people nearby, with date, image and a direct ticket link, in good time before the night."
         },
         {
-          "tag": "Example",
+          "tag": "Industry",
           "title": "Carnival, New Year's Eve & festivals",
           "desc": "Carnival nights, New Year's Eve party or festival: as an email to people nearby, with date, programme and a direct way to tickets."
         },
         {
-          "tag": "Example",
+          "tag": "Industry",
           "title": "Hotels & spas",
           "desc": "Your weekend break or spa offer for the quieter season, sent to people who live close enough for a short trip."
         },
         {
-          "tag": "Example",
+          "tag": "Industry",
           "title": "Leisure: spas, escape rooms, wineries",
           "desc": "Season opening, wine tasting, holiday offer or gift voucher as an email to people in your region looking for a day out nearby."
         },
         {
-          "tag": "Example",
+          "tag": "Industry",
           "title": "Coach tours & day trips",
           "desc": "Your new tour programme, day trips or travel talks as an email to people around your departure points."
         },
         {
-          "tag": "Example",
+          "tag": "Industry",
           "title": "Local retail & in-store events",
-          "desc": "Caravans, kitchen studios, hearing care: your open day, in-store event or seasonal offer as an email to people living near your shop – with date, directions and offer."
+          "desc": "Caravans, kitchen studios, hearing care: your open day, in-store event or seasonal offer as an email to people living near your shop, with date, directions and offer."
         }
       ],
-      "whyEyebrow": "Your benefits",
-      "whyTitleMain": "What you",
-      "whyTitleIt": "get.",
-      "whyLede": "You see your email before you decide. It is only sent to people who live in your region and agreed via double opt-in to receive offers about events, leisure and their area.",
+      "whyEyebrow": "Our service",
+      "whyTitleMain": "Premium service,",
+      "whyTitleIt": "personal and fast.",
+      "whyLede": "You have one fixed contact who looks after your campaign from the first idea to the report. You see your email before you decide, and it is only sent to people in your region who agreed via double opt-in.",
       "pillars": [
         {
-          "title": "Free draft upfront",
-          "body": "We design your email with your images and texts. You see the finished result before you decide."
+          "title": "Draft first, free of charge",
+          "body": "No off-the-shelf template: we design your email in your own look, with your images, colours and copy. You see the finished draft first, free of charge."
         },
         {
-          "title": "Approve first, then pay",
-          "body": "You approve the draft, then you receive the invoice. Payment is after approval and before sending."
+          "title": "Fast and personal",
+          "body": "You receive your draft within a short time. A fixed contact looks after you personally. The invoice only comes after your approval, and you pay before sending."
         },
         {
           "title": "Only your region, with consent",
@@ -726,7 +685,7 @@ const DICT = {
       ],
       "contactTitleMain": "Tell us",
       "contactTitleIt": "about your offer.",
-      "contactAside": "Write to us what you want to promote, when it takes place and in which area. You get a free draft of your email – no commitment.",
+      "contactAside": "Tell us what you want to promote, when and in which region. You will receive a free, no-obligation draft of your email.",
       "formType": "Industry",
       "formOptions": [
         "Concerts & tours",
@@ -742,20 +701,24 @@ const DICT = {
       "navIntro": "Intro",
       "navHow": "How it works",
       "faqEyebrow": "FAQ",
-      "faqTitleMain": "Good questions,",
+      "faqTitleMain": "Common questions,",
       "faqTitleIt": "short answers.",
       "faq": [
         {
+          "q": "How fast is it?",
+          "a": "You receive your individual draft shortly after your enquiry. After your approval and payment, we schedule the sending for your preferred date."
+        },
+        {
           "q": "Where do the recipients come from?",
-          "a": "The recipients signed up themselves for offers from their region and confirmed it via a confirmation email (double opt-in). Consent is logged with a timestamp, and every email contains an unsubscribe link. We never hand out addresses – we send on your behalf."
+          "a": "The recipients signed up themselves for offers from their region and confirmed it via a confirmation email (double opt-in). Consent is logged with a timestamp, and every email contains an unsubscribe link. We never hand out addresses, we send on your behalf."
         },
         {
           "q": "What does it cost?",
-          "a": "A fixed price per campaign, depending on region and number of recipients – you get it together with the free draft. No subscription, no cost per click."
+          "a": "A fixed price per campaign, depending on region and number of recipients, you get it together with the free draft. No subscription, no cost per click."
         },
         {
           "q": "Do you need our customer data?",
-          "a": "No. You don't need your own mailing list. You give us your offer, images and link – we send to people in your region who want to receive offers."
+          "a": "No. You don't need your own mailing list. You give us your offer, images and link, we send to people in your region who want to receive offers."
         }
       ]
     }
@@ -961,26 +924,26 @@ const DICT = {
       "founderQuoteMain": "Chaque bel événement",
       "founderQuoteIt": "mérite",
       "founderQuoteEnd": " d'être connu des gens qui habitent tout près.",
-      "founderRole": "Fondateur — LA 27",
+      "founderRole": "Propriétaire, LA 27 Productions",
       "contactDirect": "Ou écrivez-nous directement",
-      "contactStatus": "Tim vous répond personnellement – en général le jour ouvré même.",
+      "contactStatus": "Tim Helmes s'occupe personnellement de votre demande. Vous recevez en général une réponse le même jour ouvré.",
       "contactNocost": "Maquette gratuite · Sans engagement",
       "formName": "Nom",
       "formEmail": "Email",
       "formCompany": "Entreprise",
       "formMessage": "Message",
       "formSubmit": "Demander une maquette gratuite",
-      "formTypePh": "— Sélectionnez votre secteur —",
-      "footerMastered": "Développé à Barcelone",
+      "formTypePh": "Choisissez votre secteur",
+      "footerMastered": "LA 27 Productions · E-mail marketing",
       "footerLegal": "Mentions légales",
       "footerPrivacy": "Confidentialité",
       "footerCookies": "Cookies",
       "formPrivacy": "Nous utilisons vos données uniquement pour vous répondre. Plus d’infos dans notre",
       "formPrivacyLink": "politique de confidentialité",
-      "reverseCharge": "Entreprises d'autres pays de l'UE : facturation en autoliquidation (reverse charge) – vous déclarez la TVA dans votre pays.",
-      "pageTitle": "LA 27 Productions — Campagnes e-mail pour organisateurs d'événements et loisirs",
-      "metaDesc": "LA 27 Productions met en forme votre événement ou votre offre de saison en e-mail et l'envoie aux habitants de votre région inscrits pour recevoir des offres (double opt-in). Maquette gratuite avant de décider, rapport après l'envoi.",
-      "paymentNote": "Paiement par virement – uniquement après votre validation, avant l'envoi.",
+      "reverseCharge": "Facture en autoliquidation (reverse charge). Vous déclarez la TVA dans votre pays comme d'habitude.",
+      "pageTitle": "LA 27 Productions | E-mail marketing avec design individuel",
+      "metaDesc": "LA 27 Productions conçoit votre événement ou votre offre de saison sous forme d'e-mail et l'envoie à des personnes de votre région qui ont demandé à recevoir des offres (double opt-in). Maquette gratuite d'abord, rapport après l'envoi.",
+      "paymentNote": "Paiement par virement, uniquement après votre validation et avant l'envoi.",
       "formMessagePh": "p. ex. Quoi : concert de Noël, Quand : 19/12, Où : 25 km autour de Lyon",
       "legalHref": "/privacidad.html#en",
       "privacyHref": "/privacidad.html#en",
@@ -989,18 +952,18 @@ const DICT = {
     "marketing": {
       "navWork": "Exemples",
       "navWhy": "Vos avantages",
-      "navFounder": "Fondateur",
+      "navFounder": "Votre contact",
       "navContact": "Contact",
-      "founderBio": "Tim Helmes est allemand et vit à Barcelone. Avec LA 27, il conçoit des campagnes e-mail pour les organisateurs d'événements, les acteurs des loisirs et du tourisme et le commerce local : votre offre part sous forme d'e-mail mis en page vers des habitants de votre région qui se sont inscrits eux-mêmes pour ce type d'offres. Tim est votre interlocuteur personnel, de la première maquette au rapport après l'envoi.",
-      "heroBadge": "Campagnes e-mail pour organisateurs, loisirs, tourisme et commerce local",
+      "founderBio": "Tim Helmes est le propriétaire de LA 27 Productions. Pour les organisateurs d'événements, les acteurs des loisirs et du tourisme et les commerces de proximité, LA 27 prend en charge tout l'e-mail marketing : concept, texte, design individuel, envoi à des personnes de votre région ayant donné leur consentement, puis rapport. Tim est votre interlocuteur personnel, de la première idée jusqu'au résultat.",
+      "heroBadge": "E-mail marketing avec design individuel, suivi personnel",
       "heroTitleMain": "Votre offre dans la boîte mail",
       "heroTitleIt": "des habitants de votre région.",
-      "heroSub": "Événement, offre de saison ou portes ouvertes : nous envoyons votre offre en e-mail mis en page à des habitants de la zone choisie qui ont expressément demandé ce type d'offres. Vous voyez la maquette avant – gratuitement.",
+      "heroSub": "Concept, texte, design et envoi d'un seul tenant. Nous concevons votre e-mail de façon individuelle, à l'image de votre entreprise, et l'envoyons à des personnes de votre région qui ont accepté par double opt-in de recevoir de la publicité. Vous voyez votre maquette d'abord, gratuitement et rapidement.",
       "heroScroll": "Comment ça marche",
       "heroBtn": "Demander une maquette gratuite",
-      "pill1": "Maquette gratuite avant de décider",
-      "pill2": "Uniquement votre région",
-      "pill3": "Double opt-in",
+      "pill1": "Design individuel, pas de modèle",
+      "pill2": "Maquette rapide, gratuite",
+      "pill3": "Suivi personnel, avec double opt-in",
       "trust": [
         "Concerts et théâtre",
         "Carnaval et festivals",
@@ -1016,22 +979,22 @@ const DICT = {
       "flowLabelRaw": "Votre offre",
       "flowLabelFilter": "Zone + consentement",
       "flowLabelReal": "Votre région",
-      "compareThemTitle": "De la publicité pour tout le monde",
-      "compareThemSub": "Sans public précis",
-      "compareThemResult": "Beaucoup se perd",
-      "compareUsTitle": "Un e-mail aux habitants de votre région qui veulent des offres",
+      "compareThemTitle": "Newsletter standard",
+      "compareThemSub": "Modèle, sans zone ciblée",
+      "compareThemResult": "Peu d'effet",
+      "compareUsTitle": "Design individuel, pour des personnes de votre région ayant donné leur consentement",
       "sampleContacts": [
-        "Maquette gratuite avant",
+        "Maquette d'abord, gratuite",
         "Rayon au choix, p. ex. 25 km",
         "Uniquement en double opt-in",
         "Lien de désinscription dans chaque e-mail",
-        "D'abord valider, puis payer",
+        "D'abord vous validez, ensuite vous payez",
         "Rapport : délivrés, ouvertures, clics"
       ],
       "steps": [
         {
           "title": "Vous nous présentez votre offre",
-          "desc": "Événement ou offre de saison, date et zone – par exemple 25 km autour de votre salle."
+          "desc": "Événement ou offre de saison, date et zone, par exemple 25 km autour de votre salle."
         },
         {
           "title": "Vous recevez une maquette gratuite",
@@ -1046,54 +1009,54 @@ const DICT = {
           "desc": "L'e-mail part vers des habitants de votre région en double opt-in. Ensuite, vous recevez le rapport : délivrés, ouvertures, clics."
         }
       ],
-      "workEyebrow": "Exemples de campagnes",
-      "workTitleMain": "Ce que nous envoyons",
-      "workTitleIt": "pour vous.",
-      "workNote": "Voici à quoi peut ressembler une campagne dans votre secteur. Chaque e-mail est conçu sur mesure pour votre offre et votre région.",
+      "workEyebrow": "Secteurs",
+      "workTitleMain": "Pour qui",
+      "workTitleIt": "nous travaillons.",
+      "workNote": "Nous travaillons pour des entreprises qui veulent toucher les personnes de leur région. Chaque e-mail est conçu individuellement pour votre offre, votre lieu et votre région.",
       "tiles": [
         {
-          "tag": "Exemple",
+          "tag": "Secteur",
           "title": "Concerts, théâtre et humour",
-          "desc": "Votre concert de Noël, votre soirée humour ou votre dîner-spectacle en e-mail aux habitants des environs – avec date, visuel et lien billetterie direct, assez tôt."
+          "desc": "Votre concert de Noël, votre soirée humour ou votre dîner-spectacle en e-mail aux habitants des environs, avec date, visuel et lien billetterie direct, assez tôt."
         },
         {
-          "tag": "Exemple",
+          "tag": "Secteur",
           "title": "Carnaval, Saint-Sylvestre et festivals",
           "desc": "Soirées de carnaval, réveillon ou festival : en e-mail aux gens proches, avec date, programme et accès direct aux billets."
         },
         {
-          "tag": "Exemple",
+          "tag": "Secteur",
           "title": "Hôtels et bien-être",
           "desc": "Votre offre week-end ou bien-être pour la saison creuse, envoyée à ceux qui habitent assez près pour une escapade."
         },
         {
-          "tag": "Exemple",
+          "tag": "Secteur",
           "title": "Loisirs : thermes, escape games, domaines viticoles",
           "desc": "Ouverture de saison, dégustation, offre vacances ou bon cadeau en e-mail aux habitants de votre région qui cherchent une sortie."
         },
         {
-          "tag": "Exemple",
+          "tag": "Secteur",
           "title": "Voyages en autocar et excursions",
           "desc": "Votre nouveau programme, vos excursions d'une journée ou vos conférences de voyage en e-mail autour de vos points de départ."
         },
         {
-          "tag": "Exemple",
+          "tag": "Secteur",
           "title": "Commerce local et portes ouvertes",
-          "desc": "Camping-cars, cuisinistes, audioprothésistes : vos portes ouvertes, votre journée promotionnelle ou votre offre de saison en e-mail aux habitants autour de votre magasin – avec date, accès et offre."
+          "desc": "Camping-cars, cuisinistes, audioprothésistes : vos portes ouvertes, votre journée promotionnelle ou votre offre de saison en e-mail aux habitants autour de votre magasin, avec date, accès et offre."
         }
       ],
-      "whyEyebrow": "Vos avantages",
-      "whyTitleMain": "Ce que vous",
-      "whyTitleIt": "obtenez.",
-      "whyLede": "Vous voyez votre e-mail avant de décider. Il n'est envoyé qu'à des personnes qui habitent votre région et ont accepté en double opt-in de recevoir des offres sur les événements, les loisirs et leur région.",
+      "whyEyebrow": "Notre service",
+      "whyTitleMain": "Service premium,",
+      "whyTitleIt": "personnel et rapide.",
+      "whyLede": "Vous avez un interlocuteur fixe qui suit votre campagne de la première idée jusqu'au rapport. Vous voyez votre e-mail avant de vous décider, et il n'est envoyé qu'à des personnes de votre région ayant accepté par double opt-in.",
       "pillars": [
         {
-          "title": "Maquette gratuite avant",
-          "body": "Nous concevons votre e-mail avec vos images et vos textes. Vous voyez le résultat final avant de décider."
+          "title": "Maquette d'abord, gratuite",
+          "body": "Pas de modèle prêt à l'emploi : nous concevons votre e-mail à votre image, avec vos visuels, vos couleurs et vos textes. Vous voyez la maquette terminée d'abord, gratuitement."
         },
         {
-          "title": "Valider d'abord, payer ensuite",
-          "body": "Vous validez la maquette, puis vous recevez la facture. Le paiement intervient après validation et avant l'envoi."
+          "title": "Rapide et personnel",
+          "body": "Vous recevez votre maquette rapidement. Un interlocuteur fixe vous suit personnellement. La facture n'arrive qu'après votre validation, et le paiement a lieu avant l'envoi."
         },
         {
           "title": "Votre région, avec consentement",
@@ -1106,7 +1069,7 @@ const DICT = {
       ],
       "contactTitleMain": "Parlez-nous",
       "contactTitleIt": "de votre offre.",
-      "contactAside": "Dites-nous ce que vous souhaitez promouvoir, quand et dans quelle zone. Vous recevez une maquette gratuite de votre e-mail, sans engagement.",
+      "contactAside": "Dites-nous ce que vous voulez promouvoir, quand et dans quelle région. Vous recevez une maquette gratuite et sans engagement de votre e-mail.",
       "formType": "Secteur",
       "formOptions": [
         "Concerts et tournées",
@@ -1122,16 +1085,20 @@ const DICT = {
       "navIntro": "Intro",
       "navHow": "Fonctionnement",
       "faqEyebrow": "Questions fréquentes",
-      "faqTitleMain": "Bonnes questions,",
+      "faqTitleMain": "Questions fréquentes,",
       "faqTitleIt": "réponses courtes.",
       "faq": [
+        {
+          "q": "Quelle est la rapidité ?",
+          "a": "Vous recevez votre maquette individuelle peu de temps après votre demande. Après votre validation et le paiement, nous planifions l'envoi à la date de votre choix."
+        },
         {
           "q": "D'où viennent les destinataires ?",
           "a": "Les destinataires se sont inscrits eux-mêmes pour recevoir des offres de leur région et l'ont confirmé par un e-mail de confirmation (double opt-in). Le consentement est enregistré avec date et heure, et chaque e-mail contient un lien de désinscription. Nous ne transmettons aucune adresse : nous envoyons pour vous."
         },
         {
           "q": "Combien ça coûte ?",
-          "a": "Un prix fixe par campagne, selon la région et le nombre de destinataires – vous le recevez avec la maquette gratuite. Sans abonnement, sans coût par clic."
+          "a": "Un prix fixe par campagne, selon la région et le nombre de destinataires, vous le recevez avec la maquette gratuite. Sans abonnement, sans coût par clic."
         },
         {
           "q": "Avez-vous besoin de nos données clients ?",
@@ -1149,26 +1116,26 @@ const DICT = {
       "founderQuoteMain": "Cada bom evento",
       "founderQuoteIt": "merece",
       "founderQuoteEnd": " que as pessoas que vivem perto saibam dele.",
-      "founderRole": "Fundador — LA 27",
+      "founderRole": "Proprietário, LA 27 Productions",
       "contactDirect": "Ou escreve-nos diretamente",
-      "contactStatus": "O Tim responde-lhe pessoalmente – normalmente no mesmo dia útil.",
+      "contactStatus": "O Tim Helmes trata pessoalmente do seu pedido. Normalmente recebe resposta no mesmo dia útil.",
       "contactNocost": "Rascunho gratuito · Sem compromisso",
       "formName": "Nome",
       "formEmail": "Email",
       "formCompany": "Empresa",
       "formMessage": "Mensagem",
       "formSubmit": "Pedir rascunho gratuito",
-      "formTypePh": "— Selecione o seu setor —",
-      "footerMastered": "Desenvolvido em Barcelona",
+      "formTypePh": "Selecione o seu setor",
+      "footerMastered": "LA 27 Productions · E-mail marketing",
       "footerLegal": "Aviso legal",
       "footerPrivacy": "Privacidade",
       "footerCookies": "Cookies",
       "formPrivacy": "Usamos os seus dados apenas para lhe responder. Mais informações na",
       "formPrivacyLink": "política de privacidade",
-      "reverseCharge": "Empresas de outros países da UE: faturação com autoliquidação (reverse charge) – o IVA é declarado no seu país.",
-      "pageTitle": "LA 27 Productions — Campanhas de e-mail para organizadores de eventos e lazer",
-      "metaDesc": "A LA 27 Productions desenha o seu evento ou oferta sazonal como e-mail e envia-o a pessoas da sua região que pediram para receber ofertas (double opt-in). Rascunho gratuito antes de decidir, relatório depois do envio.",
-      "paymentNote": "Pagamento por transferência – só depois da sua aprovação, antes do envio.",
+      "reverseCharge": "Fatura com autoliquidação (reverse charge). O IVA é declarado por si no seu país, como habitualmente.",
+      "pageTitle": "LA 27 Productions | E-mail marketing com design individual",
+      "metaDesc": "A LA 27 Productions cria o seu evento ou oferta de temporada como e-mail e envia-o a pessoas da sua região que pediram para receber ofertas (double opt-in). Rascunho gratuito antes de decidir e relatório após o envio.",
+      "paymentNote": "Pagamento por transferência, só depois da sua aprovação e antes do envio.",
       "formMessagePh": "p. ex. O quê: concerto de Natal, Quando: 19/12, Onde: 25 km à volta do Porto",
       "legalHref": "/privacidad.html#en",
       "privacyHref": "/privacidad.html#en",
@@ -1177,18 +1144,18 @@ const DICT = {
     "marketing": {
       "navWork": "Exemplos",
       "navWhy": "A sua vantagem",
-      "navFounder": "Fundador",
+      "navFounder": "Contacto pessoal",
       "navContact": "Contacto",
-      "founderBio": "Tim Helmes é alemão e vive em Barcelona. Com a LA 27 cria campanhas de e-mail para organizadores de eventos, lazer, turismo e comércio local: a sua oferta chega como e-mail desenhado a pessoas da sua região que se inscreveram elas próprias para receber este tipo de ofertas. O Tim é o seu contacto pessoal, do primeiro rascunho ao relatório depois do envio.",
-      "heroBadge": "Campanhas de e-mail para organizadores, lazer, turismo e comércio local",
+      "founderBio": "Tim Helmes é o proprietário da LA 27 Productions. Para organizadores de eventos, lazer, turismo e comércio local, a LA 27 assegura todo o e-mail marketing: conceito, texto, design individual, envio a pessoas da sua região com consentimento e o relatório no fim. O Tim é o seu contacto pessoal, desde a primeira ideia até ao resultado.",
+      "heroBadge": "E-mail marketing com design individual, acompanhamento pessoal",
       "heroTitleMain": "A sua oferta na caixa de entrada",
       "heroTitleIt": "das pessoas da sua região.",
-      "heroSub": "Evento, oferta sazonal ou dia aberto: enviamos a sua oferta como e-mail desenhado a pessoas da zona escolhida que pediram expressamente este tipo de ofertas. Vê o rascunho antes – grátis.",
+      "heroSub": "Conceito, texto, design e envio num só lugar. Criamos o seu e-mail de forma individual, com a imagem da sua empresa, e enviamo-lo a pessoas da sua região que aceitaram por double opt-in receber publicidade. Vê o seu rascunho antes, grátis e em pouco tempo.",
       "heroScroll": "Como funciona",
       "heroBtn": "Pedir rascunho gratuito",
-      "pill1": "Rascunho gratuito antes de decidir",
-      "pill2": "Só pessoas da sua região",
-      "pill3": "Com double opt-in",
+      "pill1": "Design individual, sem modelo",
+      "pill2": "Rascunho em pouco tempo, grátis",
+      "pill3": "Acompanhamento pessoal, com double opt-in",
       "trust": [
         "Concertos e teatro",
         "Carnaval e festivais",
@@ -1204,22 +1171,22 @@ const DICT = {
       "flowLabelRaw": "A sua oferta",
       "flowLabelFilter": "Zona + consentimento",
       "flowLabelReal": "A sua região",
-      "compareThemTitle": "Publicidade para todos",
-      "compareThemSub": "Sem público definido",
-      "compareThemResult": "Muito se perde",
-      "compareUsTitle": "E-mail a pessoas da sua região que querem ofertas",
+      "compareThemTitle": "Newsletter padrão",
+      "compareThemSub": "Modelo, sem região definida",
+      "compareThemResult": "Pouco efeito",
+      "compareUsTitle": "Design individual, para pessoas da sua região com consentimento",
       "sampleContacts": [
-        "Rascunho prévio gratuito",
+        "Rascunho prévio, grátis",
         "Raio à escolha, p. ex. 25 km",
-        "Só com double opt-in",
-        "Ligação de cancelamento em cada e-mail",
+        "Apenas com double opt-in",
+        "Link de cancelamento em cada e-mail",
         "Primeiro aprova, depois paga",
         "Relatório: entregues, aberturas, cliques"
       ],
       "steps": [
         {
           "title": "Fala-nos da sua oferta",
-          "desc": "Evento ou oferta sazonal, data e zona – por exemplo 25 km à volta do seu espaço."
+          "desc": "Evento ou oferta sazonal, data e zona, por exemplo 25 km à volta do seu espaço."
         },
         {
           "title": "Recebe um rascunho gratuito",
@@ -1234,54 +1201,54 @@ const DICT = {
           "desc": "O e-mail chega a pessoas da sua região com double opt-in. Depois recebe o relatório: entregues, aberturas, cliques."
         }
       ],
-      "workEyebrow": "Exemplos de campanhas",
-      "workTitleMain": "O que enviamos",
-      "workTitleIt": "por si.",
-      "workNote": "Assim pode ser uma campanha no seu setor. Cada e-mail é desenhado à medida da sua oferta e da sua região.",
+      "workEyebrow": "Setores",
+      "workTitleMain": "Para quem",
+      "workTitleIt": "trabalhamos.",
+      "workNote": "Trabalhamos para empresas que querem chegar às pessoas da sua região. Criamos cada e-mail de forma individual para a sua oferta, o seu espaço e a sua região.",
       "tiles": [
         {
-          "tag": "Exemplo",
+          "tag": "Setor",
           "title": "Concertos, teatro e comédia",
-          "desc": "O seu concerto de Natal, noite de comédia ou jantar-espetáculo como e-mail às pessoas da zona – com data, imagem e ligação direta aos bilhetes, a tempo."
+          "desc": "O seu concerto de Natal, noite de comédia ou jantar-espetáculo como e-mail às pessoas da zona, com data, imagem e ligação direta aos bilhetes, a tempo."
         },
         {
-          "tag": "Exemplo",
+          "tag": "Setor",
           "title": "Carnaval, Passagem de Ano e festivais",
           "desc": "Bailes de Carnaval, Passagem de Ano ou festival: como e-mail a quem vive perto, com data, programa e acesso direto aos bilhetes."
         },
         {
-          "tag": "Exemplo",
+          "tag": "Setor",
           "title": "Hotéis e spa",
           "desc": "A sua escapadinha de fim de semana ou oferta de bem-estar para a época baixa, enviada a quem vive suficientemente perto."
         },
         {
-          "tag": "Exemplo",
+          "tag": "Setor",
           "title": "Lazer: termas, escape rooms, quintas vinícolas",
           "desc": "Abertura de época, prova de vinhos, oferta de férias ou vale-presente como e-mail a pessoas da sua região à procura de um passeio."
         },
         {
-          "tag": "Exemplo",
+          "tag": "Setor",
           "title": "Viagens de autocarro e passeios",
           "desc": "O seu novo programa de viagens, passeios de um dia ou palestras de viagem como e-mail à volta dos seus pontos de partida."
         },
         {
-          "tag": "Exemplo",
+          "tag": "Setor",
           "title": "Comércio local e dias abertos",
-          "desc": "Autocaravanas, cozinhas, aparelhos auditivos: o seu dia aberto, ação promocional ou oferta sazonal como e-mail a quem vive perto da sua loja – com data, como chegar e oferta."
+          "desc": "Autocaravanas, cozinhas, aparelhos auditivos: o seu dia aberto, ação promocional ou oferta sazonal como e-mail a quem vive perto da sua loja, com data, como chegar e oferta."
         }
       ],
-      "whyEyebrow": "A sua vantagem",
-      "whyTitleMain": "O que",
-      "whyTitleIt": "recebe.",
-      "whyLede": "Vê o seu e-mail antes de decidir. Só é enviado a pessoas que vivem na sua região e aceitaram por double opt-in receber ofertas de eventos, lazer e da sua zona.",
+      "whyEyebrow": "O nosso serviço",
+      "whyTitleMain": "Serviço premium,",
+      "whyTitleIt": "pessoal e rápido.",
+      "whyLede": "Tem um contacto fixo que acompanha a sua campanha desde a primeira ideia até ao relatório. Vê o seu e-mail antes de decidir, e ele só é enviado a pessoas da sua região que aceitaram por double opt-in.",
       "pillars": [
         {
-          "title": "Rascunho prévio gratuito",
-          "body": "Desenhamos o seu e-mail com as suas imagens e textos. Vê o resultado final antes de decidir."
+          "title": "Rascunho prévio, grátis",
+          "body": "Sem modelos prontos: criamos o seu e-mail com a sua imagem, as suas fotos, cores e textos. Vê o rascunho final antes, grátis."
         },
         {
-          "title": "Primeiro aprova, depois paga",
-          "body": "Aprova o rascunho e depois recebe a fatura. O pagamento é feito após a aprovação e antes do envio."
+          "title": "Rápido e pessoal",
+          "body": "Recebe o seu rascunho em pouco tempo. Um contacto fixo acompanha-o pessoalmente. A fatura só chega depois da sua aprovação e o pagamento é feito antes do envio."
         },
         {
           "title": "Só a sua região, com consentimento",
@@ -1294,7 +1261,7 @@ const DICT = {
       ],
       "contactTitleMain": "Fale-nos",
       "contactTitleIt": "da sua oferta.",
-      "contactAside": "Diga-nos o que quer promover, quando acontece e em que zona. Recebe um rascunho gratuito do seu e-mail, sem compromisso.",
+      "contactAside": "Diga-nos o que quer promover, quando e em que região. Recebe um rascunho gratuito e sem compromisso do seu e-mail.",
       "formType": "Setor",
       "formOptions": [
         "Concertos e digressões",
@@ -1310,16 +1277,20 @@ const DICT = {
       "navIntro": "Intro",
       "navHow": "Como funciona",
       "faqEyebrow": "Perguntas frequentes",
-      "faqTitleMain": "Boas perguntas,",
+      "faqTitleMain": "Perguntas frequentes,",
       "faqTitleIt": "respostas curtas.",
       "faq": [
+        {
+          "q": "Com que rapidez?",
+          "a": "Recebe o seu rascunho individual pouco depois do seu pedido. Após a sua aprovação e o pagamento, planeamos o envio para a data que preferir."
+        },
         {
           "q": "De onde vêm os destinatários?",
           "a": "Os destinatários inscreveram-se eles próprios para receber ofertas da sua região e confirmaram-no por e-mail de confirmação (double opt-in). O consentimento fica registado com data e hora, e cada e-mail tem uma ligação de cancelamento. Não entregamos endereços: enviamos nós por si."
         },
         {
           "q": "Quanto custa?",
-          "a": "Um preço fixo por campanha, conforme a região e o número de destinatários – recebe-o junto com o rascunho gratuito. Sem assinatura, sem custo por clique."
+          "a": "Um preço fixo por campanha, conforme a região e o número de destinatários, recebe-o junto com o rascunho gratuito. Sem assinatura, sem custo por clique."
         },
         {
           "q": "Precisam dos nossos dados de clientes?",
@@ -1903,7 +1874,6 @@ class Component extends DCLogic {
     const navLinks = [
       { label: m.navIntro || 'Intro', href: '#hero' },
       { label: m.navHow || m.howEyebrow, href: '#how' },
-      { label: m.navWork, href: '#work' },
       { label: m.navWhy, href: '#why' },
       { label: m.navFounder, href: '#founder' },
       { label: m.navContact, href: '#contact' }
@@ -1913,7 +1883,6 @@ class Component extends DCLogic {
     const indexItems = [
       { label: 'Intro', id: 'hero' },
       { label: m.howEyebrow, id: 'how' },
-      { label: m.navWork, id: 'work' },
       { label: m.navWhy, id: 'why' },
       { label: shared.founderEyebrow, id: 'founder' },
       { label: m.navContact, id: 'contact' }
