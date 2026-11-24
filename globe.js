@@ -19,7 +19,7 @@ function initGlobe() {
     const hub = vec(HUB[0], HUB[1]);
     const arcs = CITIES.map((c, i) => { const to = vec(c[0], c[1]); return { to, off: (i * 0.618034) % 1, d: Math.acos(Math.min(1, hub[0] * to[0] + hub[1] * to[1] + hub[2] * to[2])) }; });
     const TILT = 40 * RAD; // Europa mirando al frente
-    const RADIO = 0.40;    // radio del globo respecto al lado menor del lienzo
+    const RADIO = 0.45;    // radio del globo respecto al lado menor del lienzo
 
     // ---- WebGL: esfera trazada por píxel sobre un cuadrado, textura NASA Black Marble (dominio público)
     const gl = cg.getContext('webgl', { premultipliedAlpha: true, alpha: true, antialias: true });
