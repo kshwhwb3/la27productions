@@ -194,11 +194,7 @@
           <div style="{{ styles.heroPills }}"><span style="{{ styles.heroPill }}">{{ m.pill1 }}</span><span style="{{ styles.heroPill }}">{{ m.pill2 }}</span><span style="{{ styles.heroPill }}">{{ m.pill3 }}</span></div>
         </section>
 
-        <section aria-label="Trust" style="padding:18px 24px 26px;display:flex;flex-wrap:wrap;gap:22px;align-items:center;justify-content:center;font-family:inherit;font-size:13px;letter-spacing:.02em;opacity:.85">
-      <img src="assets/ms-for-startups-badge.png" alt="Microsoft for Startups" width="160" height="68" style="display:block;border-radius:6px">
-      <span style="font-weight:600">AWS Activate Founders</span>
-      <span>{{ shared.trustLine }}</span>
-    </section>
+        <section aria-label="Trust" style="padding:18px 24px 28px;display:flex;flex-wrap:wrap;gap:14px;align-items:center;justify-content:center;font-family:inherit"><div style="display:flex;align-items:center;gap:10px;padding:10px 18px;border:1px solid rgba(217,180,90,.55);border-radius:999px;background:linear-gradient(135deg,rgba(217,180,90,.14),rgba(217,180,90,.03));box-shadow:0 0 18px rgba(217,180,90,.08)"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 2l8 3.5v6c0 5-3.4 9.3-8 10.5C7.4 20.8 4 16.5 4 11.5v-6L12 2z" stroke="#d9b45a" stroke-width="1.6"/><path d="M8.5 12l2.4 2.4L15.8 9.6" stroke="#d9b45a" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg><div style="line-height:1.15"><div style="font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:#d9b45a">Mitglied</div><div style="font-size:14px;font-weight:600;color:#f3ead2">Microsoft for Startups</div></div></div><div style="display:flex;align-items:center;gap:10px;padding:10px 18px;border:1px solid rgba(217,180,90,.55);border-radius:999px;background:linear-gradient(135deg,rgba(217,180,90,.14),rgba(217,180,90,.03));box-shadow:0 0 18px rgba(217,180,90,.08)"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 2l8 3.5v6c0 5-3.4 9.3-8 10.5C7.4 20.8 4 16.5 4 11.5v-6L12 2z" stroke="#d9b45a" stroke-width="1.6"/><path d="M8.5 12l2.4 2.4L15.8 9.6" stroke="#d9b45a" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg><div style="line-height:1.15"><div style="font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:#d9b45a">Founders</div><div style="font-size:14px;font-weight:600;color:#f3ead2">AWS Activate</div></div></div><div style="display:flex;align-items:center;gap:10px;padding:10px 18px;border:1px solid rgba(217,180,90,.55);border-radius:999px;background:linear-gradient(135deg,rgba(217,180,90,.14),rgba(217,180,90,.03));box-shadow:0 0 18px rgba(217,180,90,.08)"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 2l8 3.5v6c0 5-3.4 9.3-8 10.5C7.4 20.8 4 16.5 4 11.5v-6L12 2z" stroke="#d9b45a" stroke-width="1.6"/><path d="M8.5 12l2.4 2.4L15.8 9.6" stroke="#d9b45a" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg><div style="line-height:1.15"><div style="font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:#d9b45a">{{ shared.trustTop }}</div><div style="font-size:14px;font-weight:600;color:#f3ead2">{{ shared.trustLine }}</div></div></div></section>
 
         <section style="{{ styles.trust }}">
           <div style="{{ styles.trustInner }}"><span style="{{ styles.trustSpan }}">
@@ -366,6 +362,7 @@ const DICT = {
       "formSubmit": "Pedir borrador gratis",
       "formTypePh": "Selecciona tu sector",
       "footerMastered": "LA 27 Productions · E-mail marketing",
+      "trustTop": "Seguridad",
       "trustLine": "Conforme al RGPD · Double-Opt-in · Servidores en la UE",
       "footerLegal": "Aviso legal",
       "footerPrivacy": "Privacidad",
@@ -559,6 +556,7 @@ const DICT = {
       "formSubmit": "Request a free draft",
       "formTypePh": "Select your industry",
       "footerMastered": "LA 27 Productions · Email marketing",
+      "trustTop": "Security",
       "trustLine": "GDPR compliant · Double opt-in · Servers in the EU",
       "footerLegal": "Legal notice",
       "footerPrivacy": "Privacy",
@@ -752,6 +750,7 @@ const DICT = {
       "formSubmit": "Kostenlosen Entwurf anfordern",
       "formTypePh": "Branche auswählen",
       "footerMastered": "LA 27 Productions · E-Mail-Marketing",
+      "trustTop": "Sicherheit",
       "trustLine": "DSGVO-konform · Double-Opt-in · Server in der EU",
       "footerLegal": "Impressum",
       "footerPrivacy": "Datenschutz",
@@ -945,6 +944,7 @@ const DICT = {
       "formSubmit": "Demander une maquette gratuite",
       "formTypePh": "Choisissez votre secteur",
       "footerMastered": "LA 27 Productions · E-mail marketing",
+      "trustTop": "Sécurité",
       "trustLine": "Conforme au RGPD · Double opt-in · Serveurs dans l’UE",
       "footerLegal": "Mentions légales",
       "footerPrivacy": "Confidentialité",
@@ -1138,6 +1138,7 @@ const DICT = {
       "formSubmit": "Pedir rascunho gratuito",
       "formTypePh": "Selecione o seu setor",
       "footerMastered": "LA 27 Productions · E-mail marketing",
+      "trustTop": "Segurança",
       "trustLine": "Conforme o RGPD · Double opt-in · Servidores na UE",
       "footerLegal": "Aviso legal",
       "footerPrivacy": "Privacidade",
