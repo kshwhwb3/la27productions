@@ -1566,17 +1566,27 @@ class Component extends DCLogic {
     if (!cg || !cr) return;
     const quieto = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     const RAD = Math.PI / 180;
-    const HUB = [41.39, 2.17]; // Barcelona
-    const CITIES = [[52.52, 13.40], [50.94, 6.96], [48.21, 16.37], [48.86, 2.35], [51.51, -0.13], [45.46, 9.19], [52.37, 4.90], [40.42, -3.70], [47.37, 8.54], [48.14, 11.58], [59.33, 18.07], [38.72, -9.14],
-      [41.90, 12.50], [52.23, 21.01], [50.08, 14.44], [53.35, -6.26], [55.68, 12.57], [47.50, 19.04], [37.98, 23.73], [60.17, 24.94], [53.55, 9.99], [50.85, 4.35]];
+    // Tim 25/11: red de Europa a Europa, muchísimas ciudades, líneas de todos lados a todos lados (sin centro).
+    const CITIES = [[52.52,13.40],[53.55,9.99],[48.14,11.58],[50.94,6.96],[50.11,8.68],[48.78,9.18],[51.23,6.78],[51.51,7.47],[51.46,7.01],[53.08,8.80],[51.34,12.37],[51.05,13.74],[52.37,9.73],[49.45,11.08],[51.48,7.22],[50.73,7.10],[49.49,8.47],[49.01,8.40],[48.37,10.90],[50.98,11.03],[52.13,11.63],[54.32,10.13],[54.09,12.14],[47.99,7.84],[49.87,8.65],[50.78,6.08],[52.27,8.05],[48.40,9.99],[49.24,6.99],[50.08,8.24],[49.01,12.10],[50.83,12.92],[51.96,7.63],[52.40,13.07],[47.66,9.18],[50.36,7.59],[49.79,9.95],[51.31,9.48],[53.87,10.69],[48.21,16.37],[47.07,15.44],[48.31,14.29],[47.80,13.04],[47.26,11.39],[47.37,8.54],[46.95,7.45],[47.56,7.59],[46.20,6.14],[47.05,8.31],[46.52,6.63],[47.42,9.37],[48.86,2.35],[45.76,4.84],[43.30,5.37],[43.60,1.44],[48.58,7.75],[47.22,-1.55],[44.84,-0.58],[50.63,3.06],[43.70,7.27],[51.51,-0.13],[53.48,-2.24],[55.95,-3.19],[52.49,-1.89],[53.35,-6.26],[52.37,4.90],[51.92,4.48],[52.09,5.12],[51.44,5.47],[50.85,4.35],[51.22,4.40],[51.05,3.72],[49.61,6.13],[55.68,12.57],[59.33,18.07],[57.71,11.97],[59.91,10.75],[60.17,24.94],[59.44,24.75],[56.95,24.11],[54.69,25.28],[52.23,21.01],[50.06,19.94],[51.11,17.04],[52.41,16.93],[54.35,18.65],[50.08,14.44],[49.20,16.61],[48.15,17.11],[47.50,19.04],[46.06,14.51],[45.81,15.98],[44.79,20.45],[44.43,26.10],[42.70,23.32],[37.98,23.73],[40.64,22.94],[41.90,12.50],[45.46,9.19],[45.07,7.69],[45.44,12.32],[44.49,11.34],[43.77,11.26],[40.85,14.27],[38.12,13.36],[41.39,2.17],[40.42,-3.70],[39.47,-0.38],[37.39,-5.98],[43.26,-2.93],[41.65,-0.88],[38.72,-9.14],[41.15,-8.61],[35.90,14.51],[46.77,23.59],[45.75,21.23]];
     const vec = (lat, lon) => [Math.cos(lat * RAD) * Math.sin(lon * RAD), Math.sin(lat * RAD), Math.cos(lat * RAD) * Math.cos(lon * RAD)];
     const slerp = (p, q, t) => {
       const d = Math.acos(Math.min(1, p[0] * q[0] + p[1] * q[1] + p[2] * q[2])), sn = Math.sin(d) || 1;
       const k1 = Math.sin((1 - t) * d) / sn, k2 = Math.sin(t * d) / sn;
       return [p[0] * k1 + q[0] * k2, p[1] * k1 + q[1] * k2, p[2] * k1 + q[2] * k2];
     };
-    const hub = vec(HUB[0], HUB[1]);
-    const arcs = CITIES.map((c, i) => { const to = vec(c[0], c[1]); return { to, off: (i * 0.618034) % 1, d: Math.acos(Math.min(1, hub[0] * to[0] + hub[1] * to[1] + hub[2] * to[2])) }; });
+    const V = CITIES.map((c) => vec(c[0], c[1]));
+    const rnd = (n) => { const x = Math.sin(n * 12.9898 + 78.233) * 43758.5453; return x - Math.floor(x); };
+    const parCache = {};
+    const par = (i, ciclo) => {
+      const key = i + ':' + ciclo; if (parCache[key]) return parCache[key];
+      let a = Math.floor(rnd(i * 97.3 + ciclo * 13.7) * V.length), b = Math.floor(rnd(i * 31.1 + ciclo * 7.9 + 5) * V.length);
+      if (b === a) b = (b + 11) % V.length;
+      const from = V[a], to = V[b];
+      const r = { from, to, d: Math.acos(Math.min(1, from[0] * to[0] + from[1] * to[1] + from[2] * to[2])) };
+      parCache[key] = r; delete parCache[i + ':' + (ciclo - 2)];
+      return r;
+    };
+    const arcs = Array.from({ length: 64 }, (_, i) => ({ i, off: (i * 0.618034) % 1 }));
     const TILT = 40 * RAD; // Europa mirando al frente
     const RADIO = 0.40;    // radio del globo respecto al lado menor del lienzo
 
@@ -1671,7 +1681,7 @@ class Component extends DCLogic {
         gl.uniform1f(uni.rad, (R * 2) / h); gl.uniform1f(uni.aspect, w / h); gl.uniform1f(uni.ok, texOk ? 1 : 0);
         gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
       }
-      // rutas desde Barcelona (misma rotación que el globo)
+      // rutas Europa ↔ Europa (misma rotación que el globo)
       const cyw = Math.cos(yaw), syw = Math.sin(yaw), ct = Math.cos(TILT), st = Math.sin(TILT);
       const rot = (p) => {
         const x1 = p[0] * cyw + p[2] * syw, z1 = -p[0] * syw + p[2] * cyw;
@@ -1683,19 +1693,23 @@ class Component extends DCLogic {
       // Cada arco: viaja con aceleración suave, deja una estela que se apaga y hace un destello al llegar.
       const CICLO = 5.2, VIAJE = 0.46;
       const ease = (x) => (x < 0.5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2);
+      // puntos de todas las ciudades
+      V.forEach((c) => { const q = rot(c); if (q[2] > 0) { ctx.fillStyle = 'rgba(255,150,140,0.55)'; ctx.beginPath(); ctx.arc(q[0], q[1], 1.15 * dpr, 0, Math.PI * 2); ctx.fill(); } });
       const punto = (a, f) => {
-        const v = slerp(hub, a.to, f), lift = 1 + Math.sin(f * Math.PI) * (0.03 + a.d * 0.42);
+        const v = slerp(a.from, a.to, f), lift = 1 + Math.sin(f * Math.PI) * (0.02 + a.d * 0.5);
         return rot([v[0] * lift, v[1] * lift, v[2] * lift]);
       };
-      arcs.forEach((a) => {
-        const fase = quieto ? 0.7 : (((t + a.off * CICLO) % CICLO) / CICLO);
+      arcs.forEach((arc) => {
+        const tt = quieto ? arc.off * CICLO * 0.7 : t + arc.off * CICLO;
+        const a = par(arc.i, Math.floor(tt / CICLO));
+        const fase = quieto ? 0.7 : ((tt % CICLO) / CICLO);
         const viajando = fase < VIAJE;
         const cabeza = viajando ? ease(fase / VIAJE) : 1;
         // desvanecido del arco completo cuando ya ha llegado
         const resto = viajando ? 1 : Math.max(0, 1 - (fase - VIAJE) / (1 - VIAJE));
         // estela: desde (cabeza - 0.45) hasta la cabeza, con muchos pasos para que no haya saltos
         const cola = viajando ? Math.max(0, cabeza - 0.45) : 0;
-        const pasos = 36;
+        const pasos = 24;
         for (let k = 0; k < pasos; k++) {
           const f1 = cola + (cabeza - cola) * (k / pasos), f2 = cola + (cabeza - cola) * ((k + 1) / pasos);
           const p1 = punto(a, f1), p2 = punto(a, f2);
@@ -1728,12 +1742,6 @@ class Component extends DCLogic {
           }
         }
       });
-      const hb = rot(hub);
-      const pulse = quieto ? 0.5 : (t * 0.5) % 1;
-      ctx.strokeStyle = 'rgba(220,38,38,' + (0.8 * (1 - pulse)).toFixed(3) + ')';
-      ctx.lineWidth = 1.3 * dpr; ctx.beginPath(); ctx.arc(hb[0], hb[1], (4 + pulse * 18) * dpr, 0, Math.PI * 2); ctx.stroke();
-      ctx.fillStyle = 'rgb(220,38,38)'; ctx.beginPath(); ctx.arc(hb[0], hb[1], 3.2 * dpr, 0, Math.PI * 2); ctx.fill();
-      ctx.fillStyle = '#fff'; ctx.beginPath(); ctx.arc(hb[0], hb[1], 1.2 * dpr, 0, Math.PI * 2); ctx.fill();
       if (!quieto) this._animGlobe = requestAnimationFrame(draw);
     };
     draw();
