@@ -1586,7 +1586,7 @@ class Component extends DCLogic {
       parCache[key] = r; delete parCache[i + ':' + (ciclo - 2)];
       return r;
     };
-    const arcs = Array.from({ length: 64 }, (_, i) => ({ i, off: (i * 0.618034) % 1 }));
+    const arcs = Array.from({ length: 14 }, (_, i) => ({ i, off: (i * 0.618034) % 1 }));
     const TILT = 40 * RAD; // Europa mirando al frente
     const RADIO = 0.40;    // radio del globo respecto al lado menor del lienzo
 
@@ -1691,7 +1691,7 @@ class Component extends DCLogic {
       ctx.clearRect(0, 0, w, h);
       ctx.lineCap = 'round';
       // Cada arco: viaja con aceleración suave, deja una estela que se apaga y hace un destello al llegar.
-      const CICLO = 5.2, VIAJE = 0.46;
+      const CICLO = 7.5, VIAJE = 0.5;
       const ease = (x) => (x < 0.5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2);
       // puntos de todas las ciudades
       V.forEach((c) => { const q = rot(c); if (q[2] > 0) { ctx.fillStyle = 'rgba(255,150,140,0.55)'; ctx.beginPath(); ctx.arc(q[0], q[1], 1.15 * dpr, 0, Math.PI * 2); ctx.fill(); } });
