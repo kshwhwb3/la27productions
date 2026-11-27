@@ -3,82 +3,1966 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>KI-Sichtbarkeit — LA 27 Productions</title>
-<meta name="description" content="Wenn Ihre Gäste ChatGPT, Gemini oder Perplexity fragen: Wird Ihr Haus empfohlen? Wir messen es und sorgen dafür, dass die KI alles über Sie findet.">
-<link rel="canonical" href="https://la27productions.com/ki-sichtbarkeit/">
+
+<!-- Estos van en el <head> ESTATICO a proposito: el bloque <helmet> de abajo
+     lo aplica JavaScript, y el robot de Google que busca el favicon no
+     ejecuta JavaScript. Si solo estuvieran ahi, en los resultados de
+     busqueda seguiria saliendo el globo terraqueo generico. -->
 <link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/assets/favicon-180.png">
+<link rel="manifest" href="/site.webmanifest">
 <meta name="theme-color" content="#070304">
-<style>
-  @font-face{font-family:"Instrument Serif";src:url(/fonts/InstrumentSerif-400-latin.woff2) format("woff2");font-display:swap}
-  @font-face{font-family:"Instrument Serif";font-style:italic;src:url(/fonts/InstrumentSerif-400i-latin.woff2) format("woff2");font-display:swap}
-  :root{--bg:#070304;--ink:#f5f1ef;--dim:#8a8480;--line:#1d1918;--accent:#e0402f;--card:#0f0b0b}
-  *{box-sizing:border-box}
-  body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.65 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
-  main{max-width:780px;margin:0 auto;padding:40px 20px 72px}
-  a{color:var(--accent)}
-  .top{font:12px/1 ui-monospace,"JetBrains Mono",monospace;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);text-decoration:none}
-  h1{font-family:"Instrument Serif",Georgia,serif;font-weight:400;font-size:clamp(36px,7vw,56px);line-height:1.08;margin:36px 0 18px}
-  h1 em{color:var(--accent)}
-  h2{font-family:"Instrument Serif",Georgia,serif;font-weight:400;font-size:30px;line-height:1.15;margin:56px 0 14px}
-  p{color:#d8d2cf;margin:0 0 14px}
-  .lead{font-size:20px;color:#ece6e3}
-  .chat{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px 20px;margin:26px 0}
-  .q{color:var(--dim);font-size:15px;margin-bottom:10px}
-  .a{font-size:16px}
-  .a b{color:var(--ink)}
-  .tag{font:11px/1 ui-monospace,monospace;letter-spacing:.14em;text-transform:uppercase;color:var(--dim)}
-  .steps{display:grid;gap:14px;margin-top:18px}
-  .step{border:1px solid var(--line);border-radius:14px;padding:18px 20px;background:var(--card)}
-  .step h3{margin:6px 0 6px;font-size:18px}
-  .step p{margin:0;font-size:16px}
-  .price{float:right;color:var(--ink);font-weight:600}
-  .note{border-left:2px solid var(--accent);padding:4px 0 4px 16px;margin:26px 0;color:#cfc8c5;font-size:16px}
-  .cta{display:inline-block;margin-top:22px;background:var(--accent);color:#fff;text-decoration:none;padding:14px 22px;border-radius:999px;font-weight:600}
-  footer{margin-top:64px;padding-top:20px;border-top:1px solid var(--line);font:11px/1.8 ui-monospace,monospace;letter-spacing:.12em;text-transform:uppercase;color:var(--dim)}
-  footer a{color:var(--dim)}
-</style>
+<meta name="description" content="Ihre Gäste fragen ChatGPT, Gemini und Perplexity, wohin sie gehen sollen. Wir messen kostenlos, ob Ihr Haus genannt wird, und richten alles ein, damit die KI Sie findet.">
+<!-- Vista previa al compartir (Instagram, WhatsApp, LinkedIn): en el <head> ESTATICO, porque sus robots
+     no ejecutan JavaScript y sin esto cogen la foto grande de la pagina. -->
+<title>KI-Sichtbarkeit | LA 27 Productions</title>
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="LA 27 Productions">
+<meta property="og:url" content="https://la27productions.com/ki-sichtbarkeit/">
+<meta property="og:title" content="KI-Sichtbarkeit | LA 27 Productions">
+<meta property="og:description" content="Konzept, Text, individuelles Design und Versand aus einer Hand: Ihre E-Mail an Menschen in Ihrer Region, mit Double-Opt-in. Persönlich betreut, Entwurf vorab kostenlos.">
+<meta property="og:image" content="https://la27productions.com/assets/og-la27.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="LA 27 Productions">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://la27productions.com/assets/og-la27.png">
+
+<script src="/support.js"></script>
+<script src="/legal.js?v=5" defer></script>
 </head>
 <body>
-<main>
-  <a class="top" href="/">LA 27 Productions</a>
+<x-dc>
 
-  <h1>Ihre Gäste fragen jetzt <em>ChatGPT</em>.<br>Wird Ihr Haus empfohlen?</h1>
-  <p class="lead">Immer mehr Menschen suchen nicht mehr bei Google, sondern fragen eine KI. Die antwortet nicht mit zehn blauen Links, sondern mit zwei oder drei Namen. Wer nicht genannt wird, wird nicht gebucht.</p>
+<helmet>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>KI-Sichtbarkeit | LA 27 Productions</title>
 
-  <div class="chat">
-    <div class="q">„Welches Wellnesshotel im Allgäu mit Außenpool lohnt sich fürs Wochenende?“</div>
-    <div class="a">Empfehlenswert sind vor allem <b>Hotel A</b>, <b>Hotel B</b> und <b>Hotel C</b> …</div>
+  <!-- Descripción para buscadores. Sin esto Google rapiña el texto de la
+       página y saca las variables de plantilla sin renderizar ({{ soundLabel }}). -->
+  <meta name="description" content="Ihre Gäste fragen ChatGPT, Gemini und Perplexity, wohin sie gehen sollen. Wir messen kostenlos, ob Ihr Haus genannt wird, und richten alles ein, damit die KI Sie findet." />
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large" />
+  <link rel="canonical" href="https://la27productions.com/ki-sichtbarkeit/" />
+
+  <!-- Favicon: el 27 en rojo sobre obsidiana -->
+  <link rel="icon" href="/assets/favicon.ico" sizes="any" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/favicon-180.png" />
+  <link rel="manifest" href="/site.webmanifest" />
+  <meta name="theme-color" content="#070304" />
+
+  <!-- Al compartir el enlace (WhatsApp, LinkedIn, Slack) -->
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="LA 27 Productions" />
+  <meta property="og:url" content="https://la27productions.com/ki-sichtbarkeit/" />
+  <meta property="og:title" content="KI-Sichtbarkeit | LA 27 Productions" />
+  <meta property="og:description" content="Konzept, Text, individuelles Design und Versand aus einer Hand: Ihre E-Mail an Menschen in Ihrer Region, mit Double-Opt-in. Persönlich betreut, Entwurf vorab kostenlos." />
+  <meta property="og:image" content="https://la27productions.com/assets/og-la27.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <link href="/fonts/fonts.css" rel="stylesheet" />
+  <style>
+    @keyframes la27-marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+    @keyframes la27-bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(4px); } }
+    @keyframes la27-pulse { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.5; transform: scale(1.4); } }
+    @keyframes la27-wave { 0%, 100% { transform: scaleY(0.4); } 50% { transform: scaleY(1); } }
+    @keyframes la27-grain { 0%,100% { transform: translate(0,0); } 20% { transform: translate(-2%,1%); } 40% { transform: translate(-1%,3%); } 60% { transform: translate(1%,-2%); } 80% { transform: translate(2%,1%); } }
+    @keyframes la27-driftA { 0% { transform: translate(0,0) rotate(0deg); } 50% { transform: translate(30px,-18px) rotate(5deg); } 100% { transform: translate(-14px,12px) rotate(-4deg); } }
+    @keyframes la27-driftB { 0% { transform: translate(0,0) rotate(0deg); } 50% { transform: translate(-34px,26px) rotate(-7deg); } 100% { transform: translate(18px,-12px) rotate(6deg); } }
+    @keyframes la27-driftC { 0% { transform: translate(0,0) rotate(0deg); } 50% { transform: translate(-18px,-30px) rotate(10deg); } 100% { transform: translate(20px,12px) rotate(-7deg); } }
+    @keyframes la27-ripple { to { transform: translate(-50%,-50%) scale(6); opacity: 0; } }
+    @keyframes la27-driftD { 0% { transform: translate(0,0) rotate(0deg) scale(1); } 50% { transform: translate(24px,-16px) rotate(4deg) scale(1.06); } 100% { transform: translate(-16px,10px) rotate(-3deg) scale(0.96); } }
+    @keyframes la27-driftE { 0% { transform: translate(0,0) scale(1); } 50% { transform: translate(-14px,18px) scale(1.08); } 100% { transform: translate(18px,-10px) scale(0.94); } }
+    @keyframes la27-wash { 0% { transform: translate(-4%,-4%) scale(1); } 50% { transform: translate(5%,7%) scale(1.15); } 100% { transform: translate(-7%,3%) scale(0.95); } }
+    @keyframes la27-chipfade { 0%, 8% { opacity: 0; transform: translateY(6px); } 15%, 85% { opacity: 1; transform: translateY(0); } 95%, 100% { opacity: 0; transform: translateY(-4px); } }
+    :root { --accent: oklch(0.58 0.22 25); --ink-2: oklch(0.56 0.2 25); }
+    html { background: #070304; }
+    body { margin: 0; background: #070304; -webkit-font-smoothing: antialiased; }
+    ::selection { background: rgba(220,38,38,0.35); color: #fff; }
+    select option { background: #140b0c; color: #f5f1ef; }
+    a[data-cursor], button[data-cursor] { transition: opacity .2s ease, background-color .2s ease, border-color .2s ease; }
+    a[data-cursor]:hover, button[data-cursor]:hover { opacity: .82; }
+    @media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; } }
+  </style>
+</helmet>
+
+<template id="__bundler_thumbnail"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect width="100" height="100" fill="#020202"/><text x="50" y="62" font-family="Georgia,serif" font-size="40" font-weight="bold" fill="#dc2626" text-anchor="middle">27</text></svg></template>
+
+<template id="__bundler_thumbnail"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect width="100" height="100" fill="#020202"/><text x="50" y="62" font-family="Georgia,serif" font-size="40" font-weight="bold" fill="#dc2626" text-anchor="middle">27</text></svg></template>
+
+<div style="{{ styles.root }}">
+
+  <canvas data-role="stars" style="{{ styles.stars }}" aria-hidden="true"></canvas>
+  <div data-role="film-grain" style="{{ styles.filmGrain }}"></div>
+  <div data-role="cursor" style="{{ styles.cursor }}"><span data-role="cursor-label" style="{{ styles.cursorLabel }}">Play</span></div>
+  <div data-role="scroll-progress" style="{{ styles.scrollProgress }}"></div>
+
+  <div data-role="gradient-wash" style="{{ styles.gradientWash }}" aria-hidden="true"></div>
+
+  <div data-role="bg-art" style="{{ styles.bgArt }}" aria-hidden="true">
+    <!-- Sagrada Família — clean tapering spire silhouette, three towers -->
+    <svg style="{{ styles.bgShapeArch }}" viewBox="0 0 200 320" fill="none" stroke="currentColor">
+      <path d="M 28,320 C 20,250 19,190 27,140 C 31,112 29,90 36,64 L 36,50 C 33,50 31,48 31,45 C 31,41 33,38 36,38 C 39,38 41,41 41,45 C 41,48 39,50 36,50 M 36,64 C 43,90 41,112 45,140 C 53,190 52,250 44,320 Z" stroke-width="1.4"/>
+      <path d="M 78,320 C 68,240 66,175 76,120 C 81,88 78,62 87,32 L 87,14 C 83,14 80,11 80,7 C 80,3 83,0 87,0 C 91,0 94,3 94,7 C 94,11 91,14 87,14 M 87,32 C 96,62 93,88 98,120 C 108,175 106,240 96,320 Z" stroke-width="1.6"/>
+      <path d="M 128,320 C 120,255 118,198 126,150 C 130,124 128,102 135,78 L 135,62 C 132,62 130,60 130,57 C 130,53 132,51 135,51 C 138,51 140,53 140,57 C 140,60 138,62 135,62 M 135,78 C 142,102 140,124 144,150 C 152,198 150,255 142,320 Z" stroke-width="1.4"/>
+      <path d="M 8,270 Q 65,235 122,270 T 192,262" stroke-width="1.0" stroke-dasharray="5 5" opacity="0.35"/>
+    </svg>
+    <!-- Gaudí's trencadís lizard — Park Güell salamander (El Drac) -->
+    <svg style="{{ styles.bgShapeGuitar }}" viewBox="0 0 240 120" fill="none" stroke="currentColor">
+      <path d="M 6,96 C 20,90 26,78 24,66 C 22,54 32,46 44,50 C 54,53 58,44 56,36 C 66,44 64,56 72,60 C 84,66 98,58 100,46 C 112,58 108,72 120,78 C 136,86 154,80 160,66 C 168,72 166,84 178,88 C 194,93 210,86 216,72 C 222,60 232,56 238,46" stroke-width="2"/>
+      <path d="M 216,72 C 220,64 228,60 236,60" stroke-width="1.6"/>
+      <circle cx="233" cy="48" r="2.8" fill="currentColor" stroke="none"/>
+      <path d="M 44,50 L 40,66 M 100,46 L 98,62 M 160,66 L 158,82" stroke-width="1.4" opacity="0.6"/>
+    </svg>
+    <svg style="{{ styles.bgShapeSail }}" viewBox="0 0 200 240" fill="none" stroke="currentColor">
+      <path d="M 10,190 L 190,190 M 10,196 L 190,196 M 10,202 L 190,202 M 10,208 L 190,208 M 10,214 L 190,214" stroke-width="1.0" opacity="0.6"/>
+      <path d="M 110,190 L 110,40 C 95,55 75,85 62,120 C 50,155 52,190 110,190 Z" stroke-width="1.8"/>
+      <path d="M 110,120 C 125,135 138,165 142,190 L 110,190" stroke-width="1.5"/>
+    </svg>
+    <!-- Eixample chamfered-block grid — iconic Barcelona urban plan -->
+    <svg style="{{ styles.bgShapeEixample }}" viewBox="0 0 300 300" fill="none" stroke="currentColor">
+      <path d="M 20,0 L 100,0 L 120,20 L 120,100 L 100,120 L 20,120 L 0,100 L 0,20 Z" stroke-width="1.2"/>
+      <path d="M 180,0 L 260,0 L 280,20 L 280,100 L 260,120 L 180,120 L 160,100 L 160,20 Z" stroke-width="1.2"/>
+      <path d="M 20,160 L 100,160 L 120,180 L 120,260 L 100,280 L 20,280 L 0,260 L 0,180 Z" stroke-width="1.2"/>
+      <path d="M 180,160 L 260,160 L 280,180 L 280,260 L 260,280 L 180,280 L 160,260 L 160,180 Z" stroke-width="1.2"/>
+      <path d="M 130,10 L 150,10 M 140,0 L 140,20" stroke-width="0.8" opacity="0.5"/>
+      <path d="M 130,290 L 150,290 M 140,280 L 140,300" stroke-width="0.8" opacity="0.5"/>
+    </svg>
+    <!-- Trencadís mosaic — broken-tile texture from Park Güell -->
+    <svg style="{{ styles.bgShapeMosaicDots }}" viewBox="0 0 260 260" fill="currentColor" stroke="none">
+      <circle cx="30" cy="40" r="6" opacity="0.5"/>
+      <circle cx="55" cy="25" r="4" opacity="0.4"/>
+      <circle cx="70" cy="55" r="8" opacity="0.6"/>
+      <circle cx="20" cy="80" r="5" opacity="0.35"/>
+      <circle cx="95" cy="30" r="5" opacity="0.45"/>
+      <circle cx="120" cy="60" r="7" opacity="0.5"/>
+      <circle cx="150" cy="20" r="4" opacity="0.4"/>
+      <circle cx="175" cy="50" r="6" opacity="0.55"/>
+      <circle cx="200" cy="15" r="5" opacity="0.4"/>
+      <circle cx="225" cy="45" r="7" opacity="0.5"/>
+      <circle cx="60" cy="100" r="6" opacity="0.4"/>
+      <circle cx="100" cy="110" r="4" opacity="0.45"/>
+      <circle cx="140" cy="95" r="8" opacity="0.55"/>
+      <circle cx="180" cy="115" r="5" opacity="0.4"/>
+      <circle cx="220" cy="90" r="6" opacity="0.5"/>
+    </svg>
   </div>
-  <p>Die KI entscheidet das nicht zufällig. Sie liest Ihr Profil bei Bing und Google, strukturierte Daten auf Ihrer Website, Bewertungen und was regionale Portale über Sie schreiben. Fehlt dort etwas, sind Sie für die KI unsichtbar, egal wie gut Ihr Haus ist.</p>
 
-  <h2>So gehen wir vor</h2>
-  <div class="steps">
-    <div class="step">
-      <span class="tag">Schritt 1</span><span class="price">kostenlos</span>
-      <h3>Wir messen, wo Sie stehen</h3>
-      <p>Wir stellen ChatGPT, Gemini und Perplexity 20 Fragen, wie Ihre Gäste sie stellen. Sie sehen auf einer Seite, wie oft Ihr Haus genannt wird, wie oft Ihre Mitbewerber, und aus welchen Quellen die KI ihre Empfehlung zieht.</p>
+    <header style="{{ styles.nav }}">
+    <a href="#hero" data-cursor="hover" data-role="brand" style="{{ styles.navBrand }}">LA 27 <span style="font-weight:400;opacity:0.75">Productions</span></a>
+    <nav style="{{ styles.navLinks }}">
+      <sc-for list="{{ navLinks }}" as="item" hint-placeholder-count="6">
+        <a href="{{ item.href }}" data-cursor="hover" style="{{ styles.navLink }}">{{ item.label }}</a>
+      </sc-for>
+    </nav>
+    <div style="{{ styles.navRight }}">
+      <div style="position:relative">
+        <button type="button" data-cursor="hover" hidden onClick="{{ toggleLangMenu }}" style="{{ styles.langBtn }}">
+          <span>{{ shared.langCode }}</span>
+          <svg width="8" height="8" viewBox="0 0 8 8" fill="none"><path d="M1.5 3l2.5 2.5L6.5 3" stroke="currentColor" stroke-width="1" stroke-linecap="round"/></svg>
+        </button>
+        <sc-if value="{{ state.langMenuOpen }}">
+          <ul style="{{ styles.langMenu }}">
+            <sc-for list="{{ langOptions }}" as="opt" hint-placeholder-count="5">
+              <li><a href="#" data-cursor="hover" onClick="{{ opt.select }}" style="{{ styles.langMenuLink }}"><span style="color:var(--accent);font-weight:500">{{ opt.code }}</span> {{ opt.label }}</a></li>
+            </sc-for>
+          </ul>
+        </sc-if>
+      </div>
     </div>
-    <div class="step">
-      <span class="tag">Schritt 2</span><span class="price">490 € einmalig</span>
-      <h3>Wir räumen auf, was die KI liest</h3>
-      <p>Bing Places und Apple Business Connect, Ihr Google-Unternehmensprofil, strukturierte Daten auf Ihrer Website, Zugang für die KI-Crawler und klare Antworten auf die Fragen, die Ihre Gäste wirklich stellen. Sie müssen dafür nichts tun außer kurz freigeben.</p>
-    </div>
-    <div class="step">
-      <span class="tag">Schritt 3</span><span class="price">nach 4 Wochen</span>
-      <h3>Wir messen noch einmal</h3>
-      <p>Dieselben 20 Fragen, vorher und nachher nebeneinander. Wenn Sie danach weitermachen möchten, betreuen wir das monatlich. Wenn nicht, behalten Sie alles, was eingerichtet wurde.</p>
-    </div>
-  </div>
+  </header>
 
-  <p class="note">Ehrlich gesagt: Niemand kann garantieren, dass eine KI ein bestimmtes Haus nennt. Wir sorgen dafür, dass alles, was sie dafür braucht, vollständig und richtig vorhanden ist, und zeigen Ihnen das Ergebnis schwarz auf weiß.</p>
+  <aside style="{{ styles.sectionIndex }}" aria-hidden="true">
+    <sc-for list="{{ indexItems }}" as="item" hint-placeholder-count="6">
+      <a href="{{ item.href }}" data-cursor="hover" data-role="section-index-link" data-target="{{ item.id }}" style="{{ styles.indexLink }}"><span style="{{ styles.indexNum }}">{{ item.num }}</span><span>{{ item.label }}</span></a>
+    </sc-for>
+  </aside>
 
-  <h2>Wie sieht es bei Ihnen aus?</h2>
-  <p>Schreiben Sie uns Ihr Haus und Ihren Ort. Die Auswertung bekommen Sie innerhalb von zwei Werktagen, kostenlos und ohne Verpflichtung.</p>
-  <a class="cta" href="mailto:tim@la27productions.com?subject=Kostenlose%20KI-Auswertung">Kostenlose Auswertung anfordern</a>
+  <main>
+<section id="hero" data-section="true" style="{{ styles.hero }}">
+          <canvas data-role="globe" style="{{ styles.globe }}" aria-hidden="true"></canvas>
+          <canvas data-role="routes" style="{{ styles.globe }}" aria-hidden="true"></canvas>
+          <div style="{{ styles.heroBadge }}">{{ m.heroBadge }}</div>
+          <h1 style="{{ styles.heroTitle }}">{{ m.heroTitleMain }} <span style="color:var(--ink-2)">{{ m.heroTitleIt }}</span></h1>
+          <div style="{{ styles.heroSub }}">
+            <p style="{{ styles.heroSubText }}">{{ m.heroSub }}</p>
+          </div>
+          <div style="{{ styles.heroBtns }}"><a href="#contact" data-cursor="hover" data-magnetic="true" style="{{ styles.btn }}">{{ m.heroBtn }}</a><a href="#how" data-cursor="hover" style="{{ styles.scrollCue }}"><span>{{ m.heroScroll }}</span><span style="{{ styles.scrollArrow }}"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M5 1v8M2 6l3 3 3-3" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a></div>
+        </section>
 
-  <footer>
-    LA 27 Productions · Tim Helmes · <a href="/impressum.html">Impressum</a> · <a href="/privacidad.html">Datenschutz</a>
-  </footer>
-</main>
+        <section aria-label="Trust" style="padding:14px 24px 24px;text-align:center;font-family:inherit"><p style="margin:0;font-size:14px;opacity:.75">{{ shared.trustLine }}</p></section>
+
+        <section style="{{ styles.trust }}">
+          <div style="{{ styles.trustInner }}"><span style="{{ styles.trustSpan }}">
+            <sc-for list="{{ trustItemsDouble }}" as="item" hint-placeholder-count="14"><span style="{{ styles.trustWord }}">{{ item }}</span><span style="{{ styles.trustDot }}"></span></sc-for>
+          </span></div>
+        </section>
+
+        <section id="how" data-section="true" style="{{ styles.section }}">
+          <div data-reveal="true" style="{{ styles.sectionHeader }}">
+            <div style="{{ styles.eyebrow }}"><span style="color:var(--accent);font-weight:600">01</span>{{ m.howEyebrow }}</div>
+            <h2 style="{{ styles.sectionTitle }}">{{ m.howTitleMain }}<br/><span style="color:var(--ink-2)">{{ m.howTitleIt }}</span></h2>
+          </div>
+          <div style="{{ styles.processCaptions }}">
+            <sc-for list="{{ processSteps }}" as="step" hint-placeholder-count="4">
+              <div data-reveal="true" style="{{ styles.processCaption }}">
+                <span style="{{ styles.processCaptionNum }}">{{ step.num }}</span>
+                <span style="{{ styles.processCaptionBody }}"><span style="{{ styles.processCaptionText }}">{{ step.title }}</span><span style="{{ styles.processCaptionDesc }}">{{ step.desc }}</span></span>
+              </div>
+            </sc-for>
+          </div>
+        </section>
+
+        <section id="why" data-section="true" style="{{ styles.section }}">
+          <div data-reveal="true" style="{{ styles.sectionHeader }}">
+            <div style="{{ styles.eyebrow }}"><span style="color:var(--accent);font-weight:600">02</span>{{ m.whyEyebrow }}</div>
+            <h2 style="{{ styles.sectionTitle }}">{{ m.whyTitleMain }}<br/><span style="color:var(--ink-2)">{{ m.whyTitleIt }}</span></h2>
+          </div>
+          <div data-reveal="true" style="{{ styles.whyLede }}">{{ m.whyLede }}</div>
+          <div style="{{ styles.pillarsGrid }}">
+            <sc-for list="{{ marketingPillars }}" as="p" hint-placeholder-count="4">
+              <div data-reveal="true" style="{{ styles.pillarCard }}">
+                <div style="{{ styles.pillarNum }}">{{ p.num }}</div>
+                <h3 style="{{ styles.pillarTitle }}">{{ p.title }}</h3>
+                <p style="{{ styles.pillarBody }}">{{ p.body }}</p>
+              </div>
+            </sc-for>
+          </div>
+        </section>
+
+      <!-- ============ SHARED FOUNDER ============ -->
+      <section id="founder" data-section="true" style="{{ styles.section }}">
+        <div data-reveal="true" style="{{ styles.sectionHeader }}">
+          <div style="{{ styles.eyebrow }}"><span style="color:var(--accent);font-weight:600">04</span>{{ shared.founderEyebrow }}</div>
+          <h2 style="{{ styles.sectionTitle }}">{{ shared.founderTitleMain }} <span style="color:var(--ink-2)">{{ shared.founderTitleIt }}</span></h2>
+        </div>
+        <div style="{{ styles.studioGrid }}">
+          <div data-reveal="true" style="{{ styles.studioPortrait }}"><img src="/assets/tim-helmes-hd.jpg" width="640" height="800" decoding="async" alt="Tim Helmes — LA 27" style="width:100%;height:100%;object-fit:cover;object-position:50% 22%;display:block" /></div>
+          <div data-reveal="true">
+            <p style="{{ styles.studioQuote }}">"{{ shared.founderQuoteMain }} <span style="color:var(--ink-2)">{{ shared.founderQuoteIt }}</span>{{ shared.founderQuoteEnd }}"</p>
+            <p style="{{ styles.studioBio }}">{{ founderBio }}</p>
+            <div style="{{ styles.studioSignature }}">
+              <div><div style="{{ styles.founderName }}">Tim Helmes</div><div style="{{ styles.studioRole }}">{{ shared.founderRole }}</div></div>
+              <div style="display:flex;flex-direction:column;align-items:flex-end;gap:6px">
+                <a href="https://www.linkedin.com/in/tim-helmes-boschi-9b9244246/" target="_blank" rel="noopener" data-cursor="hover" style="{{ styles.linkedinBtn }}">LinkedIn (Tim)</a>
+                <a href="https://www.linkedin.com/company/la-27-productions/" target="_blank" rel="noopener" data-cursor="hover" style="{{ styles.linkedinBtn }}">LinkedIn (LA 27)</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ FAQ (ronda 2, 20/11) ============ -->
+      <section id="faq" data-section="true" style="{{ styles.section }}">
+        <div data-reveal="true" style="{{ styles.sectionHeader }}">
+          <div style="{{ styles.eyebrow }}"><span style="color:var(--accent);font-weight:600">05</span>{{ m.faqEyebrow }}</div>
+          <h2 style="{{ styles.sectionTitle }}">{{ m.faqTitleMain }}<br/><span style="color:var(--ink-2)">{{ m.faqTitleIt }}</span></h2>
+        </div>
+        <div style="{{ styles.faqGrid }}">
+          <sc-for list="{{ faqItems }}" as="f" hint-placeholder-count="4">
+            <div data-reveal="true" style="{{ styles.faqCard }}">
+              <h3 style="{{ styles.faqQ }}">{{ f.q }}</h3>
+              <p style="{{ styles.faqA }}">{{ f.a }}</p>
+            </div>
+          </sc-for>
+        </div>
+      </section>
+
+      <!-- ============ SHARED CONTACT (form options vary by view) ============ -->
+      <section id="contact" data-section="true" style="{{ styles.contact }}">
+        <div style="{{ styles.contactGrid }}">
+          <div data-reveal="true">
+            <h2 style="{{ styles.contactTitle }}">{{ view.contactTitleMain }}<br/><span style="color:var(--ink-2)">{{ view.contactTitleIt }}</span></h2>
+            <p style="{{ styles.contactAside }}">{{ view.contactAside }}</p>
+            <div style="{{ styles.contactDirect }}">
+              <div style="{{ styles.contactLab }}">{{ shared.contactDirect }}</div>
+              <a href="{{ contactEmailHref }}" onClick="{{ openMailClient }}" data-cursor="hover" style="{{ styles.contactMail }}">{{ contactEmailText }}</a>
+              <div style="{{ styles.contactStatus }}"><span style="{{ styles.statusDot }}"></span>{{ shared.contactStatus }}</div>
+              <p style="{{ styles.contactTax }}">{{ shared.paymentNote }}</p>
+              <p style="{{ styles.contactTax }}">{{ shared.reverseCharge }}</p>
+            </div>
+          </div>
+          <form data-reveal="true" style="{{ styles.form }}" autocomplete="off" action="https://api.web3forms.com/submit" method="POST">
+            <input type="hidden" name="access_key" value="48fe7fa3-de85-46ab-87d2-21f985fd53f4" />
+            <input type="hidden" name="subject" value="KI-Sichtbarkeit — Anfrage" />
+            <input type="hidden" name="from_name" value="LA 27 Web" />
+            <div style="{{ styles.field }}"><label style="{{ styles.fieldLabelUp }}">{{ shared.formName }}</label><input name="name" type="text" required="true" style="{{ styles.fieldInput }}" /></div>
+            <div style="{{ styles.field }}"><label style="{{ styles.fieldLabelUp }}">{{ shared.formEmail }}</label><input name="email" type="email" required="true" style="{{ styles.fieldInput }}" /></div>
+            <div style="{{ styles.field }}"><label style="{{ styles.fieldLabelUp }}">{{ shared.formCompany }}</label><input name="empresa" type="text" style="{{ styles.fieldInput }}" /></div>
+            <div style="{{ styles.field }}">
+              <label style="{{ styles.fieldLabelUp }}">{{ view.formType }}</label>
+              <select name="tipo_servicio" required="true" style="{{ styles.fieldInput }}">
+                <option value="" disabled="true" selected="true">{{ shared.formTypePh }}</option>
+                <sc-for list="{{ formOptions }}" as="opt" hint-placeholder-count="4">
+                  <option value="{{ opt }}">{{ opt }}</option>
+                </sc-for>
+              </select>
+            </div>
+            <div style="{{ styles.field }}"><label style="{{ styles.fieldLabelUp }}">{{ shared.formMessage }}</label><textarea name="message" rows="2" placeholder="{{ shared.formMessagePh }}" style="{{ styles.fieldTextarea }}"></textarea></div>
+            <div style="{{ styles.formSubmit }}">
+              <button type="submit" data-cursor="hover" data-magnetic="true" style="{{ styles.btn }}">{{ shared.formSubmit }}<svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+              <p style="{{ styles.formNocost }}">{{ shared.contactNocost }}</p>
+              <p style="{{ styles.formNocost }}">{{ shared.formPrivacy }} <a href="{{ shared.privacyHref }}" style="color:inherit;text-decoration:underline">{{ shared.formPrivacyLink }}</a>.</p>
+            </div>
+          </form>
+        </div>
+      </section>
+  </main>
+
+
+  <div aria-hidden="true" style="{{ styles.footerMark }}">LA 27</div>
+  <footer style="{{ styles.footer }}">
+      <div>© LA 27 · Barcelona</div>
+      <div style="display:flex;gap:20px;flex-wrap:wrap"><a href="{{ shared.legalHref }}" style="color:inherit;text-decoration:none">{{ shared.footerLegal }}</a><a href="{{ shared.privacyHref }}" style="color:inherit;text-decoration:none">{{ shared.footerPrivacy }}</a><a href="{{ shared.cookiesHref }}" style="color:inherit;text-decoration:none">{{ shared.footerCookies }}</a></div>
+      <div style="display:flex;gap:32px"><span>{{ shared.footerMastered }}</span><span>v2026</span></div>
+    </footer>
+
+</div>
+
+</x-dc>
+
+<script type="text/x-dc" data-dc-script>
+
+const FONT_DISPLAY = '"Space Grotesk", system-ui, sans-serif';
+const FONT_SANS = '"Space Grotesk", system-ui, sans-serif';
+const FONT_MONO = '"JetBrains Mono", ui-monospace, monospace';
+const BG = '#070304';
+const INK = '#f5f1ef';
+const INK_DIM = '#a39a97';
+const INK_MUTE = '#6b6260';
+const LINE = 'rgba(245,241,239,0.09)';
+const ACCENT = 'oklch(0.58 0.22 25)';
+const RED_DEEP = '#8f1111';
+const LANG_NAMES = { de: 'Deutsch', en: 'English', es: 'Español', fr: 'Français', pt: 'Português' };
+
+
+
+const DICT = {
+  "es": {
+    "shared": {
+      "langCode": "ES",
+      "founderEyebrow": "Quiénes somos",
+      "founderTitleMain": "El",
+      "founderTitleIt": "Fundador.",
+      "founderQuoteMain": "Cada buen evento",
+      "founderQuoteIt": "merece",
+      "founderQuoteEnd": " que la gente de su zona se entere.",
+      "founderRole": "Propietario, LA 27 Productions",
+      "contactDirect": "O escríbenos directamente",
+      "contactStatus": "Tu consulta la atiende Tim Helmes personalmente. Normalmente recibes respuesta el mismo día laborable.",
+      "contactNocost": "Borrador gratuito · Sin compromiso",
+      "formName": "Nombre",
+      "formEmail": "Email",
+      "formCompany": "Empresa",
+      "formMessage": "Mensaje",
+      "formSubmit": "Pedir borrador gratis",
+      "formTypePh": "Selecciona tu sector",
+      "footerMastered": "LA 27 Productions · E-mail marketing",
+      "trustTop": "Seguridad",
+      "trustLine": "Solo destinatarios con consentimiento confirmado (Double-Opt-in)",
+      "svcHead": "Servicios",
+      "svcEv": "Envíos de email para eventos",
+      "svcEvTxt": "Su evento por email a la gente de su región, con diseño incluido.",
+      "svcKi": "Visibilidad en IA",
+      "svcKiTxt": "Que ChatGPT, Gemini y Perplexity le encuentren y le recomienden.",
+      "footerLegal": "Aviso legal",
+      "footerPrivacy": "Privacidad",
+      "footerCookies": "Cookies",
+      "formPrivacy": "Usamos tus datos solo para responderte. Más información en la",
+      "formPrivacyLink": "política de privacidad",
+      "reverseCharge": "Factura con inversión del sujeto pasivo (Reverse Charge). El IVA lo declaras en tu país como de costumbre.",
+      "pageTitle": "LA 27 Productions | E-mail marketing con diseño individual",
+      "metaDesc": "LA 27 Productions diseña tu evento u oferta de temporada como e-mail y lo envía a personas de tu región que han pedido recibir ofertas con doble opt-in. Borrador previo gratis e informe tras el envío.",
+      "paymentNote": "Pago por transferencia, solo tras tu aprobación y antes del envío.",
+      "formMessagePh": "p. ej. Qué: concierto de Navidad, Cuándo: 19/12, Dónde: 25 km alrededor de Girona",
+      "legalHref": "/privacidad.html#aviso-legal",
+      "privacyHref": "/privacidad.html#privacidad",
+      "cookiesHref": "/privacidad.html#cookies"
+    },
+    "marketing": {
+      "navWork": "Ejemplos",
+      "navWhy": "Tu ventaja",
+      "navFounder": "Contacto personal",
+      "navContact": "Contacto",
+      "founderBio": "Tim Helmes es el propietario de LA 27 Productions. Para organizadores de eventos, ocio, turismo y comercio local, LA 27 se encarga de todo el e-mail marketing: concepto, texto, diseño individual, envío a personas de tu región con consentimiento e informe después. Tim es tu contacto personal, desde la primera idea hasta el resultado.",
+      "heroBadge": "E-mail marketing con diseño individual, atención personal",
+      "heroTitleMain": "¿Más clientes?",
+      "heroTitleIt": "Enviamos tu oferta a miles de personas de tu zona.",
+      "heroSub": "Por e-mail, con un diseño exclusivo para ti. Solo pagas si te gusta el borrador.",
+      "heroScroll": "Cómo funciona",
+      "heroBtn": "Pedir borrador gratis",
+      "pill1": "Diseño individual, sin plantilla",
+      "pill2": "Borrador en poco tiempo, gratis",
+      "pill3": "Atención personal, con doble opt-in",
+      "trust": [
+        "Conciertos y teatro",
+        "Carnaval y festivales",
+        "Hoteles y spa",
+        "Ocio y bodegas",
+        "Viajes en autobús",
+        "Comercio local y ferias propias",
+        "Doble opt-in"
+      ],
+      "howEyebrow": "Cómo funciona",
+      "howTitleMain": "De la primera conversación",
+      "howTitleIt": "a la bandeja de entrada.",
+      "flowLabelRaw": "Tu oferta",
+      "flowLabelFilter": "Zona + consentimiento",
+      "flowLabelReal": "Tu región",
+      "compareThemTitle": "Newsletter estándar",
+      "compareThemSub": "Plantilla, sin zona de destino",
+      "compareThemResult": "Poco efecto",
+      "compareUsTitle": "Diseño individual, para personas de tu región con consentimiento",
+      "sampleContacts": [
+        "Borrador previo, gratis",
+        "Radio a elegir, p. ej. 25 km",
+        "Solo con doble opt-in",
+        "Enlace de baja en cada e-mail",
+        "Primero apruebas, luego pagas",
+        "Informe: entregados, aperturas, clics"
+      ],
+      "steps": [
+        {
+          "title": "Nos cuentas tu oferta",
+          "desc": "Evento u oferta de temporada, fecha y zona: por ejemplo, 25 km alrededor de tu local."
+        },
+        {
+          "title": "Recibes un borrador gratis",
+          "desc": "Diseñamos el e-mail terminado. Ves exactamente lo que se enviará antes de decidir."
+        },
+        {
+          "title": "Apruebas y pagas",
+          "desc": "La factura llega solo después de tu aprobación. Se paga antes del envío."
+        },
+        {
+          "title": "Envío e informe",
+          "desc": "El e-mail llega a personas de tu región con doble opt-in. Después recibes el informe: entregados, aperturas, clics."
+        }
+      ],
+      "workEyebrow": "Sectores",
+      "workTitleMain": "Para quién",
+      "workTitleIt": "trabajamos.",
+      "workNote": "Trabajamos para empresas que quieren llegar a la gente de su región. Diseñamos cada e-mail de forma individual para tu oferta, tu local y tu zona.",
+      "tiles": [
+        {
+          "tag": "Sector",
+          "title": "Conciertos, teatro y comedia",
+          "desc": "Tu concierto de Navidad, tu noche de comedia o tu cena espectáculo como e-mail a la gente de la zona, con fecha, imagen y enlace directo a las entradas, con tiempo."
+        },
+        {
+          "tag": "Sector",
+          "title": "Carnaval, Nochevieja y festivales",
+          "desc": "Fiestas, Nochevieja o festival: como e-mail a la gente cercana, con fecha, programa y acceso directo a las entradas."
+        },
+        {
+          "tag": "Sector",
+          "title": "Hoteles y spa",
+          "desc": "Tu escapada de fin de semana o tu oferta de bienestar para temporada baja, enviada a quien vive lo bastante cerca."
+        },
+        {
+          "tag": "Sector",
+          "title": "Ocio: termas, escape rooms, bodegas",
+          "desc": "Inicio de temporada, cata de vinos, oferta de vacaciones o vale regalo como e-mail a gente de tu región que busca planes cerca."
+        },
+        {
+          "tag": "Sector",
+          "title": "Viajes en autobús y excursiones",
+          "desc": "Tu nuevo programa de viajes, excursiones de un día o charlas de viaje, enviados a la gente de tus puntos de salida."
+        },
+        {
+          "tag": "Sector",
+          "title": "Comercio local y ferias propias",
+          "desc": "Caravanas, estudios de cocina, audífonos: tu feria propia, tu jornada de puertas abiertas o tu oferta de temporada como e-mail a quien vive cerca de tu tienda, con fecha, cómo llegar y oferta."
+        }
+      ],
+      "whyEyebrow": "Nuestro servicio",
+      "whyTitleMain": "Servicio premium,",
+      "whyTitleIt": "rápido, exclusivo, personal.",
+      "whyLede": "Un contacto fijo, un e-mail solo para ti, ajustado hasta que quede perfecto.",
+      "pillars": [
+        {
+          "title": "Respuesta el mismo día laborable",
+          "body": "Nos escribes y normalmente respondemos el mismo día laborable. En persona, sin esperas."
+        },
+        {
+          "title": "Diseño exclusivo",
+          "body": "Sin plantillas: cada e-mail se crea desde cero, con tus colores, tus imágenes y tus textos. El borrador es gratis."
+        },
+        {
+          "title": "Cambios sin límite",
+          "body": "Ajustamos el borrador tantas veces como quieras, hasta que sea exactamente como lo quieres. Solo entonces das el visto bueno."
+        },
+        {
+          "title": "Solo tu zona, con informe",
+          "body": "Solo personas del radio elegido que aceptaron con doble opt-in. Después recibes entregas, aperturas y clics."
+        }
+      ],
+      "contactTitleMain": "Cuéntanos",
+      "contactTitleIt": "tu oferta.",
+      "contactAside": "Escríbenos qué quieres promocionar, cuándo y en qué zona. Recibes un borrador gratuito y sin compromiso de tu e-mail.",
+      "formType": "Sector",
+      "formOptions": [
+        "Conciertos y giras",
+        "Teatro, comedia y cenas espectáculo",
+        "Carnaval, Nochevieja y festivales",
+        "Hoteles y spa",
+        "Ocio (termas, parques, escape rooms)",
+        "Bodegas y gastronomía",
+        "Viajes en autobús y excursiones",
+        "Comercio local y ferias propias (caravanas, cocinas, audífonos)",
+        "Otro"
+      ],
+      "navIntro": "Intro",
+      "navHow": "Cómo funciona",
+      "faqEyebrow": "Preguntas frecuentes",
+      "faqTitleMain": "Preguntas frecuentes,",
+      "faqTitleIt": "respuestas cortas.",
+      "faq": [
+        {
+          "q": "¿Qué tan rápido es?",
+          "a": "Recibes tu borrador individual poco después de tu consulta. Tras tu aprobación y el pago, planificamos el envío para la fecha que prefieras."
+        },
+        {
+          "q": "¿De dónde salen los destinatarios?",
+          "a": "Se dieron de alta ellos mismos para recibir ofertas de su región y lo confirmaron con un e-mail de verificación (doble opt-in). El consentimiento queda registrado con fecha y hora, y cada e-mail lleva un enlace de baja. No entregamos direcciones, enviamos nosotros por ti."
+        },
+        {
+          "q": "¿Cuánto cuesta?",
+          "a": "Un precio fijo por campaña, según la región y el número de destinatarios. Te lo damos junto con el borrador gratuito. Sin suscripción ni coste por clic."
+        },
+        {
+          "q": "¿Necesitáis nuestros datos de clientes?",
+          "a": "No. No necesitas una lista propia. Nos das tu oferta, tus imágenes y tu enlace; nosotros enviamos a personas de tu región que quieren recibir ofertas."
+        }
+      ]
+    }
+  },
+  "en": {
+    "shared": {
+      "langCode": "EN",
+      "founderEyebrow": "Who we are",
+      "founderTitleMain": "The",
+      "founderTitleIt": "Founder.",
+      "founderQuoteMain": "Every good event",
+      "founderQuoteIt": "deserves",
+      "founderQuoteEnd": " to be known by the people who live nearby.",
+      "founderRole": "Owner, LA 27 Productions",
+      "contactDirect": "Or write to us directly",
+      "contactStatus": "Tim Helmes handles your enquiry personally. You will usually get a reply the same working day.",
+      "contactNocost": "Free draft · No commitment",
+      "formName": "Name",
+      "formEmail": "Email",
+      "formCompany": "Company",
+      "formMessage": "Message",
+      "formSubmit": "Request a free draft",
+      "formTypePh": "Select your industry",
+      "footerMastered": "LA 27 Productions · Email marketing",
+      "trustTop": "Security",
+      "trustLine": "Only recipients with confirmed consent (double opt-in)",
+      "svcHead": "Services",
+      "svcEv": "Event e-mailings",
+      "svcEvTxt": "Your event by e-mail to people in your region, design included.",
+      "svcKi": "AI visibility",
+      "svcKiTxt": "Get found and recommended by ChatGPT, Gemini and Perplexity.",
+      "footerLegal": "Legal notice",
+      "footerPrivacy": "Privacy",
+      "footerCookies": "Cookies",
+      "formPrivacy": "We only use your details to reply to you. More in our",
+      "formPrivacyLink": "privacy policy",
+      "reverseCharge": "Invoice under reverse charge. You account for VAT in your own country as usual.",
+      "pageTitle": "LA 27 Productions | Email marketing with individual design",
+      "metaDesc": "LA 27 Productions designs your event or seasonal offer as an email and sends it to people in your region who opted in (double opt-in) to receive offers. Free draft first, report after sending.",
+      "paymentNote": "Payment by bank transfer, only after your approval and before sending.",
+      "formMessagePh": "e.g. What: Christmas concert, When: 19 Dec, Where: 25 km around Kassel",
+      "legalHref": "/privacidad.html#en",
+      "privacyHref": "/privacidad.html#en",
+      "cookiesHref": "/privacidad.html#en"
+    },
+    "marketing": {
+      "navWork": "Examples",
+      "navWhy": "Your benefits",
+      "navFounder": "Your contact",
+      "navContact": "Contact",
+      "founderBio": "Tim Helmes is the owner of LA 27 Productions. For event organisers, leisure and tourism businesses and local retailers, LA 27 takes care of the complete email marketing: concept, copy, individual design, sending to people in your region who have given consent, and the report afterwards. Tim is your personal contact, from the first idea to the result.",
+      "heroBadge": "Email marketing with individual design, personal service",
+      "heroTitleMain": "More customers?",
+      "heroTitleIt": "We send your offer to thousands in your region.",
+      "heroSub": "By email, designed exclusively for you. You only pay if you like the draft.",
+      "heroScroll": "How it works",
+      "heroBtn": "Request a free draft",
+      "pill1": "Individual design, no template",
+      "pill2": "Draft in a short time, free",
+      "pill3": "Personal service, with double opt-in",
+      "trust": [
+        "Concerts & theatre",
+        "Carnival & festivals",
+        "Hotels & spas",
+        "Leisure & wineries",
+        "Coach tours & day trips",
+        "Local retail & open days",
+        "Double opt-in"
+      ],
+      "howEyebrow": "How it works",
+      "howTitleMain": "From the first conversation",
+      "howTitleIt": "to the inbox.",
+      "flowLabelRaw": "Your offer",
+      "flowLabelFilter": "Area + consent",
+      "flowLabelReal": "Your region",
+      "compareThemTitle": "Standard newsletter",
+      "compareThemSub": "Template, no target region",
+      "compareThemResult": "Little effect",
+      "compareUsTitle": "Individually designed, for people in your region who gave consent",
+      "sampleContacts": [
+        "Draft first, free of charge",
+        "Radius of your choice, e.g. 25 km",
+        "Double opt-in only",
+        "Unsubscribe link in every email",
+        "Approve first, then pay",
+        "Report: delivered, opens, clicks"
+      ],
+      "steps": [
+        {
+          "title": "You tell us about your offer",
+          "desc": "Event or seasonal offer, date and area, for example 25 km around your venue."
+        },
+        {
+          "title": "You get a free draft",
+          "desc": "We design the finished email. You see exactly what will be sent before you decide."
+        },
+        {
+          "title": "You approve and pay",
+          "desc": "The invoice only comes after your approval. Payment is due before sending."
+        },
+        {
+          "title": "Sending and report",
+          "desc": "The email goes to people in your region with double opt-in. Afterwards you get the report: delivered, opens, clicks."
+        }
+      ],
+      "workEyebrow": "Industries",
+      "workTitleMain": "Who we",
+      "workTitleIt": "work for.",
+      "workNote": "We work for businesses that want to reach people in their region. We design every email individually for your offer, your venue and your region.",
+      "tiles": [
+        {
+          "tag": "Industry",
+          "title": "Concerts, theatre & comedy",
+          "desc": "Your Christmas concert, comedy night or dinner show as an email to people nearby, with date, image and a direct ticket link, in good time before the night."
+        },
+        {
+          "tag": "Industry",
+          "title": "Carnival, New Year's Eve & festivals",
+          "desc": "Carnival nights, New Year's Eve party or festival: as an email to people nearby, with date, programme and a direct way to tickets."
+        },
+        {
+          "tag": "Industry",
+          "title": "Hotels & spas",
+          "desc": "Your weekend break or spa offer for the quieter season, sent to people who live close enough for a short trip."
+        },
+        {
+          "tag": "Industry",
+          "title": "Leisure: spas, escape rooms, wineries",
+          "desc": "Season opening, wine tasting, holiday offer or gift voucher as an email to people in your region looking for a day out nearby."
+        },
+        {
+          "tag": "Industry",
+          "title": "Coach tours & day trips",
+          "desc": "Your new tour programme, day trips or travel talks as an email to people around your departure points."
+        },
+        {
+          "tag": "Industry",
+          "title": "Local retail & in-store events",
+          "desc": "Caravans, kitchen studios, hearing care: your open day, in-store event or seasonal offer as an email to people living near your shop, with date, directions and offer."
+        }
+      ],
+      "whyEyebrow": "Our service",
+      "whyTitleMain": "Premium service,",
+      "whyTitleIt": "fast, exclusive, personal.",
+      "whyLede": "One fixed contact, an email made only for you, refined until it is perfect.",
+      "pillars": [
+        {
+          "title": "Reply the same working day",
+          "body": "You write, we usually reply the same working day. Personally, no waiting line."
+        },
+        {
+          "title": "Exclusive design",
+          "body": "No templates: every email is made from scratch, in your colours, with your images and texts. The draft is free."
+        },
+        {
+          "title": "Unlimited changes",
+          "body": "We adjust the draft as often as you like, until it is exactly how you want it. Only then do you approve."
+        },
+        {
+          "title": "Only your region, with a report",
+          "body": "Only people in your chosen radius who agreed via double opt-in. Afterwards you get deliveries, opens and clicks."
+        }
+      ],
+      "contactTitleMain": "Tell us",
+      "contactTitleIt": "about your offer.",
+      "contactAside": "Tell us what you want to promote, when and in which region. You will receive a free, no-obligation draft of your email.",
+      "formType": "Industry",
+      "formOptions": [
+        "Concerts & tours",
+        "Theatre, comedy & dinner shows",
+        "Carnival, New Year's Eve & festivals",
+        "Hotels & spas",
+        "Leisure (thermal baths, parks, escape rooms)",
+        "Wineries & food",
+        "Coach tours & day trips",
+        "Local retail & open days (caravans, kitchens, hearing care)",
+        "Other"
+      ],
+      "navIntro": "Intro",
+      "navHow": "How it works",
+      "faqEyebrow": "FAQ",
+      "faqTitleMain": "Common questions,",
+      "faqTitleIt": "short answers.",
+      "faq": [
+        {
+          "q": "How fast is it?",
+          "a": "You receive your individual draft shortly after your enquiry. After your approval and payment, we schedule the sending for your preferred date."
+        },
+        {
+          "q": "Where do the recipients come from?",
+          "a": "The recipients signed up themselves for offers from their region and confirmed it via a confirmation email (double opt-in). Consent is logged with a timestamp, and every email contains an unsubscribe link. We never hand out addresses, we send on your behalf."
+        },
+        {
+          "q": "What does it cost?",
+          "a": "A fixed price per campaign, depending on region and number of recipients, you get it together with the free draft. No subscription, no cost per click."
+        },
+        {
+          "q": "Do you need our customer data?",
+          "a": "No. You don't need your own mailing list. You give us your offer, images and link, we send to people in your region who want to receive offers."
+        }
+      ]
+    }
+  },
+  "de": {
+    "shared": {
+      "langCode": "DE",
+      "founderEyebrow": "Wer wir sind",
+      "founderTitleMain": "Der",
+      "founderTitleIt": "Gründer.",
+      "founderQuoteMain": "Wer Gäste will,",
+      "founderQuoteIt": "muss dort auftauchen,",
+      "founderQuoteEnd": " wo sie heute fragen.",
+      "founderRole": "Inhaber, LA 27 Productions",
+      "contactDirect": "Oder schreiben Sie uns direkt",
+      "contactStatus": "Ihre Anfrage betreut Tim Helmes persönlich. Sie erhalten in der Regel noch am selben Werktag eine Antwort.",
+      "contactNocost": "Kostenlose Auswertung · Unverbindlich",
+      "formName": "Name",
+      "formEmail": "E-Mail",
+      "formCompany": "Firma",
+      "formMessage": "Nachricht",
+      "formSubmit": "Kostenlose Auswertung anfordern",
+      "formTypePh": "Branche auswählen",
+      "footerMastered": "LA 27 Productions · KI-Sichtbarkeit",
+      "trustTop": "Ehrlich",
+      "trustLine": "Niemand kann garantieren, dass eine KI Sie nennt. Wir sorgen dafür, dass sie alles über Sie findet, und messen das Ergebnis.",
+      "svcHead": "Leistungen",
+      "svcEv": "Event-Mailings",
+      "svcEvTxt": "Ihre Veranstaltung per E-Mail an Menschen in Ihrer Region, Gestaltung inklusive.",
+      "svcKi": "KI-Sichtbarkeit",
+      "svcKiTxt": "Damit ChatGPT, Gemini und Perplexity Sie finden und empfehlen.",
+      "footerLegal": "Impressum",
+      "footerPrivacy": "Datenschutz",
+      "footerCookies": "Cookies",
+      "formPrivacy": "Wir verwenden Ihre Daten nur, um Ihnen zu antworten. Mehr dazu in der",
+      "formPrivacyLink": "Datenschutzerklärung",
+      "reverseCharge": "Rechnung mit Reverse Charge. Die Umsatzsteuer führen Sie wie gewohnt in Deutschland ab.",
+      "pageTitle": "KI-Sichtbarkeit | LA 27 Productions",
+      "metaDesc": "Ihre Gäste fragen ChatGPT, Gemini und Perplexity, wohin sie gehen sollen. Wir messen kostenlos, ob Ihr Haus genannt wird, und richten alles ein, damit die KI Sie findet.",
+      "paymentNote": "Einrichtung 490 € einmalig, per Überweisung nach Ihrer Freigabe.",
+      "formMessagePh": "z. B. Hotel Bergblick, Oberstdorf, www.hotel-bergblick.de",
+      "legalHref": "/impressum.html",
+      "privacyHref": "/privacidad.html#datenschutz",
+      "cookiesHref": "/privacidad.html#de-cookies"
+    },
+    "marketing": {
+      "navWork": "Branchen",
+      "navWhy": "Ihr Vorteil",
+      "navFounder": "Ansprechpartner",
+      "navContact": "Kontakt",
+      "founderBio": "Tim Helmes ist Inhaber von LA 27 Productions. Wir sorgen dafür, dass Hotels, Freizeitanbieter und Betriebe vor Ort in ChatGPT, Gemini und Perplexity gefunden werden: Messung, Einrichtung und Nachweis aus einer Hand, persönlich betreut.",
+      "heroBadge": "KI-Sichtbarkeit für Hotels, Freizeit und Betriebe vor Ort",
+      "heroTitleMain": "Ihre Gäste fragen jetzt ChatGPT.",
+      "heroTitleIt": "Wird Ihr Haus empfohlen?",
+      "heroSub": "Die KI nennt zwei, drei Namen. Wir messen kostenlos, ob Ihrer dabei ist, und sorgen dafür, dass sie alles über Sie findet.",
+      "heroScroll": "So funktioniert es",
+      "heroBtn": "Kostenlose Auswertung anfordern",
+      "pill1": "ChatGPT, Gemini und Perplexity",
+      "pill2": "Auswertung kostenlos",
+      "pill3": "Vorher und nachher gemessen",
+      "trust": [
+        "Hotels & Wellness",
+        "Thermen & Freizeitparks",
+        "Dinner-Shows & Varieté",
+        "Restaurants & Weingüter",
+        "Praxen & Kliniken",
+        "Handwerk & Fachhandel",
+        "ChatGPT · Gemini · Perplexity"
+      ],
+      "howEyebrow": "So funktioniert es",
+      "howTitleMain": "Von der ersten Frage",
+      "howTitleIt": "bis zur Empfehlung.",
+      "flowLabelRaw": "Frage Ihres Gastes",
+      "flowLabelFilter": "Was die KI liest",
+      "flowLabelReal": "Ihre Empfehlung",
+      "compareThemTitle": "Ohne Pflege",
+      "compareThemSub": "Profile fehlen, Daten lückenhaft",
+      "compareThemResult": "Nicht genannt",
+      "compareUsTitle": "Vollständig, aktuell und überall gleich: so findet die KI Ihr Haus",
+      "sampleContacts": [
+        "Bing Places & Apple Business Connect",
+        "Google-Unternehmensprofil",
+        "Strukturierte Daten auf Ihrer Website",
+        "Zugang für KI-Crawler",
+        "Antworten auf echte Gästefragen",
+        "Messung vorher und nachher"
+      ],
+      "steps": [
+        {
+          "title": "Sie nennen uns Haus und Ort",
+          "desc": "Mehr brauchen wir nicht. Wir suchen die Fragen, die Ihre Gäste der KI wirklich stellen."
+        },
+        {
+          "title": "Sie bekommen kostenlos Ihre Auswertung",
+          "desc": "Auf einer Seite: wie oft ChatGPT, Gemini und Perplexity Sie nennen, wie oft Ihre Mitbewerber, und woher die KI ihre Empfehlung nimmt."
+        },
+        {
+          "title": "Wir richten alles ein, 490 € einmalig",
+          "desc": "Profile, Daten und Website so, dass die KI alles Wichtige über Sie findet. Sie geben nur kurz frei."
+        },
+        {
+          "title": "Nach vier Wochen messen wir erneut",
+          "desc": "Dieselben Fragen, vorher und nachher nebeneinander. Weiter betreuen wir nur, wenn Sie das möchten."
+        }
+      ],
+      "workEyebrow": "Branchen",
+      "workTitleMain": "Für wen das",
+      "workTitleIt": "am meisten bringt.",
+      "workNote": "Überall dort, wo Menschen vor der Buchung fragen: Wohin am Wochenende? Welches Haus lohnt sich? Wer ist in der Nähe gut?",
+      "tiles": [
+        {
+          "tag": "Branche",
+          "title": "Hotels & Wellness",
+          "desc": "„Welches Wellnesshotel im Allgäu lohnt sich?“ Wer hier nicht genannt wird, verliert Buchungen an das Haus nebenan."
+        },
+        {
+          "tag": "Branche",
+          "title": "Thermen, Parks & Freizeit",
+          "desc": "„Was kann man am Wochenende mit Kindern rund um Freiburg machen?“ Die KI empfiehlt, was sie vollständig kennt."
+        },
+        {
+          "tag": "Branche",
+          "title": "Dinner-Shows, Varieté & Theater",
+          "desc": "„Welche Dinner-Show in München ist ein schönes Geschenk?“ Feste Spielstätten mit Programm profitieren besonders."
+        },
+        {
+          "tag": "Branche",
+          "title": "Restaurants & Weingüter",
+          "desc": "„Wo kann man in der Pfalz gut essen und Wein probieren?“ Öffnungszeiten, Karte und Bewertungen entscheiden."
+        },
+        {
+          "tag": "Branche",
+          "title": "Praxen & Kliniken",
+          "desc": "„Welche Praxis in Hamburg ist für Implantate empfehlenswert?“ Bei großen Entscheidungen fragen Patienten heute zuerst die KI."
+        },
+        {
+          "tag": "Branche",
+          "title": "Handwerk & Fachhandel",
+          "desc": "„Wer baut in Augsburg Bäder um?“ Wer mit Leistungen, Region und Bewertungen sauber auffindbar ist, wird genannt."
+        }
+      ],
+      "whyEyebrow": "Unser Service",
+      "whyTitleMain": "Messbar,",
+      "whyTitleIt": "persönlich, ohne Abo-Falle.",
+      "whyLede": "Sie sehen vorher, wo Sie stehen, und nachher, was sich verändert hat.",
+      "pillars": [
+        {
+          "title": "Kostenlose Auswertung",
+          "body": "Bevor Sie einen Euro zahlen, wissen Sie, wie oft die KI Sie heute nennt und wen sie stattdessen empfiehlt."
+        },
+        {
+          "title": "Fester Preis",
+          "body": "Einrichtung 490 € einmalig. Keine Kosten pro Klick, kein Abo, das unbemerkt weiterläuft."
+        },
+        {
+          "title": "Wir machen die Arbeit",
+          "body": "Profile, Daten, Website: wir richten alles ein. Sie geben nur frei."
+        },
+        {
+          "title": "Ehrlich gemessen",
+          "body": "Nach vier Wochen dieselben Fragen noch einmal. Eine Nennung kann niemand garantieren, aber Sie sehen genau, was sich verändert hat."
+        }
+      ],
+      "contactTitleMain": "Wie sieht es",
+      "contactTitleIt": "bei Ihnen aus?",
+      "contactAside": "Nennen Sie uns Ihr Haus und Ihren Ort. Ihre Auswertung erhalten Sie innerhalb von zwei Werktagen, kostenlos und unverbindlich.",
+      "formType": "Branche",
+      "formOptions": [
+        "Hotel & Wellness",
+        "Therme, Park & Freizeit",
+        "Dinner-Show, Varieté & Theater",
+        "Restaurant & Weingut",
+        "Praxis & Klinik",
+        "Handwerk & Fachhandel",
+        "Sonstiges"
+      ],
+      "navIntro": "Intro",
+      "navHow": "Ablauf",
+      "faqEyebrow": "Häufige Fragen",
+      "faqTitleMain": "Häufige Fragen,",
+      "faqTitleIt": "kurz beantwortet.",
+      "faq": [
+        {
+          "q": "Was genau messen Sie?",
+          "a": "Wir stellen ChatGPT, Gemini und Perplexity 20 Fragen, wie Ihre Gäste sie stellen, zum Beispiel nach einem Wellnesshotel in Ihrer Region. Wir zählen, wie oft Sie und Ihre Mitbewerber genannt werden, und notieren die Quellen, aus denen die KI ihre Antwort nimmt."
+        },
+        {
+          "q": "Können Sie garantieren, dass ChatGPT uns empfiehlt?",
+          "a": "Nein, und das kann niemand seriös. Die Antworten einer KI ändern sich. Wir sorgen dafür, dass alle Informationen, die sie für eine Empfehlung braucht, vollständig und richtig vorhanden sind, und zeigen Ihnen das Ergebnis vorher und nachher."
+        },
+        {
+          "q": "Was kostet das?",
+          "a": "Die Auswertung ist kostenlos. Die Einrichtung kostet 490 € einmalig. Eine laufende Betreuung gibt es danach nur, wenn Sie das möchten."
+        },
+        {
+          "q": "Müssen wir dafür etwas tun?",
+          "a": "Kaum. Für einige Profile brauchen wir kurz Ihren Zugang oder Ihre Freigabe. Den Rest erledigen wir."
+        }
+      ]
+    }
+  },
+  "fr": {
+    "shared": {
+      "langCode": "FR",
+      "founderEyebrow": "Qui nous sommes",
+      "founderTitleMain": "Le",
+      "founderTitleIt": "Fondateur.",
+      "founderQuoteMain": "Chaque bel événement",
+      "founderQuoteIt": "mérite",
+      "founderQuoteEnd": " d'être connu des gens qui habitent tout près.",
+      "founderRole": "Propriétaire, LA 27 Productions",
+      "contactDirect": "Ou écrivez-nous directement",
+      "contactStatus": "Tim Helmes s'occupe personnellement de votre demande. Vous recevez en général une réponse le même jour ouvré.",
+      "contactNocost": "Maquette gratuite · Sans engagement",
+      "formName": "Nom",
+      "formEmail": "Email",
+      "formCompany": "Entreprise",
+      "formMessage": "Message",
+      "formSubmit": "Demander une maquette gratuite",
+      "formTypePh": "Choisissez votre secteur",
+      "footerMastered": "LA 27 Productions · E-mail marketing",
+      "trustTop": "Sécurité",
+      "trustLine": "Uniquement des destinataires avec consentement confirmé (double opt-in)",
+      "svcHead": "Services",
+      "svcEv": "E-mailings événementiels",
+      "svcEvTxt": "Votre événement par e-mail aux habitants de votre région, design inclus.",
+      "svcKi": "Visibilité IA",
+      "svcKiTxt": "Être trouvé et recommandé par ChatGPT, Gemini et Perplexity.",
+      "footerLegal": "Mentions légales",
+      "footerPrivacy": "Confidentialité",
+      "footerCookies": "Cookies",
+      "formPrivacy": "Nous utilisons vos données uniquement pour vous répondre. Plus d’infos dans notre",
+      "formPrivacyLink": "politique de confidentialité",
+      "reverseCharge": "Facture en autoliquidation (reverse charge). Vous déclarez la TVA dans votre pays comme d'habitude.",
+      "pageTitle": "LA 27 Productions | E-mail marketing avec design individuel",
+      "metaDesc": "LA 27 Productions conçoit votre événement ou votre offre de saison sous forme d'e-mail et l'envoie à des personnes de votre région qui ont demandé à recevoir des offres (double opt-in). Maquette gratuite d'abord, rapport après l'envoi.",
+      "paymentNote": "Paiement par virement, uniquement après votre validation et avant l'envoi.",
+      "formMessagePh": "p. ex. Quoi : concert de Noël, Quand : 19/12, Où : 25 km autour de Lyon",
+      "legalHref": "/privacidad.html#en",
+      "privacyHref": "/privacidad.html#en",
+      "cookiesHref": "/privacidad.html#en"
+    },
+    "marketing": {
+      "navWork": "Exemples",
+      "navWhy": "Vos avantages",
+      "navFounder": "Votre contact",
+      "navContact": "Contact",
+      "founderBio": "Tim Helmes est le propriétaire de LA 27 Productions. Pour les organisateurs d'événements, les acteurs des loisirs et du tourisme et les commerces de proximité, LA 27 prend en charge tout l'e-mail marketing : concept, texte, design individuel, envoi à des personnes de votre région ayant donné leur consentement, puis rapport. Tim est votre interlocuteur personnel, de la première idée jusqu'au résultat.",
+      "heroBadge": "E-mail marketing avec design individuel, suivi personnel",
+      "heroTitleMain": "Plus de clients ?",
+      "heroTitleIt": "Nous envoyons votre offre à des milliers de personnes de votre région.",
+      "heroSub": "Par e-mail, avec un design exclusif. Vous ne payez que si la maquette vous plaît.",
+      "heroScroll": "Comment ça marche",
+      "heroBtn": "Demander une maquette gratuite",
+      "pill1": "Design individuel, pas de modèle",
+      "pill2": "Maquette rapide, gratuite",
+      "pill3": "Suivi personnel, avec double opt-in",
+      "trust": [
+        "Concerts et théâtre",
+        "Carnaval et festivals",
+        "Hôtels et bien-être",
+        "Loisirs et domaines viticoles",
+        "Voyages en autocar",
+        "Commerce local et portes ouvertes",
+        "Double opt-in"
+      ],
+      "howEyebrow": "Comment ça marche",
+      "howTitleMain": "Du premier échange",
+      "howTitleIt": "à la boîte mail.",
+      "flowLabelRaw": "Votre offre",
+      "flowLabelFilter": "Zone + consentement",
+      "flowLabelReal": "Votre région",
+      "compareThemTitle": "Newsletter standard",
+      "compareThemSub": "Modèle, sans zone ciblée",
+      "compareThemResult": "Peu d'effet",
+      "compareUsTitle": "Design individuel, pour des personnes de votre région ayant donné leur consentement",
+      "sampleContacts": [
+        "Maquette d'abord, gratuite",
+        "Rayon au choix, p. ex. 25 km",
+        "Uniquement en double opt-in",
+        "Lien de désinscription dans chaque e-mail",
+        "D'abord vous validez, ensuite vous payez",
+        "Rapport : délivrés, ouvertures, clics"
+      ],
+      "steps": [
+        {
+          "title": "Vous nous présentez votre offre",
+          "desc": "Événement ou offre de saison, date et zone, par exemple 25 km autour de votre salle."
+        },
+        {
+          "title": "Vous recevez une maquette gratuite",
+          "desc": "Nous concevons l'e-mail final. Vous voyez exactement ce qui sera envoyé avant de décider."
+        },
+        {
+          "title": "Vous validez et payez",
+          "desc": "La facture n'arrive qu'après votre validation. Le paiement a lieu avant l'envoi."
+        },
+        {
+          "title": "Envoi et rapport",
+          "desc": "L'e-mail part vers des habitants de votre région en double opt-in. Ensuite, vous recevez le rapport : délivrés, ouvertures, clics."
+        }
+      ],
+      "workEyebrow": "Secteurs",
+      "workTitleMain": "Pour qui",
+      "workTitleIt": "nous travaillons.",
+      "workNote": "Nous travaillons pour des entreprises qui veulent toucher les personnes de leur région. Chaque e-mail est conçu individuellement pour votre offre, votre lieu et votre région.",
+      "tiles": [
+        {
+          "tag": "Secteur",
+          "title": "Concerts, théâtre et humour",
+          "desc": "Votre concert de Noël, votre soirée humour ou votre dîner-spectacle en e-mail aux habitants des environs, avec date, visuel et lien billetterie direct, assez tôt."
+        },
+        {
+          "tag": "Secteur",
+          "title": "Carnaval, Saint-Sylvestre et festivals",
+          "desc": "Soirées de carnaval, réveillon ou festival : en e-mail aux gens proches, avec date, programme et accès direct aux billets."
+        },
+        {
+          "tag": "Secteur",
+          "title": "Hôtels et bien-être",
+          "desc": "Votre offre week-end ou bien-être pour la saison creuse, envoyée à ceux qui habitent assez près pour une escapade."
+        },
+        {
+          "tag": "Secteur",
+          "title": "Loisirs : thermes, escape games, domaines viticoles",
+          "desc": "Ouverture de saison, dégustation, offre vacances ou bon cadeau en e-mail aux habitants de votre région qui cherchent une sortie."
+        },
+        {
+          "tag": "Secteur",
+          "title": "Voyages en autocar et excursions",
+          "desc": "Votre nouveau programme, vos excursions d'une journée ou vos conférences de voyage en e-mail autour de vos points de départ."
+        },
+        {
+          "tag": "Secteur",
+          "title": "Commerce local et portes ouvertes",
+          "desc": "Camping-cars, cuisinistes, audioprothésistes : vos portes ouvertes, votre journée promotionnelle ou votre offre de saison en e-mail aux habitants autour de votre magasin, avec date, accès et offre."
+        }
+      ],
+      "whyEyebrow": "Notre service",
+      "whyTitleMain": "Service premium,",
+      "whyTitleIt": "rapide, exclusif, personnel.",
+      "whyLede": "Un interlocuteur fixe, un e-mail rien que pour vous, ajusté jusqu'à ce qu'il soit parfait.",
+      "pillars": [
+        {
+          "title": "Réponse le jour ouvré même",
+          "body": "Vous écrivez, nous répondons en général le jour ouvré même. Personnellement, sans attente."
+        },
+        {
+          "title": "Design exclusif",
+          "body": "Aucun modèle : chaque e-mail est créé de zéro, à vos couleurs, avec vos images et vos textes. La maquette est gratuite."
+        },
+        {
+          "title": "Modifications illimitées",
+          "body": "Nous ajustons la maquette autant de fois que vous le souhaitez, jusqu'à ce qu'elle soit exactement comme vous la voulez. Ensuite seulement, vous validez."
+        },
+        {
+          "title": "Votre région, avec rapport",
+          "body": "Uniquement des personnes du rayon choisi ayant accepté par double opt-in. Ensuite, vous recevez livraisons, ouvertures et clics."
+        }
+      ],
+      "contactTitleMain": "Parlez-nous",
+      "contactTitleIt": "de votre offre.",
+      "contactAside": "Dites-nous ce que vous voulez promouvoir, quand et dans quelle région. Vous recevez une maquette gratuite et sans engagement de votre e-mail.",
+      "formType": "Secteur",
+      "formOptions": [
+        "Concerts et tournées",
+        "Théâtre, humour et dîners-spectacles",
+        "Carnaval, Saint-Sylvestre et festivals",
+        "Hôtels et bien-être",
+        "Loisirs (thermes, parcs, escape games)",
+        "Domaines viticoles et gastronomie",
+        "Voyages en autocar et excursions",
+        "Commerce local et portes ouvertes (camping-cars, cuisines, audition)",
+        "Autre"
+      ],
+      "navIntro": "Intro",
+      "navHow": "Fonctionnement",
+      "faqEyebrow": "Questions fréquentes",
+      "faqTitleMain": "Questions fréquentes,",
+      "faqTitleIt": "réponses courtes.",
+      "faq": [
+        {
+          "q": "Quelle est la rapidité ?",
+          "a": "Vous recevez votre maquette individuelle peu de temps après votre demande. Après votre validation et le paiement, nous planifions l'envoi à la date de votre choix."
+        },
+        {
+          "q": "D'où viennent les destinataires ?",
+          "a": "Les destinataires se sont inscrits eux-mêmes pour recevoir des offres de leur région et l'ont confirmé par un e-mail de confirmation (double opt-in). Le consentement est enregistré avec date et heure, et chaque e-mail contient un lien de désinscription. Nous ne transmettons aucune adresse : nous envoyons pour vous."
+        },
+        {
+          "q": "Combien ça coûte ?",
+          "a": "Un prix fixe par campagne, selon la région et le nombre de destinataires, vous le recevez avec la maquette gratuite. Sans abonnement, sans coût par clic."
+        },
+        {
+          "q": "Avez-vous besoin de nos données clients ?",
+          "a": "Non. Vous n'avez pas besoin de votre propre liste. Vous nous donnez votre offre, vos images et votre lien ; nous envoyons à des habitants de votre région qui veulent recevoir des offres."
+        }
+      ]
+    }
+  },
+  "pt": {
+    "shared": {
+      "langCode": "PT",
+      "founderEyebrow": "Quem somos",
+      "founderTitleMain": "O",
+      "founderTitleIt": "Fundador.",
+      "founderQuoteMain": "Cada bom evento",
+      "founderQuoteIt": "merece",
+      "founderQuoteEnd": " que as pessoas que vivem perto saibam dele.",
+      "founderRole": "Proprietário, LA 27 Productions",
+      "contactDirect": "Ou escreve-nos diretamente",
+      "contactStatus": "O Tim Helmes trata pessoalmente do seu pedido. Normalmente recebe resposta no mesmo dia útil.",
+      "contactNocost": "Rascunho gratuito · Sem compromisso",
+      "formName": "Nome",
+      "formEmail": "Email",
+      "formCompany": "Empresa",
+      "formMessage": "Mensagem",
+      "formSubmit": "Pedir rascunho gratuito",
+      "formTypePh": "Selecione o seu setor",
+      "footerMastered": "LA 27 Productions · E-mail marketing",
+      "trustTop": "Segurança",
+      "trustLine": "Apenas destinatários com consentimento confirmado (double opt-in)",
+      "svcHead": "Serviços",
+      "svcEv": "E-mailings para eventos",
+      "svcEvTxt": "O seu evento por e-mail às pessoas da sua região, design incluído.",
+      "svcKi": "Visibilidade em IA",
+      "svcKiTxt": "Ser encontrado e recomendado pelo ChatGPT, Gemini e Perplexity.",
+      "footerLegal": "Aviso legal",
+      "footerPrivacy": "Privacidade",
+      "footerCookies": "Cookies",
+      "formPrivacy": "Usamos os seus dados apenas para lhe responder. Mais informações na",
+      "formPrivacyLink": "política de privacidade",
+      "reverseCharge": "Fatura com autoliquidação (reverse charge). O IVA é declarado por si no seu país, como habitualmente.",
+      "pageTitle": "LA 27 Productions | E-mail marketing com design individual",
+      "metaDesc": "A LA 27 Productions cria o seu evento ou oferta de temporada como e-mail e envia-o a pessoas da sua região que pediram para receber ofertas (double opt-in). Rascunho gratuito antes de decidir e relatório após o envio.",
+      "paymentNote": "Pagamento por transferência, só depois da sua aprovação e antes do envio.",
+      "formMessagePh": "p. ex. O quê: concerto de Natal, Quando: 19/12, Onde: 25 km à volta do Porto",
+      "legalHref": "/privacidad.html#en",
+      "privacyHref": "/privacidad.html#en",
+      "cookiesHref": "/privacidad.html#en"
+    },
+    "marketing": {
+      "navWork": "Exemplos",
+      "navWhy": "A sua vantagem",
+      "navFounder": "Contacto pessoal",
+      "navContact": "Contacto",
+      "founderBio": "Tim Helmes é o proprietário da LA 27 Productions. Para organizadores de eventos, lazer, turismo e comércio local, a LA 27 assegura todo o e-mail marketing: conceito, texto, design individual, envio a pessoas da sua região com consentimento e o relatório no fim. O Tim é o seu contacto pessoal, desde a primeira ideia até ao resultado.",
+      "heroBadge": "E-mail marketing com design individual, acompanhamento pessoal",
+      "heroTitleMain": "Mais clientes?",
+      "heroTitleIt": "Enviamos a sua oferta a milhares de pessoas da sua região.",
+      "heroSub": "Por e-mail, com design exclusivo. Só paga se gostar do rascunho.",
+      "heroScroll": "Como funciona",
+      "heroBtn": "Pedir rascunho gratuito",
+      "pill1": "Design individual, sem modelo",
+      "pill2": "Rascunho em pouco tempo, grátis",
+      "pill3": "Acompanhamento pessoal, com double opt-in",
+      "trust": [
+        "Concertos e teatro",
+        "Carnaval e festivais",
+        "Hotéis e spa",
+        "Lazer e quintas vinícolas",
+        "Viagens de autocarro",
+        "Comércio local e dias abertos",
+        "Double opt-in"
+      ],
+      "howEyebrow": "Como funciona",
+      "howTitleMain": "Da primeira conversa",
+      "howTitleIt": "à caixa de entrada.",
+      "flowLabelRaw": "A sua oferta",
+      "flowLabelFilter": "Zona + consentimento",
+      "flowLabelReal": "A sua região",
+      "compareThemTitle": "Newsletter padrão",
+      "compareThemSub": "Modelo, sem região definida",
+      "compareThemResult": "Pouco efeito",
+      "compareUsTitle": "Design individual, para pessoas da sua região com consentimento",
+      "sampleContacts": [
+        "Rascunho prévio, grátis",
+        "Raio à escolha, p. ex. 25 km",
+        "Apenas com double opt-in",
+        "Link de cancelamento em cada e-mail",
+        "Primeiro aprova, depois paga",
+        "Relatório: entregues, aberturas, cliques"
+      ],
+      "steps": [
+        {
+          "title": "Fala-nos da sua oferta",
+          "desc": "Evento ou oferta sazonal, data e zona, por exemplo 25 km à volta do seu espaço."
+        },
+        {
+          "title": "Recebe um rascunho gratuito",
+          "desc": "Desenhamos o e-mail final. Vê exatamente o que vai ser enviado antes de decidir."
+        },
+        {
+          "title": "Aprova e paga",
+          "desc": "A fatura só chega depois da sua aprovação. O pagamento é feito antes do envio."
+        },
+        {
+          "title": "Envio e relatório",
+          "desc": "O e-mail chega a pessoas da sua região com double opt-in. Depois recebe o relatório: entregues, aberturas, cliques."
+        }
+      ],
+      "workEyebrow": "Setores",
+      "workTitleMain": "Para quem",
+      "workTitleIt": "trabalhamos.",
+      "workNote": "Trabalhamos para empresas que querem chegar às pessoas da sua região. Criamos cada e-mail de forma individual para a sua oferta, o seu espaço e a sua região.",
+      "tiles": [
+        {
+          "tag": "Setor",
+          "title": "Concertos, teatro e comédia",
+          "desc": "O seu concerto de Natal, noite de comédia ou jantar-espetáculo como e-mail às pessoas da zona, com data, imagem e ligação direta aos bilhetes, a tempo."
+        },
+        {
+          "tag": "Setor",
+          "title": "Carnaval, Passagem de Ano e festivais",
+          "desc": "Bailes de Carnaval, Passagem de Ano ou festival: como e-mail a quem vive perto, com data, programa e acesso direto aos bilhetes."
+        },
+        {
+          "tag": "Setor",
+          "title": "Hotéis e spa",
+          "desc": "A sua escapadinha de fim de semana ou oferta de bem-estar para a época baixa, enviada a quem vive suficientemente perto."
+        },
+        {
+          "tag": "Setor",
+          "title": "Lazer: termas, escape rooms, quintas vinícolas",
+          "desc": "Abertura de época, prova de vinhos, oferta de férias ou vale-presente como e-mail a pessoas da sua região à procura de um passeio."
+        },
+        {
+          "tag": "Setor",
+          "title": "Viagens de autocarro e passeios",
+          "desc": "O seu novo programa de viagens, passeios de um dia ou palestras de viagem como e-mail à volta dos seus pontos de partida."
+        },
+        {
+          "tag": "Setor",
+          "title": "Comércio local e dias abertos",
+          "desc": "Autocaravanas, cozinhas, aparelhos auditivos: o seu dia aberto, ação promocional ou oferta sazonal como e-mail a quem vive perto da sua loja, com data, como chegar e oferta."
+        }
+      ],
+      "whyEyebrow": "O nosso serviço",
+      "whyTitleMain": "Serviço premium,",
+      "whyTitleIt": "rápido, exclusivo, pessoal.",
+      "whyLede": "Um contacto fixo, um e-mail só para si, ajustado até ficar perfeito.",
+      "pillars": [
+        {
+          "title": "Resposta no mesmo dia útil",
+          "body": "Escreve-nos e normalmente respondemos no mesmo dia útil. Pessoalmente, sem esperas."
+        },
+        {
+          "title": "Design exclusivo",
+          "body": "Sem modelos: cada e-mail é criado de raiz, com as suas cores, imagens e textos. O rascunho é grátis."
+        },
+        {
+          "title": "Alterações ilimitadas",
+          "body": "Ajustamos o rascunho quantas vezes quiser, até ficar exatamente como quer. Só depois dá a aprovação."
+        },
+        {
+          "title": "Só a sua região, com relatório",
+          "body": "Só pessoas no raio escolhido que aceitaram por double opt-in. Depois recebe entregas, aberturas e cliques."
+        }
+      ],
+      "contactTitleMain": "Fale-nos",
+      "contactTitleIt": "da sua oferta.",
+      "contactAside": "Diga-nos o que quer promover, quando e em que região. Recebe um rascunho gratuito e sem compromisso do seu e-mail.",
+      "formType": "Setor",
+      "formOptions": [
+        "Concertos e digressões",
+        "Teatro, comédia e jantares-espetáculo",
+        "Carnaval, Passagem de Ano e festivais",
+        "Hotéis e spa",
+        "Lazer (termas, parques, escape rooms)",
+        "Vinho e gastronomia",
+        "Viagens de autocarro e passeios",
+        "Comércio local e dias abertos (autocaravanas, cozinhas, audição)",
+        "Outro"
+      ],
+      "navIntro": "Intro",
+      "navHow": "Como funciona",
+      "faqEyebrow": "Perguntas frequentes",
+      "faqTitleMain": "Perguntas frequentes,",
+      "faqTitleIt": "respostas curtas.",
+      "faq": [
+        {
+          "q": "Com que rapidez?",
+          "a": "Recebe o seu rascunho individual pouco depois do seu pedido. Após a sua aprovação e o pagamento, planeamos o envio para a data que preferir."
+        },
+        {
+          "q": "De onde vêm os destinatários?",
+          "a": "Os destinatários inscreveram-se eles próprios para receber ofertas da sua região e confirmaram-no por e-mail de confirmação (double opt-in). O consentimento fica registado com data e hora, e cada e-mail tem uma ligação de cancelamento. Não entregamos endereços: enviamos nós por si."
+        },
+        {
+          "q": "Quanto custa?",
+          "a": "Um preço fixo por campanha, conforme a região e o número de destinatários, recebe-o junto com o rascunho gratuito. Sem assinatura, sem custo por clique."
+        },
+        {
+          "q": "Precisam dos nossos dados de clientes?",
+          "a": "Não. Não precisa de uma lista própria. Dá-nos a sua oferta, imagens e ligação; nós enviamos a pessoas da sua região que querem receber ofertas."
+        }
+      ]
+    }
+  }
+};
+
+class Component extends DCLogic {
+  constructor() {
+    super();
+    let initialLang = 'de';
+    try {
+      const urlParams = new URLSearchParams(window.location.search);
+      const urlLang = urlParams.get('lang');
+      const stored = localStorage.getItem('la27.lang');
+      if (urlLang && DICT[urlLang.toLowerCase()]) {
+        initialLang = urlLang.toLowerCase();
+        localStorage.setItem('la27.lang', initialLang);
+      } else if (stored && DICT[stored]) {
+        initialLang = stored;
+      } else {
+        initialLang = 'de'; // el alemán es siempre el primer idioma (mercado DACH)
+      }
+    } catch (e) {}
+
+    this.state = {
+      lang: 'de',
+      langMenuOpen: false,
+      sampleIndex: 0
+    };
+  }
+
+  componentDidMount() {
+    this._sampleInterval = setInterval(() => {
+      this.setState({ sampleIndex: (this.state.sampleIndex + 1) % 6 });
+    }, 3200);
+
+    this.initCursor();
+    this.initScrollProgress();
+    this.initReveal();
+    this.initSectionIndex();
+    this.initCanvasBad();
+    this.initCanvasGood();
+    this.initStars();
+    this.initGlobe();
+    this.applyLangMeta();
+    setTimeout(() => this.applyLangMeta(), 300);
+
+    document.addEventListener('click', (e) => {
+      if (this.state.langMenuOpen && !e.target.closest('[data-role="lang-menu"]')) {
+        this.setState({ langMenuOpen: false });
+      }
+    });
+  }
+
+  componentWillUnmount() {
+    clearInterval(this._sampleInterval);
+    if (this._animGood) cancelAnimationFrame(this._animGood);
+    if (this._animBad) cancelAnimationFrame(this._animBad);
+    if (this._raf) cancelAnimationFrame(this._raf);
+    if (this._animStars) cancelAnimationFrame(this._animStars);
+    if (this._animGlobe) cancelAnimationFrame(this._animGlobe);
+  }
+
+  applyLangMeta() {
+    try {
+      const sh = (DICT[this.state.lang] || DICT.de).shared;
+      if (sh.pageTitle && document.title !== sh.pageTitle) document.title = sh.pageTitle;
+      document.documentElement.lang = this.state.lang;
+      document.querySelectorAll('meta[name="description"]').forEach((el) => { if (sh.metaDesc) el.setAttribute('content', sh.metaDesc); });
+    } catch (e) {}
+  }
+
+  componentDidUpdate() {
+    this.applyLangMeta();
+    if (this._lastLang === undefined) this._lastLang = this.state.lang;
+    if (this._lastLang !== this.state.lang) {
+      this._lastLang = this.state.lang;
+      setTimeout(() => {
+        this.initReveal();
+        this.initSectionIndex();
+      }, 50);
+    }
+  }
+
+  toggleLangMenu = (e) => {
+    e.stopPropagation();
+    this.setState({ langMenuOpen: !this.state.langMenuOpen });
+  };
+
+  selectLang = (code) => (e) => {
+    e.preventDefault();
+    try { localStorage.setItem('la27.lang', code); } catch (err) {}
+    this.setState({ lang: code, langMenuOpen: false });
+  };
+
+  initCursor() {
+    const cursor = document.querySelector('[data-role="cursor"]');
+    if (!cursor || !window.matchMedia('(hover: hover)').matches) return;
+    let cx = window.innerWidth / 2, cy = window.innerHeight / 2, tx = cx, ty = cy;
+    window.addEventListener('mousemove', (e) => { tx = e.clientX; ty = e.clientY; });
+    const render = () => {
+      cx += (tx - cx) * 0.22; cy += (ty - cy) * 0.22;
+      cursor.style.transform = `translate(${cx}px, ${cy}px) translate(-50%, -50%)`;
+      this._raf = requestAnimationFrame(render);
+    };
+    render();
+    const label = cursor.querySelector('[data-role="cursor-label"]');
+    document.addEventListener('mouseover', (e) => {
+      const hover = e.target.closest('[data-cursor="hover"]');
+      if (hover) { cursor.style.width = '56px'; cursor.style.height = '56px'; cursor.style.background = INK; cursor.style.mixBlendMode = 'difference'; if (label) label.style.opacity = '0'; }
+    });
+    document.addEventListener('mouseout', (e) => {
+      const hover = e.target.closest('[data-cursor="hover"]');
+      if (hover) { cursor.style.width = '8px'; cursor.style.height = '8px'; cursor.style.background = INK; cursor.style.mixBlendMode = 'difference'; if (label) label.style.opacity = '0'; }
+    });
+  }
+
+  initScrollProgress() {
+    const bar = document.querySelector('[data-role="scroll-progress"]');
+    const onScroll = () => {
+      const h = document.documentElement.scrollHeight - window.innerHeight;
+      const p = h > 0 ? Math.min(1, Math.max(0, window.scrollY / h)) : 0;
+      if (bar) bar.style.width = (p * 100) + '%';
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+  }
+
+  initReveal() {
+    if (this._io) this._io.disconnect();
+    if (this._revealSafety) clearTimeout(this._revealSafety);
+    const reveal = (el) => { el.style.opacity = '1'; el.style.transform = 'translateY(0)'; };
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((e) => { if (e.isIntersecting) { reveal(e.target); io.unobserve(e.target); } });
+    }, { threshold: 0, rootMargin: '0px 0px 0px 0px' });
+    const els = [...document.querySelectorAll('[data-reveal]')].filter((el) => el.offsetParent !== null);
+    els.forEach((el) => {
+      el.style.opacity = '0'; el.style.transform = 'translateY(32px)';
+      el.style.transition = 'opacity 0.9s cubic-bezier(0.16,1,0.3,1), transform 0.9s cubic-bezier(0.16,1,0.3,1)';
+      io.observe(el);
+      const r = el.getBoundingClientRect();
+      if (r.top < window.innerHeight && r.bottom > 0) reveal(el);
+    });
+    this._io = io;
+    this._revealSafety = setTimeout(() => { els.forEach(reveal); }, 2500);
+  }
+
+  initSectionIndex() {
+    const sections = [...document.querySelectorAll('section[data-section]')];
+    const links = [...document.querySelectorAll('[data-role="section-index-link"]')];
+    const update = () => {
+      const mid = window.scrollY + window.innerHeight * 0.4;
+      let active = sections[0];
+      sections.forEach((s) => { if (s.offsetTop <= mid) active = s; });
+      links.forEach((a) => { a.style.opacity = (active && a.dataset.target === active.id) ? '1' : '0.4'; });
+    };
+    window.addEventListener('scroll', update, { passive: true });
+    update();
+  }
+
+  initCanvasBad() {
+    const c = document.querySelector('[data-role="flow-canvas-bad"]');
+    if (!c) return;
+    const ctx = c.getContext('2d');
+    let w = (c.width = c.clientWidth * (window.devicePixelRatio || 1));
+    let h = (c.height = c.clientHeight * (window.devicePixelRatio || 1));
+    const N = 48;
+    const pts = Array.from({ length: N }, () => ({
+      x: Math.random() * w, y: Math.random() * h,
+      vx: 0.8 + Math.random() * 1.6, vy: (Math.random() - 0.5) * 0.8,
+      rad: 1.5 + Math.random() * 2,
+      isBounce: Math.random() < 0.45
+    }));
+    let visible = false;   // 12/11 rendimiento: solo se anima mientras está en pantalla
+    if ('IntersectionObserver' in window) new IntersectionObserver((es) => { visible = es[0].isIntersecting; }).observe(c); else visible = true;
+    const draw = () => {
+      if (!visible) { this._animBad = requestAnimationFrame(draw); return; }
+      ctx.clearRect(0, 0, w, h);
+      pts.forEach((p) => {
+        p.x += p.vx; p.y += p.vy;
+        if (p.x > w) { p.x = 0; p.y = Math.random() * h; }
+        ctx.fillStyle = p.isBounce ? 'rgba(220,38,38,0.75)' : 'rgba(245,241,239,0.2)';
+        ctx.beginPath(); ctx.arc(p.x, p.y, p.rad, 0, Math.PI * 2); ctx.fill();
+      });
+      this._animBad = requestAnimationFrame(draw);
+    };
+    draw();
+  }
+
+  initCanvasGood() {
+    const c = document.querySelector('[data-role="flow-canvas"]');
+    if (!c) return;
+    const ctx = c.getContext('2d');
+    let w = (c.width = c.clientWidth * (window.devicePixelRatio || 1));
+    let h = (c.height = c.clientHeight * (window.devicePixelRatio || 1));
+    const N = 56;
+    const pts = Array.from({ length: N }, () => ({
+      x: Math.random() * w, y: Math.random() * h,
+      vx: 0.8 + Math.random() * 1.8, vy: (Math.random() - 0.5) * 0.6,
+      rad: 1.5 + Math.random() * 2.2
+    }));
+    let visible = false;   // 12/11 rendimiento: solo se anima mientras está en pantalla
+    if ('IntersectionObserver' in window) new IntersectionObserver((es) => { visible = es[0].isIntersecting; }).observe(c); else visible = true;
+    const draw = () => {
+      if (!visible) { this._animGood = requestAnimationFrame(draw); return; }
+      ctx.clearRect(0, 0, w, h);
+      const filterX = w * 0.5;
+      ctx.strokeStyle = 'rgba(250,250,249,0.14)';
+      ctx.setLineDash([4, 4]);
+      ctx.beginPath(); ctx.moveTo(filterX, 0); ctx.lineTo(filterX, h); ctx.stroke();
+      ctx.setLineDash([]);
+      pts.forEach((p) => {
+        p.x += p.vx; p.y += p.vy;
+        if (p.x > w) { p.x = 0; p.y = Math.random() * h; }
+        const passed = p.x > filterX;
+        ctx.fillStyle = passed ? 'rgba(245,241,239,0.95)' : 'rgba(245,241,239,0.2)';
+        ctx.beginPath(); ctx.arc(p.x, p.y, p.rad, 0, Math.PI * 2); ctx.fill();
+      });
+      this._animGood = requestAnimationFrame(draw);
+    };
+    draw();
+  }
+
+  initStars() {
+    const c = document.querySelector('[data-role="stars"]');
+    if (!c) return;
+    const ctx = c.getContext('2d');
+    const quieto = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    let w, h, dpr, stars;
+    const size = () => {
+      dpr = Math.min(window.devicePixelRatio || 1, 2);
+      w = c.width = window.innerWidth * dpr; h = c.height = window.innerHeight * dpr;
+      const n = Math.round((window.innerWidth * window.innerHeight) / 9000);
+      stars = Array.from({ length: n }, () => ({ x: Math.random() * w, y: Math.random() * h, r: (Math.random() * 0.9 + 0.3) * dpr, a: Math.random() * 0.35 + 0.05, t: Math.random() * Math.PI * 2, v: Math.random() * 0.012 + 0.004 }));
+    };
+    size();
+    window.addEventListener('resize', size);
+    let ultEst = -1e9;   // 12/11 rendimiento: 30 fps, mismo ritmo de parpadeo (paso doble)
+    const draw = (now) => {
+      if (!quieto && now && now - ultEst < 30) { this._animStars = requestAnimationFrame(draw); return; }
+      ultEst = now || 0;
+      ctx.clearRect(0, 0, w, h);
+      stars.forEach((st) => {
+        st.t += st.v * 2;
+        const a = quieto ? st.a : st.a * (0.6 + 0.4 * Math.sin(st.t));
+        ctx.fillStyle = 'rgba(245,236,234,' + a.toFixed(3) + ')';
+        ctx.beginPath(); ctx.arc(st.x, st.y, st.r, 0, Math.PI * 2); ctx.fill();
+      });
+      if (!quieto) this._animStars = requestAnimationFrame(draw);
+    };
+    draw();
+  }
+
+  initGlobe() {
+    const cg = document.querySelector('[data-role="globe"]');
+    const cr = document.querySelector('[data-role="routes"]');
+    if (!cg || !cr) return;
+    const quieto = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const RAD = Math.PI / 180;
+    // Tim 25/11: red de Europa a Europa, muchísimas ciudades, líneas de todos lados a todos lados (sin centro).
+    const CITIES = [[52.52,13.40],[53.55,9.99],[48.14,11.58],[50.94,6.96],[50.11,8.68],[48.78,9.18],[51.23,6.78],[51.51,7.47],[51.46,7.01],[53.08,8.80],[51.34,12.37],[51.05,13.74],[52.37,9.73],[49.45,11.08],[51.48,7.22],[50.73,7.10],[49.49,8.47],[49.01,8.40],[48.37,10.90],[50.98,11.03],[52.13,11.63],[54.32,10.13],[54.09,12.14],[47.99,7.84],[49.87,8.65],[50.78,6.08],[52.27,8.05],[48.40,9.99],[49.24,6.99],[50.08,8.24],[49.01,12.10],[50.83,12.92],[51.96,7.63],[52.40,13.07],[47.66,9.18],[50.36,7.59],[49.79,9.95],[51.31,9.48],[53.87,10.69],[48.21,16.37],[47.07,15.44],[48.31,14.29],[47.80,13.04],[47.26,11.39],[47.37,8.54],[46.95,7.45],[47.56,7.59],[46.20,6.14],[47.05,8.31],[46.52,6.63],[47.42,9.37],[48.86,2.35],[45.76,4.84],[43.30,5.37],[43.60,1.44],[48.58,7.75],[47.22,-1.55],[44.84,-0.58],[50.63,3.06],[43.70,7.27],[51.51,-0.13],[53.48,-2.24],[55.95,-3.19],[52.49,-1.89],[53.35,-6.26],[52.37,4.90],[51.92,4.48],[52.09,5.12],[51.44,5.47],[50.85,4.35],[51.22,4.40],[51.05,3.72],[49.61,6.13],[55.68,12.57],[59.33,18.07],[57.71,11.97],[59.91,10.75],[60.17,24.94],[59.44,24.75],[56.95,24.11],[54.69,25.28],[52.23,21.01],[50.06,19.94],[51.11,17.04],[52.41,16.93],[54.35,18.65],[50.08,14.44],[49.20,16.61],[48.15,17.11],[47.50,19.04],[46.06,14.51],[45.81,15.98],[44.79,20.45],[44.43,26.10],[42.70,23.32],[37.98,23.73],[40.64,22.94],[41.90,12.50],[45.46,9.19],[45.07,7.69],[45.44,12.32],[44.49,11.34],[43.77,11.26],[40.85,14.27],[38.12,13.36],[41.39,2.17],[40.42,-3.70],[39.47,-0.38],[37.39,-5.98],[43.26,-2.93],[41.65,-0.88],[38.72,-9.14],[41.15,-8.61],[35.90,14.51],[46.77,23.59],[45.75,21.23]];
+    const vec = (lat, lon) => [Math.cos(lat * RAD) * Math.sin(lon * RAD), Math.sin(lat * RAD), Math.cos(lat * RAD) * Math.cos(lon * RAD)];
+    const slerp = (p, q, t) => {
+      const d = Math.acos(Math.min(1, p[0] * q[0] + p[1] * q[1] + p[2] * q[2])), sn = Math.sin(d) || 1;
+      const k1 = Math.sin((1 - t) * d) / sn, k2 = Math.sin(t * d) / sn;
+      return [p[0] * k1 + q[0] * k2, p[1] * k1 + q[1] * k2, p[2] * k1 + q[2] * k2];
+    };
+    const V = CITIES.map((c) => vec(c[0], c[1]));
+    const rnd = (n) => { const x = Math.sin(n * 12.9898 + 78.233) * 43758.5453; return x - Math.floor(x); };
+    const parCache = {};
+    const par = (i, ciclo) => {
+      const key = i + ':' + ciclo; if (parCache[key]) return parCache[key];
+      let a = Math.floor(rnd(i * 97.3 + ciclo * 13.7) * V.length), b = Math.floor(rnd(i * 31.1 + ciclo * 7.9 + 5) * V.length);
+      if (b === a) b = (b + 11) % V.length;
+      const from = V[a], to = V[b];
+      const r = { from, to, d: Math.acos(Math.min(1, from[0] * to[0] + from[1] * to[1] + from[2] * to[2])) };
+      parCache[key] = r; delete parCache[i + ':' + (ciclo - 2)];
+      return r;
+    };
+    const arcs = Array.from({ length: 14 }, (_, i) => ({ i, off: (i * 0.618034) % 1 }));
+    const TILT = 40 * RAD; // Europa mirando al frente
+    const RADIO = 0.40;    // radio del globo respecto al lado menor del lienzo
+
+    // ---- WebGL: esfera trazada por píxel sobre un cuadrado, textura NASA Black Marble (dominio público)
+    const gl = cg.getContext('webgl', { premultipliedAlpha: true, alpha: true, antialias: true });
+    let prog = null, uni = {}, texOk = false;
+    if (gl) {
+      const vs = 'attribute vec2 p; varying vec2 v; void main(){ v = p; gl_Position = vec4(p, 0.0, 1.0); }';
+      const fs = [
+        'precision highp float; varying vec2 v; uniform sampler2D tex; uniform float yaw, tilt, rad, aspect, ok;',
+        'void main(){',
+        '  vec2 q = vec2(v.x * aspect, v.y) / rad;',
+        '  float r2 = dot(q, q);',
+        '  vec3 atm = vec3(0.55, 0.04, 0.035);',
+        '  if (r2 > 1.0) {',
+        '    float d = sqrt(r2) - 1.0;',
+        '    float g = exp(-d * 16.0) * 0.32;',
+        '    gl_FragColor = vec4(atm * g, g); return;',
+        '  }',
+        '  float z = sqrt(1.0 - r2);',
+        '  float ct = cos(tilt), st = sin(tilt), cy = cos(yaw), sy = sin(yaw);',
+        '  float y = q.y * ct + z * st; float z1 = -q.y * st + z * ct;',
+        '  float x = q.x * cy - z1 * sy; float zz = q.x * sy + z1 * cy;',
+        '  float lat = asin(clamp(y, -1.0, 1.0)); float lon = atan(x, zz);',
+        '  vec2 uv = vec2((lon + 3.14159265) / 6.2831853, 0.5 - lat / 3.14159265);',
+        '  vec3 c = ok > 0.5 ? texture2D(tex, uv).rgb : vec3(0.05, 0.05, 0.1);',
+        '  float lights = smoothstep(0.16, 0.62, max(c.r, c.g) - c.b * 0.35);',
+        '  float land = smoothstep(0.07, 0.30, c.b) * (1.0 - lights);',
+        '  vec3 col = vec3(0.022, 0.010, 0.012);',
+        '  col += land * vec3(0.13, 0.085, 0.085);',
+        '  col += lights * vec3(0.95, 0.16, 0.10) * 1.25;',
+        '  col += pow(lights, 3.0) * vec3(1.0, 0.72, 0.55) * 0.7;',
+        '  vec3 n = vec3(q, z);',
+        '  float dif = clamp(dot(n, normalize(vec3(-0.45, 0.5, 0.75))), 0.0, 1.0);',
+        '  col *= 0.35 + 0.85 * dif;',
+        '  float fr = pow(1.0 - z, 3.0);',
+        '  col += atm * fr * 0.55;',
+        '  float edge = smoothstep(1.0, 0.985, sqrt(r2));',
+        '  gl_FragColor = vec4(col * edge, edge);',
+        '}'].join('\n');
+      const sh = (t, src) => { const o = gl.createShader(t); gl.shaderSource(o, src); gl.compileShader(o); if (!gl.getShaderParameter(o, gl.COMPILE_STATUS)) { console.warn(gl.getShaderInfoLog(o)); return null; } return o; };
+      const v1 = sh(gl.VERTEX_SHADER, vs), f1 = sh(gl.FRAGMENT_SHADER, fs);
+      if (v1 && f1) {
+        prog = gl.createProgram(); gl.attachShader(prog, v1); gl.attachShader(prog, f1); gl.linkProgram(prog);
+        gl.useProgram(prog);
+        const buf = gl.createBuffer(); gl.bindBuffer(gl.ARRAY_BUFFER, buf);
+        gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, 1, -1, -1, 1, 1, 1]), gl.STATIC_DRAW);
+        const loc = gl.getAttribLocation(prog, 'p'); gl.enableVertexAttribArray(loc); gl.vertexAttribPointer(loc, 2, gl.FLOAT, false, 0, 0);
+        ['yaw', 'tilt', 'rad', 'aspect', 'ok'].forEach((k) => { uni[k] = gl.getUniformLocation(prog, k); });
+        const tex = gl.createTexture(); gl.bindTexture(gl.TEXTURE_2D, tex);
+        gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, 1, 1, 0, gl.RGBA, gl.UNSIGNED_BYTE, new Uint8Array([10, 10, 20, 255]));
+        const img = new Image();
+        img.onload = () => {
+          gl.bindTexture(gl.TEXTURE_2D, tex);
+          gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, img);
+          gl.generateMipmap(gl.TEXTURE_2D);
+          gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR_MIPMAP_LINEAR);
+          gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
+          texOk = true; if (quieto) draw(0);
+        };
+        img.src = '/assets/globe/tierra-noche.jpg';
+        gl.enable(gl.BLEND); gl.blendFunc(gl.ONE, gl.ONE_MINUS_SRC_ALPHA);
+      } else { prog = null; }
+    }
+
+    const ctx = cr.getContext('2d');
+    let w, h, dpr, R, cx, cy;
+    const size = () => {
+      dpr = Math.min(window.devicePixelRatio || 1, 2);
+      w = cg.width = cr.width = Math.round(cg.clientWidth * dpr);
+      h = cg.height = cr.height = Math.round(cg.clientHeight * dpr);
+      R = Math.min(w, h) * RADIO; cx = w / 2; cy = h / 2;
+      if (gl) gl.viewport(0, 0, w, h);
+    };
+    size();
+    window.addEventListener('resize', size);
+
+    const t0 = performance.now();
+    // Rendimiento (12/11): el globo gira ~1 grado/s, así que basta redibujar la esfera a ~12 fps (idéntico a la vista);
+    // las rutas siguen a 60 fps. Y nada se dibuja mientras el globo no está en pantalla.
+    let visible = true, ultGlobo = -1e9;
+    if ('IntersectionObserver' in window) new IntersectionObserver((es) => { visible = es[0].isIntersecting; }).observe(cg);
+    const draw = (now) => {
+      if (!visible && !quieto) { this._animGlobe = requestAnimationFrame(draw); return; }
+      const t = ((now || t0) - t0) / 1000;
+      const yaw = -(8 + Math.sin(t * 0.08) * 16) * RAD;
+      // globo
+      if (gl && prog && (quieto || !now || now - ultGlobo > 80)) {
+        ultGlobo = now || 0;
+        gl.clearColor(0, 0, 0, 0); gl.clear(gl.COLOR_BUFFER_BIT);
+        gl.uniform1f(uni.yaw, yaw); gl.uniform1f(uni.tilt, TILT);
+        gl.uniform1f(uni.rad, (R * 2) / h); gl.uniform1f(uni.aspect, w / h); gl.uniform1f(uni.ok, texOk ? 1 : 0);
+        gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+      }
+      // rutas Europa ↔ Europa (misma rotación que el globo)
+      const cyw = Math.cos(yaw), syw = Math.sin(yaw), ct = Math.cos(TILT), st = Math.sin(TILT);
+      const rot = (p) => {
+        const x1 = p[0] * cyw + p[2] * syw, z1 = -p[0] * syw + p[2] * cyw;
+        const y2 = p[1] * ct - z1 * st, z2 = p[1] * st + z1 * ct;
+        return [cx + x1 * R, cy - y2 * R, z2];
+      };
+      ctx.clearRect(0, 0, w, h);
+      ctx.lineCap = 'round';
+      // Cada arco: viaja con aceleración suave, deja una estela que se apaga y hace un destello al llegar.
+      const CICLO = 7.5, VIAJE = 0.5;
+      const ease = (x) => (x < 0.5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2);
+      // puntos de todas las ciudades
+      V.forEach((c) => { const q = rot(c); if (q[2] > 0) { ctx.fillStyle = 'rgba(255,150,140,0.55)'; ctx.beginPath(); ctx.arc(q[0], q[1], 1.15 * dpr, 0, Math.PI * 2); ctx.fill(); } });
+      const punto = (a, f) => {
+        const v = slerp(a.from, a.to, f), lift = 1 + Math.sin(f * Math.PI) * (0.02 + a.d * 0.5);
+        return rot([v[0] * lift, v[1] * lift, v[2] * lift]);
+      };
+      arcs.forEach((arc) => {
+        const tt = quieto ? arc.off * CICLO * 0.7 : t + arc.off * CICLO;
+        const a = par(arc.i, Math.floor(tt / CICLO));
+        const fase = quieto ? 0.7 : ((tt % CICLO) / CICLO);
+        const viajando = fase < VIAJE;
+        const cabeza = viajando ? ease(fase / VIAJE) : 1;
+        // desvanecido del arco completo cuando ya ha llegado
+        const resto = viajando ? 1 : Math.max(0, 1 - (fase - VIAJE) / (1 - VIAJE));
+        // estela: desde (cabeza - 0.45) hasta la cabeza, con muchos pasos para que no haya saltos
+        const cola = viajando ? Math.max(0, cabeza - 0.45) : 0;
+        const pasos = 24;
+        for (let k = 0; k < pasos; k++) {
+          const f1 = cola + (cabeza - cola) * (k / pasos), f2 = cola + (cabeza - cola) * ((k + 1) / pasos);
+          const p1 = punto(a, f1), p2 = punto(a, f2);
+          if (p1[2] < 0 || p2[2] < 0) continue;
+          const u = (k + 1) / pasos; // 0 en la cola, 1 en la cabeza
+          const al = viajando ? (0.05 + 0.75 * u * u) : 0.22 * resto;
+          if (al < 0.01) continue;
+          ctx.strokeStyle = 'rgba(255,110,100,' + al.toFixed(3) + ')';
+          ctx.lineWidth = (viajando ? 0.8 + 0.9 * u : 1) * dpr;
+          ctx.beginPath(); ctx.moveTo(p1[0], p1[1]); ctx.lineTo(p2[0], p2[1]); ctx.stroke();
+        }
+        if (viajando) {
+          const h = punto(a, cabeza);
+          if (h[2] > 0) {
+            const g = ctx.createRadialGradient(h[0], h[1], 0, h[0], h[1], 7 * dpr);
+            g.addColorStop(0, 'rgba(255,235,228,0.95)'); g.addColorStop(0.35, 'rgba(255,90,80,0.55)'); g.addColorStop(1, 'rgba(255,60,50,0)');
+            ctx.fillStyle = g; ctx.beginPath(); ctx.arc(h[0], h[1], 7 * dpr, 0, Math.PI * 2); ctx.fill();
+          }
+        } else {
+          const e = punto(a, 1);
+          if (e[2] > 0) {
+            const k = (fase - VIAJE) / (1 - VIAJE); // 0 → 1 tras la llegada
+            if (k < 0.5) {
+              const r = (3 + k * 2 * 14) * dpr;
+              ctx.strokeStyle = 'rgba(255,100,90,' + (0.7 * (1 - k * 2)).toFixed(3) + ')';
+              ctx.lineWidth = 1.2 * dpr; ctx.beginPath(); ctx.arc(e[0], e[1], r, 0, Math.PI * 2); ctx.stroke();
+            }
+            ctx.fillStyle = 'rgba(255,225,215,' + (0.9 * resto).toFixed(3) + ')';
+            ctx.beginPath(); ctx.arc(e[0], e[1], 1.6 * dpr, 0, Math.PI * 2); ctx.fill();
+          }
+        }
+      });
+      if (!quieto) this._animGlobe = requestAnimationFrame(draw);
+    };
+    draw();
+  }
+
+  openMailClient = (e) => {
+    e.preventDefault();
+    const email = ['tim', 'la27productions.com'].join('@');
+    window.location.href = 'mailto:' + email;
+  };
+
+  renderVals() {
+    const { lang, sampleIndex } = this.state;
+    const d = DICT[lang] || DICT.de;
+    const shared = d.shared;
+    const m = d.marketing;
+
+    const isMobile = typeof window !== 'undefined' ? window.innerWidth < 768 : false;
+
+    const W = isMobile ? '20px' : '48px';
+    const isNarrow = typeof window !== 'undefined' ? window.innerWidth < 1100 : false;
+    const CARD = { background: 'linear-gradient(180deg, rgba(245,241,239,0.035), rgba(245,241,239,0.012))', border: '1px solid ' + LINE, borderRadius: '24px' };
+    const TITLE = { fontFamily: FONT_SANS, fontWeight: 400, letterSpacing: '-0.045em', color: INK };  // la 2.ª línea va en rojo (--ink-2)
+    const MONO_S = { fontFamily: FONT_MONO, fontSize: '11px', letterSpacing: '0.08em', textTransform: 'uppercase' };
+    const styles = {
+      root: { background: BG, color: INK, minHeight: '100vh', position: 'relative', overflowX: 'hidden', fontFamily: FONT_SANS, isolation: 'isolate' },
+      stars: { position: 'fixed', inset: 0, width: '100%', height: '100%', pointerEvents: 'none', zIndex: -1 },
+      filmGrain: { display: 'none' },
+      cursor: { display: 'none' },
+      cursorLabel: { display: 'none' },
+      scrollProgress: { position: 'fixed', top: 0, left: 0, height: '2px', background: ACCENT, zIndex: 1001, width: '0%' },
+      gradientWash: { position: 'fixed', inset: 0, pointerEvents: 'none', zIndex: -1, background: 'radial-gradient(ellipse 55% 45% at 75% 18%, rgba(160,12,16,0.16), transparent 70%), radial-gradient(ellipse 50% 40% at 10% 95%, rgba(120,8,12,0.10), transparent 70%)' },
+      bgArt: { display: 'none' },
+      bgShapeArch: {}, bgShapeGuitar: {}, bgShapeSail: {}, bgShapeEixample: {}, bgShapeMosaicDots: {},
+
+      nav: { position: 'fixed', top: 0, left: 0, right: 0, height: isMobile ? '60px' : '68px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '0 ' + W, zIndex: 100, backdropFilter: 'blur(18px) saturate(160%)', WebkitBackdropFilter: 'blur(18px) saturate(160%)', background: 'rgba(7,3,4,0.72)', borderBottom: '1px solid ' + LINE },
+      navBrand: { fontFamily: FONT_SANS, fontSize: '19px', fontWeight: 600, letterSpacing: '-0.03em', color: INK, textDecoration: 'none', display: 'inline-flex', alignItems: 'baseline', gap: '6px', whiteSpace: 'nowrap' },
+      navLinks: { display: isNarrow ? 'none' : 'flex', gap: '28px', alignItems: 'center', whiteSpace: 'nowrap' },
+      navLink: { color: INK_DIM, textDecoration: 'none', fontFamily: FONT_SANS, fontSize: '14px', letterSpacing: '-0.01em', whiteSpace: 'nowrap' },
+      navRight: { display: 'flex', alignItems: 'center', gap: isMobile ? '8px' : '12px' },
+      langBtn: { appearance: 'none', background: 'transparent', border: '1px solid ' + LINE, color: INK, fontFamily: FONT_MONO, fontSize: '11px', letterSpacing: '0.08em', padding: '8px 12px', borderRadius: '12px', cursor: 'pointer', display: 'inline-flex', alignItems: 'center', gap: '6px' },
+      langMenu: { position: 'absolute', top: '100%', right: 0, marginTop: '10px', background: 'rgba(18,10,11,0.97)', backdropFilter: 'blur(16px)', border: '1px solid ' + LINE, borderRadius: '16px', listStyle: 'none', padding: '6px', minWidth: '160px', zIndex: 200, boxShadow: '0 16px 40px rgba(0,0,0,0.6)' },
+      langMenuLink: { display: 'block', padding: '9px 12px', color: INK, textDecoration: 'none', fontFamily: FONT_SANS, fontSize: '14px', borderRadius: '10px' },
+
+      sectionIndex: { display: 'none' },
+      indexLink: {}, indexNum: {},
+
+      hero: { position: 'relative', isolation: 'isolate', minHeight: isNarrow ? 'auto' : '100vh', display: 'flex', flexDirection: 'column', justifyContent: 'center', padding: isMobile ? '236px 20px 56px' : (isNarrow ? '520px 48px 96px' : '140px 48px 80px'), maxWidth: '1320px', margin: '0 auto', boxSizing: 'border-box' },
+      globe: isNarrow
+        ? { position: 'absolute', zIndex: -1, top: isMobile ? '58px' : '80px', left: '50%', transform: 'translateX(-50%)', width: isMobile ? '300px' : '600px', height: isMobile ? '200px' : '460px', pointerEvents: 'none' }
+        : { position: 'absolute', zIndex: -1, top: '50%', right: '-2%', transform: 'translateY(-47%)', width: '58%', height: '760px', pointerEvents: 'none' },
+      heroBadge: { fontFamily: FONT_SANS, fontSize: '13px', color: INK_DIM, marginBottom: '24px', border: '1px solid rgba(220,38,38,0.35)', background: 'rgba(220,38,38,0.07)', display: 'inline-flex', alignItems: 'center', padding: '7px 14px', borderRadius: '999px', width: 'fit-content' },
+      heroTitle: { ...TITLE, fontSize: isMobile ? 'clamp(36px, 9.5vw, 50px)' : 'clamp(46px, 4.9vw, 72px)', lineHeight: 1.04, margin: '0 0 24px', maxWidth: isMobile ? 'none' : '680px' },
+      heroSub: { display: 'flex', flexDirection: 'column', alignItems: 'flex-start', gap: '28px', maxWidth: '520px' },
+      heroSubText: { fontFamily: FONT_SANS, fontSize: isMobile ? '17px' : '19px', lineHeight: 1.5, letterSpacing: '-0.01em', color: 'rgba(245,241,239,0.86)', margin: 0 },
+      scrollCue: { order: 2, display: 'inline-flex', alignItems: 'center', gap: '10px', color: INK, textDecoration: 'none', fontFamily: FONT_SANS, fontSize: '15px', fontWeight: 500, padding: '13px 20px', border: '1px solid rgba(245,241,239,0.18)', borderRadius: '16px' },
+      scrollArrow: { display: 'inline-flex', alignItems: 'center', justifyContent: 'center', opacity: 0.8 },
+      heroBtns: { marginTop: '14px', display: 'flex', gap: '12px', flexWrap: 'wrap' },
+      heroPills: { display: 'flex', gap: '8px', flexWrap: 'wrap', marginTop: '40px' },
+      heroPill: { fontFamily: FONT_SANS, fontSize: '13px', color: INK_DIM, border: '1px solid ' + LINE, borderRadius: '999px', padding: '6px 12px' },
+
+      trust: { borderTop: '1px solid ' + LINE, borderBottom: '1px solid ' + LINE, padding: isMobile ? '22px 0' : '30px 0', overflow: 'hidden', WebkitMaskImage: 'linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent)', maskImage: 'linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent)' },
+      trustInner: { display: 'flex', whiteSpace: 'nowrap', animation: 'la27-marquee 40s linear infinite' },
+      trustSpan: { display: 'inline-flex', alignItems: 'center', fontFamily: FONT_SANS, fontSize: isMobile ? '18px' : '22px', letterSpacing: '-0.03em', color: INK_MUTE },
+      trustWord: { padding: isMobile ? '0 24px' : '0 40px' },
+      trustDot: { display: 'inline-block', width: '4px', height: '4px', borderRadius: '50%', background: ACCENT },
+
+      section: { position: 'relative', padding: '0 ' + W, maxWidth: '1320px', margin: '0 auto', boxSizing: 'border-box' },
+      sectionHeader: { display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center', gap: '20px', padding: isMobile ? '88px 0 32px' : '168px 0 64px' },
+      eyebrow: { ...MONO_S, color: INK_MUTE, display: 'flex', alignItems: 'center', gap: '10px' },
+      sectionTitle: { ...TITLE, fontSize: isMobile ? 'clamp(34px, 9.5vw, 48px)' : 'clamp(44px, 4.8vw, 72px)', lineHeight: 1.04, margin: 0 },
+      exampleNote: { fontFamily: FONT_SANS, fontSize: '16px', color: INK_DIM, margin: '0 auto 40px', maxWidth: '620px', lineHeight: 1.6, textAlign: 'center' },
+
+      compareGrid: { display: 'grid', gridTemplateColumns: isMobile ? '1fr' : '1fr 1fr', gap: '16px', marginBottom: '20px' },
+      flowWrap: { ...CARD, position: 'relative', padding: isMobile ? '20px 16px 12px' : '28px 28px 16px' },
+      flowCanvasHolder: { position: 'relative' },
+      flowCanvas: { display: 'block', width: '100%', height: isMobile ? '150px' : '220px' },
+      flowLabels: { display: 'flex', justifyContent: 'space-between', ...MONO_S, fontSize: isMobile ? '9px' : '10px', color: INK_MUTE, paddingTop: '12px', borderTop: '1px solid ' + LINE, gap: '6px' },
+      flowLabelLeft: { flex: 1 }, flowLabelMid: { flex: 1.4, textAlign: 'center', color: ACCENT }, flowLabelMidBad: { flex: 1.4, textAlign: 'center', color: INK_MUTE }, flowLabelRight: { flex: 1, textAlign: 'right' },
+      flowPanelLabel: { fontFamily: FONT_SANS, fontSize: '15px', fontWeight: 500, letterSpacing: '-0.01em', marginBottom: '12px' },
+      flowPanelLabelBad: { color: INK_MUTE },
+      flowPanelLabelGood: { color: INK },
+      contactChip: { position: 'absolute', bottom: isMobile ? '12px' : '16px', right: isMobile ? '8px' : '14px', display: 'flex', alignItems: 'center', gap: '8px', background: 'rgba(14,8,9,0.92)', border: '1px solid ' + LINE, borderRadius: '12px', padding: isMobile ? '6px 10px' : '8px 12px', fontFamily: FONT_SANS, fontSize: isMobile ? '11px' : '12.5px', color: INK, maxWidth: isMobile ? '170px' : '240px', animation: 'la27-chipfade 3.2s ease-in-out infinite' },
+      contactChipDot: { width: '6px', height: '6px', borderRadius: '50%', background: ACCENT, boxShadow: '0 0 8px ' + ACCENT, flexShrink: 0 },
+      processCaptions: { display: 'grid', gridTemplateColumns: isMobile ? '1fr' : (isNarrow ? 'repeat(2, 1fr)' : 'repeat(4, 1fr)'), gap: isMobile ? '12px' : '16px', marginBottom: '0' },
+      processCaption: { display: 'flex', alignItems: 'flex-start', gap: '14px', padding: '18px 0', borderTop: '1px solid ' + LINE },
+      processCaptionBody: { display: 'flex', flexDirection: 'column', gap: '6px' },
+      processCaptionDesc: { fontFamily: FONT_SANS, fontSize: '14px', lineHeight: 1.55, color: INK_DIM },
+      processCaptionNum: { fontFamily: FONT_MONO, fontSize: '12px', color: ACCENT, paddingTop: '3px' },
+      processCaptionText: { fontFamily: FONT_SANS, fontSize: '16px', letterSpacing: '-0.015em', color: INK },
+
+      capabilityTiles: { display: 'grid', gridTemplateColumns: isMobile ? '1fr' : (isNarrow ? 'repeat(2, 1fr)' : 'repeat(3, 1fr)'), gap: '16px' },
+      capabilityTile: { ...CARD, padding: isMobile ? '28px 22px' : '36px 32px', minHeight: isMobile ? 'auto' : '240px' },
+      capabilityTag: { display: 'inline-block', fontFamily: FONT_MONO, fontSize: '10px', letterSpacing: '0.08em', textTransform: 'uppercase', color: ACCENT, marginBottom: '28px' },
+      capabilityTitle: { fontFamily: FONT_SANS, fontSize: '22px', fontWeight: 500, letterSpacing: '-0.03em', lineHeight: 1.2, marginBottom: '12px', color: INK },
+      capabilityDesc: { fontFamily: FONT_SANS, fontSize: '15px', color: INK_DIM, lineHeight: 1.6, margin: 0 },
+
+      whyLede: { maxWidth: '900px', margin: isMobile ? '0 0 48px' : '0 auto 72px', fontFamily: FONT_SANS, fontWeight: 400, fontSize: isMobile ? '21px' : 'clamp(24px, 2.3vw, 32px)', lineHeight: 1.35, letterSpacing: '-0.03em', color: INK_DIM, textAlign: 'center' },
+      pillarsGrid: { display: 'grid', gridTemplateColumns: isMobile ? '1fr' : (isNarrow ? 'repeat(2, 1fr)' : 'repeat(4, 1fr)'), gap: '16px' },
+      pillarCard: { ...CARD, padding: isMobile ? '28px 22px' : '32px 28px', display: 'flex', flexDirection: 'column', gap: '14px', minHeight: isMobile ? 'auto' : '280px' },
+      pillarNum: { fontFamily: FONT_MONO, fontSize: '12px', color: ACCENT, marginBottom: 'auto', paddingBottom: '40px' },
+      pillarTitle: { fontFamily: FONT_SANS, fontSize: '22px', fontWeight: 500, lineHeight: 1.2, letterSpacing: '-0.03em', margin: 0 },
+      pillarBody: { color: INK_DIM, fontSize: '15px', lineHeight: 1.6, margin: 0 },
+
+      faqGrid: { display: 'grid', gridTemplateColumns: isMobile ? '1fr' : '1fr 1fr', gap: '16px', maxWidth: '1080px', margin: '0 auto' },
+      faqCard: { ...CARD, padding: isMobile ? '26px 22px' : '32px 32px', display: 'flex', flexDirection: 'column', gap: '12px' },
+      faqQ: { fontFamily: FONT_SANS, fontSize: isMobile ? '19px' : '21px', fontWeight: 500, lineHeight: 1.25, letterSpacing: '-0.03em', margin: 0, color: INK },
+      faqA: { color: INK_DIM, fontSize: '15px', lineHeight: 1.65, margin: 0 },
+
+      studioGrid: { display: 'grid', gridTemplateColumns: isMobile ? '1fr' : '5fr 7fr', gap: isMobile ? '32px' : '72px', alignItems: 'center' },
+      studioPortrait: { position: 'relative', aspectRatio: isMobile ? '4/3' : '4/5', background: '#120a0b', border: '1px solid ' + LINE, borderRadius: '24px', overflow: 'hidden' },
+      studioQuote: { fontFamily: FONT_SANS, fontWeight: 400, fontSize: isMobile ? '24px' : 'clamp(26px, 2.4vw, 34px)', lineHeight: 1.28, letterSpacing: '-0.035em', margin: '0 0 28px' },
+      studioBio: { color: INK_DIM, fontSize: '16px', lineHeight: 1.7, maxWidth: '560px', margin: '0 0 32px' },
+      studioSignature: { display: 'flex', flexDirection: isMobile ? 'column' : 'row', alignItems: isMobile ? 'flex-start' : 'center', gap: isMobile ? '18px' : 0, justifyContent: 'space-between', paddingTop: '24px', borderTop: '1px solid ' + LINE, maxWidth: '560px' },
+      founderName: { fontFamily: FONT_SANS, fontSize: '18px', fontWeight: 500, letterSpacing: '-0.02em' },
+      studioRole: { fontFamily: FONT_SANS, fontSize: '14px', color: INK_DIM, marginTop: '2px' },
+      linkedinBtn: { fontFamily: FONT_SANS, fontSize: '13px', fontWeight: 500, color: INK, textDecoration: 'none', padding: '9px 14px', border: '1px solid rgba(250,250,249,0.16)', borderRadius: '12px' },
+
+      contact: { padding: '0 ' + W + (isMobile ? ' 72px' : ' 120px'), maxWidth: '1320px', margin: isMobile ? '88px auto 0' : '160px auto 0', boxSizing: 'border-box' },
+      contactGrid: { ...CARD, display: 'grid', gridTemplateColumns: isMobile ? '1fr' : '1fr 1fr', gap: isMobile ? '32px' : '72px', padding: isMobile ? '32px 20px' : '64px', background: 'radial-gradient(ellipse 70% 70% at 0% 0%, rgba(160,12,16,0.22), transparent 60%), rgba(245,241,239,0.02)' },
+      contactTitle: { ...TITLE, fontSize: isMobile ? 'clamp(38px, 10vw, 52px)' : 'clamp(48px, 5vw, 76px)', lineHeight: 1.02, margin: 0 },
+      contactAside: { marginTop: '24px', color: INK_DIM, fontSize: '16px', lineHeight: 1.65, maxWidth: '420px' },
+      contactDirect: { marginTop: '36px', paddingTop: '24px', borderTop: '1px solid ' + LINE, maxWidth: '420px' },
+      contactLab: { ...MONO_S, color: INK_MUTE, marginBottom: '10px' },
+      contactMail: { fontFamily: FONT_SANS, fontSize: isMobile ? '19px' : '22px', letterSpacing: '-0.02em', color: INK, textDecoration: 'none', borderBottom: '1px solid ' + ACCENT, paddingBottom: '2px' },
+      contactStatus: { marginTop: '20px', display: 'inline-flex', alignItems: 'center', gap: '10px', fontFamily: FONT_SANS, fontSize: '14px', color: INK_DIM },
+      contactTax: { margin: '16px 0 0', fontFamily: FONT_SANS, fontSize: '13px', lineHeight: 1.55, color: INK_DIM },
+      statusDot: { width: '7px', height: '7px', borderRadius: '50%', background: 'oklch(0.75 0.15 145)', boxShadow: '0 0 8px oklch(0.75 0.15 145)', display: 'inline-block' },
+
+      form: { display: 'grid', gap: '4px', alignContent: 'start' },
+      field: { position: 'relative', borderBottom: '1px solid ' + LINE, padding: '16px 0 10px' },
+      fieldLabelUp: { display: 'block', fontFamily: FONT_SANS, fontSize: '13px', color: INK_DIM, marginBottom: '6px' },
+      fieldInput: { width: '100%', background: 'transparent', border: 0, outline: 0, color: INK, fontFamily: FONT_SANS, fontSize: '17px', padding: 0, colorScheme: 'dark' },
+      fieldTextarea: { width: '100%', background: 'transparent', border: 0, outline: 0, color: INK, fontFamily: FONT_SANS, fontSize: '16px', padding: 0, resize: 'none', minHeight: '64px', colorScheme: 'dark' },
+      formSubmit: { marginTop: '24px', display: 'flex', alignItems: 'center', gap: '14px', flexWrap: 'wrap' },
+      formNocost: { fontFamily: FONT_SANS, fontSize: '12px', color: INK_MUTE, margin: 0, flexBasis: '100%', lineHeight: 1.5 },
+
+      btn: { appearance: 'none', border: '1px solid ' + ACCENT, background: ACCENT, color: '#fff', fontFamily: FONT_SANS, fontSize: '15px', fontWeight: 500, letterSpacing: '-0.01em', padding: '13px 21px', borderRadius: '16px', display: 'inline-flex', alignItems: 'center', gap: '10px', cursor: 'pointer', textDecoration: 'none', boxShadow: '0 8px 28px rgba(200,20,20,0.28)' },
+      footer: { position: 'relative', borderTop: '1px solid ' + LINE, padding: isMobile ? '28px 20px' : '36px 48px', display: 'flex', flexDirection: isMobile ? 'column' : 'row', gap: isMobile ? '14px' : 0, alignItems: isMobile ? 'flex-start' : 'center', justifyContent: 'space-between', fontFamily: FONT_SANS, fontSize: '13px', color: INK_MUTE },
+      footerMark: { fontFamily: FONT_SANS, fontWeight: 600, letterSpacing: '-0.06em', lineHeight: 0.8, fontSize: isMobile ? '38vw' : '30vw', textAlign: 'center', whiteSpace: 'nowrap', margin: isMobile ? '96px 0 0' : '140px 0 0', height: isMobile ? '24vw' : '19vw', overflow: 'hidden', userSelect: 'none', pointerEvents: 'none', background: 'linear-gradient(180deg, rgba(220,38,38,0.30) 0%, rgba(120,10,14,0.10) 55%, rgba(7,3,4,0) 100%)', WebkitBackgroundClip: 'text', backgroundClip: 'text', color: 'transparent' },
+    };
+
+    const langOptions = Object.keys(LANG_NAMES).map((code) => ({
+      code: code.toUpperCase(),
+      label: LANG_NAMES[code],
+      select: this.selectLang(code)
+    }));
+
+    // All 6 sections in top nav:
+    const navLinks = [
+      { label: m.navIntro || 'Intro', href: '#hero' },
+      { label: m.navHow || m.howEyebrow, href: '#how' },
+      { label: m.navWhy, href: '#why' },
+      { label: m.navFounder, href: '#founder' },
+      { label: m.navContact, href: '#contact' }
+    ];
+
+    // All 6 sections in section index:
+    const indexItems = [
+      { label: 'Intro', id: 'hero' },
+      { label: m.howEyebrow, id: 'how' },
+      { label: m.navWhy, id: 'why' },
+      { label: shared.founderEyebrow, id: 'founder' },
+      { label: m.navContact, id: 'contact' }
+    ];
+    indexItems.forEach((it, i) => { it.num = '0' + (i + 1); it.href = '#' + it.id; });
+
+    return {
+      styles,
+      isMobile,
+      state: this.state,
+      shared,
+      m,
+      view: {
+        contactTitleMain: m.contactTitleMain,
+        contactTitleIt: m.contactTitleIt,
+        contactAside: m.contactAside,
+        formType: m.formType
+      },
+      toggleLangMenu: this.toggleLangMenu,
+      langOptions,
+      navLinks,
+      indexItems,
+      trustItemsDouble: (m.trust || []).concat(m.trust || []),
+      processSteps: (m.steps || []).map((s, i) => ({ ...s, num: '0' + (i + 1) })),
+      capabilityTiles: m.tiles || [],
+      faqItems: m.faq || [],
+      marketingPillars: (m.pillars || []).map((pl, i) => ({ ...pl, num: '0' + (i + 1) })),
+      formOptions: m.formOptions || [],
+      sampleContact: (m.sampleContacts && m.sampleContacts[sampleIndex % m.sampleContacts.length]) || '',
+      contactEmailText: ['tim', 'la27productions.com'].join('@'),
+      contactEmailHref: 'mail' + 'to:' + ['tim', 'la27productions.com'].join('@'),
+      openMailClient: this.openMailClient,
+      founderBio: m.founderBio
+    };
+  }
+}
+
+</script>
 </body>
 </html>
