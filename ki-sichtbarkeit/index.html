@@ -256,20 +256,7 @@
       </section>
 
       <!-- ============ FAQ (ronda 2, 20/11) ============ -->
-      <section id="faq" data-section="true" style="{{ styles.section }}">
-        <div data-reveal="true" style="{{ styles.sectionHeader }}">
-          <div style="{{ styles.eyebrow }}"><span style="color:var(--accent);font-weight:600">05</span>{{ m.faqEyebrow }}</div>
-          <h2 style="{{ styles.sectionTitle }}">{{ m.faqTitleMain }}<br/><span style="color:var(--ink-2)">{{ m.faqTitleIt }}</span></h2>
-        </div>
-        <div style="{{ styles.faqGrid }}">
-          <sc-for list="{{ faqItems }}" as="f" hint-placeholder-count="4">
-            <div data-reveal="true" style="{{ styles.faqCard }}">
-              <h3 style="{{ styles.faqQ }}">{{ f.q }}</h3>
-              <p style="{{ styles.faqA }}">{{ f.a }}</p>
-            </div>
-          </sc-for>
-        </div>
-      </section>
+      
 
       <!-- ============ SHARED CONTACT (form options vary by view) ============ -->
       <section id="contact" data-section="true" style="{{ styles.contact }}">
@@ -774,7 +761,7 @@ const DICT = {
       "reverseCharge": "Rechnung mit Reverse Charge. Die Umsatzsteuer führen Sie wie gewohnt in Deutschland ab.",
       "pageTitle": "KI-Sichtbarkeit | LA 27 Productions",
       "metaDesc": "Ihre Gäste fragen ChatGPT, Gemini und Perplexity, wohin sie gehen sollen. Wir messen kostenlos, ob Ihr Haus genannt wird, und richten alles ein, damit die KI Sie findet.",
-      "paymentNote": "Einrichtung 490 € einmalig, per Überweisung nach Ihrer Freigabe.",
+      "paymentNote": "Bezahlung per Überweisung, erst nach Ihrer Freigabe.",
       "formMessagePh": "z. B. Hotel Bergblick, Oberstdorf, www.hotel-bergblick.de",
       "legalHref": "/impressum.html",
       "privacyHref": "/privacidad.html#datenschutz",
@@ -832,7 +819,7 @@ const DICT = {
           "desc": "Auf einer Seite: wie oft ChatGPT, Gemini und Perplexity Sie nennen, wie oft Ihre Mitbewerber, und woher die KI ihre Empfehlung nimmt."
         },
         {
-          "title": "Wir richten alles ein, 490 € einmalig",
+          "title": "Wir richten alles ein",
           "desc": "Profile, Daten und Website so, dass die KI alles Wichtige über Sie findet. Sie geben nur kurz frei."
         },
         {
@@ -887,7 +874,7 @@ const DICT = {
         },
         {
           "title": "Fester Preis",
-          "body": "Einrichtung 490 € einmalig. Keine Kosten pro Klick, kein Abo, das unbemerkt weiterläuft."
+          "body": "Sie wissen vorher genau, was es kostet. Keine Kosten pro Klick, kein Abo, das unbemerkt weiterläuft."
         },
         {
           "title": "Wir machen die Arbeit",
@@ -927,7 +914,7 @@ const DICT = {
         },
         {
           "q": "Was kostet das?",
-          "a": "Die Auswertung ist kostenlos. Die Einrichtung kostet 490 € einmalig. Eine laufende Betreuung gibt es danach nur, wenn Sie das möchten."
+          "a": "Die Auswertung ist kostenlos.  Eine laufende Betreuung gibt es danach nur, wenn Sie das möchten."
         },
         {
           "q": "Müssen wir dafür etwas tun?",
